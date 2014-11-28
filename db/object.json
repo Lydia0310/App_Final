@@ -1,0 +1,9 @@
+{
+  "name": "Business",
+  "networkList": [
+    {"name": "network1"},
+    {"name": "network2"},
+    {"name": "network3"},
+    {"name": "network4"}
+  ]
+}
