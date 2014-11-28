@@ -24,9 +24,9 @@ public class SupplierAdmin extends Role {
     public SupplierAdmin(){
         super(Role.RoleType.SupplierAdmin);
         
-        privilegeList.add(new Function("Manage Device","userinterface.supplierworkarea.ManageDevice"));
-        privilegeList.add(new Function("View Device Dispatching Request","userinterface.supplierworkarea.ViewDeviceRequest"));
-        privilegeList.add(new Function("View Order","userinterface.supplierworkarea.ViewOrder"));
+        privilegeList.add(new Function("Manage Device","org.yueli.userinterface.supplierworkarea.ManageDevice"));
+        privilegeList.add(new Function("View Device Dispatching Request","org.yueli.userinterface.supplierworkarea.ViewDeviceRequest"));
+        privilegeList.add(new Function("View Order","org.yueli.userinterface.supplierworkarea.ViewOrder"));
         
     }
 

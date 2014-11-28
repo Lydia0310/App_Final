@@ -22,26 +22,26 @@ public class SystemAdminRole extends Role{
 
     public SystemAdminRole() {
         super(Role.RoleType.SystemAdmin);
-        privilegeList.add(new Function("View Tree Chart for Whole System", "userinterface.sysadminworkarea.ViewTreeChart"));
-        privilegeList.add(new Function("Manage Network", "userinterface.sysadminworkarea.ManageNetwork"));
-        privilegeList.add(new Function("Manage Enterprise", "userinterface.sysadminworkarea.ManageEnterprise"));
-        privilegeList.add(new Function("Manage Enterprise Admin", "userinterface.sysadminworkarea.ManageEnterpriseAdmin"));
-        privilegeList.add(new Function("View Tree Chart for Whole System", "userinterface.sysadminworkarea.ViewTreeChart"));
-        privilegeList.add(new Function("Manage Device","userinterface.supplierworkarea.ManageDevice"));
-        privilegeList.add(new Function("View Device Dispatching Request","userinterface.supplierworkarea.ViewDeviceRequest"));
-        privilegeList.add(new Function("View Order","userinterface.supplierworkarea.ViewOrder"));
-        privilegeList.add(new Function("View Device Inventory","userinterface.hospitalworkarea.ViewDeviceInventory"));
-        privilegeList.add(new Function("Browser Device List","userinterface.hospitalworkarea.BrowserDevice"));
-        privilegeList.add(new Function("View Order","userinterface.hospitalworkarea.ViewOrder"));
-        privilegeList.add(new Function("View Room Request","userinterface.hospitalworkarea.ViewRoomRequest"));
-        privilegeList.add(new Function("View Device Request","userinterface.hospitalworkarea.ViewDeviceRequest"));
-        privilegeList.add(new Function("View Operation","userinterface.doctorworkarea.ViewOperation"));
-        privilegeList.add(new Function("View Room Schedule","userinterface.doctorworkarea.ViewAndRequestRoomSchedule"));
-        privilegeList.add(new Function("View Device Schedule","userinterface.doctorworkarea.ViewAndRequestDeviceSchedule"));
-        privilegeList.add(new Function("View Care Team Schedule","userinterface.doctorworkarea.ViewAndRequestCareTeamSchedule"));
-        privilegeList.add(new Function("View Device Inventory","userinterface.warehouseworkarea.ViewDeviceInventory"));
-        privilegeList.add(new Function("View Device Schedule Request","userinterface.warehouseworkarea.ViewDeviceScheduleRequest"));
-        privilegeList.add(new Function("Track Maintaince History","userinterface.warehouseworkarea.TrackMaintainceHistory"));
+        privilegeList.add(new Function("View Tree Chart for Whole System", "org.yueli.userinterface.sysadminworkarea.ViewTreeChart"));
+        privilegeList.add(new Function("Manage Network", "org.yueli.userinterface.sysadminworkarea.ManageNetwork"));
+        privilegeList.add(new Function("Manage Enterprise", "org.yueli.userinterface.sysadminworkarea.ManageEnterprise"));
+        privilegeList.add(new Function("Manage Enterprise Admin", "org.yueli.userinterface.sysadminworkarea.ManageEnterpriseAdmin"));
+        privilegeList.add(new Function("View Tree Chart for Whole System", "org.yueli.userinterface.sysadminworkarea.ViewTreeChart"));
+        privilegeList.add(new Function("Manage Device","org.yueli.userinterface.supplierworkarea.ManageDevice"));
+        privilegeList.add(new Function("View Device Dispatching Request","org.yueli.userinterface.supplierworkarea.ViewDeviceRequest"));
+        privilegeList.add(new Function("View Order","org.yueli.userinterface.supplierworkarea.ViewOrder"));
+        privilegeList.add(new Function("View Device Inventory","org.yueli.userinterface.hospitalworkarea.ViewDeviceInventory"));
+        privilegeList.add(new Function("Browser Device List","org.yueli.userinterface.hospitalworkarea.BrowserDevice"));
+        privilegeList.add(new Function("View Order","org.yueli.userinterface.hospitalworkarea.ViewOrder"));
+        privilegeList.add(new Function("View Room Request","org.yueli.userinterface.hospitalworkarea.ViewRoomRequest"));
+        privilegeList.add(new Function("View Device Request","org.yueli.userinterface.hospitalworkarea.ViewDeviceRequest"));
+        privilegeList.add(new Function("View Operation","org.yueli.userinterface.doctorworkarea.ViewOperation"));
+        privilegeList.add(new Function("View Room Schedule","org.yueli.userinterface.doctorworkarea.ViewAndRequestRoomSchedule"));
+        privilegeList.add(new Function("View Device Schedule","org.yueli.userinterface.doctorworkarea.ViewAndRequestDeviceSchedule"));
+        privilegeList.add(new Function("View Care Team Schedule","org.yueli.userinterface.doctorworkarea.ViewAndRequestCareTeamSchedule"));
+        privilegeList.add(new Function("View Device Inventory","org.yueli.userinterface.warehouseworkarea.ViewDeviceInventory"));
+        privilegeList.add(new Function("View Device Schedule Request","org.yueli.userinterface.warehouseworkarea.ViewDeviceScheduleRequest"));
+        privilegeList.add(new Function("Track Maintaince History","org.yueli.userinterface.warehouseworkarea.TrackMaintainceHistory"));
     }
 
 
