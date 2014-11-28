@@ -22,10 +22,10 @@ public class DoctorRole extends Role{
 
     public DoctorRole(){
         super(Role.RoleType.Doctor);
-        privilegeList.add(new Function("View Operation","ViewOperation"));
-        privilegeList.add(new Function("View Room Schedule","ViewAndRequestRoomSchedule"));
-        privilegeList.add(new Function("View Device Schedule","ViewAndRequestDeviceSchedule"));
-        privilegeList.add(new Function("View Care Team Schedule","ViewAndRequestCareTeamSchedule"));
+        privilegeList.add(new Function("View Operation","userinterface.doctorworkarea.ViewOperation"));
+        privilegeList.add(new Function("View Room Schedule","userinterface.doctorworkarea.ViewAndRequestRoomSchedule"));
+        privilegeList.add(new Function("View Device Schedule","userinterface.doctorworkarea.ViewAndRequestDeviceSchedule"));
+        privilegeList.add(new Function("View Care Team Schedule","userinterface.doctorworkarea.ViewAndRequestCareTeamSchedule"));
     }
 
     @Override

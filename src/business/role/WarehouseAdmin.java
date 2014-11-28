@@ -22,9 +22,9 @@ public class WarehouseAdmin extends Role{
 
     public WarehouseAdmin(){
         super(Role.RoleType.WarehouseAdmin);
-        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
-        privilegeList.add(new Function("View Device Schedule Request","ViewDeviceScheduleRequest"));
-        privilegeList.add(new Function("Track Maintaince History","TrackMaintainceHistory"));
+        privilegeList.add(new Function("View Device Inventory","userinterface.warehouseworkarea.ViewDeviceInventory"));
+        privilegeList.add(new Function("View Device Schedule Request","userinterface.warehouseworkarea.ViewDeviceScheduleRequest"));
+        privilegeList.add(new Function("Track Maintaince History","userinterface.warehouseworkarea.TrackMaintainceHistory"));
     }
 
     @Override

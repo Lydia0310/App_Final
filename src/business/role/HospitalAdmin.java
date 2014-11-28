@@ -22,11 +22,11 @@ public class HospitalAdmin extends Role{
 
     public HospitalAdmin(){
         super(Role.RoleType.HospitalAdmin);
-        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
-        privilegeList.add(new Function("Browser Device List","BrowserDevice"));
-        privilegeList.add(new Function("View Order","ViewOrder"));
-        privilegeList.add(new Function("View Room Request","ViewRoomRequest"));
-        privilegeList.add(new Function("View Device Request","ViewDeviceRequest"));
+        privilegeList.add(new Function("View Device Inventory","userinterface.hospitalworkarea.ViewDeviceInventory"));
+        privilegeList.add(new Function("Browser Device List","userinterface.hospitalworkarea.BrowserDevice"));
+        privilegeList.add(new Function("View Order","userinterface.hospitalworkarea.ViewOrder"));
+        privilegeList.add(new Function("View Room Request","userinterface.hospitalworkarea.ViewRoomRequest"));
+        privilegeList.add(new Function("View Device Request","userinterface.hospitalworkarea.ViewDeviceRequest"));
     }
 
     @Override

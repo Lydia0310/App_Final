@@ -22,22 +22,26 @@ public class SystemAdminRole extends Role{
 
     public SystemAdminRole() {
         super(Role.RoleType.SystemAdmin);
-        privilegeList.add(new Function("Manage Device","ManageDevice"));
-        privilegeList.add(new Function("View Device Dispatching Request","ViewDeviceRequest"));
-        privilegeList.add(new Function("View Order","ViewOrder"));
-        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
-        privilegeList.add(new Function("Browser Device List","BrowserDevice"));
-        privilegeList.add(new Function("View Order","ViewOrder"));
-        privilegeList.add(new Function("View Room Request","ViewRoomRequest"));
-        privilegeList.add(new Function("View Device Request","ViewDeviceRequest"));
-        privilegeList.add(new Function("View Operation","ViewOperation"));
-        privilegeList.add(new Function("View Room Schedule","ViewAndRequestRoomSchedule"));
-        privilegeList.add(new Function("View Device Schedule","ViewAndRequestDeviceSchedule"));
-        privilegeList.add(new Function("View Care Team Schedule","ViewAndRequestCareTeamSchedule"));
-        privilegeList.add(new Function("View Operation Request","ViewOperationRequest"));
-        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
-        privilegeList.add(new Function("View Device Schedule Request","ViewDeviceScheduleRequest"));
-        privilegeList.add(new Function("Track Maintaince History","TrackMaintainceHistory"));
+        privilegeList.add(new Function("View Tree Chart for Whole System", "userinterface.sysadminworkarea.ViewTreeChart"));
+        privilegeList.add(new Function("Manage Network", "userinterface.sysadminworkarea.ManageNetwork"));
+        privilegeList.add(new Function("Manage Enterprise", "userinterface.sysadminworkarea.ManageEnterprise"));
+        privilegeList.add(new Function("Manage Enterprise Admin", "userinterface.sysadminworkarea.ManageEnterpriseAdmin"));
+        privilegeList.add(new Function("View Tree Chart for Whole System", "userinterface.sysadminworkarea.ViewTreeChart"));
+        privilegeList.add(new Function("Manage Device","userinterface.supplierworkarea.ManageDevice"));
+        privilegeList.add(new Function("View Device Dispatching Request","userinterface.supplierworkarea.ViewDeviceRequest"));
+        privilegeList.add(new Function("View Order","userinterface.supplierworkarea.ViewOrder"));
+        privilegeList.add(new Function("View Device Inventory","userinterface.hospitalworkarea.ViewDeviceInventory"));
+        privilegeList.add(new Function("Browser Device List","userinterface.hospitalworkarea.BrowserDevice"));
+        privilegeList.add(new Function("View Order","userinterface.hospitalworkarea.ViewOrder"));
+        privilegeList.add(new Function("View Room Request","userinterface.hospitalworkarea.ViewRoomRequest"));
+        privilegeList.add(new Function("View Device Request","userinterface.hospitalworkarea.ViewDeviceRequest"));
+        privilegeList.add(new Function("View Operation","userinterface.doctorworkarea.ViewOperation"));
+        privilegeList.add(new Function("View Room Schedule","userinterface.doctorworkarea.ViewAndRequestRoomSchedule"));
+        privilegeList.add(new Function("View Device Schedule","userinterface.doctorworkarea.ViewAndRequestDeviceSchedule"));
+        privilegeList.add(new Function("View Care Team Schedule","userinterface.doctorworkarea.ViewAndRequestCareTeamSchedule"));
+        privilegeList.add(new Function("View Device Inventory","userinterface.warehouseworkarea.ViewDeviceInventory"));
+        privilegeList.add(new Function("View Device Schedule Request","userinterface.warehouseworkarea.ViewDeviceScheduleRequest"));
+        privilegeList.add(new Function("Track Maintaince History","userinterface.warehouseworkarea.TrackMaintainceHistory"));
     }
 
     @Override
