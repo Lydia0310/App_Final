@@ -11,12 +11,11 @@ import business.organization.Organization;
 import business.role.Role;
 
 import java.util.ArrayList;
-import business.role.SystemAdminRole;
 /**
  *
  * @author Lydia
  */
-public class Business extends Organization{
+public class Business extends Organization {
     private static Business business;
     private MasterOrderDirectory masterOrderDirectory;
     
