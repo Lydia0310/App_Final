@@ -22,7 +22,7 @@ public class Device {
     private int stockCount;
     private String location;
     private String exprationDate;
-    private String currentStatus;        
+    private String currentStatus;
     
     public Device(){
         count++;

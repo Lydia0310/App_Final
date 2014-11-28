@@ -22,7 +22,7 @@ public class FirstPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         loginPanel = new LoginPanel();
         JLabel welcomeLabel = new JLabel("Welcome!   Please login.");
-        welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 64));
+        welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 48));
         Box row1 = new Box(BoxLayout.LINE_AXIS);
         row1.add(Box.createHorizontalGlue());
         row1.add(welcomeLabel);
@@ -40,7 +40,7 @@ public class FirstPanel extends JPanel {
         row3.add(versionInfoLabel);
         row3.add(Box.createHorizontalStrut(100));
 
-        add(Box.createVerticalStrut(150));
+        add(Box.createVerticalStrut(50));
         add(row1);
         add(Box.createVerticalStrut(100));
         add(row2);

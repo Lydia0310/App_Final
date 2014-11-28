@@ -5,30 +5,34 @@
  */
 
 package business;
+
 import business.network.Network;
 import business.order.MasterOrderDirectory;
 import business.organization.Organization;
 import business.role.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
+
 /**
- *
  * @author Lydia
  */
 public class Business extends Organization {
+    @JsonIgnore
     private static Business business;
     private MasterOrderDirectory masterOrderDirectory;
-    
+
     private ArrayList<Network> networkList;
-    
-    public static Business getInstance(){
-        if(business == null){
+
+    @JsonIgnore
+    public static Business getInstance() {
+        if (business == null) {
             business = new Business();
         }
         return business;
     }
-    
-    private Business(){
+
+    private Business() {
         super(null);
         networkList = new ArrayList<>();
         masterOrderDirectory = new MasterOrderDirectory();
@@ -45,36 +49,27 @@ public class Business extends Organization {
     public void setMasterOrderDirectory(MasterOrderDirectory masterOrderDirectory) {
         this.masterOrderDirectory = masterOrderDirectory;
     }
-    
-    
-    
-    public Network AddNetwork(){
+
+    public Network addNetwork() {
         Network network = new Network();
         networkList.add(network);
         return network;
     }
-    
 
-
-    
-    public boolean checkIfUsernameIsUnique(String username){
-        if(!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
+    public boolean checkIfUsernameIsUnique(String username) {
+        if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
             return false;
         }
-        
-        for(Network network : networkList){
-        
+
+        for (Network network : networkList) {
+
         }
         return true;
     }
 
-   
-
+    @JsonIgnore
     @Override
     public ArrayList<Role> getSupportedRoles() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-   
-
 }
