@@ -8,8 +8,9 @@ package business.organization;
 
 import business.device.DeviceDirectory;
 import business.device.InventorySupplierRecord;
+import business.role.Role;
 import java.util.ArrayList;
-import javax.management.relation.Role;
+
 
 /**
  *

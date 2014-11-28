@@ -6,9 +6,9 @@
 
 package business.organization;
 
+import business.role.Role;
 import business.role.SystemAdminRole;
 import java.util.ArrayList;
-import javax.management.relation.Role;
 
 /**
  *

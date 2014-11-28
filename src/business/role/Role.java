@@ -7,10 +7,12 @@
 package business.role;
 
 import business.Business;
-import javax.swing.JPanel;
 import business.enterprise.Enterprise;
+import business.function.Function;
 import business.organization.Organization;
 import business.useraccount.UserAccount;
+import java.util.ArrayList;
+import javax.swing.JPanel;
 
 /**
  *
@@ -42,8 +44,10 @@ public abstract class Role {
     }
 }
     private RoleType roletype;
+    protected ArrayList<Function> privilegeList;
     public Role(RoleType type){
         this.roletype = type;
+        privilegeList = new ArrayList<Function>();
     }
     
     public abstract JPanel createWorkArea(
@@ -54,6 +58,7 @@ public abstract class Role {
             Business business
     );
   
+   
     @Override
     public String toString(){
         return this.getClass().getName();

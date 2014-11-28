@@ -19,6 +19,7 @@ public class Device {
     private int devicePrice;
     private int quantity;
     private int availablity;
+    private int stockCount;
     private String location;
     private String exprationDate;
     private String currentStatus;        
@@ -108,6 +109,14 @@ public class Device {
 
     public void setCurrentStatus(String currentStatus) {
         this.currentStatus = currentStatus;
+    }
+
+    public int getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
     }
     
     

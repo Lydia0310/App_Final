@@ -6,6 +6,7 @@
 
 package business;
 import business.network.Network;
+import business.order.MasterOrderDirectory;
 import business.organization.Organization;
 import business.role.Role;
 
@@ -17,6 +18,8 @@ import business.role.SystemAdminRole;
  */
 public class Business extends Organization{
     private static Business business;
+    private MasterOrderDirectory masterOrderDirectory;
+    
     private ArrayList<Network> networkList;
     
     public static Business getInstance(){
@@ -29,11 +32,22 @@ public class Business extends Organization{
     private Business(){
         super(null);
         networkList = new ArrayList<>();
+        masterOrderDirectory = new MasterOrderDirectory();
     }
 
     public ArrayList<Network> getNetworkList() {
         return networkList;
     }
+
+    public MasterOrderDirectory getMasterOrderDirectory() {
+        return masterOrderDirectory;
+    }
+
+    public void setMasterOrderDirectory(MasterOrderDirectory masterOrderDirectory) {
+        this.masterOrderDirectory = masterOrderDirectory;
+    }
+    
+    
     
     public Network AddNetwork(){
         Network network = new Network();
@@ -58,7 +72,7 @@ public class Business extends Organization{
    
 
     @Override
-    public ArrayList<javax.management.relation.Role> getSupportedRoles() {
+    public ArrayList<Role> getSupportedRoles() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -6,8 +6,9 @@
 
 package business.organization;
 
+import business.role.Role;
 import java.util.ArrayList;
-import javax.management.relation.Role;
+
 
 /**
  *

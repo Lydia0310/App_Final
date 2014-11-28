@@ -7,6 +7,7 @@
 package userinterface.hospitalworkarea;
 
 import business.Business;
+import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -21,6 +22,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Business business;
+    private UserAccount userAccount;
     
     public HospitalWorkArea() {
         initComponents();
@@ -117,7 +119,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void browserDeviceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browserDeviceJButtonActionPerformed
         // TODO add your handling code here:
-        BrowserDevice browserDevice = new BrowserDevice();
+        BrowserDevice browserDevice = new BrowserDevice(userProcessContainer, business.getMasterOrderDirectory(),userAccount,business);
         userProcessContainer.add("Browser Device", browserDevice);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

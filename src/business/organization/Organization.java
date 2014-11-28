@@ -6,11 +6,11 @@
 
 package business.organization;
 
-import java.util.ArrayList;
-import javax.management.relation.Role;
 import business.person.PersonDirectory;
+import business.role.Role;
 import business.useraccount.UserAccountDirectory;
 import business.workqueue.WorkQueue;
+import java.util.ArrayList;
 
 /**
  *
