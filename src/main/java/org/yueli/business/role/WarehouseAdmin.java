@@ -27,7 +27,7 @@ public class WarehouseAdmin extends Role{
         privilegeList.add(new Function("Track Maintaince History","userinterface.warehouseworkarea.TrackMaintainceHistory"));
     }
 
-    
+
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Business business) {
         return new WarehouseWorkArea(); //To change body of generated methods, choose Tools | Templates.

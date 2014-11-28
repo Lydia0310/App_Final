@@ -32,7 +32,14 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         enterpriseNameJLabel.setVisible(false);
         usernameJLabel.setVisible(false);
         passwordJLabel.setVisible(false);
-        //firstNameJT
+        firstNameJLabel.setVisible(false);
+        lastNameJLabel.setVisible(false);
+        networkNameJComboBox.setVisible(false);
+        enterpriseNamejComboBox.setVisible(false);
+        userNameJTextField.setVisible(false);
+        PasswordField.setVisible(false);
+        firstNameJTextField.setVisible(false);
+        lastNameJTextField.setVisible(false);
     }
 
     private void populateEnterpriseAdminTable(){
@@ -131,6 +138,11 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         lastNameJLabel.setText("Last Name:");
 
         createJButton.setText("Create");
+        createJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -225,6 +237,11 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_deleteJButtonActionPerformed
+
+    private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_createJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
