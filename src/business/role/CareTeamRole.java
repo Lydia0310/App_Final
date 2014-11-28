@@ -26,7 +26,7 @@ public class CareTeamRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Business business) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return createWorkArea(userProcessContainer, userAccount, organization, enterprise, business); //To change body of generated methods, choose Tools | Templates.
     }
     
     
