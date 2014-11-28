@@ -9,6 +9,7 @@ package business.role;
 import business.Business;
 import javax.swing.JPanel;
 import business.enterprise.Enterprise;
+import business.function.Function;
 import business.organization.Organization;
 import business.useraccount.UserAccount;
 
@@ -20,6 +21,9 @@ public class WarehouseAdmin extends Role{
 
     public WarehouseAdmin(){
         super(Role.RoleType.WarehouseAdmin);
+        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
+        privilegeList.add(new Function("View Device Schedule Request","ViewDeviceScheduleRequest"));
+        privilegeList.add(new Function("Track Maintaince History","TrackMaintainceHistory"));
     }
 
     @Override

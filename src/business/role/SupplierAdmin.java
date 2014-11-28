@@ -8,6 +8,7 @@ package business.role;
 
 import business.Business;
 import business.enterprise.Enterprise;
+import business.function.Function;
 import business.organization.Organization;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
@@ -20,6 +21,11 @@ public class SupplierAdmin extends Role{
 
     public SupplierAdmin(){
         super(Role.RoleType.SupplierAdmin);
+        
+        privilegeList.add(new Function("Manage Device","ManageDevice"));
+        privilegeList.add(new Function("View Device Dispatching Request","ViewDeviceRequest"));
+        privilegeList.add(new Function("View Order","ViewOrder"));
+        
     }
 
     @Override

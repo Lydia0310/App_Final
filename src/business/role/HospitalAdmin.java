@@ -8,6 +8,7 @@ package business.role;
 
 import business.Business;
 import business.enterprise.Enterprise;
+import business.function.Function;
 import business.organization.Organization;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
@@ -20,6 +21,11 @@ public class HospitalAdmin extends Role{
 
     public HospitalAdmin(){
         super(Role.RoleType.HospitalAdmin);
+        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
+        privilegeList.add(new Function("Browser Device List","BrowserDevice"));
+        privilegeList.add(new Function("View Order","ViewOrder"));
+        privilegeList.add(new Function("View Room Request","ViewRoomRequest"));
+        privilegeList.add(new Function("View Device Request","ViewDeviceRequest"));
     }
 
     @Override

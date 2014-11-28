@@ -21,7 +21,22 @@ public class SystemAdminRole extends Role{
 
     public SystemAdminRole() {
         super(Role.RoleType.SystemAdmin);
-        
+        privilegeList.add(new Function("Manage Device","ManageDevice"));
+        privilegeList.add(new Function("View Device Dispatching Request","ViewDeviceRequest"));
+        privilegeList.add(new Function("View Order","ViewOrder"));
+        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
+        privilegeList.add(new Function("Browser Device List","BrowserDevice"));
+        privilegeList.add(new Function("View Order","ViewOrder"));
+        privilegeList.add(new Function("View Room Request","ViewRoomRequest"));
+        privilegeList.add(new Function("View Device Request","ViewDeviceRequest"));
+        privilegeList.add(new Function("View Operation","ViewOperation"));
+        privilegeList.add(new Function("View Room Schedule","ViewAndRequestRoomSchedule"));
+        privilegeList.add(new Function("View Device Schedule","ViewAndRequestDeviceSchedule"));
+        privilegeList.add(new Function("View Care Team Schedule","ViewAndRequestCareTeamSchedule"));
+        privilegeList.add(new Function("View Operation Request","ViewOperationRequest"));
+        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
+        privilegeList.add(new Function("View Device Schedule Request","ViewDeviceScheduleRequest"));
+        privilegeList.add(new Function("Track Maintaince History","TrackMaintainceHistory"));
     }
 
     @Override

@@ -9,6 +9,7 @@ package business.role;
 import business.Business;
 import javax.swing.JPanel;
 import business.enterprise.Enterprise;
+import business.function.Function;
 import business.organization.Organization;
 import business.useraccount.UserAccount;
 
@@ -20,6 +21,10 @@ public class DoctorRole extends Role{
 
     public DoctorRole(){
         super(Role.RoleType.Doctor);
+        privilegeList.add(new Function("View Operation","ViewOperation"));
+        privilegeList.add(new Function("View Room Schedule","ViewAndRequestRoomSchedule"));
+        privilegeList.add(new Function("View Device Schedule","ViewAndRequestDeviceSchedule"));
+        privilegeList.add(new Function("View Care Team Schedule","ViewAndRequestCareTeamSchedule"));
     }
 
     @Override

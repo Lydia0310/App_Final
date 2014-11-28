@@ -14,8 +14,9 @@ public class Function {
     private String displayName;
     private String className;
 
-    public Function(){
-    
+    public Function(String displayName, String clssName){
+        this.displayName = displayName;
+        this.className = clssName;
     }
     public String getDisplayName() {
         return displayName;

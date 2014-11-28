@@ -34,7 +34,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
 
         manageDeviceJButton.setText("Manage Device");
 
-        viewDeviceRequestJButton.setText("View Device Dspatching Request");
+        viewDeviceRequestJButton.setText("View Device Dispatching Request");
 
         viewOrderJButton.setText("View Order");
 
