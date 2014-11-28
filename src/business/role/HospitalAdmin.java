@@ -12,6 +12,7 @@ import business.function.Function;
 import business.organization.Organization;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.hospitalworkarea.HospitalWorkArea;
 
 /**
  *
@@ -21,16 +22,16 @@ public class HospitalAdmin extends Role{
 
     public HospitalAdmin(){
         super(Role.RoleType.HospitalAdmin);
-        privilegeList.add(new Function("View Device Inventory","ViewDeviceInventory"));
-        privilegeList.add(new Function("Browser Device List","BrowserDevice"));
-        privilegeList.add(new Function("View Order","ViewOrder"));
-        privilegeList.add(new Function("View Room Request","ViewRoomRequest"));
-        privilegeList.add(new Function("View Device Request","ViewDeviceRequest"));
+        privilegeList.add(new Function("View Device Inventory","userinterface.hospitalworkarea.ViewDeviceInventory"));
+        privilegeList.add(new Function("Browser Device List","userinterface.hospitalworkarea.BrowserDevice"));
+        privilegeList.add(new Function("View Order","userinterface.hospitalworkarea.ViewOrder"));
+        privilegeList.add(new Function("View Room Request","userinterface.hospitalworkarea.ViewRoomRequest"));
+        privilegeList.add(new Function("View Device Request","userinterface.hospitalworkarea.ViewDeviceRequest"));
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Business business) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new HospitalWorkArea(); //To change body of generated methods, choose Tools | Templates.
     }
    
     

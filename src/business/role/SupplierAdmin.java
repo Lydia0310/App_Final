@@ -12,6 +12,7 @@ import business.function.Function;
 import business.organization.Organization;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.supplierworkarea.SupplierWorkArea;
 
 /**
  *
@@ -22,15 +23,15 @@ public class SupplierAdmin extends Role{
     public SupplierAdmin(){
         super(Role.RoleType.SupplierAdmin);
         
-        privilegeList.add(new Function("Manage Device","ManageDevice"));
-        privilegeList.add(new Function("View Device Dispatching Request","ViewDeviceRequest"));
-        privilegeList.add(new Function("View Order","ViewOrder"));
+        privilegeList.add(new Function("Manage Device","userinterface.supplierworkarea.ManageDevice"));
+        privilegeList.add(new Function("View Device Dispatching Request","userinterface.supplierworkarea.ViewDeviceRequest"));
+        privilegeList.add(new Function("View Order","userinterface.supplierworkarea.ViewOrder"));
         
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Business business) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new SupplierWorkArea(); //To change body of generated methods, choose Tools | Templates.
     }
   
     

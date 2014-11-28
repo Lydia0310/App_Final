@@ -7,7 +7,9 @@
 package userinterface.sysadminworkarea;
 
 import business.Business;
+import business.network.Network;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +26,7 @@ public class ManageNetwork extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
+        populateNetworkTable();
     }
 
     /**
@@ -36,12 +39,12 @@ public class ManageNetwork extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        networkJTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         networkNameJTextField = new javax.swing.JTextField();
         submitJButton = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        networkJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -57,14 +60,19 @@ public class ManageNetwork extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane1.setViewportView(networkJTable);
+        if (networkJTable.getColumnModel().getColumnCount() > 0) {
+            networkJTable.getColumnModel().getColumn(0).setResizable(false);
         }
 
         jLabel1.setText("Network Name: ");
 
         submitJButton.setText("Submit");
+        submitJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,11 +109,31 @@ public class ManageNetwork extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
+        // TODO add your handling code here:
+        String name = networkNameJTextField.getText();
+        
+        Network network = business.AddNetwork();
+        network.setName(name);
+        
+        populateNetworkTable();
+        
+    }//GEN-LAST:event_submitJButtonActionPerformed
 
+    private void populateNetworkTable(){
+        DefaultTableModel model = (DefaultTableModel) networkJTable.getModel();
+        model.setRowCount(0);
+        
+        for(Network network : business.getNetworkList()){
+            Object[] row = new Object[1];
+            row[0] = network.getName();
+            model.addRow(row);
+        }
+    };
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable networkJTable;
     private javax.swing.JTextField networkNameJTextField;
     private javax.swing.JButton submitJButton;
     // End of variables declaration//GEN-END:variables

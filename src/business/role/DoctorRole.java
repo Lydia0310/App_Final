@@ -12,6 +12,7 @@ import business.enterprise.Enterprise;
 import business.function.Function;
 import business.organization.Organization;
 import business.useraccount.UserAccount;
+import userinterface.doctorworkarea.DoctorWorkArea;
 
 /**
  *
@@ -21,15 +22,15 @@ public class DoctorRole extends Role{
 
     public DoctorRole(){
         super(Role.RoleType.Doctor);
-        privilegeList.add(new Function("View Operation","ViewOperation"));
-        privilegeList.add(new Function("View Room Schedule","ViewAndRequestRoomSchedule"));
-        privilegeList.add(new Function("View Device Schedule","ViewAndRequestDeviceSchedule"));
-        privilegeList.add(new Function("View Care Team Schedule","ViewAndRequestCareTeamSchedule"));
+        privilegeList.add(new Function("View Operation","userinterface.doctorworkarea.ViewOperation"));
+        privilegeList.add(new Function("View Room Schedule","userinterface.doctorworkarea.ViewAndRequestRoomSchedule"));
+        privilegeList.add(new Function("View Device Schedule","userinterface.doctorworkarea.ViewAndRequestDeviceSchedule"));
+        privilegeList.add(new Function("View Care Team Schedule","userinterface.doctorworkarea.ViewAndRequestCareTeamSchedule"));
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Business business) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new DoctorWorkArea(); //To change body of generated methods, choose Tools | Templates.
     }
     
     
