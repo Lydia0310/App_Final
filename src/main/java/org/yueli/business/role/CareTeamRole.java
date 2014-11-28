@@ -21,7 +21,7 @@ public class CareTeamRole extends Role{
 
     public CareTeamRole(){
         super(Role.RoleType.CareTeam);
-        privilegeList.add(new Function("View Operation Request","userinterface.careteamworkarea.ViewOperationRequest"));
+        privilegeList.add(new Function("View Operation Request","org.yueli.userinterface.careteamworkarea.ViewOperationRequest"));
     }
 
     @Override
