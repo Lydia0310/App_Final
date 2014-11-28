@@ -7,7 +7,10 @@
 package userinterface.sysadminworkarea;
 
 import business.Business;
+import business.enterprise.Enterprise;
+import business.network.Network;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +27,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
+        populateNetworkCombo();
     }
 
     /**
@@ -37,7 +41,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
+        networkComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         enterpriseJTable = new javax.swing.JTable();
@@ -86,10 +90,20 @@ public class ManageEnterprise extends javax.swing.JPanel {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        addJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addJButtonActionPerformed(evt);
+            }
+        });
 
         deleteJButton.setText("Delete ");
 
         refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,7 +123,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(refreshJButton)
                 .addGap(75, 75, 75))
@@ -119,7 +133,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(refreshJButton))
                 .addGap(32, 32, 32)
@@ -138,6 +152,11 @@ public class ManageEnterprise extends javax.swing.JPanel {
         jLabel3.setText("Enterprise Type: ");
 
         addEnterpriseJButton.setText("Add Enterprise");
+        addEnterpriseJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEnterpriseJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -205,9 +224,48 @@ public class ManageEnterprise extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void populateNetworkCombo(){
+        networkComboBox.removeAllItems();;
+        for(Network network : business.getNetworkList()){
+            networkComboBox.addItem(network);
+        }
+    }
+    
+    private void populateEnterpriseTable(){
+        Network networkName = (Network)networkComboBox.getSelectedItem();
+        
+        
+        DefaultTableModel model = (DefaultTableModel)enterpriseJTable.getModel();
+        model.setRowCount(0);
+        
+       if(networkName != null){
+            for(Enterprise enterprise : networkName.getEnterpriseList().getEnterpriseList()){
+                Object[] row = new Object[2];
+                row[0] = enterprise.getName();
+                row[1] = enterprise.getEnterpriseType().getValue();
+                
+                model.addRow(row);
+            }
+        }
+    }
     private void addJButtonAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_addJButtonAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_addJButtonAncestorAdded
+
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+        // TODO add your handling code here:
+        populateEnterpriseTable();
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_addJButtonActionPerformed
+
+    private void addEnterpriseJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEnterpriseJButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addEnterpriseJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -218,7 +276,6 @@ public class ManageEnterprise extends javax.swing.JPanel {
     private javax.swing.JTextField enterpriseNameJTextField;
     private javax.swing.JComboBox enterpriseTypeJComboBox;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -226,6 +283,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JComboBox networkComboBox;
     private javax.swing.JButton refreshJButton;
     // End of variables declaration//GEN-END:variables
 }

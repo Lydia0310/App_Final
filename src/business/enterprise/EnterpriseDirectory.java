@@ -16,7 +16,7 @@ public class EnterpriseDirectory {
     private ArrayList<Enterprise> enterpriseList;
     
     public EnterpriseDirectory(){
-        enterpriseList = new ArrayList<>();
+        enterpriseList = new ArrayList<Enterprise>();
     }
     
     public ArrayList<Enterprise> getEnterpriseList(){

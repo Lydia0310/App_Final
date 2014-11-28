@@ -15,13 +15,13 @@ public class Device {
     private int deviceID;
     private String deviceName;
     private String supplierName;
-    private String funcation;
+    private String function;
     private int devicePrice;
     private int quantity;
-    private int availablity;
+    private int availability;
     private int stockCount;
     private String location;
-    private String exprationDate;
+    private String expirationDate;
     private String currentStatus;        
     
     public Device(){
@@ -41,12 +41,12 @@ public class Device {
         return deviceName;
     }
 
-    public String getFuncation() {
-        return funcation;
+    public String getFunction() {
+        return function;
     }
 
-    public void setFuncation(String funcation) {
-        this.funcation = funcation;
+    public void setFunction(String function) {
+        this.function = function;
     }
     
     
@@ -79,12 +79,12 @@ public class Device {
         this.quantity = quantity;
     }
 
-    public int getAvailablity() {
-        return availablity;
+    public int getAvailability() {
+        return availability;
     }
 
-    public void setAvailablity(int availablity) {
-        this.availablity = availablity;
+    public void setAvailability(int availability) {
+        this.availability = availability;
     }
 
     public String getLocation() {
@@ -95,12 +95,12 @@ public class Device {
         this.location = location;
     }
 
-    public String getExprationDate() {
-        return exprationDate;
+    public String getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setExprationDate(String exprationDate) {
-        this.exprationDate = exprationDate;
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public String getCurrentStatus() {
