@@ -15,6 +15,7 @@ import org.yueli.business.organization.Organization;
 import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -258,6 +259,11 @@ public class BrowserDevice extends javax.swing.JPanel {
                 }
             }
         }
+    }
+    
+    private void populateDeviceTable(String name){
+        DefaultTableModel
+    
     }
     
     private void viewDetailJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailJButtonActionPerformed
