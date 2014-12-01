@@ -5,9 +5,9 @@ import org.yueli.business.workqueue.ScheduleRequest;
 import java.util.Date;
 
 /**
- * Created by Zhang Junyan on 11/30/2014/2014.
+ * Created by Yue Li on 11/30/2014/2014.
  */
-public class Schedule {
+public class Schedule implements Comparable<Schedule> {
     private String item;
     private ScheduleRequest.ScheduleType type;
     private Date beginTime;
@@ -43,5 +43,10 @@ public class Schedule {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    @Override
+    public int compareTo(Schedule o) {
+        return getBeginTime().compareTo(o.getBeginTime());
     }
 }
