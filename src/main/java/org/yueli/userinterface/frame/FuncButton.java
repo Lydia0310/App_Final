@@ -1,6 +1,7 @@
 package org.yueli.userinterface.frame;
 
 import  org.yueli.business.function.Function;
+import org.yueli.userinterface.AppEntrance;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -19,7 +20,7 @@ public class FuncButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                //Main.getMainFrame().addTab(func);
+                AppEntrance.getMainFrame().addTab(func);
             }
         });
     }
