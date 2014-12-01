@@ -13,6 +13,7 @@ import  org.yueli.business.role.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
+import org.yueli.business.organization.OrganizationDirectory;
 
 /**
  * @author Lydia
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class Business extends Organization {
     @JsonIgnore
     private static Business business;
+    private OrganizationDirectory organizationDirectory;
     private MasterOrderDirectory masterOrderDirectory;
 
     private ArrayList<Network> networkList;
@@ -49,6 +51,16 @@ public class Business extends Organization {
     public void setMasterOrderDirectory(MasterOrderDirectory masterOrderDirectory) {
         this.masterOrderDirectory = masterOrderDirectory;
     }
+
+    public OrganizationDirectory getOrganizationDirectory() {
+        return organizationDirectory;
+    }
+
+    public void setOrganizationDirectory(OrganizationDirectory organizationDirectory) {
+        this.organizationDirectory = organizationDirectory;
+    }
+    
+    
 
     public Network addNetwork() {
         Network network = new Network();

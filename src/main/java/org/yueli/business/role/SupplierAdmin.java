@@ -13,6 +13,7 @@ import org.yueli.business.organization.Organization;
 import org.yueli.business.useraccount.UserAccount;
 
 import javax.swing.JPanel;
+import org.yueli.business.device.DeviceDirectory;
 import  org.yueli.userinterface.supplierworkarea.SupplierWorkArea;
 
 /**
@@ -21,14 +22,39 @@ import  org.yueli.userinterface.supplierworkarea.SupplierWorkArea;
  */
 public class SupplierAdmin extends Role {
 
+    private DeviceDirectory deviceCatalog;
+    private String supplierID;
+    private static int count = 0;
+    
     public SupplierAdmin(){
         super(Role.RoleType.SupplierAdmin);
         
-        privilegeList.add(new Function("Manage Device","org.yueli.userinterface.supplierworkarea.ManageDevice"));
-        privilegeList.add(new Function("View Device Dispatching Request","org.yueli.userinterface.supplierworkarea.ViewDeviceRequest"));
-        privilegeList.add(new Function("View Order","org.yueli.userinterface.supplierworkarea.ViewOrder"));
+        count++;
+        supplierID = String.valueOf(count);
+        deviceCatalog = new DeviceDirectory();
+        
+        privilegeList.add(new Function("Supplier Work Area","org.yueli.userinterface.supplierworkarea.SupplierWorkArea"));
+        
         
     }
+
+    public DeviceDirectory getDeviceCatalog() {
+        return deviceCatalog;
+    }
+
+    public void setDeviceCatalog(DeviceDirectory deviceCatalog) {
+        this.deviceCatalog = deviceCatalog;
+    }
+
+    public String getSupplierID() {
+        return supplierID;
+    }
+
+    public void setSupplierID(String supplierID) {
+        this.supplierID = supplierID;
+    }
+    
+    
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Business business) {

@@ -16,6 +16,9 @@ import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.yueli.business.device.Device;
+import org.yueli.business.role.HospitalAdmin;
+import org.yueli.business.role.SupplierAdmin;
 
 /**
  *
@@ -262,7 +265,15 @@ public class BrowserDevice extends javax.swing.JPanel {
     }
     
     private void populateDeviceTable(String name){
-        DefaultTableModel
+        DefaultTableModel model = (DefaultTableModel)deviceJTable.getModel();
+        model.setRowCount(0);
+        for(Organization organization : business.getOrganizationDirectory().getOrganizationList()){
+            if(organization instanceof SupplierOrganization){
+                for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
+                    for(Device device : (SupplierAdmin)userAccount.getRole().get)
+                }
+            }
+        }
     
     }
     
