@@ -46,7 +46,7 @@ public class FirstPanel extends JPanel {
         add(row2);
         add(Box.createVerticalGlue());
         add(row3);
-        add(Box.createVerticalStrut(50));
+        add(Box.createVerticalStrut(20));
     }
 
 }

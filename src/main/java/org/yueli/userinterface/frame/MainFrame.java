@@ -2,6 +2,8 @@ package org.yueli.userinterface.frame;
 
 
 
+import org.yueli.business.function.Function;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
@@ -9,6 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainFrame extends JFrame {
 
@@ -21,11 +25,10 @@ public class MainFrame extends JFrame {
     private JLabel topBarLoginUser;
     private JLabel topBarLoginRole;
     private JButton topBarLogout;
-    //private JPanel welcomePanel;
     private JTabbedPane appTab;
     private FuncButtonPanel funcButtonPanel;
     private JToolBar statusBar;
-    //private RedPointPanel redPointPanel;
+    private Map<Integer, JComponent> activatedComponent;
 
     public static final Color blue = new Color(21, 127, 204);
     public static final Color gray = new Color(125, 125, 125);
@@ -36,6 +39,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame() throws HeadlessException {
         initComponents();
+        activatedComponent = new HashMap<>();
     }
 
     private void initComponents() {
@@ -178,7 +182,7 @@ public class MainFrame extends JFrame {
         horizontalSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, funcButtonPanel, rightPanel);
         horizontalSplit.setDividerLocation((int) (getWidth() * 0.15));
         horizontalSplit.setDividerSize(10);
-        horizontalSplit.setDividerLocation(310);
+        horizontalSplit.setDividerLocation(400);
     }
 
     private void initVerticalSplit() {
@@ -189,25 +193,24 @@ public class MainFrame extends JFrame {
         verticalSplit.setEnabled(false);
     }
 
-//    public void addTab (Function func) {
-//        if (func.getActivedTabIndex() > 0) {
-//            appTab.setSelectedIndex(func.getActivedTabIndex());
-//            this.postInfo("Component already opened, switch to it.");
-//        } else {
+    public void addTab (Function func) {
+        if (func.getActivatedTabIndex() > 0) {
+            appTab.setSelectedIndex(func.getActivatedTabIndex());
+        } else {
 //            JPanel appPanel = ((FunctionService)Service.getInstance(FunctionService.class)).getPanel(func.getFuncClass());
 //            if (appPanel != null) {
 //                int tabCount = appTab.getTabCount();
 //                appTab.add(appPanel);
-//                appTab.setTabComponentAt(tabCount, new CloseButtonTabPanel(func.getFuncName(), appTab, func));
-//                func.setActivedTabIndex(tabCount);
+//                appTab.setTabComponentAt(tabCount, new CloseButtonTabPanel(func.getDisplayName(), appTab, func));
+//                func.setActivatedTabIndex(tabCount);
 //                appTab.setSelectedIndex(tabCount);
 //            }
-//        }
-//    }
+        }
+    }
 
     public void loginSuccess() {
         verticalSplit.setRightComponent(horizontalSplit);
-//        funcButtonPanel.refresh();
+        funcButtonPanel.refresh();
 //        AccountService accountService = (AccountService) Service.getInstance(AccountService.class);
 //        topBarLoginUser.setText("User Name: " + accountService.getLoginUser().getUser_name());
 //        StringBuilder loginRole = new StringBuilder();

@@ -20,7 +20,6 @@ import javax.swing.JPanel;
  */
 public abstract class Role {
     public enum RoleType{
-        
         SystemAdmin("System Admin"),
         Doctor("Doctor"),
         WarehouseAdmin("Warehouse Admin"),
@@ -36,13 +35,13 @@ public abstract class Role {
         public String getValue(){
             return value;
         }
-    
-    
-    @Override
-    public String toString(){
+
+        @Override
+        public String toString(){
         return value;
     }
-}
+    }
+
     private RoleType roletype;
     protected ArrayList<Function> privilegeList;
     public Role(RoleType type){
@@ -57,8 +56,11 @@ public abstract class Role {
             Enterprise enterprise,
             Business business
     );
-  
-   
+
+    public ArrayList<Function> getPrivilegeList() {
+        return privilegeList;
+    }
+
     @Override
     public String toString(){
         return this.getClass().getName();

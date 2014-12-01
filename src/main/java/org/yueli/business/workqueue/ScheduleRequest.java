@@ -18,10 +18,8 @@ public abstract class  ScheduleRequest {
     private int scheduleID;
     private Date beginningTime;
     private Date endTime;
-    
-  
-    
-    public enum ScheduleType{
+
+    public static enum ScheduleType {
         Device("Device"),
         OperationRoom("OperationRoom"),
         StorageRoom("StorageRoom"),
@@ -44,11 +42,10 @@ public abstract class  ScheduleRequest {
     }
     private ScheduleType type;
     
-      public ScheduleRequest(ScheduleType type){
+    public ScheduleRequest(ScheduleType type) {
         count++;
         scheduleID = count;
         this.type = type;
-        
     }
 
     public int getScheduleID() {
