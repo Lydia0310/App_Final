@@ -22,10 +22,8 @@ public class DoctorRole extends Role{
 
     public DoctorRole(){
         super(Role.RoleType.Doctor);
-        privilegeList.add(new Function("View Operation","org.yueli.userinterface.doctorworkarea.ViewOperation"));
-        privilegeList.add(new Function("View Room Schedule","org.yueli.userinterface.doctorworkarea.ViewAndRequestRoomSchedule"));
-        privilegeList.add(new Function("View Device Schedule","org.yueli.userinterface.doctorworkarea.ViewAndRequestDeviceSchedule"));
-        privilegeList.add(new Function("View Care Team Schedule","org.yueli.userinterface.doctorworkarea.ViewAndRequestCareTeamSchedule"));
+        privilegeList.add(new Function("Doctor Work Area","org.yueli.userinterface.doctorworkarea.DoctorWorkArea"));
+       
     }
 
     @Override

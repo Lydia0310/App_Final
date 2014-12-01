@@ -6,6 +6,8 @@
 
 package org.yueli.userinterface.hospitalworkarea;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import  org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
@@ -15,6 +17,11 @@ import org.yueli.business.organization.Organization;
 import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.device.Device;
+import org.yueli.business.order.OrderItem;
+import org.yueli.business.role.HospitalAdmin;
+import org.yueli.business.role.SupplierAdmin;
 
 /**
  *
@@ -61,7 +68,7 @@ public class BrowserDevice extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         deviceJTable = new javax.swing.JTable();
         viewDetailJButton = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
+        quantityJSpinner = new javax.swing.JSpinner();
         addJButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         orderJTable = new javax.swing.JTable();
@@ -75,10 +82,20 @@ public class BrowserDevice extends javax.swing.JPanel {
         jLabel1.setText("Supplier Name:");
 
         searchJButton.setText("Search");
+        searchJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchJButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("jLabel2");
 
         refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
 
         deviceJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,6 +129,11 @@ public class BrowserDevice extends javax.swing.JPanel {
         });
 
         addJButton.setText("Add");
+        addJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addJButtonActionPerformed(evt);
+            }
+        });
 
         orderJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,8 +162,18 @@ public class BrowserDevice extends javax.swing.JPanel {
         jLabel3.setText("Order:");
 
         editJButton.setText("Edit");
+        editJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editJButtonActionPerformed(evt);
+            }
+        });
 
         deleteJButtton.setText("Delete");
+        deleteJButtton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteJButttonActionPerformed(evt);
+            }
+        });
 
         refreshOrderJButton.setText("Refresh");
 
@@ -201,7 +233,7 @@ public class BrowserDevice extends javax.swing.JPanel {
                         .addGap(72, 72, 72)
                         .addComponent(viewDetailJButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(addJButton)))
                 .addGap(40, 40, 40))
@@ -223,9 +255,9 @@ public class BrowserDevice extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewDetailJButton)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addJButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,10 +291,150 @@ public class BrowserDevice extends javax.swing.JPanel {
             }
         }
     }
+    private void populateDeviceTable(){
+        UserAccount userAccount = (UserAccount)supplierNameComboBox.getSelectedItem();
+        DefaultTableModel model = (DefaultTableModel)deviceJTable.getModel();
+        model.setRowCount(0);
+        
+        if(userAccount != null){
+            for (Device device : ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().getDeviceList()){
+                Object[] row = new Object[4];
+                row[0] = device;
+                row[1] = device.getFunction();
+                row[2] = device.getDevicePrice();
+                row[3] = device.getAvailability();
+                model.addRow(row);
+            }
+        }
+    }
+    private void populateDeviceTable(String name){
+        DefaultTableModel model = (DefaultTableModel)deviceJTable.getModel();
+        model.setRowCount(0);
+        for(Organization organization : business.getOrganizationDirectory().getOrganizationList()){
+            if(organization instanceof SupplierOrganization){
+                for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
+                    for(Device device : ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().getDeviceList()){
+                        Object[] row = new Object[4];
+                        row[0] = device;
+                        row[1] = device.getFunction();
+                        row[2] = device.getAvailability();
+                        row[3] = device.getDevicePrice();
+                        
+                        model.addRow(row);
+                    }
+                }
+            }
+        }
     
+    }
+    
+    public void populateOrderTable(){
+        DefaultTableModel model = (DefaultTableModel) orderJTable.getModel();
+        model.setRowCount(0);
+        for(OrderItem orderItem : order.getOrderItemList()){
+            Object[] row = new Object[4];
+            row[0]= orderItem;
+            row[1] = orderItem.getQuantity();
+            row[2] = orderItem.getDevice().getDevicePrice();
+            row[3] = orderItem.getQuantity()*orderItem.getDevice().getDevicePrice();
+            model.addRow(row);
+        }
+    }
     private void viewDetailJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailJButtonActionPerformed
         // TODO add your handling code here:
+        int selectedRow = deviceJTable.getSelectedRow();
+        if(selectedRow < 0){
+            JOptionPane.showMessageDialog(null, "Please select a row to view!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            Device device = (Device)deviceJTable.getValueAt(selectedRow, 0);
+            ViewDeviceDetail viewDeviceDetail = new ViewDeviceDetail(userProcessContainer, device);
+            userProcessContainer.add("View Device Detail", viewDeviceDetail);
+            CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        }
     }//GEN-LAST:event_viewDetailJButtonActionPerformed
+
+    private void searchJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchJButtonActionPerformed
+        // TODO add your handling code here:
+        String deviceName = searchJTextField.getText();
+        populateDeviceTable(deviceName);
+    }//GEN-LAST:event_searchJButtonActionPerformed
+
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = deviceJTable.getSelectedRow();
+        int quantity = (Integer)quantityJSpinner.getValue();
+        if(selectedRow < 0){
+            JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            Device device = (Device)deviceJTable.getValueAt(selectedRow, 0);
+            if(quantity<=0 || quantity > device.getAvailability()){
+                JOptionPane.showMessageDialog(null, "The stock is not enough", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            Boolean isInculded = false;
+            for(OrderItem orderItem : order.getOrderItemList()){
+                if(orderItem.getDevice().getDeviceName().equals(device.getDeviceName())){
+                    int oldQuantity = orderItem.getQuantity();
+                    int newQuantity = (Integer)quantityJSpinner.getValue();
+                    int availiability = device.getAvailability();
+                    int totalQuantity = oldQuantity + newQuantity;
+                    orderItem.setQuantity(totalQuantity);
+                    int newAvailiability = device.getAvailability() - newQuantity;
+                    device.setAvailability(newAvailiability);
+                    isInculded = true;
+                    
+                }
+            }
+            if(!isInculded){
+                OrderItem orderItem = order.addOrderItem();
+                orderItem.setDevice(device);
+                int quantity_notIncluded = (Integer)quantityJSpinner.getValue();
+                orderItem.setQuantity(quantity_notIncluded);
+                int new_availiability = device.getAvailability() - quantity_notIncluded;
+                device.setAvailability(new_availiability);
+                
+            }
+            
+            populateDeviceTable();
+            populateOrderTable();
+            
+        }
+    }//GEN-LAST:event_addJButtonActionPerformed
+
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+        // TODO add your handling code here:
+        populateDeviceTable();
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+
+    private void editJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = orderJTable.getSelectedRow();
+        if(selectedRow < 0){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            OrderItem orderItem = (OrderItem)orderJTable.getValueAt(selectedRow, 0);
+            EditDeviceOrder editDeviceOrder = new EditDeviceOrder(userProcessContainer,orderItem);
+            userProcessContainer.add("Edit Device Order", editDeviceOrder);
+            CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        }
+    }//GEN-LAST:event_editJButtonActionPerformed
+
+    private void deleteJButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButttonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = orderJTable.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(null, "Please select a row to delete!","Warning",JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            OrderItem orderItem = (OrderItem)orderJTable.getValueAt(selectedRow, 0);
+            order.deleteOrderItem(orderItem);
+        }
+    }//GEN-LAST:event_deleteJButttonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -277,8 +449,8 @@ public class BrowserDevice extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable orderJTable;
+    private javax.swing.JSpinner quantityJSpinner;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JButton refreshOrderJButton;
     private javax.swing.JButton searchJButton;

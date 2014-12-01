@@ -22,11 +22,8 @@ public class HospitalAdmin extends Role{
 
     public HospitalAdmin(){
         super(Role.RoleType.HospitalAdmin);
-        privilegeList.add(new Function("View Device Inventory","org.yueli.userinterface.hospitalworkarea.ViewDeviceInventory"));
-        privilegeList.add(new Function("Browser Device List","org.yueli.userinterface.hospitalworkarea.BrowserDevice"));
-        privilegeList.add(new Function("View Order","org.yueli.userinterface.hospitalworkarea.ViewOrder"));
-        privilegeList.add(new Function("View Room Request","org.yueli.userinterface.hospitalworkarea.ViewRoomRequest"));
-        privilegeList.add(new Function("View Device Request","org.yueli.userinterface.hospitalworkarea.ViewDeviceRequest"));
+        privilegeList.add(new Function("Hospital Work Area","org.yueli.userinterface.hospitalworkarea.HospitalWorkArea"));
+        
     }
 
     @Override
