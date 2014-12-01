@@ -176,8 +176,18 @@ public class BrowserDevice extends javax.swing.JPanel {
         });
 
         refreshOrderJButton.setText("Refresh");
+        refreshOrderJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshOrderJButtonActionPerformed(evt);
+            }
+        });
 
         checkoutJButton.setText("Checkout");
+        checkoutJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutJButtonActionPerformed(evt);
+            }
+        });
 
         backJButton.setText("<< Back");
 
@@ -435,6 +445,19 @@ public class BrowserDevice extends javax.swing.JPanel {
             order.deleteOrderItem(orderItem);
         }
     }//GEN-LAST:event_deleteJButttonActionPerformed
+
+    private void refreshOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshOrderJButtonActionPerformed
+        // TODO add your handling code here:
+        populateOrderTable();
+    }//GEN-LAST:event_refreshOrderJButtonActionPerformed
+
+    private void checkoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutJButtonActionPerformed
+        // TODO add your handling code here:
+        masterOrderDirectory.addOrder(order);
+        order.setHospitalOrderID(((HospitalAdmin)userAccount.getRole()).getHospitalD());
+        
+        if()
+    }//GEN-LAST:event_checkoutJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
