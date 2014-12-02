@@ -13,6 +13,13 @@ public class Schedule implements Comparable<Schedule> {
     private Date beginTime;
     private Date endTime;
 
+    public Schedule(Date beginTime, Date endTime, String item, ScheduleRequest.ScheduleType type) {
+        this.item = item;
+        this.type = type;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
+    }
+
     public String getItem() {
         return item;
     }
