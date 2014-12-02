@@ -4,14 +4,20 @@
  * and open the template in the editor.
  */
 
-package org.yueli.userinterface.sysadminworkarea;
+package org.yueli.userinterface.networkadminworkarea;
 
+import javax.swing.JOptionPane;
 import  org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
 import org.yueli.business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.yueli.business.person.Person;
+import org.yueli.business.role.FAMCAdmin;
+import org.yueli.business.role.HospitalAdmin;
+import org.yueli.business.role.NetworkAdmin;
+import org.yueli.business.role.PrimaryCareAdmin;
 
 /**
  *
@@ -24,17 +30,19 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Business business;
-    public ManageEnterpriseAdmin(JPanel userProcessContainer, Business business) {
+    private UserAccount userAccount;
+    public ManageEnterpriseAdmin(JPanel userProcessContainer,UserAccount userAccount, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
         this.business = business;
-        networkNameJLabel.setVisible(false);
+        
         enterpriseNameJLabel.setVisible(false);
         usernameJLabel.setVisible(false);
         passwordJLabel.setVisible(false);
         firstNameJLabel.setVisible(false);
         lastNameJLabel.setVisible(false);
-        networkNameJComboBox.setVisible(false);
+        
         enterpriseNamejComboBox.setVisible(false);
         userNameJTextField.setVisible(false);
         PasswordField.setVisible(false);
@@ -72,7 +80,6 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         enterpriseAdminJTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        networkNameJLabel = new javax.swing.JLabel();
         enterpriseNameJLabel = new javax.swing.JLabel();
         usernameJLabel = new javax.swing.JLabel();
         passwordJLabel = new javax.swing.JLabel();
@@ -80,10 +87,8 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         firstNameJLabel = new javax.swing.JLabel();
         userNameJTextField = new javax.swing.JTextField();
         PasswordField = new javax.swing.JPasswordField();
-        networkNameJComboBox = new javax.swing.JComboBox();
         enterpriseNamejComboBox = new javax.swing.JComboBox();
         addJButton = new javax.swing.JButton();
-        deleteJButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         lastNameJLabel = new javax.swing.JLabel();
         lastNameJTextField = new javax.swing.JTextField();
@@ -114,8 +119,6 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
 
         jLabel1.setText("Enterprise Admin List:");
 
-        networkNameJLabel.setText("Network Name: ");
-
         enterpriseNameJLabel.setText("Enterprise Name: ");
 
         usernameJLabel.setText("Username:");
@@ -125,11 +128,9 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         firstNameJLabel.setText("First Name:");
 
         addJButton.setText("Add Enterprise Admin");
-
-        deleteJButton.setText("Delete");
-        deleteJButton.addActionListener(new java.awt.event.ActionListener() {
+        addJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteJButtonActionPerformed(evt);
+                addJButtonActionPerformed(evt);
             }
         });
 
@@ -156,40 +157,38 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 465, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(enterpriseNameJLabel)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(45, 45, 45))
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(addJButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(deleteJButton)
-                .addGap(167, 167, 167))
+                .addGap(71, 451, Short.MAX_VALUE)
+                .addComponent(createJButton)
+                .addGap(215, 215, 215))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(networkNameJLabel)
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(enterpriseNamejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(networkNameJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(firstNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(120, 120, 120)
+                        .addComponent(addJButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lastNameJLabel)
-                            .addComponent(firstNameJLabel)
-                            .addComponent(passwordJLabel)
-                            .addComponent(usernameJLabel))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createJButton)
-                .addGap(215, 215, 215))
+                        .addGap(90, 90, 90)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enterpriseNameJLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(enterpriseNamejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(firstNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lastNameJLabel)
+                                    .addComponent(firstNameJLabel)
+                                    .addComponent(passwordJLabel)
+                                    .addComponent(usernameJLabel))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,14 +200,8 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addJButton)
-                    .addComponent(deleteJButton))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(networkNameJLabel)
-                    .addComponent(networkNameJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(addJButton)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterpriseNameJLabel)
                     .addComponent(enterpriseNamejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,28 +220,64 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lastNameJLabel)
-                    .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createJButton))
-                .addGap(0, 73, Short.MAX_VALUE))
+                    .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(createJButton)
+                .addGap(0, 74, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_deleteJButtonActionPerformed
-
     private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
         // TODO add your handling code here:
+        Enterprise enterprise = (Enterprise)enterpriseNamejComboBox.getSelectedItem();
+        String username = userNameJTextField.getText();
+        String password = String.valueOf(PasswordField.getPassword());
+        String firstName = firstNameJTextField.getText();
+        String lastName = lastNameJTextField.getText();
         
+        Person person = enterprise.getPersonDirectory().addPerson();
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital){
+            UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new HospitalAdmin());
+        }
+        if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.PrimaryCare){
+            UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new PrimaryCareAdmin());
+        }
+        if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.FoundingAMC){
+            UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new FAMCAdmin());
+        }
     }//GEN-LAST:event_createJButtonActionPerformed
 
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        // TODO add your handling code here:
+         
+        enterpriseNameJLabel.setVisible(true);
+        usernameJLabel.setVisible(true);
+        passwordJLabel.setVisible(true);
+        firstNameJLabel.setVisible(true);
+        lastNameJLabel.setVisible(true);
+        
+        enterpriseNamejComboBox.setVisible(true);
+        userNameJTextField.setVisible(true);
+        PasswordField.setVisible(true);
+        firstNameJTextField.setVisible(true);
+        lastNameJTextField.setVisible(true);
+        populateEnterpriseCombo();
+        
+    }//GEN-LAST:event_addJButtonActionPerformed
+
+    public void populateEnterpriseCombo(){
+        enterpriseNamejComboBox.removeAllItems();
+        for(Enterprise enterprise : ((NetworkAdmin)userAccount.getRole()).getEnterpriseDirectory().getEnterpriseList() ){
+            enterpriseNamejComboBox.addItem(enterprise);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JButton addJButton;
     private javax.swing.JButton createJButton;
-    private javax.swing.JButton deleteJButton;
     private javax.swing.JTable enterpriseAdminJTable;
     private javax.swing.JLabel enterpriseNameJLabel;
     private javax.swing.JComboBox enterpriseNamejComboBox;
@@ -259,8 +288,6 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastNameJLabel;
     private javax.swing.JTextField lastNameJTextField;
-    private javax.swing.JComboBox networkNameJComboBox;
-    private javax.swing.JLabel networkNameJLabel;
     private javax.swing.JLabel passwordJLabel;
     private javax.swing.JTextField userNameJTextField;
     private javax.swing.JLabel usernameJLabel;

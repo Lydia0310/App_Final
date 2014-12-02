@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class InventoryHospital {
     private ArrayList<DeviceDirectory> inventoryHospital;
-    private StorageRoom room;
+    private String room;
     public InventoryHospital(){
         inventoryHospital = new ArrayList<DeviceDirectory>();
     }
@@ -28,11 +28,11 @@ public class InventoryHospital {
         this.inventoryHospital = inventoryHospital;
     }
 
-    public StorageRoom getRoom() {
+    public String getRoom() {
         return room;
     }
 
-    public void setRoom(StorageRoom room) {
+    public void setRoom(String room) {
         this.room = room;
     }
 

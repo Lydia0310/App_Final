@@ -14,6 +14,7 @@ import org.yueli.business.useraccount.UserAccount;
 
 import javax.swing.JPanel;
 import org.yueli.business.device.DeviceDirectory;
+import org.yueli.business.network.Network;
 import  org.yueli.userinterface.supplierworkarea.SupplierWorkArea;
 
 /**
@@ -24,6 +25,7 @@ public class SupplierAdmin extends Role {
 
     private DeviceDirectory deviceCatalog;
     private String supplierID;
+    private String supplierName;
     private static int count = 0;
     
     public SupplierAdmin(){
@@ -53,13 +55,22 @@ public class SupplierAdmin extends Role {
     public void setSupplierID(String supplierID) {
         this.supplierID = supplierID;
     }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
+
+    @Override
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
+         return new SupplierWorkArea(userProcessContainer,userAccount,business);//To change body of generated methods, choose Tools | Templates.
+    }
     
     
 
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Business business) {
-        return new SupplierWorkArea(); //To change body of generated methods, choose Tools | Templates.
-    }
-  
+
     
 }

@@ -6,8 +6,11 @@
 
 package org.yueli.userinterface.sysadminworkarea;
 
+import org.yueli.userinterface.networkadminworkarea.ManageEnterpriseAdmin;
+import org.yueli.userinterface.networkadminworkarea.ManageEnterprise;
 import org.yueli.business.Business;
 import java.awt.CardLayout;
+import javax.smartcardio.Card;
 import javax.swing.JPanel;
 
 /**
@@ -41,8 +44,7 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
 
         viewTreeChartJButton = new javax.swing.JButton();
         manageNetworkJButton = new javax.swing.JButton();
-        manageEnterpriseJButton = new javax.swing.JButton();
-        manageEnterpriseAdminJButton = new javax.swing.JButton();
+        manageNetworkAdminJButton = new javax.swing.JButton();
 
         viewTreeChartJButton.setText("View Tree Chart for whole system");
         viewTreeChartJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -58,17 +60,10 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        manageEnterpriseJButton.setText("Manage Enterprise");
-        manageEnterpriseJButton.addActionListener(new java.awt.event.ActionListener() {
+        manageNetworkAdminJButton.setText("Manage NetworkAdmin");
+        manageNetworkAdminJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageEnterpriseJButtonActionPerformed(evt);
-            }
-        });
-
-        manageEnterpriseAdminJButton.setText("Manage Enterprise Admin");
-        manageEnterpriseAdminJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageEnterpriseAdminJButtonActionPerformed(evt);
+                manageNetworkAdminJButtonActionPerformed(evt);
             }
         });
 
@@ -79,8 +74,7 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(205, 205, 205)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(manageEnterpriseAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageEnterpriseJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageNetworkAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageNetworkJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewTreeChartJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(284, Short.MAX_VALUE))
@@ -92,11 +86,9 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
                 .addComponent(viewTreeChartJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(manageNetworkJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(manageEnterpriseJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(manageEnterpriseAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(manageNetworkAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(273, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -117,27 +109,17 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
                  
     }//GEN-LAST:event_manageNetworkJButtonActionPerformed
 
-    private void manageEnterpriseJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEnterpriseJButtonActionPerformed
+    private void manageNetworkAdminJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageNetworkAdminJButtonActionPerformed
         // TODO add your handling code here:
-        ManageEnterprise manageEnterprise = new ManageEnterprise(userProcessContainer, business);
-        userProcessContainer.add("Manage Enterprise", manageEnterprise);
+        ManageNetworkUserAccount manageNetworkUserAccount = new ManageNetworkUserAccount(userProcessContainer, business);
+        userProcessContainer.add("Manage Network Admin", manageNetworkUserAccount);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-                 
-    }//GEN-LAST:event_manageEnterpriseJButtonActionPerformed
-
-    private void manageEnterpriseAdminJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEnterpriseAdminJButtonActionPerformed
-        // TODO add your handling code here:
-        ManageEnterpriseAdmin manageEnterpriseAdmin = new ManageEnterpriseAdmin(userProcessContainer, business);
-        userProcessContainer.add("Manage EnterpriseAdmin", manageEnterpriseAdmin);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_manageEnterpriseAdminJButtonActionPerformed
+    }//GEN-LAST:event_manageNetworkAdminJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton manageEnterpriseAdminJButton;
-    private javax.swing.JButton manageEnterpriseJButton;
+    private javax.swing.JButton manageNetworkAdminJButton;
     private javax.swing.JButton manageNetworkJButton;
     private javax.swing.JButton viewTreeChartJButton;
     // End of variables declaration//GEN-END:variables

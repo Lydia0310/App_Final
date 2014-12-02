@@ -6,13 +6,15 @@
 
 package org.yueli.business.role;
 
-import  org.yueli.business.Business;
-import org.yueli.business.enterprise.Enterprise;
-import org.yueli.business.function.Function;
-import org.yueli.business.organization.Organization;
-import org.yueli.business.useraccount.UserAccount;
+
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import org.yueli.business.Business;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.function.Function;
+import org.yueli.business.network.Network;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.useraccount.UserAccount;
 
 /**
  *
@@ -21,10 +23,14 @@ import javax.swing.JPanel;
 public abstract class Role {
     public enum RoleType{
         SystemAdmin("System Admin"),
+        NetworkAdmin("Network Admin"),
+        EnterpriseAdmin("Enterprise Admin"),
         Doctor("Doctor"),
         WarehouseAdmin("Warehouse Admin"),
         SupplierAdmin("Supplier Admin"),
         HospitalAdmin("Hospital Admin"),
+        FAMCAdmin("Founding Academic Medical Center Admin"),
+        PrimaryCareAdmin("Primary Care Admin"),
         CareTeam("CareTeam");
         
         private String value;
@@ -54,6 +60,7 @@ public abstract class Role {
             UserAccount userAccount,
             Organization organization,
             Enterprise enterprise,
+            Network network,
             Business business
     );
 

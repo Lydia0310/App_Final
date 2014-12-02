@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 
-package org.yueli.userinterface.sysadminworkarea;
+package org.yueli.userinterface.networkadminworkarea;
 
+import javax.swing.JOptionPane;
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.yueli.business.role.NetworkAdmin;
+import org.yueli.business.useraccount.UserAccount;
 
 /**
  *
@@ -22,12 +25,14 @@ public class ManageEnterprise extends javax.swing.JPanel {
      * Creates new form ManageEnterprise
      */
     private JPanel userProcessContainer;
+    private UserAccount userAccount;
     private Business business;
-    public ManageEnterprise(JPanel userProcessContainer, Business business) {
+    public ManageEnterprise(JPanel userProcessContainer,UserAccount userAccount, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
         this.business = business;
-        populateNetworkCombo();
+       
     }
 
     /**
@@ -41,11 +46,8 @@ public class ManageEnterprise extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        networkComboBox = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         enterpriseJTable = new javax.swing.JTable();
-        addJButton = new javax.swing.JButton();
         deleteJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -55,8 +57,6 @@ public class ManageEnterprise extends javax.swing.JPanel {
         enterpriseNameJTextField = new javax.swing.JTextField();
         addEnterpriseJButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-
-        jLabel1.setText("Network: ");
 
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,23 +80,12 @@ public class ManageEnterprise extends javax.swing.JPanel {
             enterpriseJTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        addJButton.setText("Add Enterprise");
-        addJButton.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                addJButtonAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        addJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addJButtonActionPerformed(evt);
-            }
-        });
-
         deleteJButton.setText("Delete ");
+        deleteJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteJButtonActionPerformed(evt);
+            }
+        });
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -114,17 +103,11 @@ public class ManageEnterprise extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(addJButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(67, 454, Short.MAX_VALUE)
                 .addComponent(deleteJButton)
                 .addGap(142, 142, 142))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(refreshJButton)
                 .addGap(75, 75, 75))
         );
@@ -132,16 +115,11 @@ public class ManageEnterprise extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(networkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(refreshJButton))
+                .addComponent(refreshJButton)
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addJButton)
-                    .addComponent(deleteJButton))
+                .addComponent(deleteJButton)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -224,66 +202,69 @@ public class ManageEnterprise extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void populateNetworkCombo(){
-        networkComboBox.removeAllItems();;
-        for(Network network : business.getNetworkList()){
-            networkComboBox.addItem(network);
-        }
-    }
+
     
     private void populateEnterpriseTable(){
-        Network networkName = (Network)networkComboBox.getSelectedItem();
-        
-        
+       
         DefaultTableModel model = (DefaultTableModel)enterpriseJTable.getModel();
         model.setRowCount(0);
         
-       if(networkName != null){
-            for(Enterprise enterprise : networkName.getEnterpriseList().getEnterpriseList()){
+        for(Enterprise enterprise : ((NetworkAdmin)userAccount.getRole()).getEnterpriseDirectory().getEnterpriseList()){
                 Object[] row = new Object[2];
                 row[0] = enterprise.getName();
                 row[1] = enterprise.getEnterpriseType().getValue();
                 
                 model.addRow(row);
             }
-        }
+        
     }
-    private void addJButtonAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_addJButtonAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addJButtonAncestorAdded
-
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
         // TODO add your handling code here:
         populateEnterpriseTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
-    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_addJButtonActionPerformed
-
     private void addEnterpriseJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEnterpriseJButtonActionPerformed
         // TODO add your handling code here:
+        Enterprise.EnterpriseType type = (Enterprise.EnterpriseType)enterpriseTypeJComboBox.getSelectedItem();
+        if(type == null){
+            JOptionPane.showMessageDialog(null, "Please selecte a enterprise type to continue!");
+            return;
+        }
+        String name = enterpriseNameJTextField.getText();
+        for(Network network : business.getNetworkList()){
+            Enterprise enterprise = network.getEnterpriseList().addEnterprise(name, type);
+            
+        }
+        populateEnterpriseTable();
     }//GEN-LAST:event_addEnterpriseJButtonActionPerformed
+
+    private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = enterpriseJTable.getSelectedRow();
+        if(selectedRow <0 ){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
+        }
+        else{
+            Enterprise enterprise = (Enterprise)enterpriseJTable.getValueAt(selectedRow, 0);
+            ((NetworkAdmin)userAccount.getRole()).getEnterpriseDirectory().deleteEnterprise(enterprise);
+            populateEnterpriseTable();
+        }
+    }//GEN-LAST:event_deleteJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEnterpriseJButton;
-    private javax.swing.JButton addJButton;
     private javax.swing.JButton deleteJButton;
     private javax.swing.JTable enterpriseJTable;
     private javax.swing.JTextField enterpriseNameJTextField;
     private javax.swing.JComboBox enterpriseTypeJComboBox;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JComboBox networkComboBox;
     private javax.swing.JButton refreshJButton;
     // End of variables declaration//GEN-END:variables
 }

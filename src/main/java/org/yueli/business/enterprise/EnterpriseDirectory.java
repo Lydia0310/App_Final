@@ -32,9 +32,11 @@ public class EnterpriseDirectory {
             enterpriseList.add(enterprise);
         }
         
-      
-        
         return enterprise;
+    }
+    
+        public void deleteEnterprise(Enterprise enterprise){
+        enterpriseList.remove(enterprise);
     }
             
 }

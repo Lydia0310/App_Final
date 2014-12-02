@@ -111,7 +111,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void viewDeviceInventoryJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceInventoryJButtonActionPerformed
         // TODO add your handling code here:
-        ViewDeviceInventory viewDeviceInventory = new ViewDeviceInventory();
+        ViewDeviceInventory viewDeviceInventory = new ViewDeviceInventory(userProcessContainer, userAccount);
         userProcessContainer.add("View Device Inventory", viewDeviceInventory);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

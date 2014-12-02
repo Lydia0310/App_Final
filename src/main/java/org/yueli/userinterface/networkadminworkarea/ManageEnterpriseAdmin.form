@@ -25,50 +25,50 @@
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="enterpriseNameJLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="543" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" min="-2" pref="543" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-              <Component id="addJButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="deleteJButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+              <EmptySpace min="71" pref="451" max="32767" attributes="0"/>
+              <Component id="createJButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                      <Component id="networkNameJLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="enterpriseNamejComboBox" min="-2" pref="177" max="-2" attributes="0"/>
-                          <Component id="networkNameJComboBox" min="-2" pref="177" max="-2" attributes="0"/>
-                          <Component id="userNameJTextField" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
-                          <Component id="PasswordField" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
-                          <Component id="firstNameJTextField" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
-                          <Component id="lastNameJTextField" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="addJButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lastNameJLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="firstNameJLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="passwordJLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="usernameJLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="enterpriseNameJLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="enterpriseNamejComboBox" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="userNameJTextField" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="PasswordField" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="firstNameJTextField" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="lastNameJTextField" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lastNameJLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="firstNameJLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="passwordJLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="usernameJLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="createJButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,16 +83,8 @@
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="164" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="addJButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="deleteJButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="networkNameJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="networkNameJComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="addJButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="enterpriseNameJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="enterpriseNamejComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -116,9 +108,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lastNameJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lastNameJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="createJButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="73" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Component id="createJButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="74" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -171,11 +164,6 @@
         <Property name="text" type="java.lang.String" value="Enterprise Admin List:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="networkNameJLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Network Name: "/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="enterpriseNameJLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Enterprise Name: "/>
@@ -202,13 +190,6 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="PasswordField">
     </Component>
-    <Component class="javax.swing.JComboBox" name="networkNameJComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JComboBox" name="enterpriseNamejComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -220,13 +201,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Enterprise Admin"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="deleteJButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
-      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteJButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addJButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">

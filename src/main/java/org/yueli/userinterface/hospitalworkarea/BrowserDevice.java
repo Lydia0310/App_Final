@@ -19,6 +19,9 @@ import org.yueli.business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.yueli.business.device.Device;
+import org.yueli.business.device.DeviceDirectory;
+import org.yueli.business.inventory.Inventory;
+import org.yueli.business.inventory.InventoryItem;
 import org.yueli.business.order.OrderItem;
 import org.yueli.business.role.HospitalAdmin;
 import org.yueli.business.role.SupplierAdmin;
@@ -489,6 +492,11 @@ public class BrowserDevice extends javax.swing.JPanel {
             populateDeviceTable();
             populateOrderTable();
             //Inventory change??
+            for(OrderItem orderItem : order.getOrderItemList() ){
+                for(){
+                
+                }
+            }
         }
         
     }//GEN-LAST:event_checkoutJButtonActionPerformed

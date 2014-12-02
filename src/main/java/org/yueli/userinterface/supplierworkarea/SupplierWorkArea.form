@@ -20,7 +20,6 @@
               <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="viewOrderJButton" min="-2" pref="266" max="-2" attributes="0"/>
-                  <Component id="viewDeviceRequestJButton" min="-2" pref="266" max="-2" attributes="0"/>
                   <Component id="manageDeviceJButton" min="-2" pref="266" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="258" max="32767" attributes="0"/>
@@ -30,11 +29,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
               <Component id="manageDeviceJButton" min="-2" pref="37" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-              <Component id="viewDeviceRequestJButton" min="-2" pref="37" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               <Component id="viewOrderJButton" min="-2" pref="37" max="-2" attributes="0"/>
               <EmptySpace pref="264" max="32767" attributes="0"/>
           </Group>
@@ -47,15 +44,13 @@
         <Property name="text" type="java.lang.String" value="Manage Device"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="viewDeviceRequestJButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Device Dispatching Request"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="viewOrderJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Order"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewOrderJButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -6,6 +6,11 @@
 
 package org.yueli.userinterface.supplierworkarea;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import org.yueli.business.Business;
+import org.yueli.business.useraccount.UserAccount;
+
 /**
  *
  * @author Lydia
@@ -15,9 +20,18 @@ public class SupplierWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form SupplierWorkArea
      */
-    public SupplierWorkArea() {
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
+    public SupplierWorkArea(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.business = business;
+        
     }
+    
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,14 +43,16 @@ public class SupplierWorkArea extends javax.swing.JPanel {
     private void initComponents() {
 
         manageDeviceJButton = new javax.swing.JButton();
-        viewDeviceRequestJButton = new javax.swing.JButton();
         viewOrderJButton = new javax.swing.JButton();
 
         manageDeviceJButton.setText("Manage Device");
 
-        viewDeviceRequestJButton.setText("View Device Dispatching Request");
-
         viewOrderJButton.setText("View Order");
+        viewOrderJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewOrderJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -46,27 +62,31 @@ public class SupplierWorkArea extends javax.swing.JPanel {
                 .addGap(214, 214, 214)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(258, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(112, 112, 112)
                 .addComponent(manageDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(76, 76, 76)
                 .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(264, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void viewOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderJButtonActionPerformed
+        // TODO add your handling code here:
+        ViewOrder viewOrder = new ViewOrder(userProcessContainer,userAccount,business);
+        userProcessContainer.add("View Order",viewOrder);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_viewOrderJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton manageDeviceJButton;
-    private javax.swing.JButton viewDeviceRequestJButton;
     private javax.swing.JButton viewOrderJButton;
     // End of variables declaration//GEN-END:variables
 }

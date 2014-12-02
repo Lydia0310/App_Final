@@ -10,6 +10,7 @@ import  org.yueli.business.Business;
 import javax.swing.JPanel;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.function.Function;
+import org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli. userinterface.warehouseworkarea.WarehouseWorkArea;
@@ -26,11 +27,12 @@ public class WarehouseAdmin extends Role{
        
     }
 
-
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Business business) {
-        return new WarehouseWorkArea(); //To change body of generated methods, choose Tools | Templates.
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
+         return new WarehouseWorkArea();
     }
+
+
     
     
 }

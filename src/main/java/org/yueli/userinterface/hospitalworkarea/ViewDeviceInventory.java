@@ -6,6 +6,12 @@
 
 package org.yueli.userinterface.hospitalworkarea;
 
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.device.Device;
+import org.yueli.business.role.SupplierAdmin;
+import org.yueli.business.useraccount.UserAccount;
+
 /**
  *
  * @author Lydia
@@ -15,9 +21,28 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
     /**
      * Creates new form ViewDeviceInventory
      */
-    public ViewDeviceInventory() {
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    public ViewDeviceInventory(JPanel userProcessContainer,UserAccount userAccount ) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        populateInventoryTable();
     }
+    
+    public void populateInventoryTable(){
+        DefaultTableModel model = (DefaultTableModel)deviceInventoryTable.getModel();
+        model.setRowCount(0);
+        for(Device device : ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().getDeviceList()){
+            Object row[] = new Object[5];
+            row[0] = device;
+            row[1] = device.getSupplierID();
+            row[2] = device.getFunction();
+            row[3] = device.getStockCount();
+            row[4] = device.getLocation();
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,18 +54,18 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        deviceInventoryTable = new javax.swing.JTable();
+        sortBySupplierNameButton = new javax.swing.JButton();
+        sortByFunctionJButton = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
         requestDispatchingJButton = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        deviceInventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Device Name", "Supplier Name", "Function", "Quantity", "Storage Room"
+                "Device Name", "Supplier ID", "Function", "Stock Count", "Storage Room"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -51,22 +76,32 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane1.setViewportView(deviceInventoryTable);
+        if (deviceInventoryTable.getColumnModel().getColumnCount() > 0) {
+            deviceInventoryTable.getColumnModel().getColumn(0).setResizable(false);
+            deviceInventoryTable.getColumnModel().getColumn(1).setResizable(false);
+            deviceInventoryTable.getColumnModel().getColumn(2).setResizable(false);
+            deviceInventoryTable.getColumnModel().getColumn(3).setResizable(false);
+            deviceInventoryTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButton1.setText("Sort by Supplier Name");
+        sortBySupplierNameButton.setText("Sort by Supplier Name");
+        sortBySupplierNameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortBySupplierNameButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Sort by Function");
+        sortByFunctionJButton.setText("Sort by Function");
 
         backJButton.setText("<< Back");
 
-        requestDispatchingJButton.setText("Request Dispatching from another Hospital");
+        requestDispatchingJButton.setText("Request Dispatching");
+        requestDispatchingJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestDispatchingJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -84,9 +119,9 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(sortBySupplierNameButton)
                                 .addGap(339, 339, 339)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(sortByFunctionJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
@@ -94,8 +129,8 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(sortBySupplierNameButton)
+                    .addComponent(sortByFunctionJButton))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,13 +145,23 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void sortBySupplierNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortBySupplierNameButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sortBySupplierNameButtonActionPerformed
+
+    private void requestDispatchingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestDispatchingJButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_requestDispatchingJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTable deviceInventoryTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton requestDispatchingJButton;
+    private javax.swing.JButton sortByFunctionJButton;
+    private javax.swing.JButton sortBySupplierNameButton;
     // End of variables declaration//GEN-END:variables
 }
+

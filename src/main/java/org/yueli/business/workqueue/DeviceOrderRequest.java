@@ -10,6 +10,6 @@ package org.yueli.business.workqueue;
  *
  * @author Lydia
  */
-public class DeviceOrderRequest {
+public class DeviceOrderRequest extends WorkRequest{
     
 }

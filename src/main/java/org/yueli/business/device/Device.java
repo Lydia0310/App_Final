@@ -6,6 +6,8 @@
 
 package org.yueli.business.device;
 
+import static org.yueli.business.organization.Organization.Type.Supplier;
+
 /**
  *
  * @author Lydia
@@ -14,16 +16,17 @@ public class Device {
     private static int count;
     private int deviceID;
     private String deviceName;
-    private String supplierName;
+    private String supplierID;
+    
     private String function;
     private int devicePrice;
     private int quantity;
-    private int availability;
-    private int stockCount;
+    private int availability;//stock in Enterprise 
+    private int stockCount;//Inventory number
     private String location;
-
-    private String expirationDate;
-    private String currentStatus;        
+    private String description;
+    //private String expirationDate;
+    //private String currentStatus;        
 
 
     
@@ -51,21 +54,28 @@ public class Device {
     public void setFunction(String function) {
         this.function = function;
     }
-    
-    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
     }
 
-    public String getSupplierName() {
-        return supplierName;
+    public String getSupplierID() {
+        return supplierID;
     }
 
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
+    public void setSupplierID(String supplierID) {
+        this.supplierID = supplierID;
     }
 
+ 
     public int getDevicePrice() {
         return devicePrice;
     }
@@ -90,6 +100,16 @@ public class Device {
         this.availability = availability;
     }
 
+    public int getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    
+
     public String getLocation() {
         return location;
     }
@@ -98,29 +118,6 @@ public class Device {
         this.location = location;
     }
 
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public String getCurrentStatus() {
-        return currentStatus;
-    }
-
-    public void setCurrentStatus(String currentStatus) {
-        this.currentStatus = currentStatus;
-    }
-
-    public int getStockCount() {
-        return stockCount;
-    }
-
-    public void setStockCount(int stockCount) {
-        this.stockCount = stockCount;
-    }
     
     
 }

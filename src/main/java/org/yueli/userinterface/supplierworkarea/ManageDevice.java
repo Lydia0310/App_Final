@@ -6,6 +6,13 @@
 
 package org.yueli.userinterface.supplierworkarea;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.device.Device;
+import org.yueli.business.role.SupplierAdmin;
+import org.yueli.business.useraccount.UserAccount;
+
 /**
  *
  * @author Lydia
@@ -15,10 +22,34 @@ public class ManageDevice extends javax.swing.JPanel {
     /**
      * Creates new form ManageDevice
      */
-    public ManageDevice() {
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    public ManageDevice(JPanel userProcessContainer, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        supplierNameJLabel.setText(((SupplierAdmin)userAccount.getRole()).getSupplierID());
+        populateDeviceTable();
+    
     }
 
+    private void populateDeviceTable(){
+        int rowCount = deviceTable.getRowCount();
+        DefaultTableModel model = (DefaultTableModel)deviceTable.getModel();
+        for(int i=rowCount-1; i>=0; i--){
+            model.removeRow(i);
+        }
+        
+        for(Device device : ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().getDeviceList()){
+            Object row[] = new Object[4];
+            row[0] = device;
+            row[1] = device.getDeviceID();
+            row[2] = device.getDevicePrice();
+            row[3] = device.getStockCount();
+            model.addRow(row);
+                    
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,13 +62,24 @@ public class ManageDevice extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        deviceTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        supplierNameJLabel = new javax.swing.JLabel();
         deleteJButton = new javax.swing.JButton();
-        viewDetailJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
-        addJButton = new javax.swing.JButton();
+        viewJButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        deviceNameJTextField = new javax.swing.JTextField();
+        deviceFunctionJTextField = new javax.swing.JTextField();
+        stockCountJTextField = new javax.swing.JTextField();
+        unitPriceJTextField = new javax.swing.JTextField();
+        createJButton = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        descriptionJTextField = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -48,19 +90,9 @@ public class ManageDevice extends javax.swing.JPanel {
         stockCountJTextField1 = new javax.swing.JTextField();
         unitPriceJTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        deviceNameJTextField = new javax.swing.JTextField();
-        deviceFunctionJTextField = new javax.swing.JTextField();
-        stockCountJTextField = new javax.swing.JTextField();
-        unitPriceJTextField = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        deviceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -76,51 +108,56 @@ public class ManageDevice extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane2.setViewportView(deviceTable);
+        if (deviceTable.getColumnModel().getColumnCount() > 0) {
+            deviceTable.getColumnModel().getColumn(0).setResizable(false);
+            deviceTable.getColumnModel().getColumn(1).setResizable(false);
+            deviceTable.getColumnModel().getColumn(2).setResizable(false);
+            deviceTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jLabel3.setText("Supplier Name: ");
 
-        jLabel4.setText("jLabel2");
+        supplierNameJLabel.setText("jLabel2");
 
         deleteJButton.setText("Delete");
-
-        viewDetailJButton.setText("View Detail");
+        deleteJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteJButtonActionPerformed(evt);
+            }
+        });
 
         refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
 
-        addJButton.setText("Add");
+        viewJButton.setText("View Detail");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(55, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(deleteJButton)
-                        .addGap(165, 165, 165)
-                        .addComponent(viewDetailJButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addJButton)
-                        .addGap(68, 68, 68))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(supplierNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(refreshJButton)
                 .addGap(66, 66, 66))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(deleteJButton)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(524, 524, 524)
+                        .addComponent(viewJButton)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,22 +167,102 @@ public class ManageDevice extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(supplierNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(refreshJButton)
                         .addGap(18, 18, 18)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteJButton)
-                    .addComponent(viewDetailJButton)
-                    .addComponent(addJButton))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(deleteJButton)
+                .addGap(18, 18, 18)
+                .addComponent(viewJButton)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("View Device Catalog", jPanel2);
+
+        jLabel1.setText("Device Name: ");
+
+        jLabel2.setText("Device Function:");
+
+        jLabel5.setText("Device Stock Count:");
+
+        jLabel6.setText("Unit Price:");
+
+        stockCountJTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stockCountJTextFieldActionPerformed(evt);
+            }
+        });
+
+        createJButton.setText("Create");
+        createJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createJButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Description:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(createJButton)
+                .addGap(40, 40, 40))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel11)))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deviceNameJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(deviceFunctionJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(stockCountJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(unitPriceJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(descriptionJTextField))
+                .addContainerGap(183, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(deviceNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(deviceFunctionJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(stockCountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(unitPriceJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descriptionJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(createJButton)
+                .addGap(36, 36, 36))
+        );
+
+        jTabbedPane1.addTab("Create New Device", jPanel3);
 
         jLabel7.setText("Device Name: ");
 
@@ -154,6 +271,8 @@ public class ManageDevice extends javax.swing.JPanel {
         jLabel9.setText("Device Stock Count:");
 
         jLabel10.setText("Unit Price:");
+
+        deviceNameJTextField1.setEditable(false);
 
         stockCountJTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,71 +336,6 @@ public class ManageDevice extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("View Device Detail", jPanel1);
 
-        jLabel1.setText("Device Name: ");
-
-        jLabel2.setText("Device Function:");
-
-        jLabel5.setText("Device Stock Count:");
-
-        jLabel6.setText("Unit Price:");
-
-        stockCountJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stockCountJTextFieldActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Create");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deviceNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deviceFunctionJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stockCountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(unitPriceJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(183, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(63, 63, 63))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(deviceNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(deviceFunctionJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(stockCountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(unitPriceJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
-                .addComponent(jButton2)
-                .addContainerGap(151, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Create New Device", jPanel3);
-
         jButton1.setText("<< Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -316,22 +370,61 @@ public class ManageDevice extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_stockCountJTextField1ActionPerformed
 
+    private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = deviceTable.getSelectedRow();
+        if(selectedRow<0){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!","Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            Device device = (Device)deviceTable.getValueAt(selectedRow, 0);
+            ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().removeDevice(device);
+            populateDeviceTable();
+        }
+    }//GEN-LAST:event_deleteJButtonActionPerformed
+
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+        // TODO add your handling code here:
+        populateDeviceTable();
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+
+    private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
+        // TODO add your handling code here:
+        Device device = ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().addDevice();
+        device.setDeviceName(deviceNameJTextField.getText());
+        device.setFunction(deviceFunctionJTextField.getText());
+        device.setStockCount(Integer.parseInt((stockCountJTextField.getText())));
+        if(unitPriceJTextField.getText().isEmpty()==false){
+            device.setDevicePrice(Integer.parseInt(unitPriceJTextField.getText()));
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Please enter a valid price", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        device.setDescription(descriptionJTextField.getText());
+        device.setSupplierID(((SupplierAdmin)userAccount.getRole()).getSupplierID());
+        
+        
+               
+        
+    }//GEN-LAST:event_createJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addJButton;
+    private javax.swing.JButton createJButton;
     private javax.swing.JButton deleteJButton;
+    private javax.swing.JTextField descriptionJTextField;
     private javax.swing.JTextField deviceFunctionJTextField;
     private javax.swing.JTextField deviceFunctionJTextField1;
     private javax.swing.JTextField deviceNameJTextField;
     private javax.swing.JTextField deviceNameJTextField1;
+    private javax.swing.JTable deviceTable;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -342,12 +435,12 @@ public class ManageDevice extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTextField stockCountJTextField;
     private javax.swing.JTextField stockCountJTextField1;
+    private javax.swing.JLabel supplierNameJLabel;
     private javax.swing.JTextField unitPriceJTextField;
     private javax.swing.JTextField unitPriceJTextField1;
-    private javax.swing.JButton viewDetailJButton;
+    private javax.swing.JButton viewJButton;
     // End of variables declaration//GEN-END:variables
 }

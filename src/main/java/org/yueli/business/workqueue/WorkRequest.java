@@ -6,6 +6,8 @@
 
 package org.yueli.business.workqueue;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import  org.yueli.business.device.DeviceDirectory;
 import  org.yueli.business.organization.Organization;
 import  org.yueli.business.organization.OrganizationDirectory;
@@ -25,15 +27,16 @@ public abstract class WorkRequest {
     private int requestID;
     private UserAccount sender;
     private UserAccount reciever;
-    private Date requestDate;
-    private Date resolveDate;
+    private String requestDate;
+    private String resolveDate;
+    private String timestamp;
     
 
     
     public WorkRequest(){
         count++;
         requestID = count;
-        requestDate = new Date();
+        
     }
 
     public DeviceDirectory getDeviceList() {
@@ -84,20 +87,31 @@ public abstract class WorkRequest {
         this.reciever = reciever;
     }
 
-    public Date getRequestDate() {
+    public String getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
+    public void setRequestDate(String requestDate) {
         this.requestDate = requestDate;
     }
 
-    public Date getResolveDate() {
+    public String getResolveDate() {
         return resolveDate;
     }
 
-    public void setResolveDate(Date resolveDate) {
+    public void setResolveDate(String resolveDate) {
         this.resolveDate = resolveDate;
+    }
+
+    public String getTimestamp() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        this.timestamp = dateFormat.format(date);
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
     
     

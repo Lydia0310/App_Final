@@ -19,8 +19,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="manageEnterpriseAdminJButton" min="-2" pref="198" max="-2" attributes="0"/>
-                  <Component id="manageEnterpriseJButton" min="-2" pref="198" max="-2" attributes="0"/>
+                  <Component id="manageNetworkAdminJButton" min="-2" pref="198" max="-2" attributes="0"/>
                   <Component id="manageNetworkJButton" min="-2" pref="198" max="-2" attributes="0"/>
                   <Component id="viewTreeChartJButton" min="-2" pref="198" max="-2" attributes="0"/>
               </Group>
@@ -35,11 +34,9 @@
               <Component id="viewTreeChartJButton" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="manageNetworkJButton" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Component id="manageEnterpriseJButton" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="manageEnterpriseAdminJButton" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace pref="206" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="manageNetworkAdminJButton" min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace pref="273" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,20 +58,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageNetworkJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="manageEnterpriseJButton">
+    <Component class="javax.swing.JButton" name="manageNetworkAdminJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Manage Enterprise"/>
+        <Property name="text" type="java.lang.String" value="Manage NetworkAdmin"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageEnterpriseJButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="manageEnterpriseAdminJButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Manage Enterprise Admin"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageEnterpriseAdminJButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageNetworkAdminJButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

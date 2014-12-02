@@ -7,6 +7,7 @@
 package org.yueli.business.order;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,8 +17,9 @@ public class Order {
     private ArrayList<OrderItem> orderItemList;
     private static int count = 0;
     private String orderID;
-    private String hospitalOrderID;
+    private String orderEnterpriseID;
     private String status;
+    
     
     public Order(){
         count++;
@@ -41,13 +43,16 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public String getHospitalOrderID() {
-        return hospitalOrderID;
+    public String getOrderEnterpriseID() {
+        return orderEnterpriseID;
     }
 
-    public void setHospitalOrderID(String hospitalOrderID) {
-        this.hospitalOrderID = hospitalOrderID;
+    public void setOrderEnterpriseID(String orderEnterpriseID) {
+        this.orderEnterpriseID = orderEnterpriseID;
     }
+
+    
+    
 
     public String getStatus() {
         return status;
@@ -55,6 +60,16 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public OrderItem addOrderItem(){
+        OrderItem orderItem = new OrderItem();
+        orderItemList.add(orderItem);
+        return orderItem;
+    }
+    
+    public void deleteOrderItem (OrderItem orderItem){
+        orderItemList.remove(orderItem);
     }
     
     @Override

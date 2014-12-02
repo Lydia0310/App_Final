@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by Yue Li on 11/30/2014/2014.
+ * Created by Lydia on 11/30/2014/2014.
  */
 public class SchedulePanel extends JPanel {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
