@@ -22,6 +22,7 @@ import org.yueli.business.device.Device;
 import org.yueli.business.order.OrderItem;
 import org.yueli.business.role.HospitalAdmin;
 import org.yueli.business.role.SupplierAdmin;
+import org.yueli.business.workqueue.OrderRequest;
 
 /**
  *
@@ -454,9 +455,42 @@ public class BrowserDevice extends javax.swing.JPanel {
     private void checkoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutJButtonActionPerformed
         // TODO add your handling code here:
         masterOrderDirectory.addOrder(order);
-        order.setHospitalOrderID(((HospitalAdmin)userAccount.getRole()).getHospitalD());
+        order.setOrderEnterpriseID(((HospitalAdmin)userAccount.getRole()).getHospitalID());
         
-        if()
+        if(order != null){
+            OrderRequest orderRequest = new OrderRequest();
+            orderRequest.setSender(userAccount);
+            orderRequest.setOrder(order);
+            orderRequest.setOrderStatus("Sent");
+            orderRequest.setRequestDate(orderRequest.getTimestamp());
+            
+            Organization organization = null;
+            for(Organization organization1 : business.getOrganizationDirectory().getOrganizationList()){
+                if(organization instanceof SupplierOrganization){
+                    organization1 = organization;
+                    break;
+                }
+            }
+            if(organization != null){
+                organization.getWorkQueue().getWorkRequestList().add(orderRequest);
+                userAccount.getWorkQueue().getWorkRequestList().add(orderRequest);
+                
+            }
+            JOptionPane.showMessageDialog(null, "You have successfully checked out!");
+            
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "There is some error checking out!");
+            return;
+        }
+        if(!isCheckedOut){
+            Order o = new Order();
+            populateDeviceTable();
+            populateOrderTable();
+            //Inventory change??
+        }
+        
     }//GEN-LAST:event_checkoutJButtonActionPerformed
 
 
