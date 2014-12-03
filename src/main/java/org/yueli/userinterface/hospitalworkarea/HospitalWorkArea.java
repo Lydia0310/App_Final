@@ -6,10 +6,11 @@
 
 package org.yueli.userinterface.hospitalworkarea;
 
-import org.yueli.business.Business;
-import org.yueli.business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import org.yueli.business.Business;
+import org.yueli.business.network.Network;
+import org.yueli.business.useraccount.UserAccount;
 
 /**
  *
@@ -22,10 +23,15 @@ public class HospitalWorkArea extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Business business;
+    private Network network;
     private UserAccount userAccount;
     
-    public HospitalWorkArea() {
+    public HospitalWorkArea(JPanel userProcessContainer, Business business, Network network, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+        this.network = network;
+        this.userAccount = userAccount;
     }
 
     /**
@@ -40,8 +46,9 @@ public class HospitalWorkArea extends javax.swing.JPanel {
         viewDeviceInventoryJButton = new javax.swing.JButton();
         viewOrderJButton = new javax.swing.JButton();
         browserDeviceJButton = new javax.swing.JButton();
-        viewRoomRequestJButton = new javax.swing.JButton();
         viewDeviceRequestJButton = new javax.swing.JButton();
+        manageOrganizationJButton = new javax.swing.JButton();
+        manageUserAccountJButton = new javax.swing.JButton();
 
         viewDeviceInventoryJButton.setText("View Device Inventory");
         viewDeviceInventoryJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -64,17 +71,24 @@ public class HospitalWorkArea extends javax.swing.JPanel {
             }
         });
 
-        viewRoomRequestJButton.setText("View Room Request");
-        viewRoomRequestJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewRoomRequestJButtonActionPerformed(evt);
-            }
-        });
-
         viewDeviceRequestJButton.setText("View Device Request");
         viewDeviceRequestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewDeviceRequestJButtonActionPerformed(evt);
+            }
+        });
+
+        manageOrganizationJButton.setText("Manage Organization");
+        manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageOrganizationJButtonActionPerformed(evt);
+            }
+        });
+
+        manageUserAccountJButton.setText("Manage User Account");
+        manageUserAccountJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageUserAccountJButtonActionPerformed(evt);
             }
         });
 
@@ -83,35 +97,44 @@ public class HospitalWorkArea extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(223, 223, 223)
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manageUserAccountJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                .addGap(95, 95, 95)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewRoomRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browserDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(307, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(browserDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 317, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(browserDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(103, 103, 103)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(browserDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageUserAccountJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(viewRoomRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewDeviceInventoryJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceInventoryJButtonActionPerformed
         // TODO add your handling code here:
-        ViewDeviceInventory viewDeviceInventory = new ViewDeviceInventory(userProcessContainer, userAccount);
+        ViewDeviceInventory viewDeviceInventory = new ViewDeviceInventory(userProcessContainer,network,userAccount, business);
         userProcessContainer.add("View Device Inventory", viewDeviceInventory);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -127,34 +150,43 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void viewOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderJButtonActionPerformed
         // TODO add your handling code here
-        ViewOrder viewOrder = new ViewOrder();
+        ViewOrder viewOrder = new ViewOrder(userProcessContainer, business.getMasterOrderDirectory(), userAccount);
         userProcessContainer.add("View Order", viewOrder);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_viewOrderJButtonActionPerformed
 
-    private void viewRoomRequestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRoomRequestJButtonActionPerformed
-        // TODO add your handling code here
-        ViewRoomRequest viewRoomRequest = new ViewRoomRequest();
-        userProcessContainer.add("View Room Request",viewRoomRequest);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_viewRoomRequestJButtonActionPerformed
-
     private void viewDeviceRequestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceRequestJButtonActionPerformed
         // TODO add your handling code here:
-        ViewDeviceRequest viewDeviceRequest = new ViewDeviceRequest();
+        ViewDeviceRequest viewDeviceRequest = new ViewDeviceRequest(userProcessContainer, business, userAccount);
         userProcessContainer.add("View Device Request", viewDeviceRequest);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_viewDeviceRequestJButtonActionPerformed
 
+    private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
+        // TODO add your handling code here:
+        ManageOrganization manageOrganization = new ManageOrganization(userProcessContainer, business.getOrganizationDirectory());
+        userProcessContainer.add("Manage Organization", manageOrganization);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
+
+    private void manageUserAccountJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUserAccountJButtonActionPerformed
+        // TODO add your handling code here:
+        ManageUserAccount manageUserAccount = new ManageUserAccount(userProcessContainer, business);
+        userProcessContainer.add("Manage User Account", manageUserAccount);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_manageUserAccountJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browserDeviceJButton;
+    private javax.swing.JButton manageOrganizationJButton;
+    private javax.swing.JButton manageUserAccountJButton;
     private javax.swing.JButton viewDeviceInventoryJButton;
     private javax.swing.JButton viewDeviceRequestJButton;
     private javax.swing.JButton viewOrderJButton;
-    private javax.swing.JButton viewRoomRequestJButton;
     // End of variables declaration//GEN-END:variables
 }

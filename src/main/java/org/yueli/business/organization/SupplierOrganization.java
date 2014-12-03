@@ -7,9 +7,10 @@
 package org.yueli.business.organization;
 
 import org.yueli.business.device.DeviceDirectory;
-import org.yueli.business.device.InventorySupplierRecord;
+
 import org.yueli.business.role.Role;
 import java.util.ArrayList;
+import org.yueli.business.inventory.Inventory;
 
 
 /**
@@ -18,11 +19,11 @@ import java.util.ArrayList;
  */
 public class SupplierOrganization extends Organization{
 
-    private InventorySupplierRecord inventorySupplierRecord;
+    private Inventory inventory;
     
     public SupplierOrganization(){
         super(Type.Supplier.getValue());
-        inventorySupplierRecord = new InventorySupplierRecord();
+        inventory = new Inventory();
     }
     @Override
     public ArrayList<Role> getSupportedRoles() {

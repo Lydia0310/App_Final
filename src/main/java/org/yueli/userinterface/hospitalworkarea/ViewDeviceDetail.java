@@ -8,6 +8,7 @@ package org.yueli.userinterface.hospitalworkarea;
 
 import javax.swing.JPanel;
 import org.yueli.business.device.Device;
+import org.yueli.business.inventory.InventoryItem;
 
 /**
  *
@@ -19,15 +20,15 @@ public class ViewDeviceDetail extends javax.swing.JPanel {
      * Creates new form ViewDeviceDetail
      */
     private JPanel userProcessContainer;
-    private Device device;
-    public ViewDeviceDetail(JPanel userProcessContainer, Device device) {
+    private InventoryItem inventoryItem;
+    public ViewDeviceDetail(JPanel userProcessContainer, InventoryItem inventoryItem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.device = device;
-        deviceNameJTextField1.setText(device.getDeviceName());
-        deviceFunctionJTextField1.setText(device.getFunction());
-        unitPriceJTextField1.setText(String.valueOf(device.getDevicePrice()));
-        descriptionJTextField.setText(device.getDescription());
+        this.inventoryItem = inventoryItem;
+        deviceNameJTextField1.setText(inventoryItem.getDevice().getDeviceName());
+        deviceFunctionJTextField1.setText(inventoryItem.getDevice().getFunction());
+        unitPriceJTextField1.setText(String.valueOf(inventoryItem.getDevice().getDevicePrice()));
+        descriptionJTextField.setText(inventoryItem.getDevice().getDescription());
         
     }
 

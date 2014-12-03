@@ -7,32 +7,34 @@
 package org.yueli.business.order;
 
 import org.yueli.business.device.Device;
+import org.yueli.business.inventory.InventoryItem;
 
 /**
  *
  * @author Lydia
  */
 public class OrderItem {
-    private Device device;
-    private int quantity;
+    private InventoryItem inventoryItem;
+    private int orderQuantity;
 
-    public Device getDevice() {
-        return device;
+    public InventoryItem getInventoryItem() {
+        return inventoryItem;
     }
 
-    public void setDevice(Device device) {
-        this.device = device;
+    public void setInventoryItem(InventoryItem inventoryItem) {
+        this.inventoryItem = inventoryItem;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getOrderQuantity() {
+        return orderQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setOrderQuantity(int orderQuantity) {
+        this.orderQuantity = orderQuantity;
     }
-    
+
+ 
     public String toString(){
-        return device.getDeviceName();
+        return inventoryItem.getDevice().getDeviceName();
     }
 }

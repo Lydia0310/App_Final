@@ -16,33 +16,48 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="223" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="viewDeviceRequestJButton" min="-2" pref="233" max="-2" attributes="0"/>
-                  <Component id="viewRoomRequestJButton" min="-2" pref="233" max="-2" attributes="0"/>
-                  <Component id="viewOrderJButton" min="-2" pref="233" max="-2" attributes="0"/>
-                  <Component id="browserDeviceJButton" min="-2" pref="233" max="-2" attributes="0"/>
-                  <Component id="viewDeviceInventoryJButton" min="-2" pref="233" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="manageOrganizationJButton" max="32767" attributes="0"/>
+                  <Component id="manageUserAccountJButton" pref="146" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="307" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="browserDeviceJButton" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                          <Component id="viewOrderJButton" min="-2" pref="153" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="49" pref="317" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="viewDeviceInventoryJButton" min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="viewDeviceRequestJButton" min="-2" pref="163" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-              <Component id="viewDeviceInventoryJButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-              <Component id="browserDeviceJButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="manageOrganizationJButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="viewDeviceInventoryJButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="viewDeviceRequestJButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="browserDeviceJButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="manageUserAccountJButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Component id="viewOrderJButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-              <Component id="viewRoomRequestJButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="viewDeviceRequestJButton" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
+              <EmptySpace pref="193" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,20 +87,28 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browserDeviceJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="viewRoomRequestJButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Room Request"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewRoomRequestJButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="viewDeviceRequestJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Device Request"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewDeviceRequestJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="manageOrganizationJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manage Organization"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageOrganizationJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="manageUserAccountJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manage User Account"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageUserAccountJButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

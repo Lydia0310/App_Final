@@ -22,6 +22,8 @@
                   <Group type="102" attributes="0">
                       <Component id="backJButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="quantityJSpinner" min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="requestDispatchingJButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -58,7 +60,10 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="requestDispatchingJButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="requestDispatchingJButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="quantityJSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -77,21 +82,15 @@
         <Component class="javax.swing.JTable" name="deviceInventoryTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
+              <Table columnCount="4" rowCount="0">
                 <Column editable="false" title="Device Name" type="java.lang.Object"/>
                 <Column editable="false" title="Supplier ID" type="java.lang.Object"/>
                 <Column editable="false" title="Function" type="java.lang.Object"/>
                 <Column editable="false" title="Stock Count" type="java.lang.Object"/>
-                <Column editable="false" title="Storage Room" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
@@ -146,6 +145,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="requestDispatchingJButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="quantityJSpinner">
     </Component>
   </SubComponents>
 </Form>

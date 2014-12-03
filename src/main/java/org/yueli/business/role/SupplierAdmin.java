@@ -14,6 +14,7 @@ import org.yueli.business.useraccount.UserAccount;
 
 import javax.swing.JPanel;
 import org.yueli.business.device.DeviceDirectory;
+import org.yueli.business.inventory.Inventory;
 import org.yueli.business.network.Network;
 import  org.yueli.userinterface.supplierworkarea.SupplierWorkArea;
 
@@ -24,6 +25,7 @@ import  org.yueli.userinterface.supplierworkarea.SupplierWorkArea;
 public class SupplierAdmin extends Role {
 
     private DeviceDirectory deviceCatalog;
+    private Inventory inventory;
     private String supplierID;
     private String supplierName;
     private static int count = 0;
@@ -33,6 +35,7 @@ public class SupplierAdmin extends Role {
         
         count++;
         supplierID = String.valueOf(count);
+        inventory = new Inventory();
         deviceCatalog = new DeviceDirectory();
         
         privilegeList.add(new Function("Supplier Work Area","org.yueli.userinterface.supplierworkarea.SupplierWorkArea"));
@@ -40,6 +43,15 @@ public class SupplierAdmin extends Role {
         
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    
     public DeviceDirectory getDeviceCatalog() {
         return deviceCatalog;
     }

@@ -6,6 +6,17 @@
 
 package org.yueli.userinterface.hospitalworkarea;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.order.MasterOrderDirectory;
+import org.yueli.business.order.Order;
+import org.yueli.business.order.OrderItem;
+import org.yueli.business.role.HospitalAdmin;
+import org.yueli.business.useraccount.UserAccount;
+import org.yueli.business.workqueue.OrderRequest;
+import org.yueli.business.workqueue.WorkRequest;
+
 /**
  *
  * @author Lydia
@@ -15,8 +26,32 @@ public class ViewOrder extends javax.swing.JPanel {
     /**
      * Creates new form ViewOrder
      */
-    public ViewOrder() {
+    private JPanel userProcessContainer;
+    private MasterOrderDirectory masterOrderDirectory;
+    private UserAccount userAccount;
+    public ViewOrder(JPanel userProcessContainer, MasterOrderDirectory masterOrderDirectory, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.masterOrderDirectory = masterOrderDirectory;
+        this.userAccount = userAccount;
+        populateOrderOverviewTable();
+    }   
+    
+    public void populateOrderOverviewTable(){
+        DefaultTableModel model = (DefaultTableModel)orderJTable.getModel();
+        model.setRowCount(0);
+        for(Order order : masterOrderDirectory.getMasterOrderList()){
+            if(order.getOrderEnterpriseID().equals(((HospitalAdmin)userAccount.getRole()).getHospitalID())){
+                Object row[] = new Object[2];
+                row[0] = order;
+                for(WorkRequest workRequest : userAccount.getWorkQueue().getWorkRequestList()){
+                    if(order.getOrderID().equals(((OrderRequest)workRequest).getOrder().getOrderID())){
+                        row[1] = ((OrderRequest)workRequest).getOrderStatus();
+                        
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -83,8 +118,18 @@ public class ViewOrder extends javax.swing.JPanel {
         }
 
         viewJButton.setText("View");
+        viewJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewJButtonActionPerformed(evt);
+            }
+        });
 
         refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
 
         backJButton.setText("<< Back");
 
@@ -130,6 +175,32 @@ public class ViewOrder extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+        // TODO add your handling code here:
+        populateOrderOverviewTable();
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+
+    private void viewJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = orderJTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)orderJTable.getModel();
+        model.setRowCount(0);
+        if(selectedRow <0 ){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
+        }
+        else{
+            OrderRequest orderRequest = (OrderRequest)orderJTable.getValueAt(selectedRow, 0);
+            for(OrderItem orderItem : orderRequest.getOrder().getOrderItemList()){
+                Object row[] = new Object[4];
+                row[0] = orderItem.getInventoryItem().getDevice().getDeviceName();
+                row[1] = orderItem.getOrderQuantity();
+                row[2] = orderItem.getInventoryItem().getDevice().getDevicePrice();
+                row[3] = orderItem.getInventoryItem().getDevice().getDevicePrice() * orderItem.getOrderQuantity();
+                model.addRow(row);
+            }
+        }
+    }//GEN-LAST:event_viewJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

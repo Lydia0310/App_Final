@@ -46,6 +46,11 @@ public class SupplierWorkArea extends javax.swing.JPanel {
         viewOrderJButton = new javax.swing.JButton();
 
         manageDeviceJButton.setText("Manage Device");
+        manageDeviceJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageDeviceJButtonActionPerformed(evt);
+            }
+        });
 
         viewOrderJButton.setText("View Order");
         viewOrderJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +88,10 @@ public class SupplierWorkArea extends javax.swing.JPanel {
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_viewOrderJButtonActionPerformed
+
+    private void manageDeviceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageDeviceJButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manageDeviceJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

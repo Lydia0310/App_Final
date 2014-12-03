@@ -311,12 +311,12 @@ public class BrowserDevice extends javax.swing.JPanel {
         model.setRowCount(0);
         
         if(userAccount != null){
-            for (Device device : ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().getDeviceList()){
+            for (InventoryItem inventoryItem : ((SupplierAdmin)userAccount.getRole()).getInventory().getInventoryItemList()){
                 Object[] row = new Object[4];
-                row[0] = device;
-                row[1] = device.getFunction();
-                row[2] = device.getDevicePrice();
-                row[3] = device.getAvailability();
+                row[0] = inventoryItem.getDevice().getDeviceName();
+                row[1] = inventoryItem.getDevice().getFunction();
+                row[2] = inventoryItem.getDevice().getDevicePrice();
+                row[3] = inventoryItem.getQuantity();
                 model.addRow(row);
             }
         }
@@ -327,13 +327,12 @@ public class BrowserDevice extends javax.swing.JPanel {
         for(Organization organization : business.getOrganizationDirectory().getOrganizationList()){
             if(organization instanceof SupplierOrganization){
                 for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
-                    for(Device device : ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().getDeviceList()){
+                    for(InventoryItem inventoryItem : ((SupplierAdmin)userAccount.getRole()).getInventory().getInventoryItemList()){
                         Object[] row = new Object[4];
-                        row[0] = device;
-                        row[1] = device.getFunction();
-                        row[2] = device.getAvailability();
-                        row[3] = device.getDevicePrice();
-                        
+                        row[0] = inventoryItem.getDevice().getDeviceName();
+                        row[1] = inventoryItem.getDevice().getFunction();
+                        row[2] = inventoryItem.getQuantity();
+                        row[3] = inventoryItem.getDevice().getDevicePrice();
                         model.addRow(row);
                     }
                 }
@@ -348,9 +347,9 @@ public class BrowserDevice extends javax.swing.JPanel {
         for(OrderItem orderItem : order.getOrderItemList()){
             Object[] row = new Object[4];
             row[0]= orderItem;
-            row[1] = orderItem.getQuantity();
-            row[2] = orderItem.getDevice().getDevicePrice();
-            row[3] = orderItem.getQuantity()*orderItem.getDevice().getDevicePrice();
+            row[1] = orderItem.getOrderQuantity();
+            row[2] = orderItem.getInventoryItem().getDevice().getDevicePrice();
+            row[3] = orderItem.getOrderQuantity()*orderItem.getInventoryItem().getDevice().getDevicePrice();
             model.addRow(row);
         }
     }
@@ -361,8 +360,8 @@ public class BrowserDevice extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row to view!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         else{
-            Device device = (Device)deviceJTable.getValueAt(selectedRow, 0);
-            ViewDeviceDetail viewDeviceDetail = new ViewDeviceDetail(userProcessContainer, device);
+            InventoryItem inventoryItem = (InventoryItem)deviceJTable.getValueAt(selectedRow, 0);
+            ViewDeviceDetail viewDeviceDetail = new ViewDeviceDetail(userProcessContainer, inventoryItem);
             userProcessContainer.add("View Device Detail", viewDeviceDetail);
             CardLayout layout = (CardLayout)userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -383,32 +382,32 @@ public class BrowserDevice extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         else{
-            Device device = (Device)deviceJTable.getValueAt(selectedRow, 0);
-            if(quantity<=0 || quantity > device.getAvailability()){
+            InventoryItem  inventoryItem = (InventoryItem)deviceJTable.getValueAt(selectedRow, 0);
+            if(quantity<=0 || quantity > inventoryItem.getQuantity()){
                 JOptionPane.showMessageDialog(null, "The stock is not enough", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             Boolean isInculded = false;
             for(OrderItem orderItem : order.getOrderItemList()){
-                if(orderItem.getDevice().getDeviceName().equals(device.getDeviceName())){
-                    int oldQuantity = orderItem.getQuantity();
+                if(orderItem.getInventoryItem().getDevice().getDeviceName().equals(inventoryItem.getDevice().getDeviceName())){
+                    int oldQuantity = orderItem.getOrderQuantity();
                     int newQuantity = (Integer)quantityJSpinner.getValue();
-                    int availiability = device.getAvailability();
+                    int availiability = inventoryItem.getQuantity();
                     int totalQuantity = oldQuantity + newQuantity;
-                    orderItem.setQuantity(totalQuantity);
-                    int newAvailiability = device.getAvailability() - newQuantity;
-                    device.setAvailability(newAvailiability);
+                    orderItem.setOrderQuantity(totalQuantity);
+                    int newAvailiability = inventoryItem.getQuantity() - newQuantity;
+                    inventoryItem.setInventoryQuantity(newAvailiability);
                     isInculded = true;
                     
                 }
             }
             if(!isInculded){
                 OrderItem orderItem = order.addOrderItem();
-                orderItem.setDevice(device);
+                orderItem.setInventoryItem(inventoryItem);
                 int quantity_notIncluded = (Integer)quantityJSpinner.getValue();
-                orderItem.setQuantity(quantity_notIncluded);
-                int new_availiability = device.getAvailability() - quantity_notIncluded;
-                device.setAvailability(new_availiability);
+                orderItem.setOrderQuantity(quantity_notIncluded);
+                int new_availiability = inventoryItem.getQuantity() - quantity_notIncluded;
+                inventoryItem.setInventoryQuantity(new_availiability);
                 
             }
             
@@ -491,12 +490,7 @@ public class BrowserDevice extends javax.swing.JPanel {
             Order o = new Order();
             populateDeviceTable();
             populateOrderTable();
-            //Inventory change??
-            for(OrderItem orderItem : order.getOrderItemList() ){
-                for(){
-                
-                }
-            }
+          
         }
         
     }//GEN-LAST:event_checkoutJButtonActionPerformed

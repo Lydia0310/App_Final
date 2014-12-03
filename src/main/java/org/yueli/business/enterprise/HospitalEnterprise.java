@@ -12,6 +12,7 @@ import org.yueli.business.room.RoomDirectory;
 import org.yueli.business.enterprise.Enterprise;
 
 import java.util.ArrayList;
+import org.yueli.business.inventory.Inventory;
 
 
 /**
@@ -22,9 +23,13 @@ public class HospitalEnterprise extends Enterprise {
 
     private RoomDirectory roomList;
     private OperationDirectory operationList;
+    private Inventory inventory;
     
     public HospitalEnterprise(String name){
         super(name, EnterpriseType.Hospital);
+        roomList = new RoomDirectory();
+        operationList = new OperationDirectory();
+        inventory = new Inventory();
     }
 
     public RoomDirectory getRoomList() {
@@ -34,6 +39,15 @@ public class HospitalEnterprise extends Enterprise {
     public OperationDirectory getOperationList() {
         return operationList;
     }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+    
     
     @Override
     public ArrayList<Role> getSupportedRoles() {

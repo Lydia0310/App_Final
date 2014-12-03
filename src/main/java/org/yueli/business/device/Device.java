@@ -17,12 +17,12 @@ public class Device {
     private int deviceID;
     private String deviceName;
     private String supplierID;
-    
+    private String supplierName;
     private String function;
     private int devicePrice;
     private int quantity;
-    private int availability;//stock in Enterprise 
-    private int stockCount;//Inventory number
+    //private int availability;//stock in Enterprise 
+    //private int stockCount;//Inventory number
     private String location;
     private String description;
     //private String expirationDate;
@@ -92,24 +92,15 @@ public class Device {
         this.quantity = quantity;
     }
 
-    public int getAvailability() {
-        return availability;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setAvailability(int availability) {
-        this.availability = availability;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
-
-    public int getStockCount() {
-        return stockCount;
-    }
-
-    public void setStockCount(int stockCount) {
-        this.stockCount = stockCount;
-    }
-
     
-
+    
     public String getLocation() {
         return location;
     }
