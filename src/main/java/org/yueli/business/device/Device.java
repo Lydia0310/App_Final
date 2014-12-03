@@ -21,6 +21,7 @@ public class Device {
     private String function;
     private int devicePrice;
     private int quantity;
+    Boolean isAssigned;
     //private int availability;//stock in Enterprise 
     //private int stockCount;//Inventory number
     private String location;
@@ -107,6 +108,14 @@ public class Device {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Boolean isIsAssigned() {
+        return isAssigned;
+    }
+
+    public void setIsAssigned(Boolean isAssigned) {
+        this.isAssigned = isAssigned;
     }
 
     

@@ -246,6 +246,9 @@ public class ViewOrder extends javax.swing.JPanel {
         else{
             OrderRequest orderRequest = (OrderRequest)orderJTable.getValueAt(selectedRow, 0);
             orderRequest.setOrderStatus("Completed");
+            for(OrderItem orderItem : orderRequest.getOrder().getOrderItemList()){
+                orderItem.getInventoryItem().getDevice().setIsAssigned(Boolean.FALSE);
+            }
         }
     }//GEN-LAST:event_approveJButtonActionPerformed
 

@@ -51,7 +51,7 @@ public class HospitalAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
-        return new HospitalWorkArea();
+        return new HospitalWorkArea(userProcessContainer, business, network, userAccount);
     }
 
     

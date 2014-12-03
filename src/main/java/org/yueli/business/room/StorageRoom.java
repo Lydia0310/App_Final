@@ -11,7 +11,11 @@ package org.yueli.business.room;
  * @author Lydia
  */
 public class StorageRoom extends Room{
+   
     public StorageRoom(){
         super(Room.RoomType.StorageRoom);
     }
+
+    
+    
 }

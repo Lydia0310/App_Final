@@ -49,13 +49,15 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
         model.setRowCount(0);
         for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
             for(InventoryItem inventoryItem : ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList()){
-               Object row[] = new Object[5];
-               row[0] = inventoryItem.getDevice().getDeviceName();
-               row[1] = inventoryItem.getDevice().getFunction();
-               row[2] = inventoryItem.getDevice().getSupplierID();
-               row[3] = inventoryItem.getQuantity();
-               
-               model.addRow(row);
+               if(inventoryItem.getDevice().isIsAssigned()){
+                Object row[] = new Object[5];
+                row[0] = inventoryItem.getDevice().getDeviceName();
+                row[1] = inventoryItem.getDevice().getFunction();
+                row[2] = inventoryItem.getDevice().getSupplierID();
+                row[3] = inventoryItem.getQuantity();
+                row[4] = inventoryItem.getDevice().getLocation();
+                model.addRow(row);
+               }
             }
         }
         
@@ -84,11 +86,11 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Device Name", "Supplier ID", "Function", "Stock Count"
+                "Device Name", "Supplier ID", "Function", "Stock Count", "Location"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -101,6 +103,7 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
             deviceInventoryTable.getColumnModel().getColumn(1).setResizable(false);
             deviceInventoryTable.getColumnModel().getColumn(2).setResizable(false);
             deviceInventoryTable.getColumnModel().getColumn(3).setResizable(false);
+            deviceInventoryTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         sortBySupplierNameButton.setText("Sort by Supplier Name");

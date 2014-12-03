@@ -51,7 +51,7 @@ public class HospitalEnterprise extends Enterprise {
     
     @Override
     public ArrayList<Role> getSupportedRoles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return null; 
     }
     
 }

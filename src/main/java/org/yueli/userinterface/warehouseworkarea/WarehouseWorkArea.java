@@ -6,6 +6,13 @@
 
 package org.yueli.userinterface.warehouseworkarea;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import org.yueli.business.Business;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
+import org.yueli.business.useraccount.UserAccount;
+
 /**
  *
  * @author Lydia
@@ -15,9 +22,22 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form WarehouseWorkArea
      */
-    public WarehouseWorkArea() {
+    private JPanel userProcessContainer;
+    private Business business;
+    private Network network;
+    private Enterprise enterprise;
+    private UserAccount userAccount; 
+    public WarehouseWorkArea(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+        this.network = network;
+        this.enterprise = enterprise;
+        this.userAccount = userAccount;
+        
     }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,14 +49,24 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
     private void initComponents() {
 
         viewDeviceScheduleRequestJButton = new javax.swing.JButton();
-        viewDeviceInventoryJButton = new javax.swing.JButton();
-        trackMaintainceHistoryJButton = new javax.swing.JButton();
+        manageStorageRoomJButton = new javax.swing.JButton();
+        manageStorageRoomJButton1 = new javax.swing.JButton();
 
         viewDeviceScheduleRequestJButton.setText("View Device Schedule Request");
 
-        viewDeviceInventoryJButton.setText("View Device Inventory");
+        manageStorageRoomJButton.setText("Manage Storage Room");
+        manageStorageRoomJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageStorageRoomJButtonActionPerformed(evt);
+            }
+        });
 
-        trackMaintainceHistoryJButton.setText("Track Maintaince History");
+        manageStorageRoomJButton1.setText("Assign Device");
+        manageStorageRoomJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageStorageRoomJButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -45,28 +75,40 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(trackMaintainceHistoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageStorageRoomJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageStorageRoomJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewDeviceScheduleRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(216, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(72, 72, 72)
+                .addComponent(manageStorageRoomJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(manageStorageRoomJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addComponent(viewDeviceScheduleRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(trackMaintainceHistoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void manageStorageRoomJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStorageRoomJButtonActionPerformed
+        // TODO add your handling code here:
+        ManageRoom manageRoom = new ManageRoom(userProcessContainer, network,enterprise, userAccount);
+        userProcessContainer.add("Manage Storage Room", manageRoom);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_manageStorageRoomJButtonActionPerformed
+
+    private void manageStorageRoomJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStorageRoomJButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manageStorageRoomJButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton trackMaintainceHistoryJButton;
-    private javax.swing.JButton viewDeviceInventoryJButton;
+    private javax.swing.JButton manageStorageRoomJButton;
+    private javax.swing.JButton manageStorageRoomJButton1;
     private javax.swing.JButton viewDeviceScheduleRequestJButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,6 +50,7 @@ public class ViewOrder extends javax.swing.JPanel {
                         
                     }
                 }
+                model.addRow(row);
             }
         }
     }

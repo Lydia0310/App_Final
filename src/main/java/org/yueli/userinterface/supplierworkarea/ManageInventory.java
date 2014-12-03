@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-package org.yueli.userinterface.warehouseworkarea;
+package org.yueli.userinterface.supplierworkarea;
 
 /**
  *
  * @author Lydia
  */
-public class ViewDeviceInventory extends javax.swing.JPanel {
+public class ManageInventory extends javax.swing.JPanel {
 
     /**
-     * Creates new form ViewDeviceInventory
+     * Creates new form ManageInventory
      */
-    public ViewDeviceInventory() {
+    public ManageInventory() {
         initComponents();
     }
 
@@ -32,11 +32,11 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGap(0, 669, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -8,6 +8,7 @@ package org.yueli.business.network;
 
 import  org.yueli.business.enterprise.EnterpriseDirectory;
 import org.yueli.business.organization.SupplierDirectory;
+import org.yueli.business.room.RoomDirectory;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Network {
     private String name;
     private EnterpriseDirectory enterpriseList;
     private SupplierDirectory supplierDirectory;
+    
     public Network(){
         enterpriseList = new EnterpriseDirectory();
         supplierDirectory = new SupplierDirectory();
@@ -42,6 +44,8 @@ public class Network {
     public void setSupplierDirectory(SupplierDirectory supplierDirectory) {
         this.supplierDirectory = supplierDirectory;
     }
+
+    
     
     
     

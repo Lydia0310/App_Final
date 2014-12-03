@@ -13,6 +13,9 @@ package org.yueli.business.room;
 public abstract class Room {
     private static int counter;
     private int roomID;
+    private String roomNumber;
+    private String status;
+    Boolean isFull;
     
     public enum RoomType{
         OperationRoom("Operation Room"),
@@ -49,4 +52,39 @@ public abstract class Room {
         this.roomID = roomID;
     }
 
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public RoomType getType() {
+        return type;
+    }
+
+    public void setType(RoomType type) {
+        this.type = type;
+    }
+
+    public Boolean isIsFull() {
+        return isFull;
+    }
+
+    public void setIsFull(Boolean isFull) {
+        this.isFull = isFull;
+    }
+
+    
+    
+    
 }

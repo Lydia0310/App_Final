@@ -8,6 +8,7 @@ package org.yueli.business.enterprise;
 
 import  org.yueli.business.organization.Organization;
 import  org.yueli.business.organization.OrganizationDirectory;
+import org.yueli.business.room.RoomDirectory;
 
 /**
  *
@@ -18,10 +19,12 @@ public abstract class Enterprise extends Organization{
     private OrganizationDirectory organizationDirectory;
     private String enterpriseID;
     private static int count = 0;
+    private RoomDirectory roomList;
     public Enterprise (String name, EnterpriseType type){
         super(name);
         this.enterpriseType = type;
         organizationDirectory = new OrganizationDirectory();
+        
         count++;
         enterpriseID = String.valueOf(count);
     }
@@ -67,6 +70,14 @@ public abstract class Enterprise extends Organization{
 
     public void setEnterpriseID(String enterpriseID) {
         this.enterpriseID = enterpriseID;
+    }
+
+    public RoomDirectory getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(RoomDirectory roomList) {
+        this.roomList = roomList;
     }
 
     

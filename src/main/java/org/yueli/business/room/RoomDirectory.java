@@ -28,7 +28,7 @@ public class RoomDirectory {
         this.roomList = roomList;
     }
     
-    public Room addRoom(RoomType type){
+    public Room addRoom(String roomNumber, RoomType type){
         Room room = null;
         
         if(type.getValue().equals((RoomType.OperationRoom.getValue()))){

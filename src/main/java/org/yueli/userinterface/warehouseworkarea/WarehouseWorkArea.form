@@ -19,8 +19,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="trackMaintainceHistoryJButton" min="-2" pref="319" max="-2" attributes="0"/>
-                  <Component id="viewDeviceInventoryJButton" min="-2" pref="319" max="-2" attributes="0"/>
+                  <Component id="manageStorageRoomJButton1" min="-2" pref="319" max="-2" attributes="0"/>
+                  <Component id="manageStorageRoomJButton" min="-2" pref="319" max="-2" attributes="0"/>
                   <Component id="viewDeviceScheduleRequestJButton" min="-2" pref="319" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="216" max="32767" attributes="0"/>
@@ -30,13 +30,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-              <Component id="viewDeviceInventoryJButton" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+              <Component id="manageStorageRoomJButton" min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="manageStorageRoomJButton1" min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Component id="viewDeviceScheduleRequestJButton" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-              <Component id="trackMaintainceHistoryJButton" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace pref="233" max="32767" attributes="0"/>
+              <EmptySpace pref="258" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,15 +47,21 @@
         <Property name="text" type="java.lang.String" value="View Device Schedule Request"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="viewDeviceInventoryJButton">
+    <Component class="javax.swing.JButton" name="manageStorageRoomJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View Device Inventory"/>
+        <Property name="text" type="java.lang.String" value="Manage Storage Room"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageStorageRoomJButtonActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="trackMaintainceHistoryJButton">
+    <Component class="javax.swing.JButton" name="manageStorageRoomJButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Track Maintaince History"/>
+        <Property name="text" type="java.lang.String" value="Assign Device"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageStorageRoomJButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
