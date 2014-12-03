@@ -228,9 +228,9 @@ public class ViewOrder extends javax.swing.JPanel {
             for(OrderItem orderItem : orderRequest.getOrder().getOrderItemList()){
                 Object row[] = new Object[5];
                 row[0] = orderItem;
-                row[1] = orderItem.getQuantity();
-                row[2] = orderItem.getDevice().getDevicePrice();
-                row[3] = orderItem.getDevice().getDevicePrice() * orderItem.getQuantity();
+                row[1] = orderItem.getOrderQuantity();
+                row[2] = orderItem.getInventoryItem().getDevice().getDevicePrice();
+                row[3] = orderItem.getInventoryItem().getDevice().getDevicePrice() * orderItem.getOrderQuantity();
                 row[4] = orderRequest.getOrderStatus();
                 model.addRow(row);
             }
