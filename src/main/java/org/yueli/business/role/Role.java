@@ -52,10 +52,10 @@ public abstract class Role {
     protected ArrayList<Function> privilegeList;
     public Role(RoleType type){
         this.roletype = type;
-        privilegeList = new ArrayList<Function>();
+        privilegeList = new ArrayList<>();
     }
     
-    public abstract JPanel createWorkArea(
+    public abstract JPanel createWorkArea (
             JPanel userProcessContainer,
             UserAccount userAccount,
             Organization organization,

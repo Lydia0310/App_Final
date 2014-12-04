@@ -31,10 +31,10 @@ public class AppEntrance {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Font font16 = new Font("Arial",Font.PLAIN, 16);
-                UIManager.put("Button.font", font16);
-                UIManager.put("Label.font", font16);
-                UIManager.put("TabbedPane.font", font16);
+                Font font18 = new Font("Arial",Font.PLAIN, 18);
+                UIManager.put("Button.font", font18);
+                UIManager.put("Label.font", font18);
+                UIManager.put("TabbedPane.font", font18);
                 AppEntrance.getMainFrame().setVisible(true);
             }
         });

@@ -15,8 +15,7 @@ import  org.yueli.business.useraccount.UserAccount;
  * @author Lydia
  */
 public class ConfigureABusiness {
-    public static Business configure(){
-    
+    public static Business configure() {
         Business system = Business.getInstance();
         
         Person person = new Person();

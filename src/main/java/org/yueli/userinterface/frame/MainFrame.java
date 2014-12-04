@@ -3,14 +3,14 @@ package org.yueli.userinterface.frame;
 
 
 import org.yueli.business.function.Function;
+import org.yueli.userinterface.AppEntrance;
 
+import javax.smartcardio.Card;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
     private JLabel topBarLoginRole;
     private JButton topBarLogout;
     private FuncButtonPanel funcButtonPanel;
-    private Map<Integer, JComponent> activatedComponent;
+    private Dimension windowSize = new Dimension(1200, 800);
 
     public static final Color blue = new Color(21, 127, 204);
     public static final Color gray = new Color(125, 125, 125);
@@ -37,7 +37,6 @@ public class MainFrame extends JFrame {
 
     public MainFrame() throws HeadlessException {
         initComponents();
-        activatedComponent = new HashMap<>();
     }
 
     private void initComponents() {
@@ -53,11 +52,10 @@ public class MainFrame extends JFrame {
     private void initMainFrame() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        setMinimumSize(new Dimension(800, 600));
-        Dimension maxScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setMaximumSize(maxScreenSize);
-        setPreferredSize(maxScreenSize);
-        setMinimumSize(new Dimension((int) maxScreenSize.getWidth() - 100, (int) maxScreenSize.getHeight() - 100));
+        setMinimumSize(windowSize);
+        setMaximumSize(windowSize);
+        setPreferredSize(windowSize);
+        //setMinimumSize(new Dimension((int) maxScreenSize.getWidth() - 100, (int) maxScreenSize.getHeight() - 100));
         //maxScreenSize mac device have problem: GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
     }
 
@@ -66,9 +64,7 @@ public class MainFrame extends JFrame {
     }
 
     private void initRightPanel() {
-        //app tab
         rightPanel = new JPanel(new CardLayout());
-        //right panel
         
         Font buttonFont = new Font("Arial", Font.PLAIN, 12);
         final JButton collapseFuncTreeButton = new JButton("<<");
@@ -154,7 +150,6 @@ public class MainFrame extends JFrame {
         row1.add(Box.createHorizontalStrut(10));
         row1.add(topBarLoginRole);
         row1.add(Box.createHorizontalStrut(10));
-        //row1.add(redPointPanel);
         row1.add(Box.createHorizontalStrut(10));
         row2.add(topBarLogout);
         row2.add(Box.createHorizontalStrut(30));
@@ -180,25 +175,20 @@ public class MainFrame extends JFrame {
 
     public void addFunctionPanel(Function func) {
         rightPanel.removeAll();
-
+        JPanel appPanel;
+        try {
+            appPanel = (JPanel)func.getClz().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+            return;
+        }
+        rightPanel.add(appPanel);
+        ((CardLayout)rightPanel.getLayout()).next(rightPanel);
     }
 
     public void loginSuccess() {
         verticalSplit.setRightComponent(horizontalSplit);
         funcButtonPanel.refresh();
-//        AccountService accountService = (AccountService) Service.getInstance(AccountService.class);
-//        topBarLoginUser.setText("User Name: " + accountService.getLoginUser().getUser_name());
-//        StringBuilder loginRole = new StringBuilder();
-//        loginRole.append("| Role: ");
-//        for (Role role : accountService.getLoginUser().getRoleList()) {
-//            loginRole.append(role.getName());
-//            loginRole.append(" ");
-//        }
-//        topBarLoginRole.setText(loginRole.toString());
-//
-//        welcomePanel = new WelcomePanel();
-//        appTab.add("Home", welcomePanel);
-
         topBarLogout.setVisible(true);
     }
 
@@ -206,7 +196,7 @@ public class MainFrame extends JFrame {
         if (firstPanel == null)
             firstPanel = new FirstPanel ();
         topBarLogout.setVisible(false);
-        
+        AppEntrance.saveBusiness();
         verticalSplit.setRightComponent(firstPanel);
     }
 

@@ -35,7 +35,7 @@ public class UserAccountDirectory {
                 return userAccount;
             }
         }
-         return null;
+        return null;
     }
     
     public UserAccount addUserAccount (String username, String password, Person person, Role role){

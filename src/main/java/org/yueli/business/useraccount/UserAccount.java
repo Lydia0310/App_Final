@@ -90,39 +90,38 @@ public class UserAccount {
     
     
     public void initialize(){
-        UserAccount userAccount = AppEntrance.getBusiness().getUserAccountDirectory().authenticateUser(username, password);
-        Enterprise inEnterprise = null;
-        Organization inOrganization = null;
-        if (userAccount == null) {
-            //Step2: Go inside each network to check each enterprise
-            for (Network network : AppEntrance.getBusiness().getNetworkList()) {
-                //Step 2-a: Check against each enterprise
-                for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
-                    userAccount = enterprise.getUserAccountDirectory().authenticateUser(username, password);
-                    if (userAccount == null) {
-                        //Step3: Check against each organization inside that enterprise
-                        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-                            userAccount = organization.getUserAccountDirectory().authenticateUser(username, password);
-                            if (userAccount != null) {
-                                inEnterprise = enterprise;
-                                inOrganization = organization;
-                                break;
-                            }
-                        }
-                    } else {
-                        inEnterprise = enterprise;
-                        break;
-                    }
-                    if (inOrganization != null) {
-                        break;
-                    }
-                }
-                if (inEnterprise != null) {
-                    break;
-                }
-            }
-        }
 
+//        Enterprise inEnterprise = null;
+//        Organization inOrganization = null;
+//        if (userAccount == null) {
+//            //Step2: Go inside each network to check each enterprise
+//            for (Network network : AppEntrance.getBusiness().getNetworkList()) {
+//                //Step 2-a: Check against each enterprise
+//                for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
+//                    userAccount = enterprise.getUserAccountDirectory().authenticateUser(username, password);
+//                    if (userAccount == null) {
+//                        //Step3: Check against each organization inside that enterprise
+//                        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+//                            userAccount = organization.getUserAccountDirectory().authenticateUser(username, password);
+//                            if (userAccount != null) {
+//                                inEnterprise = enterprise;
+//                                inOrganization = organization;
+//                                break;
+//                            }
+//                        }
+//                    } else {
+//                        inEnterprise = enterprise;
+//                        break;
+//                    }
+//                    if (inOrganization != null) {
+//                        break;
+//                    }
+//                }
+//                if (inEnterprise != null) {
+//                    break;
+//                }
+//            }
+//        }
     }
     
     @Override
