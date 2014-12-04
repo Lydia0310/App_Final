@@ -32,7 +32,8 @@ public class ManageEnterprise extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.business = business;
-       
+        populateEnterpriseTypeCombo();
+        populateEnterpriseTable();
     }
 
     /**
@@ -202,7 +203,12 @@ public class ManageEnterprise extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    public void populateEnterpriseTypeCombo(){
+        enterpriseTypeJComboBox.removeAllItems();
+        for(Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()){
+            enterpriseTypeJComboBox.addItem(type);
+        }
+    }
     
     private void populateEnterpriseTable(){
        

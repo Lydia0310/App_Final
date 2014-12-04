@@ -6,6 +6,12 @@
 
 package org.yueli.userinterface.doctorworkarea;
 
+import javax.swing.JPanel;
+import org.yueli.business.Business;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
+import org.yueli.business.useraccount.UserAccount;
+
 /**
  *
  * @author Lydia
@@ -15,6 +21,12 @@ public class DoctorWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form DoctorWorkArea
      */
+    private JPanel userProcessContainer;
+    private Business business;
+    private Network network;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    
     public DoctorWorkArea() {
         initComponents();
     }

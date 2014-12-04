@@ -20,13 +20,31 @@ import org.yueli.userinterface.doctorworkarea.DoctorWorkArea;
  * @author Lydia
  */
 public class DoctorRole extends Role{
-
+    private String docotorID;
+    private String doctorName;
     public DoctorRole(){
         super(Role.RoleType.Doctor);
         privilegeList.add(new Function(6, "Doctor Work Area",DoctorWorkArea.class));
        
     }
 
+    public String getDocotorID() {
+        return docotorID;
+    }
+
+    public void setDocotorID(String docotorID) {
+        this.docotorID = docotorID;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
         return new DoctorWorkArea();

@@ -1,43 +1,64 @@
-{
-  "name": "Business",
-  "personDirectory": {"personList": []},
-  "userAccountDirectory": {
-    "userAccountList": [
-      {
-        "username": "sys",
-        "password": "sys",
-        "person": null,
-        "role": null,
-        "workQueue": {"workRequestList": []},
-        "enterprise": null,
-        "network": null
-      }
+{"name": null, "personDirectory": {
+    "personList": [
+        {
+            "firstName": "n1",
+            "lastName": "n1",
+            "personID": 1
+        }
     ]
-  },
-  "organizationID": 1,
-  "workQueue": {"workRequestList": []},
-  "organizationDirectory": null,
-  "masterOrderDirectory": {"masterOrderList": []},
-  "networkList": [
+}, "userAccountDirectory": {
+    "userAccountList": [
+        {
+            "username": "sys",
+            "password": "sys",
+            "person": null,
+            "role": null,
+            "workQueue": {
+                "workRequestList": []
+            },
+            "enterprise": null,
+            "network": null
+        },
+        {
+            "username": "n1",
+            "password": "n1",
+            "person": {
+                "firstName": "n1",
+                "lastName": "n1",
+                "personID": 1
+            },
+            "role": {
+                "privilegeList": [
+                    {
+                        "displayName": "Network Admin Work Area",
+                        "clz": "org.yueli.userinterface.networkadminworkarea.NetworkAdminWorkArea",
+                        "functionId": 1,
+                        "activatedTabIndex": -1
+                    }
+                ],
+                "enterpriseDirectory": {
+                    "enterpriseList": []
+                }
+            },
+            "workQueue": {
+                "workRequestList": []
+            },
+            "enterprise": null,
+            "network": null
+        }
+    ]
+}, "organizationID": 1, "workQueue": {
+    "workRequestList": []
+}, "organizationDirectory": null, "masterOrderDirectory": {
+    "masterOrderList": []
+}, "networkList": [
     {
-      "name": "network1",
-      "enterpriseList": {"enterpriseList": []},
-      "supplierDirectory": {"supplierList": []}
-    },
-    {
-      "name": "network2",
-      "enterpriseList": {"enterpriseList": []},
-      "supplierDirectory": {"supplierList": []}
-    },
-    {
-      "name": "network3",
-      "enterpriseList": {"enterpriseList": []},
-      "supplierDirectory": {"supplierList": []}
-    },
-    {
-      "name": "network4",
-      "enterpriseList": {"enterpriseList": []},
-      "supplierDirectory": {"supplierList": []}
+        "name": "net1",
+        "enterpriseList": {
+            "enterpriseList": []
+        },
+        "supplierDirectory": {
+            "supplierList": []
+        }
     }
-  ]
-}
+]}
