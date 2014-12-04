@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -17,43 +17,29 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="267" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="viewDeviceRequestJButton" min="-2" pref="198" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="manageEnterpriseAdminJButton" min="-2" pref="198" max="-2" attributes="0"/>
-                          <Component id="manageEnterpriseJButton" min="-2" pref="198" max="-2" attributes="0"/>
-                          <Component id="manageSupplierJButton" min="-2" pref="198" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="jPanel1" min="-2" pref="310" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="viewDeviceRequestJButton" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
+                  <Component id="manageEnterpriseJButton" min="-2" pref="198" max="-2" attributes="0"/>
+                  <Component id="manageEnterpriseAdminJButton" min="-2" pref="198" max="-2" attributes="0"/>
+                  <Component id="manageSupplierJButton" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <EmptySpace pref="269" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="manageEnterpriseJButton" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="manageEnterpriseAdminJButton" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Component id="manageSupplierJButton" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                      <Component id="jPanel1" min="-2" pref="214" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Component id="manageEnterpriseJButton" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Component id="manageEnterpriseAdminJButton" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="manageSupplierJButton" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Component id="viewDeviceRequestJButton" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace pref="119" max="32767" attributes="0"/>
+              <EmptySpace pref="148" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -88,24 +74,5 @@
         <Property name="text" type="java.lang.String" value="View Device Request"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="jPanel1">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-      <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="List&lt;Schedule&gt; scheduleList = new LinkedList&lt;&gt;();&#xa;SimpleDateFormat timeFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);&#xa;        try {&#xa;            Schedule schedule1 = new Schedule(timeFormat.parse(&quot;2014-12-01 01:00:00&quot;), timeFormat.parse(&quot;2014-12-01 03:00:00&quot;),&#xa;                &quot;test&quot;, ScheduleRequest.ScheduleType.Device);&#xa;            Schedule schedule2 = new Schedule(timeFormat.parse(&quot;2014-12-01 05:00:00&quot;), timeFormat.parse(&quot;2014-12-01 07:00:00&quot;),&#xa;                &quot;test&quot;, ScheduleRequest.ScheduleType.Device);&#xa;            Schedule schedule3 = new Schedule(timeFormat.parse(&quot;2014-12-02 12:00:00&quot;), timeFormat.parse(&quot;2014-12-02 18:00:00&quot;),&#xa;                &quot;test&quot;, ScheduleRequest.ScheduleType.Device);&#xa;            Schedule schedule4 = new Schedule(timeFormat.parse(&quot;2014-12-03 05:00:00&quot;), timeFormat.parse(&quot;2014-12-03 07:00:00&quot;),&#xa;                &quot;test&quot;, ScheduleRequest.ScheduleType.Device);&#xa;            Schedule schedule5 = new Schedule(timeFormat.parse(&quot;2014-12-04 05:00:00&quot;), timeFormat.parse(&quot;2014-12-04 07:00:00&quot;),&#xa;                &quot;test&quot;, ScheduleRequest.ScheduleType.Device);&#xa;            Schedule schedule6 = new Schedule(timeFormat.parse(&quot;2014-12-05 05:00:00&quot;), timeFormat.parse(&quot;2014-12-06 07:00:00&quot;),&#xa;                &quot;test&quot;, ScheduleRequest.ScheduleType.Device);&#xa;            scheduleList.add(schedule1);&#xa;            scheduleList.add(schedule2);&#xa;            scheduleList.add(schedule3);&#xa;            scheduleList.add(schedule4);&#xa;            scheduleList.add(schedule5);&#xa;            scheduleList.add(schedule6);&#xa;        } catch (ParseException e) {&#xa;            e.printStackTrace();&#xa;        }&#xa;        schedulePanel = new SchedulePanel(scheduleList);&#xa;        jPanel1.add(schedulePanel);"/>
-            <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private org.yueli.userinterface.schedule.SchedulePanel schedulePanel;"/>
-          </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="Center"/>
-            </Constraint>
-          </Constraints>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-        </Container>
-      </SubComponents>
-    </Container>
   </SubComponents>
 </Form>

@@ -187,7 +187,7 @@ public class MainFrame extends JFrame {
 
     public void loginSuccess() {
         verticalSplit.setRightComponent(horizontalSplit);
-        funcButtonPanel.refresh(AppEntrance.getLoginUser().getRole().getPrivilegeList());
+        funcButtonPanel.refresh();
         topBarLogout.setVisible(true);
     }
 

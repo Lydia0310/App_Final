@@ -4,6 +4,7 @@ import org.yueli.business.schedule.Schedule;
 import org.yueli.userinterface.frame.MainFrame;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.text.ParseException;

@@ -7,18 +7,11 @@
 package org.yueli.userinterface.networkadminworkarea;
 
 import java.awt.CardLayout;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.LinkedList;
-import java.util.List;
 import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.network.Network;
-import org.yueli.business.schedule.Schedule;
 import org.yueli.business.useraccount.UserAccount;
-import org.yueli.business.workqueue.ScheduleRequest;
 import org.yueli.userinterface.AppEntrance;
-import org.yueli.userinterface.schedule.SchedulePanel;
 
 /**
  *
@@ -54,8 +47,6 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
         manageEnterpriseAdminJButton = new javax.swing.JButton();
         manageSupplierJButton = new javax.swing.JButton();
         viewDeviceRequestJButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
 
         manageEnterpriseJButton.setText("Manage Enterprise");
         manageEnterpriseJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,69 +71,31 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
 
         viewDeviceRequestJButton.setText("View Device Request");
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
-        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-        List<Schedule> scheduleList = new LinkedList<>();
-        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            Schedule schedule1 = new Schedule(timeFormat.parse("2014-12-01 01:00:00"), timeFormat.parse("2014-12-01 03:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule2 = new Schedule(timeFormat.parse("2014-12-01 05:00:00"), timeFormat.parse("2014-12-01 07:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule3 = new Schedule(timeFormat.parse("2014-12-02 12:00:00"), timeFormat.parse("2014-12-02 18:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule4 = new Schedule(timeFormat.parse("2014-12-03 05:00:00"), timeFormat.parse("2014-12-03 07:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule5 = new Schedule(timeFormat.parse("2014-12-04 05:00:00"), timeFormat.parse("2014-12-04 07:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule6 = new Schedule(timeFormat.parse("2014-12-05 05:00:00"), timeFormat.parse("2014-12-06 07:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            scheduleList.add(schedule1);
-            scheduleList.add(schedule2);
-            scheduleList.add(schedule3);
-            scheduleList.add(schedule4);
-            scheduleList.add(schedule5);
-            scheduleList.add(schedule6);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        schedulePanel = new SchedulePanel(scheduleList);
-        jPanel1.add(schedulePanel);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
+                .addGap(267, 267, 267)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(manageEnterpriseAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageEnterpriseJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageSupplierJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(52, 52, 52)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(manageEnterpriseJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageEnterpriseAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageSupplierJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(manageEnterpriseJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(manageEnterpriseAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(manageSupplierJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25)
+                .addGap(55, 55, 55)
+                .addComponent(manageEnterpriseJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(manageEnterpriseAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(manageSupplierJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -173,9 +126,6 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private org.yueli.userinterface.schedule.SchedulePanel schedulePanel;
     private javax.swing.JButton manageEnterpriseAdminJButton;
     private javax.swing.JButton manageEnterpriseJButton;
     private javax.swing.JButton manageSupplierJButton;

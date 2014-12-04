@@ -1,14 +1,12 @@
 package org.yueli.userinterface.frame;
 
 
+import org.yueli.business.function.Function;
+import org.yueli.business.role.SystemAdminRole;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import javax.swing.*;
-import org.yueli.business.function.Function;
-import org.yueli.business.role.Role;
-import org.yueli.business.role.SystemAdminRole;
-import org.yueli.business.useraccount.UserAccount;
-import org.yueli.userinterface.AppEntrance;
 
 
 /**
@@ -33,9 +31,10 @@ public class FuncButtonPanel extends JPanel{
         this.add(scrollPane);
     }
 
-    public void refresh (List<Function> funcList) {
+    public void refresh () {
         funcPanel.removeAll();
-        
+        SystemAdminRole systemAdminRole = new SystemAdminRole();
+        List<Function> funcList = systemAdminRole.getPrivilegeList();
         for (Function func : funcList) {
             JPanel buttonPanel = new JPanel(new BorderLayout());
             buttonPanel.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));

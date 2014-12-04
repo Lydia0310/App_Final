@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.zip.InflaterOutputStream;
 
 /**
- * Created by Lydia.
+ * Created by Zhang Junyan on 11/19/2014/2014.
  */
 public class LoginPanel extends JPanel {
     private JTextField userNameField;

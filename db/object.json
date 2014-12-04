@@ -1,1 +1,43 @@
-{"name":"Business","personDirectory":{"personList":[{"firstName":"1","lastName":"1","personID":1},{"firstName":"NAdmin1","lastName":"NAdmin1","personID":2}]},"userAccountDirectory":{"userAccountList":[{"username":"sys","password":"sys","person":null,"role":null,"workQueue":{"workRequestList":[]},"enterprise":null,"network":null},{"username":"1","password":"1","person":{"firstName":"1","lastName":"1","personID":1},"role":{"privilegeList":[{"displayName":"Network Admin Work Area","clz":"org.yueli.userinterface.networkadminworkarea.NetworkAdminWorkArea","functionId":1,"activatedTabIndex":-1}],"enterpriseDirectory":{"enterpriseList":[]}},"workQueue":{"workRequestList":[]},"enterprise":null,"network":null},{"username":"NAdmin1","password":"NAdmin1","person":{"firstName":"NAdmin1","lastName":"NAdmin1","personID":2},"role":{"privilegeList":[{"displayName":"Network Admin Work Area","clz":"org.yueli.userinterface.networkadminworkarea.NetworkAdminWorkArea","functionId":1,"activatedTabIndex":-1}],"enterpriseDirectory":{"enterpriseList":[]}},"workQueue":{"workRequestList":[]},"enterprise":null,"network":null}]},"organizationID":1,"workQueue":{"workRequestList":[]},"organizationDirectory":null,"masterOrderDirectory":{"masterOrderList":[]},"networkList":[{"name":"network1","enterpriseList":{"enterpriseList":[]},"supplierDirectory":{"supplierList":[]}},{"name":"network2","enterpriseList":{"enterpriseList":[]},"supplierDirectory":{"supplierList":[]}},{"name":"network3","enterpriseList":{"enterpriseList":[]},"supplierDirectory":{"supplierList":[]}},{"name":"network4","enterpriseList":{"enterpriseList":[]},"supplierDirectory":{"supplierList":[]}}]}
+{
+  "name": "Business",
+  "personDirectory": {"personList": []},
+  "userAccountDirectory": {
+    "userAccountList": [
+      {
+        "username": "sys",
+        "password": "sys",
+        "person": null,
+        "role": null,
+        "workQueue": {"workRequestList": []},
+        "enterprise": null,
+        "network": null
+      }
+    ]
+  },
+  "organizationID": 1,
+  "workQueue": {"workRequestList": []},
+  "organizationDirectory": null,
+  "masterOrderDirectory": {"masterOrderList": []},
+  "networkList": [
+    {
+      "name": "network1",
+      "enterpriseList": {"enterpriseList": []},
+      "supplierDirectory": {"supplierList": []}
+    },
+    {
+      "name": "network2",
+      "enterpriseList": {"enterpriseList": []},
+      "supplierDirectory": {"supplierList": []}
+    },
+    {
+      "name": "network3",
+      "enterpriseList": {"enterpriseList": []},
+      "supplierDirectory": {"supplierList": []}
+    },
+    {
+      "name": "network4",
+      "enterpriseList": {"enterpriseList": []},
+      "supplierDirectory": {"supplierList": []}
+    }
+  ]
+}
