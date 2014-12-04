@@ -84,7 +84,6 @@ public class MainFrame extends JFrame {
                 }
             }
         });
-
         infoLabel = new JLabel();
         infoLabel.setPreferredSize(new Dimension(1000, 20));
     }
