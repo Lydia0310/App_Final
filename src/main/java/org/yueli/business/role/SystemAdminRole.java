@@ -13,7 +13,15 @@ import  org.yueli.business.function.Function;
 import org.yueli.business.network.Network;
 import  org.yueli.business.organization.Organization;
 import  org.yueli.business.useraccount.UserAccount;
+import org.yueli.userinterface.careteamworkarea.CareTeamWorkArea;
+import org.yueli.userinterface.doctorworkarea.DoctorWorkArea;
+import org.yueli.userinterface.famcworkarea.FAMCAdminWorkArea;
+import org.yueli.userinterface.hospitalworkarea.HospitalWorkArea;
+import org.yueli.userinterface.networkadminworkarea.NetworkAdminWorkArea;
+import org.yueli.userinterface.primarycareworkarea.PrimaryCareWorkArea;
+import org.yueli.userinterface.supplierworkarea.SupplierWorkArea;
 import org.yueli.userinterface.sysadminworkarea.SysAdminWorkArea;
+import org.yueli.userinterface.warehouseworkarea.WarehouseWorkArea;
 
 /**
  *
@@ -23,15 +31,15 @@ public class SystemAdminRole extends Role{
 
     public SystemAdminRole() {
         super(Role.RoleType.SystemAdmin);
-        privilegeList.add(new Function(1, "Network Admin Work Area", "org.yueli.userinterface.NetworkAdminWorkArea"));
-        privilegeList.add(new Function(2, "Hospital Work Area","org.yueli.userinterface.hospitalworkarea.HospitalWorkArea"));
-        privilegeList.add(new Function(3, "Funding Academic Medical Center Admin Work Area", "org.yueli.userinterface.famcworkarea.FAMCAdminWorkArea"));
-        privilegeList.add(new Function(4, "Primary Care Admin Work Area", "org.yueli.userinterface.primarycareworkarea.PrimaryCareWorkArea"));
-        privilegeList.add(new Function(5, "Supplier Work Area","org.yueli.userinterface.supplierworkarea.SupplierWorkArea"));
-        privilegeList.add(new Function(6, "Doctor Work Area","org.yueli.userinterface.doctorworkarea.DoctorWorkArea"));
-        privilegeList.add(new Function(7, "Care Team Work Area","org.yueli.userinterface.careteamworkarea.CareTeamWorkArea"));
-        privilegeList.add(new Function(8, "Warehouse Admin Work Area","org.yueli.userinterface.warehouseworkarea.WarehouseWorkArea"));
-        privilegeList.add(new Function(9, "System Admin Work Area","org.yueli.userinterface.sysadminworkarea.SysAdminWorkArea"));
+        privilegeList.add(new Function(1, "Network Admin Work Area", NetworkAdminWorkArea.class));
+        privilegeList.add(new Function(2, "Hospital Work Area", HospitalWorkArea.class));
+        privilegeList.add(new Function(3, "Funding Academic Medical Center Admin Work Area", FAMCAdminWorkArea.class));
+        privilegeList.add(new Function(4, "Primary Care Admin Work Area", PrimaryCareWorkArea.class));
+        privilegeList.add(new Function(5, "Supplier Work Area", SupplierWorkArea.class));
+        privilegeList.add(new Function(6, "Doctor Work Area", DoctorWorkArea.class));
+        privilegeList.add(new Function(7, "Care Team Work Area", CareTeamWorkArea.class));
+        privilegeList.add(new Function(8, "Warehouse Admin Work Area", WarehouseWorkArea.class));
+        privilegeList.add(new Function(9, "System Admin Work Area", SysAdminWorkArea.class));
     }
 
     @Override
