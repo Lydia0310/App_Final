@@ -26,7 +26,7 @@ public class NetworkAdmin extends Role{
    private EnterpriseDirectory enterpriseDirectory; 
     public NetworkAdmin() {
         super(Role.RoleType.NetworkAdmin);
-        privilegeList.add(new Function("Network Admin Work Area", "org.yueli.userinterface.NetworkAdminWorkArea"));
+        privilegeList.add(new Function(1,"Network Admin Work Area", "org.yueli.userinterface.NetworkAdminWorkArea"));
         enterpriseDirectory = new EnterpriseDirectory();
     }
 

@@ -28,7 +28,7 @@ public class HospitalAdmin extends Role{
             
     public HospitalAdmin(){
         super(Role.RoleType.HospitalAdmin);
-        privilegeList.add(new Function("Hospital Work Area","org.yueli.userinterface.hospitalworkarea.HospitalWorkArea"));
+        privilegeList.add(new Function(2, "Hospital Work Area","org.yueli.userinterface.hospitalworkarea.HospitalWorkArea"));
         count++;
         hospitalID = String.valueOf(count);
     }

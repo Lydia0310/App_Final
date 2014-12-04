@@ -30,7 +30,7 @@ public class FAMCAdmin extends Role{
         count++;
         famcID = String.valueOf(count);
         
-        privilegeList.add(new Function("Funding Academic Medical Center Admin Work Area", "org.yueli.userinterface.famcworkarea.FAMCAdminWorkArea"));
+        privilegeList.add(new Function(3, "Funding Academic Medical Center Admin Work Area", "org.yueli.userinterface.famcworkarea.FAMCAdminWorkArea"));
                 
     }
 
