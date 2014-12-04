@@ -78,7 +78,7 @@ public class SupplierAdmin extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
-         return new SupplierWorkArea(userProcessContainer,userAccount,business);//To change body of generated methods, choose Tools | Templates.
+         return new SupplierWorkArea();//To change body of generated methods, choose Tools | Templates.
     }
     
     

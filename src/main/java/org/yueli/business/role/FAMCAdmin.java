@@ -52,7 +52,7 @@ public class FAMCAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
-       return new FAMCAdminWorkArea( userProcessContainer, business,network, userAccount);
+       return new FAMCAdminWorkArea();
     }
 
 

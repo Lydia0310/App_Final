@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.network.Network;
 import org.yueli.business.useraccount.UserAccount;
+import org.yueli.userinterface.AppEntrance;
 
 /**
  *
@@ -26,13 +27,12 @@ public class PrimaryCareWorkArea extends javax.swing.JPanel {
     private Network network;
     private UserAccount userAccount;
     
-    public PrimaryCareWorkArea(JPanel userProcessContainer, Business business, Network network, UserAccount userAccount) {
+    public PrimaryCareWorkArea() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.business = business;
-        this.network = network;
-        this.userAccount = userAccount;
-        
+        this.userProcessContainer = AppEntrance.getSlide();
+        this.business = AppEntrance.getBusiness();
+        this.userAccount = AppEntrance.getLoginUser();
+        userAccount.getNetwork();
     }
 
 

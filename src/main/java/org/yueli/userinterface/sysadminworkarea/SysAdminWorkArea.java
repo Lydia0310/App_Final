@@ -12,6 +12,7 @@ import org.yueli.business.Business;
 import java.awt.CardLayout;
 import javax.smartcardio.Card;
 import javax.swing.JPanel;
+import org.yueli.userinterface.AppEntrance;
 
 /**
  *
@@ -27,10 +28,10 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Business business;
-    public SysAdminWorkArea(JPanel userProcessContainer, Business business) {
+    public SysAdminWorkArea() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.business = business;
+        this.userProcessContainer = AppEntrance.getSlide();
+        this.business = AppEntrance.getBusiness();
     }
 
     /**
