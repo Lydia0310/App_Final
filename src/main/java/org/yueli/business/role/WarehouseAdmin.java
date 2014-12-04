@@ -23,7 +23,7 @@ public class WarehouseAdmin extends Role{
 
     public WarehouseAdmin(){
         super(Role.RoleType.WarehouseAdmin);
-        privilegeList.add(new Function(8, "Warehouse Admin Work Area","org.yueli.userinterface.warehouseworkarea.WarehouseWorkArea"));
+        privilegeList.add(new Function(8, "Warehouse Admin Work Area",WarehouseWorkArea.class));
        
     }
 

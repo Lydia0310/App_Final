@@ -38,7 +38,7 @@ public class SupplierAdmin extends Role {
         inventory = new Inventory();
         deviceCatalog = new DeviceDirectory();
         
-        privilegeList.add(new Function(5, "Supplier Work Area","org.yueli.userinterface.supplierworkarea.SupplierWorkArea"));
+        privilegeList.add(new Function(5, "Supplier Work Area",SupplierWorkArea.class));
         
         
     }

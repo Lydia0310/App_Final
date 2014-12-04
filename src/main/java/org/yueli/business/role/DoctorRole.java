@@ -23,7 +23,7 @@ public class DoctorRole extends Role{
 
     public DoctorRole(){
         super(Role.RoleType.Doctor);
-        privilegeList.add(new Function(6, "Doctor Work Area","org.yueli.userinterface.doctorworkarea.DoctorWorkArea"));
+        privilegeList.add(new Function(6, "Doctor Work Area",DoctorWorkArea.class));
        
     }
 

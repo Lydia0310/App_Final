@@ -30,7 +30,7 @@ public class PrimaryCareAdmin extends Role{
         super(Role.RoleType.PrimaryCareAdmin);
         count++;
         primaryCareID = String.valueOf(count);
-        privilegeList.add(new Function(4, "Primary Care Admin Work Area", "org.yueli.userinterface.primarycareworkarea.PrimaryCareWorkArea"));
+        privilegeList.add(new Function(4, "Primary Care Admin Work Area",PrimaryCareWorkArea.class));
     }
 
     public String getPrimaryCareID() {

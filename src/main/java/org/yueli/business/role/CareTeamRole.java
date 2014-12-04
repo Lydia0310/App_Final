@@ -23,7 +23,7 @@ public class CareTeamRole extends Role{
 
     public CareTeamRole(){
         super(Role.RoleType.CareTeam);
-        privilegeList.add(new Function(7, "Care Team Work Area","org.yueli.userinterface.careteamworkarea.CareTeamWorkArea"));
+        privilegeList.add(new Function(7, "Care Team Work Area",CareTeamWorkArea.class));
     }
 
     @Override
