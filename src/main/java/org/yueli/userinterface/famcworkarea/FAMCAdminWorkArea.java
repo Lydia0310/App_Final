@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.network.Network;
 import org.yueli.business.useraccount.UserAccount;
+import org.yueli.userinterface.AppEntrance;
 
 /**
  *
@@ -25,12 +26,12 @@ public class FAMCAdminWorkArea extends javax.swing.JPanel {
     private Business business;
     private Network network;
     private UserAccount userAccount;
-    public FAMCAdminWorkArea(JPanel useProcessContainer, Business business, Network network, UserAccount userAccount) {
+    public FAMCAdminWorkArea() {
         initComponents();
-        this.userProcessContainer = useProcessContainer;
-        this.business = business;
-        this.network = network;
-        this.userAccount = userAccount;
+        this.userProcessContainer = AppEntrance.getSlide();
+        this.business = AppEntrance.getBusiness();
+        this.userAccount = AppEntrance.getLoginUser();
+        userAccount.getNetwork();
         
     }
 

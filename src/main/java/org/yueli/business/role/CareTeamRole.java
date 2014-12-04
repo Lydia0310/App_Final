@@ -28,8 +28,10 @@ public class CareTeamRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
-        return CareTeamWorkArea();
+          return CareTeamWorkArea(); 
     }
+
+   
 
 
     

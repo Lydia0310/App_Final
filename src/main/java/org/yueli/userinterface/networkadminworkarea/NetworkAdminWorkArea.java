@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.network.Network;
 import org.yueli.business.useraccount.UserAccount;
+import org.yueli.userinterface.AppEntrance;
 
 /**
  *
@@ -25,12 +26,12 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
     private Business business;
     private Network network;
     private UserAccount userAccount;
-    public NetworkAdminWorkArea(JPanel userProcessContainer, UserAccount userAccount, Network network, Business business) {
+    public NetworkAdminWorkArea() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.business = business;
-        this.userAccount = userAccount;
-        this.network = network;
+        this.userProcessContainer = AppEntrance.getSlide();
+        this.business = AppEntrance.getBusiness();
+        this.userAccount = AppEntrance.getLoginUser();
+        userAccount.getNetwork();
     }
 
     /**

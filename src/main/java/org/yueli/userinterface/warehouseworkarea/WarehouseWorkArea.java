@@ -12,6 +12,7 @@ import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
 import org.yueli.business.useraccount.UserAccount;
+import org.yueli.userinterface.AppEntrance;
 
 /**
  *
@@ -27,13 +28,13 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
     private Network network;
     private Enterprise enterprise;
     private UserAccount userAccount; 
-    public WarehouseWorkArea(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
+    public WarehouseWorkArea() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.business = business;
-        this.network = network;
-        this.enterprise = enterprise;
-        this.userAccount = userAccount;
+        this.userProcessContainer = AppEntrance.getSlide();
+        this.business = AppEntrance.getBusiness();
+        this.userAccount = AppEntrance.getLoginUser();
+        userAccount.getNetwork();
+        userAccount.getEnterprise();
         
     }
     

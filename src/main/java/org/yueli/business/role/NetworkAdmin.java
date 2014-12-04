@@ -40,7 +40,7 @@ public class NetworkAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
-        return new NetworkAdminWorkArea(userProcessContainer, userAccount, network, business);
+        return new NetworkAdminWorkArea();
     }
 
     

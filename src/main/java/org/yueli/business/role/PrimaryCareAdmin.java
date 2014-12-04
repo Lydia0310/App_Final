@@ -51,7 +51,7 @@ public class PrimaryCareAdmin extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
-         return new PrimaryCareWorkArea(userProcessContainer,business,network,userAccount);
+         return new PrimaryCareWorkArea();
     }
 
     
