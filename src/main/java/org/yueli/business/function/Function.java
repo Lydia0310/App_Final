@@ -13,11 +13,13 @@ package org.yueli.business.function;
 public class Function {
     private String displayName;
     private String className;
+    private int functionId;
     private int activatedTabIndex;
 
-    public Function(String displayName, String clssName){
+    public Function(int functionId, String displayName, String className){
         this.displayName = displayName;
-        this.className = clssName;
+        this.className = className;
+        this.functionId = functionId;
     }
     public String getDisplayName() {
         return displayName;
@@ -41,5 +43,13 @@ public class Function {
 
     public void setActivatedTabIndex(int activatedTabIndex) {
         this.activatedTabIndex = activatedTabIndex;
+    }
+
+    public int getFunctionId() {
+        return functionId;
+    }
+
+    public void setFunctionId(int functionId) {
+        this.functionId = functionId;
     }
 }

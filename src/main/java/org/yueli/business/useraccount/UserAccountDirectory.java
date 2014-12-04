@@ -34,7 +34,6 @@ public class UserAccountDirectory {
             if(userAccount.getUsername().equals(username) && userAccount.getPassword().equals(password)){
                 return userAccount;
             }
-           
         }
          return null;
     }

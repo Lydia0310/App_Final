@@ -23,21 +23,16 @@ public class SystemAdminRole extends Role{
 
     public SystemAdminRole() {
         super(Role.RoleType.SystemAdmin);
-        privilegeList.add(new Function("Doctor Work Area","org.yueli.userinterface.doctorworkarea.DoctorWorkArea"));
-        privilegeList.add(new Function("Supplier Work Area","org.yueli.userinterface.supplierworkarea.SupplierWorkArea"));
-        privilegeList.add(new Function("Hospital Work Area","org.yueli.userinterface.hospitalworkarea.HospitalWorkArea"));
-        privilegeList.add(new Function("Care Team Work Area","org.yueli.userinterface.careteamworkarea.CareTeamWorkArea"));
-        privilegeList.add(new Function("Warehouse Admin Work Area","org.yueli.userinterface.warehouseworkarea.WarehouseWorkArea"));
-    
+        privilegeList.add(new Function("Doctor Work Area", "org.yueli.userinterface.doctorworkarea.DoctorWorkArea"));
+        privilegeList.add(new Function("Supplier Work Area", "org.yueli.userinterface.supplierworkarea.SupplierWorkArea"));
+        privilegeList.add(new Function("Hospital Work Area", "org.yueli.userinterface.hospitalworkarea.HospitalWorkArea"));
+        privilegeList.add(new Function("Care Team Work Area", "org.yueli.userinterface.careteamworkarea.CareTeamWorkArea"));
+        privilegeList.add(new Function("Warehouse Admin Work Area", "org.yueli.userinterface.warehouseworkarea.WarehouseWorkArea"));
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {
          return new SysAdminWorkArea(userProcessContainer, business);  //To change body of generated methods, choose Tools | Templates.
     }
-
-
-
-   
     
 }
