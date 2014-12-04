@@ -59,7 +59,7 @@ public class CloseButtonTabPanel extends JPanel {
 //                    } else {
 //                        tabbedPane.remove(tabbedPane.indexOfTabComponent(CloseButtonTabPanel.this));
 //                        if (tabbedPane.getTabCount() == 0) {
-//                            tabbedPane.addTab("Home", new WelcomePanel());
+//                            tabbedPane.addFunctionPanel("Home", new WelcomePanel());
 //                        }
 //                    }
                 }

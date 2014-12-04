@@ -25,9 +25,7 @@ public class MainFrame extends JFrame {
     private JLabel topBarLoginUser;
     private JLabel topBarLoginRole;
     private JButton topBarLogout;
-    private JTabbedPane appTab;
     private FuncButtonPanel funcButtonPanel;
-    private JToolBar statusBar;
     private Map<Integer, JComponent> activatedComponent;
 
     public static final Color blue = new Color(21, 127, 204);
@@ -69,17 +67,8 @@ public class MainFrame extends JFrame {
 
     private void initRightPanel() {
         //app tab
-        rightPanel = new JPanel(new BorderLayout());
-        appTab = new JTabbedPane();
-
-        //status bar
-        statusBar = new JToolBar();
-        BoxLayout statusBarLayout = new BoxLayout(statusBar, BoxLayout.X_AXIS);
-        statusBar.setLayout(statusBarLayout);
-
+        rightPanel = new JPanel(new CardLayout());
         //right panel
-        rightPanel.add(appTab, BorderLayout.CENTER);
-        rightPanel.add(statusBar, BorderLayout.SOUTH);
         
         Font buttonFont = new Font("Arial", Font.PLAIN, 12);
         final JButton collapseFuncTreeButton = new JButton("<<");
@@ -102,10 +91,6 @@ public class MainFrame extends JFrame {
 
         infoLabel = new JLabel();
         infoLabel.setPreferredSize(new Dimension(1000, 20));
-        statusBar.add(collapseFuncTreeButton);
-        statusBar.add(Box.createHorizontalStrut(30));
-        statusBar.add(infoLabel);
-        statusBar.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
     }
 
     private void initTopBar() {
@@ -193,19 +178,9 @@ public class MainFrame extends JFrame {
         verticalSplit.setEnabled(false);
     }
 
-    public void addTab (Function func) {
-        if (func.getActivatedTabIndex() > 0) {
-            appTab.setSelectedIndex(func.getActivatedTabIndex());
-        } else {
-//            JPanel appPanel = ((FunctionService)Service.getInstance(FunctionService.class)).getPanel(func.getFuncClass());
-//            if (appPanel != null) {
-//                int tabCount = appTab.getTabCount();
-//                appTab.add(appPanel);
-//                appTab.setTabComponentAt(tabCount, new CloseButtonTabPanel(func.getDisplayName(), appTab, func));
-//                func.setActivatedTabIndex(tabCount);
-//                appTab.setSelectedIndex(tabCount);
-//            }
-        }
+    public void addFunctionPanel(Function func) {
+        rightPanel.removeAll();
+
     }
 
     public void loginSuccess() {
@@ -233,20 +208,9 @@ public class MainFrame extends JFrame {
         topBarLogout.setVisible(false);
         
         verticalSplit.setRightComponent(firstPanel);
-        appTab.removeAll();
     }
 
-    public void postInfo(String msg) {
-        infoLabel.setText("<Info> " + dateFormat.format(new Date()) + ": " + msg);
+    public JPanel getRightPanel() {
+        return rightPanel;
     }
-
-    public void postDebug(String msg) {
-        infoLabel.setText("<Debug> " + dateFormat.format(new Date()) + ": " + msg);
-    }
-
-    public void postError(String msg) {
-        infoLabel.setText("<Error> " + dateFormat.format(new Date()) + ": " + msg);
-        JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
 }

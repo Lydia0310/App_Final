@@ -87,6 +87,6 @@ public class AppEntrance {
     }
 
     public static JPanel getSlide() {
-        return slide;
+        return mainFrame.getRightPanel();
     }
 }

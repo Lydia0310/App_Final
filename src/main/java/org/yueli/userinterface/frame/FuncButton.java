@@ -20,7 +20,7 @@ public class FuncButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                AppEntrance.getMainFrame().addTab(func);
+                AppEntrance.getMainFrame().addFunctionPanel(func);
             }
         });
     }
