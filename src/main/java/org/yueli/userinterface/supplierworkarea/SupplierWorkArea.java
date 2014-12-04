@@ -24,9 +24,9 @@ public class SupplierWorkArea extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
-    public SupplierWorkArea(JPanel userProcessContainer) {
+    public SupplierWorkArea() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
+        this.userProcessContainer = AppEntrance.getSlide();
         this.userAccount = AppEntrance.getLoginUser();
         this.business = AppEntrance.getBusiness();
     }

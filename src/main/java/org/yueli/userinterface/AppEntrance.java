@@ -24,6 +24,7 @@ public class AppEntrance {
     private static ObjectMapper mapper = new ObjectMapper();
     private static Business business;
     private static UserAccount loginUser;
+    private static JPanel slide = new JPanel(new CardLayout());
 
     public static void main(String[] args) {
         getBusiness();
@@ -83,5 +84,9 @@ public class AppEntrance {
 
     public static void setLoginUser(UserAccount loginUser) {
         AppEntrance.loginUser = loginUser;
+    }
+
+    public static JPanel getSlide() {
+        return slide;
     }
 }
