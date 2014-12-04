@@ -4,6 +4,7 @@ package org.yueli.userinterface;
 import  org.yueli.business.Business;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.yueli.business.useraccount.UserAccount;
 import  org.yueli.userinterface.frame.MainFrame;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class AppEntrance {
     private static File file = new File("db/object.json");
     private static ObjectMapper mapper = new ObjectMapper();
     private static Business business;
+    private static UserAccount loginUser;
 
     public static void main(String[] args) {
         getBusiness();
@@ -73,5 +75,13 @@ public class AppEntrance {
             mainFrame = new MainFrame();
         }
         return mainFrame;
+    }
+
+    public static UserAccount getLoginUser() {
+        return loginUser;
+    }
+
+    public static void setLoginUser(UserAccount loginUser) {
+        AppEntrance.loginUser = loginUser;
     }
 }

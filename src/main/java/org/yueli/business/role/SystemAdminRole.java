@@ -23,7 +23,7 @@ public class SystemAdminRole extends Role{
 
     public SystemAdminRole() {
         super(Role.RoleType.SystemAdmin);
-        privilegeList.add(new Function(1,"Network Admin Work Area", "org.yueli.userinterface.NetworkAdminWorkArea"));
+        privilegeList.add(new Function(1, "Network Admin Work Area", "org.yueli.userinterface.NetworkAdminWorkArea"));
         privilegeList.add(new Function(2, "Hospital Work Area","org.yueli.userinterface.hospitalworkarea.HospitalWorkArea"));
         privilegeList.add(new Function(3, "Funding Academic Medical Center Admin Work Area", "org.yueli.userinterface.famcworkarea.FAMCAdminWorkArea"));
         privilegeList.add(new Function(4, "Primary Care Admin Work Area", "org.yueli.userinterface.primarycareworkarea.PrimaryCareWorkArea"));

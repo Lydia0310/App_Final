@@ -14,7 +14,7 @@ public class Function {
     private String displayName;
     private String className;
     private int functionId;
-    private int activatedTabIndex;
+    private int activatedTabIndex = -1;
 
     public Function(int functionId, String displayName, String className){
         this.displayName = displayName;

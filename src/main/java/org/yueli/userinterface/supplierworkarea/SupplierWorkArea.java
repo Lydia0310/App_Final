@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.useraccount.UserAccount;
+import org.yueli.userinterface.AppEntrance;
 
 /**
  *
@@ -23,12 +24,11 @@ public class SupplierWorkArea extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
-    public SupplierWorkArea(JPanel userProcessContainer, UserAccount userAccount, Business business) {
+    public SupplierWorkArea(JPanel userProcessContainer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.userAccount = userAccount;
-        this.business = business;
-        
+        this.userAccount = AppEntrance.getLoginUser();
+        this.business = AppEntrance.getBusiness();
     }
     
   
