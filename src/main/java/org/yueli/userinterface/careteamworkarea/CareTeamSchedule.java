@@ -30,7 +30,6 @@ public class CareTeamSchedule extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
 
-        System.out.print("haha");
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -49,31 +48,6 @@ public class CareTeamSchedule extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(147, Short.MAX_VALUE))
         );
-
-        List<Schedule> scheduleList = new LinkedList<>();
-        try {
-            Schedule schedule1 = new Schedule(timeFormat.parse("2014-12-01 01:00:00"), timeFormat.parse("2014-12-01 03:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule2 = new Schedule(timeFormat.parse("2014-12-01 05:00:00"), timeFormat.parse("2014-12-01 07:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule3 = new Schedule(timeFormat.parse("2014-12-02 12:00:00"), timeFormat.parse("2014-12-02 18:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule4 = new Schedule(timeFormat.parse("2014-12-03 05:00:00"), timeFormat.parse("2014-12-03 07:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule5 = new Schedule(timeFormat.parse("2014-12-04 05:00:00"), timeFormat.parse("2014-12-04 07:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            Schedule schedule6 = new Schedule(timeFormat.parse("2014-12-05 05:00:00"), timeFormat.parse("2014-12-06 07:00:00"),
-                "test", ScheduleRequest.ScheduleType.Device);
-            scheduleList.add(schedule1);
-            scheduleList.add(schedule2);
-            scheduleList.add(schedule3);
-            scheduleList.add(schedule4);
-            scheduleList.add(schedule5);
-            scheduleList.add(schedule6);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        SchedulePanel = new SchedulePanel(scheduleList);
     }// </editor-fold>//GEN-END:initComponents
 
 

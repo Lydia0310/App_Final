@@ -19,6 +19,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="manageDoctorScheduleJButton" min="-2" pref="263" max="-2" attributes="0"/>
                   <Component id="viewCareTeamScheduleJButton" min="-2" pref="263" max="-2" attributes="0"/>
                   <Component id="viewDeviceJButton" min="-2" pref="263" max="-2" attributes="0"/>
                   <Component id="viewRoomScheduleJButton" min="-2" pref="263" max="-2" attributes="0"/>
@@ -33,13 +34,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Component id="viewOperationJButton" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <Component id="manageDoctorScheduleJButton" min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace pref="71" max="32767" attributes="0"/>
               <Component id="viewRoomScheduleJButton" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Component id="viewDeviceJButton" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="viewCareTeamScheduleJButton" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace pref="170" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,6 +67,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="View Care Team Schedule"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="manageDoctorScheduleJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manage Doctor Schedule"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageDoctorScheduleJButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
