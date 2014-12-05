@@ -1,16 +1,20 @@
 package org.yueli.userinterface;
 
 
-import  org.yueli.business.Business;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.config.EmbeddedConfiguration;
+import com.db4o.ta.TransparentPersistenceSupport;
+import org.yueli.business.Business;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.yueli.business.ConfigureABusiness;
 import org.yueli.business.useraccount.UserAccount;
-import  org.yueli.userinterface.frame.MainFrame;
+import org.yueli.userinterface.frame.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -24,14 +28,14 @@ public class AppEntrance {
     private static ObjectMapper mapper = new ObjectMapper();
     private static Business business;
     private static UserAccount loginUser;
-    private static JPanel slide = new JPanel(new CardLayout());
+    private static final String FILENAME = "db/database.db4o"; // path to the data store
 
     public static void main(String[] args) {
         getBusiness();
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Font font18 = new Font("Arial",Font.PLAIN, 18);
+                Font font18 = new Font("Arial", Font.PLAIN, 18);
                 UIManager.put("Button.font", font18);
                 UIManager.put("Label.font", font18);
                 UIManager.put("TabbedPane.font", font18);
@@ -42,36 +46,43 @@ public class AppEntrance {
 
     private static MainFrame mainFrame;
 
-    public static Business getBusiness () {
-        if(!file.exists() || !file.isFile()){
-            return null;
-        }
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        mapper.setDateFormat(df);
+    public static Business getBusiness() {
         if (business == null) {
-            try {
-                business = mapper.readValue(file, Business.class);
-                return business;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
+            ObjectContainer objectContainer = createDb40Connection();
+            ObjectSet<Business> businesses = objectContainer.query(Business.class);
+            if (businesses.size() == 0) {
+                business = ConfigureABusiness.configure();  // If there's no System in the record, create a new one
+            } else {
+                business = businesses.get(0);
             }
+            objectContainer.close();
+            return business;
         } else {
             return business;
         }
     }
 
-    public static void saveBusiness () {
-        try {
-            byte[] output = mapper.writeValueAsBytes(business);
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            fileOutputStream.write(output);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private static ObjectContainer createDb40Connection() {
+        EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
+        config.common().add(new TransparentPersistenceSupport());
+        //Controls the number of objects in memory
+        config.common().activationDepth(Integer.MAX_VALUE);
+        //Controls the depth/level of updation of Object
+        config.common().updateDepth(Integer.MAX_VALUE);
+        //Register your top most Class here
+        config.common().objectClass(Business.class).cascadeOnUpdate(true); // Change to the object you want to save
+        ObjectContainer db = Db4oEmbedded.openFile(config, FILENAME);
+        return db;
     }
 
-    public static MainFrame getMainFrame () {
+    public static void saveBusiness() {
+        ObjectContainer conn = createDb40Connection();
+        conn.store(business);
+        conn.commit();
+        conn.close();
+    }
+
+    public static MainFrame getMainFrame() {
         if (mainFrame == null) {
             mainFrame = new MainFrame();
         }

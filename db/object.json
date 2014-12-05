@@ -1,64 +1,60 @@
-{"name": null, "personDirectory": {
+{
+  "name": null,
+  "personDirectory": {
     "personList": [
-        {
-            "firstName": "n1",
-            "lastName": "n1",
-            "personID": 1
-        }
+      {
+        "firstName": "n1",
+        "lastName": "n1",
+        "personID": 1
+      }
     ]
-}, "userAccountDirectory": {
+  },
+  "userAccountDirectory": {
     "userAccountList": [
-        {
-            "username": "sys",
-            "password": "sys",
-            "person": null,
-            "role": null,
-            "workQueue": {
-                "workRequestList": []
-            },
-            "enterprise": null,
-            "network": null
+      {
+        "username": "sys",
+        "password": "sys",
+        "person": null,
+        "role": null,
+        "workQueue": {
+          "workRequestList": []
         },
-        {
-            "username": "n1",
-            "password": "n1",
-            "person": {
-                "firstName": "n1",
-                "lastName": "n1",
-                "personID": 1
-            },
-            "role": {
-                "privilegeList": [
-                    {
-                        "displayName": "Network Admin Work Area",
-                        "clz": "org.yueli.userinterface.networkadminworkarea.NetworkAdminWorkArea",
-                        "functionId": 1,
-                        "activatedTabIndex": -1
-                    }
-                ],
-                "enterpriseDirectory": {
-                    "enterpriseList": []
-                }
-            },
-            "workQueue": {
-                "workRequestList": []
-            },
-            "enterprise": null,
-            "network": null
-        }
+        "enterprise": null,
+        "network": null
+      },
+      {
+        "username": "n1",
+        "password": "n1",
+        "person": {
+          "firstName": "n1",
+          "lastName": "n1",
+          "personID": 1
+        },
+        "workQueue": {
+          "workRequestList": []
+        },
+        "enterprise": null,
+        "network": null
+      }
     ]
-}, "organizationID": 1, "workQueue": {
+  },
+  "organizationID": 1,
+  "workQueue": {
     "workRequestList": []
-}, "organizationDirectory": null, "masterOrderDirectory": {
+  },
+  "organizationDirectory": null,
+  "masterOrderDirectory": {
     "masterOrderList": []
-}, "networkList": [
+  },
+  "networkList": [
     {
-        "name": "net1",
-        "enterpriseList": {
-            "enterpriseList": []
-        },
-        "supplierDirectory": {
-            "supplierList": []
-        }
+      "name": "net1",
+      "enterpriseList": {
+        "enterpriseList": []
+      },
+      "supplierDirectory": {
+        "supplierList": []
+      }
     }
-]}
+  ]
+}
