@@ -16,13 +16,235 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="701" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="doneJButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="beginningTimeJLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="dateJLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="endTimeJLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="hourJTextField" min="-2" pref="17" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="colonJLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="minuteJTextField" min="-2" pref="17" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="colonJLabel1" min="-2" pref="6" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="secondJTextField" min="-2" pref="17" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="beginningTimeFormateJLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="hourJTextField1" min="-2" pref="17" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="colonJLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="minuteJTextField1" min="-2" pref="17" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="colonJLabel3" min="-2" pref="6" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="secondjTextField1" min="-2" pref="17" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="endTimeFormateJLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="yearJTextField" min="-2" pref="42" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="dashJLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="monthJTextField" min="-2" pref="26" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="dashJLabel1" min="-2" pref="4" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="dateJTextField" min="-2" pref="27" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="formateJLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" pref="586" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="469" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" pref="252" max="-2" attributes="0"/>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="dateJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="yearJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dashJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="monthJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dashJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dateJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="formateJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="beginningTimeJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hourJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="minuteJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="secondJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="colonJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="colonJLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="beginningTimeFormateJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="endTimeJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hourJTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="minuteJTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="secondjTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="colonJLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="colonJLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="endTimeFormateJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="doneJButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+    </Container>
+    <Component class="javax.swing.JLabel" name="dateJLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="beginningTimeJLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Beginning Time:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="endTimeJLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="End Time:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="yearJTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="dashJLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="-"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="monthJTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="monthJTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dashJLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="-"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="minuteJTextField1">
+    </Component>
+    <Component class="javax.swing.JTextField" name="secondjTextField1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="colonJLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=":"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="colonJLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=":"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="doneJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Done"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="dateJTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="formateJLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(YYYY-MM-DD)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="hourJTextField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="minuteJTextField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="secondJTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="colonJLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=":"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="colonJLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=":"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="beginningTimeFormateJLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(hh:mm:ss)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="endTimeFormateJLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(hh:mm:ss)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="hourJTextField1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Operation Room Number:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(Begin with &quot;O&quot;)"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

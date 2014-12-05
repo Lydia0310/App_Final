@@ -6,6 +6,7 @@
 
 package org.yueli.business.workqueue;
 
+import java.util.Date;
 import org.yueli.business.organization.DoctorDirectory;
 import static org.yueli.business.organization.Organization.Type.Doctor;
 
@@ -21,7 +22,9 @@ public class OperationRequest extends WorkRequest{
     private String careTeamID;
     private String deviceName;
     private int deviceQuantity;
-    private int operationRoomNumber;
+    private String operationRoomNumber;
+    private Date beginningTime;
+    private Date endTime;
     
     public OperationRequest(){
         count++;
@@ -75,12 +78,30 @@ public class OperationRequest extends WorkRequest{
         this.deviceQuantity = deviceQuantity;
     }
 
-    public int getOperationRoomNumber() {
+    public String getOperationRoomNumber() {
         return operationRoomNumber;
     }
 
-    public void setOperationRoomNumber(int operationRoomNumber) {
+    public void setOperationRoomNumber(String operationRoomNumber) {
         this.operationRoomNumber = operationRoomNumber;
     }
+
+    public Date getBeginningTime() {
+        return beginningTime;
+    }
+
+    public void setBeginningTime(Date beginningTime) {
+        this.beginningTime = beginningTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+   
     
 }

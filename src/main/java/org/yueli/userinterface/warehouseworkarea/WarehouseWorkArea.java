@@ -33,8 +33,8 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
         this.userProcessContainer = AppEntrance.getSlide();
         this.business = AppEntrance.getBusiness();
         this.userAccount = AppEntrance.getLoginUser();
-        userAccount.getNetwork();
-        userAccount.getEnterprise();
+        network = userAccount.getNetwork();
+        enterprise = userAccount.getEnterprise();
         
     }
     
@@ -54,6 +54,11 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
         manageStorageRoomJButton1 = new javax.swing.JButton();
 
         viewDeviceScheduleRequestJButton.setText("View Device Schedule Request");
+        viewDeviceScheduleRequestJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewDeviceScheduleRequestJButtonActionPerformed(evt);
+            }
+        });
 
         manageStorageRoomJButton.setText("Manage Storage Room");
         manageStorageRoomJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +109,20 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
 
     private void manageStorageRoomJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStorageRoomJButton1ActionPerformed
         // TODO add your handling code here:
+        AssignDevice assignDevice = new AssignDevice(userProcessContainer, business, network, enterprise, userAccount);
+        userProcessContainer.add("Assign Device", assignDevice);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageStorageRoomJButton1ActionPerformed
+
+    private void viewDeviceScheduleRequestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceScheduleRequestJButtonActionPerformed
+        // TODO add your handling code here:
+        ViewDeviceScheduleRequest viewDeviceScheduleRequest = new ViewDeviceScheduleRequest();
+        userProcessContainer.add("View Device Schedule Request", viewDeviceScheduleRequest);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+                
+    }//GEN-LAST:event_viewDeviceScheduleRequestJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

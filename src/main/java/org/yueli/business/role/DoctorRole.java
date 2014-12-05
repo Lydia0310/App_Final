@@ -21,7 +21,8 @@ import org.yueli.userinterface.doctorworkarea.DoctorWorkArea;
  * @author Lydia
  */
 public class DoctorRole extends Role{
-    private String docotorID;
+    private String doctorID;
+    private String doctorName;
     private static int count;
     private PatientDirectory patientDirectory;
     
@@ -29,16 +30,16 @@ public class DoctorRole extends Role{
         super(Role.RoleType.Doctor);
         privilegeList.add(new Function(6, "Doctor Work Area",DoctorWorkArea.class));
         count++;
-        docotorID = String.valueOf(count);
+        doctorID = String.valueOf(count);
         patientDirectory = new PatientDirectory();
     }
 
     public String getDocotorID() {
-        return docotorID;
+        return doctorID;
     }
 
-    public void setDocotorID(String docotorID) {
-        this.docotorID = docotorID;
+    public void setDocotorID(String doctorID) {
+        this.doctorID = doctorID;
     }
 
     public PatientDirectory getPatientDirectory() {

@@ -6,6 +6,13 @@
 
 package org.yueli.userinterface.operationroomadminworkarea;
 
+import javax.swing.JPanel;
+import org.yueli.business.Business;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
+import org.yueli.business.useraccount.UserAccount;
+import org.yueli.userinterface.AppEntrance;
+
 /**
  *
  * @author Lydia
@@ -15,8 +22,18 @@ public class OperationRoomAdminWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form OperationRoomAdminWorkArea
      */
+    private JPanel userProcessContainer;
+    private Business business;
+    private Network network;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
     public OperationRoomAdminWorkArea() {
         initComponents();
+        this.userProcessContainer = AppEntrance.getSlide();
+        this.business = AppEntrance.getBusiness();
+        this.userAccount = AppEntrance.getLoginUser();
+        network = userAccount.getNetwork();
+        enterprise = userAccount.getEnterprise();
     }
 
     /**
@@ -28,19 +45,38 @@ public class OperationRoomAdminWorkArea extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        manageOperationRoomJButton = new javax.swing.JButton();
+        viewOperationRoomRequestJButton = new javax.swing.JButton();
+
+        manageOperationRoomJButton.setText("Manage Operation Room");
+
+        viewOperationRoomRequestJButton.setText("View Operation Room Request");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(229, 229, 229)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(viewOperationRoomRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageOperationRoomJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(manageOperationRoomJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(viewOperationRoomRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(273, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton manageOperationRoomJButton;
+    private javax.swing.JButton viewOperationRoomRequestJButton;
     // End of variables declaration//GEN-END:variables
 }

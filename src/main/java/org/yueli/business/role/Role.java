@@ -27,6 +27,7 @@ public abstract class Role {
         EnterpriseAdmin("Enterprise Admin"),
         Doctor("Doctor"),
         WarehouseAdmin("Warehouse Admin"),
+        OperationRoomAdmin("Operation Room Admin"),
         SupplierAdmin("Supplier Admin"),
         HospitalAdmin("Hospital Admin"),
         FAMCAdmin("Founding Academic Medical Center Admin"),
