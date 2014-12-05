@@ -21,11 +21,13 @@ import org.yueli.userinterface.doctorworkarea.DoctorWorkArea;
  */
 public class DoctorRole extends Role{
     private String docotorID;
+    private static int count;
     private String doctorName;
     public DoctorRole(){
         super(Role.RoleType.Doctor);
         privilegeList.add(new Function(6, "Doctor Work Area",DoctorWorkArea.class));
-       
+        count++;
+        docotorID = String.valueOf(count);
     }
 
     public String getDocotorID() {

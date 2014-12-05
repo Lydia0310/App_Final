@@ -7,9 +7,13 @@
 package org.yueli.userinterface.hospitalworkarea;
 
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
+import org.yueli.business.organization.DoctorOrganization;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.role.DoctorRole;
 import org.yueli.business.useraccount.UserAccount;
 
 /**
@@ -33,6 +37,22 @@ public class ManageDoctor extends javax.swing.JPanel {
         this.network = network;
         this.enterprise = enterprise;
         this.userAccount = userAccount;
+        populateDoctorOverviewTable();
+    }
+    public void populateDoctorOverviewTable(){
+        DefaultTableModel model = (DefaultTableModel)doctorOverviewTable.getModel();
+        model.setRowCount(0);
+        for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+            if(organization instanceof DoctorOrganization){
+                for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
+                    Object row[] = new Object[3];
+                    row[0] = ((DoctorRole)userAccount.getRole()).getDocotorID();
+                    row[1] = ((DoctorRole)userAccount.getRole()).getDoctorName();
+                    row[2] = userAccount.getUsername();
+                }
+            }
+        }
+        
     }
 
     /**

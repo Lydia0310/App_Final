@@ -213,7 +213,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
         person.setFirstName(firstName);
         person.setLastName(lastName);
         organization.getUserAccountDirectory().addUserAccount(username, password, person, role);
-        
+        //Doctor role ---> setDoctorName(firstName + lastName)
         populateUserAccountTable();
         
     }//GEN-LAST:event_addJButtonActionPerformed

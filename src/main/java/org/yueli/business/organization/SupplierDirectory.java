@@ -16,7 +16,7 @@ public class SupplierDirectory {
     private ArrayList<SupplierOrganization> supplierList;
     
     public SupplierDirectory(){
-        supplierList = new ArrayList<SupplierOrganization>();
+        supplierList = new ArrayList<>();
     }
 
     public ArrayList<SupplierOrganization> getSupplierList() {
