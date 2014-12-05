@@ -32,7 +32,6 @@
 //
 //    private ObjectContainer createConnection() {
 //        try {
-//
 //            EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
 //            config.common().add(new TransparentPersistenceSupport());
 //            //Controls the number of objects in memory
