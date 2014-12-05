@@ -12,6 +12,7 @@ import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.function.Function;
 import org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
+import org.yueli.business.patient.PatientDirectory;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.doctorworkarea.DoctorWorkArea;
 
@@ -22,12 +23,14 @@ import org.yueli.userinterface.doctorworkarea.DoctorWorkArea;
 public class DoctorRole extends Role{
     private String docotorID;
     private static int count;
-    private String doctorName;
+    private PatientDirectory patientDirectory;
+    
     public DoctorRole(){
         super(Role.RoleType.Doctor);
         privilegeList.add(new Function(6, "Doctor Work Area",DoctorWorkArea.class));
         count++;
         docotorID = String.valueOf(count);
+        patientDirectory = new PatientDirectory();
     }
 
     public String getDocotorID() {
@@ -38,14 +41,15 @@ public class DoctorRole extends Role{
         this.docotorID = docotorID;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public PatientDirectory getPatientDirectory() {
+        return patientDirectory;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
+    public void setPatientDirectory(PatientDirectory patientDirectory) {
+        this.patientDirectory = patientDirectory;
     }
 
+    
     
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {

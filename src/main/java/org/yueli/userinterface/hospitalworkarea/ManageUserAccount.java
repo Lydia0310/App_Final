@@ -12,6 +12,7 @@ import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.organization.Organization;
 import org.yueli.business.person.Person;
+import org.yueli.business.role.DoctorRole;
 import org.yueli.business.role.Role;
 import org.yueli.business.useraccount.UserAccount;
 
@@ -214,6 +215,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
         person.setLastName(lastName);
         organization.getUserAccountDirectory().addUserAccount(username, password, person, role);
         //Doctor role ---> setDoctorName(firstName + lastName)
+        
         populateUserAccountTable();
         
     }//GEN-LAST:event_addJButtonActionPerformed

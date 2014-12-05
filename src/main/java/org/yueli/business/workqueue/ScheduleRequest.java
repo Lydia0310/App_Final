@@ -20,9 +20,7 @@ public abstract class  ScheduleRequest {
     private Date endTime;
 
     public static enum ScheduleType {
-        Device("Device"),
         OperationRoom("OperationRoom"),
-        StorageRoom("StorageRoom"),
         CareTeam("CareTeam"),
         Doctor("Doctor");
         

@@ -4,16 +4,12 @@
  * and open the template in the editor.
  */
 
-package org.yueli.business.workqueue;
+package org.yueli.business.role;
 
 /**
  *
  * @author Lydia
  */
-public class StorageRoomSchedule extends ScheduleRequest{
-
-    public StorageRoomSchedule() {
-        super(ScheduleRequest.ScheduleType.StorageRoom);
-    }
+public class OperationRoomAdmin {
     
 }

@@ -10,6 +10,8 @@ import  org.yueli.business.device.Device;
 import org.yueli.business.organization.CareTeamOrganization;
 import org.yueli.business.organization.DoctorOrganization;
 import static org.yueli.business.organization.Organization.Type.Doctor;
+import org.yueli.business.patient.Patient;
+import org.yueli.business.patient.PatientDirectory;
 import static org.yueli.business.role.Role.RoleType.Doctor;
 import org.yueli.business.room.Room;
 
@@ -22,7 +24,7 @@ public class Operation {
     private DoctorOrganization doctor;
     private Device device;
     private CareTeamOrganization careTeam;
-
+    private Patient patient;
     public void Operation(){
     
     }
@@ -57,6 +59,14 @@ public class Operation {
 
     public void setCareTeam(CareTeamOrganization careTeam) {
         this.careTeam = careTeam;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
     
     

@@ -96,7 +96,7 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
 
     private void manageStorageRoomJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStorageRoomJButtonActionPerformed
         // TODO add your handling code here:
-        ManageRoom manageRoom = new ManageRoom(userProcessContainer, network,enterprise, userAccount);
+        ManageStorageRoom manageRoom = new ManageStorageRoom(userProcessContainer, network,enterprise, userAccount);
         userProcessContainer.add("Manage Storage Room", manageRoom);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

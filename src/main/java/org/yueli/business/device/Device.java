@@ -22,6 +22,7 @@ public class Device {
     private int devicePrice;
     private int quantity;
     Boolean isAssigned;
+    Boolean isUsing;
     //private int availability;//stock in Enterprise 
     //private int stockCount;//Inventory number
     private String location;
@@ -116,6 +117,14 @@ public class Device {
 
     public void setIsAssigned(Boolean isAssigned) {
         this.isAssigned = isAssigned;
+    }
+
+    public Boolean isIsUsing() {
+        return isUsing;
+    }
+
+    public void setIsUsing(Boolean isUsing) {
+        this.isUsing = isUsing;
     }
 
     

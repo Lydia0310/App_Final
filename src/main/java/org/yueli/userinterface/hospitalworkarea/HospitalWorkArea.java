@@ -52,7 +52,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
         viewDeviceRequestJButton = new javax.swing.JButton();
         manageOrganizationJButton = new javax.swing.JButton();
         manageUserAccountJButton = new javax.swing.JButton();
-        manageAccountJButton = new javax.swing.JButton();
+        viewDeviceRequestJButton1 = new javax.swing.JButton();
 
         viewDeviceInventoryJButton.setText("View Device Inventory");
         viewDeviceInventoryJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +61,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
             }
         });
 
-        viewOrderJButton.setText("View Order ");
+        viewOrderJButton.setText("View Device Order ");
         viewOrderJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewOrderJButtonActionPerformed(evt);
@@ -96,10 +96,10 @@ public class HospitalWorkArea extends javax.swing.JPanel {
             }
         });
 
-        manageAccountJButton.setText("Manage Doctor");
-        manageAccountJButton.addActionListener(new java.awt.event.ActionListener() {
+        viewDeviceRequestJButton1.setText("View Operation Request");
+        viewDeviceRequestJButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageAccountJButtonActionPerformed(evt);
+                viewDeviceRequestJButton1ActionPerformed(evt);
             }
         });
 
@@ -109,14 +109,15 @@ public class HospitalWorkArea extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(208, 208, 208)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(manageUserAccountJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                    .addComponent(browserDeviceJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewOrderJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manageAccountJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(manageUserAccountJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                        .addComponent(browserDeviceJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(viewDeviceRequestJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(0, 262, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -126,17 +127,17 @@ public class HospitalWorkArea extends javax.swing.JPanel {
                 .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(manageUserAccountJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(manageAccountJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(38, 38, 38)
                 .addComponent(viewDeviceInventoryJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(28, 28, 28)
                 .addComponent(browserDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(33, 33, 33)
                 .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(viewDeviceRequestJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,18 +189,18 @@ public class HospitalWorkArea extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageUserAccountJButtonActionPerformed
 
-    private void manageAccountJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageAccountJButtonActionPerformed
+    private void viewDeviceRequestJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceRequestJButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_manageAccountJButtonActionPerformed
+    }//GEN-LAST:event_viewDeviceRequestJButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browserDeviceJButton;
-    private javax.swing.JButton manageAccountJButton;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton manageUserAccountJButton;
     private javax.swing.JButton viewDeviceInventoryJButton;
     private javax.swing.JButton viewDeviceRequestJButton;
+    private javax.swing.JButton viewDeviceRequestJButton1;
     private javax.swing.JButton viewOrderJButton;
     // End of variables declaration//GEN-END:variables
 }

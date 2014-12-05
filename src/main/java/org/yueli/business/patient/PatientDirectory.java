@@ -6,10 +6,31 @@
 
 package org.yueli.business.patient;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Lydia
  */
 public class PatientDirectory {
+    private ArrayList<Patient> patientList;
     
+    public PatientDirectory(){
+        patientList = new ArrayList<>();
+    }
+
+    public ArrayList<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(ArrayList<Patient> patientList) {
+        this.patientList = patientList;
+    }
+    
+    public Patient addPatient(){
+       Patient patient = new Patient();
+       patientList.add(patient);
+       return patient;
+        
+    }
 }

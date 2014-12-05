@@ -33,11 +33,13 @@ public class OperationDirectory {
         this.operationList = operationList;
     }
     
-    public Operation addOperation(OperationRoom operationRoom,Device device//CareTeam,Doctor,BeginningTime,EndTime
-    ){
+    public Operation addOperation(){
         Operation operation = new Operation();
         return operation;   
     }
     
+    public void removeOperation(Operation operation){
+        operationList.remove(operation);
+    }
     
 }

@@ -38,6 +38,7 @@ public abstract class Organization {
         Supplier("Supplier"){},
         Doctor("Doctor Organization"){},
         CareTeam("CareTeam Organization"){},
+        OperationRoomAdmin("Operation Room Admin"){},
         Warehouse("Warehouse Organization"){};
         
         private String value;

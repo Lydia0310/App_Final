@@ -20,7 +20,7 @@ import org.yueli.business.useraccount.UserAccount;
  *
  * @author Lydia
  */
-public class ManageRoom extends javax.swing.JPanel {
+public class ManageStorageRoom extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageRoom
@@ -32,7 +32,7 @@ public class ManageRoom extends javax.swing.JPanel {
     private UserAccount userAccount;   
     
             
-    public ManageRoom(JPanel userProcessContainer, Network network,Enterprise enterprise, UserAccount userAccount) {
+    public ManageStorageRoom(JPanel userProcessContainer, Network network,Enterprise enterprise, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.network = network;
@@ -201,7 +201,6 @@ public class ManageRoom extends javax.swing.JPanel {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(emptyJRadioButton)
                                         .addComponent(fullJRadioButton)))))))
-                .addGap(18, 18, 18)
                 .addComponent(refreshJButton)
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()

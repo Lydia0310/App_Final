@@ -32,7 +32,7 @@ public class ManageDoctorSchedule extends javax.swing.JPanel {
     public ManageDoctorSchedule() {
         initComponents();
         
-        doctorNameJLabel.setText(((DoctorRole)userAccount.getRole()).getDoctorName());
+        doctorNameJLabel.setText(userAccount.getPerson().getFirstName());
     }
 
     /**
