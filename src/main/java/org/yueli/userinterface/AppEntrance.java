@@ -19,8 +19,6 @@ import java.io.File;
  * Created by zjy on 11/9/14.
  */
 public class AppEntrance {
-    private static File file = new File("db/object.json");
-    private static ObjectMapper mapper = new ObjectMapper();
     private static Business business;
     private static UserAccount loginUser;
     private static final String FILENAME = "db/database.db4o"; // path to the data store
