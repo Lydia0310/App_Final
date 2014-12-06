@@ -48,6 +48,7 @@ public class ManageSupplier extends javax.swing.JPanel {
                 row[0] = ((SupplierAdmin)userAccount.getRole()).getSupplierID();
                 row[1] = ((SupplierAdmin)userAccount.getRole()).getSupplierName();
                 row[2] = userAccount.getUsername();
+                model.addRow(row);
             }
         }
     }
@@ -185,7 +186,7 @@ public class ManageSupplier extends javax.swing.JPanel {
         String password = String.valueOf(PasswordField.getPassword());
         String firstName = firstNameJTextField.getText();
         String lastName = lastNameJTextField.getText();
-         Person person = business.getPersonDirectory().addPerson();
+        Person person = business.getPersonDirectory().addPerson();
         person.setFirstName(firstName);
         person.setLastName(lastName);
         UserAccount userAccount = business.getUserAccountDirectory().addUserAccount(username, password, person, new SupplierAdmin());

@@ -6,6 +6,16 @@
 
 package org.yueli.userinterface.careteamworkarea;
 
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.Business;
+import org.yueli.business.careteam.CareTeam;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.role.CareTeamAdmin;
+import org.yueli.business.useraccount.UserAccount;
+
 /**
  *
  * @author Lydia
@@ -15,8 +25,30 @@ public class ManageCareTeam extends javax.swing.JPanel {
     /**
      * Creates new form ManageCareTeam
      */
-    public ManageCareTeam() {
+    private JPanel userProcessContainer;
+    private Business business;
+    private Network network;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    public ManageCareTeam(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+        this.network = network;
+        this.enterprise = enterprise;
+        this.userAccount = userAccount;
+        populateCareTeamTable();
+    }
+    
+    public void populateCareTeamTable(){
+        DefaultTableModel model = (DefaultTableModel)careTeamTable.getModel();
+        model.setRowCount(0);
+       for(Organization careTeamOrganization :enterprise.getOrganizationDirectory().getOrganizationList() ){
+           Object row[] = new Object[2];
+           row[0] = ((CareTeamAdmin)userAccount.getRole()).getCareTeamID();
+           row[1] = ((CareTeamAdmin)userAccount.getRole()).getTeamLeaderName();
+           model.addRow(row);
+       }
     }
 
     /**
@@ -30,41 +62,112 @@ public class ManageCareTeam extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         careTeamTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        careTeamLeaderNameJTextField = new javax.swing.JTextField();
+        addJButton = new javax.swing.JButton();
+        refreshJButton = new javax.swing.JButton();
 
         careTeamTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Care Team ID", "Care Team Leader Name"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(careTeamTable);
+        if (careTeamTable.getColumnModel().getColumnCount() > 0) {
+            careTeamTable.getColumnModel().getColumn(0).setResizable(false);
+            careTeamTable.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jLabel1.setText("Care Team Leader Name:");
+
+        addJButton.setText("Add");
+        addJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addJButtonActionPerformed(evt);
+            }
+        });
+
+        refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(267, 267, 267)
+                        .addComponent(jLabel1)
+                        .addGap(33, 33, 33)
+                        .addComponent(careTeamLeaderNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(126, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(161, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(addJButton)
+                        .addGap(102, 102, 102))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(refreshJButton)
+                        .addGap(47, 47, 47))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(25, 25, 25)
+                .addComponent(refreshJButton)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(careTeamLeaderNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(addJButton)
+                .addContainerGap(148, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        // TODO add your handling code here:
+        String careTeamLeaderName = careTeamLeaderNameJTextField.getText();
+        
+        CareTeam careTeam = new CareTeam();
+        careTeam.setCareTeamName(careTeamLeaderName);
+        
+    }//GEN-LAST:event_addJButtonActionPerformed
+
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+        // TODO add your handling code here:
+        populateCareTeamTable();
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addJButton;
+    private javax.swing.JTextField careTeamLeaderNameJTextField;
     private javax.swing.JTable careTeamTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refreshJButton;
     // End of variables declaration//GEN-END:variables
 }

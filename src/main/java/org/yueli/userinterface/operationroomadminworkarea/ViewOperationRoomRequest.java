@@ -6,7 +6,6 @@
 
 package org.yueli.userinterface.operationroomadminworkarea;
 
-import business.workqueue.OperationRoomSchedule;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
-import org.yueli.business.room.OperationRoom;
 import org.yueli.business.room.Room;
 import org.yueli.business.schedule.Schedule;
 import org.yueli.business.useraccount.UserAccount;

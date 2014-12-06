@@ -214,14 +214,15 @@ public class ManageEnterprise extends javax.swing.JPanel {
        
         DefaultTableModel model = (DefaultTableModel)enterpriseJTable.getModel();
         model.setRowCount(0);
-        
-        for(Enterprise enterprise : ((NetworkAdmin)userAccount.getRole()).getEnterpriseDirectory().getEnterpriseList()){
+         for(Network network : business.getNetworkList()){
+        for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
                 Object[] row = new Object[2];
                 row[0] = enterprise.getName();
                 row[1] = enterprise.getEnterpriseType().getValue();
                 
                 model.addRow(row);
             }
+         }
         
     }
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed

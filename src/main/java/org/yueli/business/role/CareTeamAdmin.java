@@ -6,8 +6,9 @@
 
 package org.yueli.business.role;
 
-import org.yueli.business.Business;
 import javax.swing.JPanel;
+import org.yueli.business.Business;
+import org.yueli.business.careteam.CareTeamDirectory;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.function.Function;
 import org.yueli.business.network.Network;
@@ -20,13 +21,14 @@ import org.yueli.userinterface.careteamworkarea.CareTeamWorkArea;
  *
  * @author Lydia
  */
-public class CareTeamRole extends Role{
+public class CareTeamAdmin extends Role{
     private ScheduleDirectory scheduleDirectory;
     private String careTeamID;
     private String teamLeaderName;
     private static int count;
     
-    public CareTeamRole(){
+    
+    public CareTeamAdmin(){
         super(Role.RoleType.CareTeam);
         privilegeList.add(new Function(7, "Care Team Work Area",CareTeamWorkArea.class));
         count++;
@@ -57,7 +59,8 @@ public class CareTeamRole extends Role{
     public void setTeamLeaderName(String teamLeaderName) {
         this.teamLeaderName = teamLeaderName;
     }
-    
+
+
     
 
     @Override

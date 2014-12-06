@@ -14,6 +14,8 @@ import org.yueli.business.enterprise.Enterprise;
 import java.util.ArrayList;
 import org.yueli.business.inventory.Inventory;
 
+import org.yueli.business.organization.DoctorDirectory;
+
 
 /**
  *
@@ -24,6 +26,8 @@ public class HospitalEnterprise extends Enterprise {
     private RoomDirectory roomList;
     private OperationDirectory operationList;
     private Inventory inventory;
+    private DoctorDirectory doctorList;
+    
     
     public HospitalEnterprise(String name){
         super(name, EnterpriseType.Hospital);
@@ -47,6 +51,16 @@ public class HospitalEnterprise extends Enterprise {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
+
+    public DoctorDirectory getDoctorList() {
+        return doctorList;
+    }
+
+    public void setDoctorList(DoctorDirectory doctorList) {
+        this.doctorList = doctorList;
+    }
+
+
     
     
     @Override

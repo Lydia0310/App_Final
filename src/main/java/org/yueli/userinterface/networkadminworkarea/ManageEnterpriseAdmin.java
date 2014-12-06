@@ -48,6 +48,7 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         PasswordField.setVisible(false);
         firstNameJTextField.setVisible(false);
         lastNameJTextField.setVisible(false);
+        populateEnterpriseCombo();
     }
 
     private void populateEnterpriseAdminTable(){
@@ -135,6 +136,11 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         });
 
         jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         lastNameJLabel.setText("Last Name:");
 
@@ -267,11 +273,18 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         
     }//GEN-LAST:event_addJButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        populateEnterpriseAdminTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void populateEnterpriseCombo(){
         enterpriseNamejComboBox.removeAllItems();
-        for(Enterprise enterprise : ((NetworkAdmin)userAccount.getRole()).getEnterpriseDirectory().getEnterpriseList() ){
+         for(Network network : business.getNetworkList()){
+        for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
             enterpriseNamejComboBox.addItem(enterprise);
         }
+         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
