@@ -14,7 +14,7 @@ import org.yueli.userinterface.frame.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
+
 /**
  * Created by zjy on 11/9/14.
  */

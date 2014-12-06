@@ -6,8 +6,6 @@
 package org.yueli.userinterface.frame;
 
 import org.yueli.business.schedule.Schedule;
-
-import org.yueli.userinterface.networkadminworkarea.NetworkAdminWorkArea;
 import org.yueli.userinterface.schedule.SchedulePanel;
 
 import javax.swing.*;
@@ -23,7 +21,7 @@ import java.util.List;
  */
 public class FirstPanel extends JPanel {
 
-    //private final LoginPanel loginPanel;
+    // private final LoginPanel loginPanel;
     private final JPanel loginPanel;
     private final String versionInfo = "Name: Yue Li          ver. 1.01";
     private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -54,7 +52,7 @@ public class FirstPanel extends JPanel {
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
-        //loginPanel = new SchedulePanel(scheduleList);
+//        loginPanel = new SchedulePanel(scheduleList);
         JLabel welcomeLabel = new JLabel("Welcome!   Please login.");
         welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 48));
         Box row1 = new Box(BoxLayout.LINE_AXIS);
