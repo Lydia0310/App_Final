@@ -7,6 +7,10 @@
 package org.yueli.userinterface.doctorworkarea;
 
 import java.nio.file.attribute.UserPrincipal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +20,8 @@ import org.yueli.business.enterprise.HospitalEnterprise;
 import org.yueli.business.network.Network;
 import org.yueli.business.patient.Patient;
 import org.yueli.business.role.DoctorRole;
+import org.yueli.business.room.OperationRoom;
+import org.yueli.business.schedule.Schedule;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.OperationRequest;
 
@@ -79,8 +85,8 @@ public class ManagePatient extends javax.swing.JPanel {
         assignOperationJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        beginningTimeJTextField = new javax.swing.JTextField();
+        endTimeJTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -141,9 +147,9 @@ public class ManagePatient extends javax.swing.JPanel {
 
         jLabel2.setText("End Time:");
 
-        jLabel3.setText("(hh:mm:ss)");
+        jLabel3.setText("(yyyy-MM-dd hh:mm:ss)");
 
-        jLabel4.setText("(hh:mm:ss)");
+        jLabel4.setText("(yyyy-MM-dd hh:mm:ss)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -182,11 +188,11 @@ public class ManagePatient extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(beginningTimeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(endTimeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -207,11 +213,11 @@ public class ManagePatient extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(beginningTimeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endTimeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)))
                     .addGroup(layout.createSequentialGroup()
@@ -248,13 +254,29 @@ public class ManagePatient extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row to continue!");     
         }
         else{
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String requestBeginningTime = beginningTimeJTextField.getText();
+            String requestEndTime = endTimeJTextField.getText();
+            try {
+            Date beginningTime = df.parse(requestBeginningTime);
+            Date endTime = df.parse(requestEndTime);
+                       
             Patient patient = (Patient)patientTable.getValueAt(selectedRow, 0);
             ((HospitalEnterprise)userAccount.getEnterprise()).getOperationList().addOperation().setPatient(patient);
             OperationRequest operationRequest = new OperationRequest();
             operationRequest.setSender(userAccount);
             operationRequest.setRequestDate(operationRequest.getTimestamp());
             operationRequest.setDoctorName(userAccount.getPerson().getFirstName());
-            operationRequest.setOperationRequestStatue("Pending");
+            operationRequest.setOperationRequestStatus("Pending");
+            operationRequest.setBeginningTime(beginningTime);
+            operationRequest.setEndTime(endTime);
+            
+        } catch (ParseException ex) {
+           ex.printStackTrace();
+        }
+         
+            
+           
         }
     }//GEN-LAST:event_assignOperationJButtonActionPerformed
 
@@ -266,14 +288,14 @@ public class ManagePatient extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignOperationJButton;
+    private javax.swing.JTextField beginningTimeJTextField;
     private javax.swing.JButton createJButton;
+    private javax.swing.JTextField endTimeJTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel patientNameJLabel;
     private javax.swing.JTextField patientNameJTextField;
     private javax.swing.JTable patientTable;

@@ -6,6 +6,21 @@
 
 package org.yueli.userinterface.operationroomadminworkarea;
 
+import business.workqueue.OperationRoomSchedule;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.Business;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
+import org.yueli.business.room.OperationRoom;
+import org.yueli.business.room.Room;
+import org.yueli.business.schedule.Schedule;
+import org.yueli.business.useraccount.UserAccount;
+import org.yueli.business.workqueue.OperationRequest;
+import org.yueli.business.workqueue.WorkRequest;
+
 /**
  *
  * @author Lydia
@@ -15,8 +30,36 @@ public class ViewOperationRoomRequest extends javax.swing.JPanel {
     /**
      * Creates new form ViewOperationRoomRequest
      */
-    public ViewOperationRoomRequest() {
+    private JPanel userPrcessContainer;
+    private Business business;
+    private Network network;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    public ViewOperationRoomRequest(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
+        this.userPrcessContainer = userProcessContainer;
+        this.business = business;
+        this.network = network;
+        this.enterprise = enterprise;
+        this.userAccount = userAccount;
+        populateOperationRoomTable();
+    }
+    
+    public void populateOperationRoomTable(){
+        DefaultTableModel model = (DefaultTableModel)operationRoomRequestTable.getModel();
+        model.setRowCount(0);
+        for(WorkRequest workRequest : business.getWorkQueue().getWorkRequestList()){
+            if(workRequest instanceof OperationRequest){
+                Object row[] = new Object[6];
+                row[0] = workRequest.getRequestID();
+                row[1] = ((OperationRequest)workRequest).getOperationRoomNumber();
+                row[2] = ((OperationRequest)workRequest).getBeginningTime();
+                row[3] = ((OperationRequest)workRequest).getEndTime();
+                row[4] = ((OperationRequest)workRequest).getDoctorName();
+                row[5] = ((OperationRequest)workRequest).getOperationRequestStatus();
+                model.addRow(row);
+            }
+        }
     }
 
     /**
@@ -28,19 +71,93 @@ public class ViewOperationRoomRequest extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        operationRoomRequestTable = new javax.swing.JTable();
+        approveJButton = new javax.swing.JButton();
+
+        operationRoomRequestTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Request ID", "Request Operation Room Number", "Request Beginning Time", "Request End Time", "Doctor Name", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(operationRoomRequestTable);
+        if (operationRoomRequestTable.getColumnModel().getColumnCount() > 0) {
+            operationRoomRequestTable.getColumnModel().getColumn(0).setResizable(false);
+            operationRoomRequestTable.getColumnModel().getColumn(0).setPreferredWidth(15);
+            operationRoomRequestTable.getColumnModel().getColumn(1).setResizable(false);
+            operationRoomRequestTable.getColumnModel().getColumn(2).setResizable(false);
+            operationRoomRequestTable.getColumnModel().getColumn(3).setResizable(false);
+            operationRoomRequestTable.getColumnModel().getColumn(4).setResizable(false);
+            operationRoomRequestTable.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        approveJButton.setText("Approve");
+        approveJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 732, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 899, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(approveJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(approveJButton)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void approveJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = operationRoomRequestTable.getSelectedRow();
+        if(selectedRow <0 ){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
+        }
+        else{
+            OperationRequest operationRequest = (OperationRequest)operationRoomRequestTable.getValueAt(selectedRow, 0);
+            for(Room room : enterprise.getRoomList().getRoomList()){
+               if(room.getType().equals(Room.RoomType.OperationRoom)){
+                   for(Schedule schedule: room.getScheduleDirectory().getScheduleList()){
+                       Date requestBeginningTime = operationRequest.getBeginningTime();
+                       Date requestEndTime = operationRequest.getEndTime();
+                       room.getScheduleDirectory().addSchedule(new Schedule(requestEndTime, requestEndTime, null, Schedule.ScheduleType.OperationRoom) );
+                       operationRequest.setOperationRoomRequestIsCompeleted(true);
+                   }
+               } 
+            }
+        }
+    }//GEN-LAST:event_approveJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton approveJButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable operationRoomRequestTable;
     // End of variables declaration//GEN-END:variables
 }

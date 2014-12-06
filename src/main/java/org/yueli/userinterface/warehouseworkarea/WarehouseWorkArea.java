@@ -117,7 +117,7 @@ public class WarehouseWorkArea extends javax.swing.JPanel {
 
     private void viewDeviceScheduleRequestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceScheduleRequestJButtonActionPerformed
         // TODO add your handling code here:
-        ViewDeviceScheduleRequest viewDeviceScheduleRequest = new ViewDeviceScheduleRequest();
+        ViewDeviceScheduleRequest viewDeviceScheduleRequest = new ViewDeviceScheduleRequest(userProcessContainer, business, network, enterprise, userAccount);
         userProcessContainer.add("View Device Schedule Request", viewDeviceScheduleRequest);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

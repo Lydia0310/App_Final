@@ -13,6 +13,7 @@ import org.yueli.business.function.Function;
 import org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
 import org.yueli.business.patient.PatientDirectory;
+import org.yueli.business.schedule.ScheduleDirectory;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.doctorworkarea.DoctorWorkArea;
 
@@ -25,6 +26,7 @@ public class DoctorRole extends Role{
     private String doctorName;
     private static int count;
     private PatientDirectory patientDirectory;
+    private ScheduleDirectory scheduleDirectory;
     
     public DoctorRole(){
         super(Role.RoleType.Doctor);
@@ -32,6 +34,7 @@ public class DoctorRole extends Role{
         count++;
         doctorID = String.valueOf(count);
         patientDirectory = new PatientDirectory();
+        scheduleDirectory = new ScheduleDirectory();
     }
 
     public String getDocotorID() {
@@ -48,6 +51,30 @@ public class DoctorRole extends Role{
 
     public void setPatientDirectory(PatientDirectory patientDirectory) {
         this.patientDirectory = patientDirectory;
+    }
+
+    public String getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public ScheduleDirectory getScheduleDirectory() {
+        return scheduleDirectory;
+    }
+
+    public void setScheduleDirectory(ScheduleDirectory scheduleDirectory) {
+        this.scheduleDirectory = scheduleDirectory;
     }
 
     

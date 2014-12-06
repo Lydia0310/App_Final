@@ -19,6 +19,7 @@ import org.yueli.business.network.Network;
 import org.yueli.business.order.Order;
 import org.yueli.business.order.OrderItem;
 import org.yueli.business.room.Room;
+import org.yueli.business.room.StorageRoom;
 import org.yueli.business.useraccount.UserAccount;
 
 /**
@@ -71,8 +72,8 @@ public class AssignDevice extends javax.swing.JPanel {
             if(room.getType() == Room.RoomType.StorageRoom){
                 Object row[] = new Object[3];
                 row[0] = room.getRoomID();
-                row[1] = room.getRoomNumber();
-                row[2] = room.getStatus();
+                row[1] = ((StorageRoom)room).getStorageRoomNumber();
+                row[2] = ((StorageRoom)room).getStorageRoomStatus();
                 model.addRow(row);
              }
         }
@@ -82,8 +83,8 @@ public class AssignDevice extends javax.swing.JPanel {
     public void populateRoomNumberCombo(){
         roomNumberCombo.removeAllItems();
         for(Room room : enterprise.getRoomList().getRoomList()){
-            if(room.getType() == Room.RoomType.StorageRoom && !(room.isIsFull())){
-                roomNumberCombo.addItem(room.getRoomNumber());
+            if(room.getType() == Room.RoomType.StorageRoom && !(((StorageRoom)room).isIsFull())){
+                roomNumberCombo.addItem(((StorageRoom)room).getStorageRoomNumber());
             }
         }
     }
@@ -278,7 +279,7 @@ public class AssignDevice extends javax.swing.JPanel {
         else{
             InventoryItem inventoryItem = (InventoryItem)deviceTable.getValueAt(selectedRow, 0);
             Room assignRoomNumber = (Room)roomNumberCombo.getSelectedItem();
-            inventoryItem.getDevice().setLocation(assignRoomNumber.getRoomNumber());
+            inventoryItem.getDevice().setLocation(((StorageRoom)assignRoomNumber).getStorageRoomNumber());
             inventoryItem.getDevice().setIsAssigned(true);
             populateAssignDeviceTable();
             populateRoomTable();

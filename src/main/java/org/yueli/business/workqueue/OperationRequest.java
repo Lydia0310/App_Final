@@ -17,12 +17,16 @@ import static org.yueli.business.organization.Organization.Type.Doctor;
 public class OperationRequest extends WorkRequest{
     private static int count;
     private String operationID;
-    private String operationRequestStatue;    
+    private String operationRequestStatus;    
     private String doctorName;
     private String careTeamID;
+    Boolean careTeamRequestIsCompeleted;
     private String deviceName;
-    private int deviceQuantity;
+    Boolean deviceRequestIsCompeleted;
+    private String deviceQuantity;
     private String operationRoomNumber;
+    Boolean operationRoomRequestIsCompeleted;
+   
     private Date beginningTime;
     private Date endTime;
     
@@ -38,13 +42,39 @@ public class OperationRequest extends WorkRequest{
         this.operationID = operationID;
     }
 
-    public String getOperationRequestStatue() {
-        return operationRequestStatue;
+    public String getOperationRequestStatus() {
+        return operationRequestStatus;
     }
 
-    public void setOperationRequestStatue(String operationRequestStatue) {
-        this.operationRequestStatue = operationRequestStatue;
+    public void setOperationRequestStatus(String operationRequestStatus) {
+        this.operationRequestStatus = operationRequestStatus;
     }
+
+    public Boolean isCareTeamRequestIsCompeleted() {
+        return careTeamRequestIsCompeleted;
+    }
+
+    public void setCareTeamRequestIsCompeleted(Boolean careTeamRequestIsCompeleted) {
+        this.careTeamRequestIsCompeleted = careTeamRequestIsCompeleted;
+    }
+
+    public Boolean isDeviceRequestIsCompeleted() {
+        return deviceRequestIsCompeleted;
+    }
+
+    public void setDeviceRequestIsCompeleted(Boolean deviceRequestIsCompeleted) {
+        this.deviceRequestIsCompeleted = deviceRequestIsCompeleted;
+    }
+
+    public Boolean isOperationRoomRequestIsCompeleted() {
+        return operationRoomRequestIsCompeleted;
+    }
+
+    public void setOperationRoomRequestIsCompeleted(Boolean operationRoomRequestIsCompeleted) {
+        this.operationRoomRequestIsCompeleted = operationRoomRequestIsCompeleted;
+    }
+
+   
 
     public String getDoctorName() {
         return doctorName;
@@ -70,13 +100,16 @@ public class OperationRequest extends WorkRequest{
         this.deviceName = deviceName;
     }
 
-    public int getDeviceQuantity() {
+    public String getDeviceQuantity() {
         return deviceQuantity;
     }
 
-    public void setDeviceQuantity(int deviceQuantity) {
+    public void setDeviceQuantity(String deviceQuantity) {
         this.deviceQuantity = deviceQuantity;
     }
+
+   
+    
 
     public String getOperationRoomNumber() {
         return operationRoomNumber;
@@ -101,6 +134,10 @@ public class OperationRequest extends WorkRequest{
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+    
+
+   
 
    
     

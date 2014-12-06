@@ -4,23 +4,19 @@
  * and open the template in the editor.
  */
 
-package org.yueli.userinterface.sysadminworkarea;
-
-import javax.swing.JPanel;
+package org.yueli.userinterface.careteamworkarea;
 
 /**
  *
  * @author Lydia
  */
-public class ViewTreeChart extends javax.swing.JPanel {
+public class ManageCareTeamSchedule extends javax.swing.JPanel {
 
     /**
-     * Creates new form ViewTreeChart
+     * Creates new form CareTeamSchedule
      */
-    private JPanel userProcessContainer;
-    public ViewTreeChart(JPanel userProcessContainer) {
+    public ManageCareTeamSchedule() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
     }
 
     /**
@@ -32,19 +28,31 @@ public class ViewTreeChart extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 692, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private org.yueli.userinterface.schedule.SchedulePanel schedulePanel;
     // End of variables declaration//GEN-END:variables
 }

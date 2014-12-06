@@ -6,6 +6,20 @@
 
 package org.yueli.userinterface.warehouseworkarea;
 
+import com.sun.jmx.snmp.BerDecoder;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.Business;
+import org.yueli.business.device.Device;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.enterprise.HospitalEnterprise;
+import org.yueli.business.inventory.InventoryItem;
+import org.yueli.business.network.Network;
+import org.yueli.business.useraccount.UserAccount;
+import org.yueli.business.workqueue.OperationRequest;
+import org.yueli.business.workqueue.WorkRequest;
+
 /**
  *
  * @author Lydia
@@ -15,8 +29,35 @@ public class ViewDeviceScheduleRequest extends javax.swing.JPanel {
     /**
      * Creates new form ViewDeviceScheduleRequest
      */
-    public ViewDeviceScheduleRequest() {
+    private JPanel userProcessContainer;
+    private Business business;
+    private Network network;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+            
+    public ViewDeviceScheduleRequest(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+        this.network = network;
+        this.enterprise = enterprise;
+        this.userAccount = userAccount;
+        populateDeviceRequestTable();
+    }
+    
+    public void populateDeviceRequestTable(){
+        DefaultTableModel model = (DefaultTableModel)deviceRequestTable.getModel();
+        model.setRowCount(0);
+        
+        for(WorkRequest workRequest : business.getWorkQueue().getWorkRequestList()){
+            if(workRequest instanceof OperationRequest){
+                Object row[] = new Object[3];
+                row[0] = workRequest.getRequestID();
+                row[1] = ((OperationRequest)workRequest).getDeviceName();
+                row[2] = ((OperationRequest)workRequest).getDeviceQuantity();
+                model.addRow(row);
+            }
+        }
     }
 
     /**
@@ -29,14 +70,15 @@ public class ViewDeviceScheduleRequest extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        deviceRequestTable = new javax.swing.JTable();
+        approveJButton = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        deviceRequestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Device Schedule ID", "Device Name", "Quantity"
+                "Request ID", "Device Name", "Quantity"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -47,34 +89,71 @@ public class ViewDeviceScheduleRequest extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(deviceRequestTable);
+        if (deviceRequestTable.getColumnModel().getColumnCount() > 0) {
+            deviceRequestTable.getColumnModel().getColumn(0).setResizable(false);
+            deviceRequestTable.getColumnModel().getColumn(1).setResizable(false);
+            deviceRequestTable.getColumnModel().getColumn(2).setResizable(false);
         }
+
+        approveJButton.setText("Approve");
+        approveJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(596, 596, 596)
+                        .addComponent(approveJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(approveJButton)
+                .addContainerGap(188, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void approveJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = deviceRequestTable.getSelectedRow();
+        if(selectedRow <0 ){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
+        }
+        else{
+            OperationRequest operationRequest = (OperationRequest)deviceRequestTable.getValueAt(selectedRow, 0);
+            operationRequest.setDeviceRequestIsCompeleted(true);
+            for(InventoryItem inventoryItem : ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList()){
+                if(inventoryItem.getDevice().getDeviceName().equals(operationRequest.getDeviceName())){
+                    String requestQuantity = operationRequest.getDeviceQuantity();
+                    int newQuantity = inventoryItem.getQuantity() - Integer.parseInt(requestQuantity);
+                    inventoryItem.setInventoryQuantity(newQuantity);
+                    
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_approveJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton approveJButton;
+    private javax.swing.JTable deviceRequestTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+

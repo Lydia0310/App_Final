@@ -58,8 +58,8 @@ public class ManageStorageRoom extends javax.swing.JPanel {
             if(room.getType() == Room.RoomType.StorageRoom){
                 Object row[] = new Object[3];
                 row[0] = room.getRoomID();
-                row[1] = room.getRoomNumber();
-                row[2] = room.getStatus();
+                row[1] = ((StorageRoom)room).getStorageRoomNumber();
+                row[2] = ((StorageRoom)room).getStorageRoomStatus();
                 model.addRow(row);
              }
         }
@@ -276,7 +276,7 @@ public class ManageStorageRoom extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = storageRoomTable.getSelectedRow();
         StorageRoom storageRoom = (StorageRoom)storageRoomTable.getValueAt(selectedRow, 0);
-        storageRoom.setStatus(status);
+        storageRoom.setStorageRoomStatus(status);
         if(status.equals("Empty")){
             storageRoom.setIsFull(false);
         }
@@ -292,13 +292,13 @@ public class ManageStorageRoom extends javax.swing.JPanel {
         
        String roomNumber = roomNumberJTextField.getText();
         Room room = enterprise.getRoomList().addRoom(roomNumber,Room.RoomType.StorageRoom);
-        room.setRoomNumber(roomNumber);
-        room.setStatus(status);
+        ((StorageRoom)room).setStorageRoomNumber(roomNumber);
+        ((StorageRoom)room).setStorageRoomStatus(status);
         if(status.equals("empty")){
-            room.setIsFull(false);
+           ((StorageRoom)room).setIsFull(false);
         }
         if(status.equals("Full")){
-            room.setIsFull(true);
+            ((StorageRoom)room).setIsFull(true);
         }
         populateRoomTable();
     }//GEN-LAST:event_submitJButtonActionPerformed

@@ -6,6 +6,19 @@
 
 package org.yueli.userinterface.doctorworkarea;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.Business;
+import org.yueli.business.device.Device;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.enterprise.HospitalEnterprise;
+import org.yueli.business.inventory.InventoryItem;
+import org.yueli.business.network.Network;
+import org.yueli.business.useraccount.UserAccount;
+import org.yueli.business.workqueue.OperationRequest;
+import org.yueli.business.workqueue.WorkRequest;
+
 /**
  *
  * @author Lydia
@@ -15,8 +28,38 @@ public class ViewAndRequestDeviceSchedule extends javax.swing.JPanel {
     /**
      * Creates new form ViewAndRequestDeviceSchedule
      */
-    public ViewAndRequestDeviceSchedule() {
+    private JPanel userProcessContainer;
+    private Business business;
+    private Network network;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    
+    public ViewAndRequestDeviceSchedule(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+        this.network = network;
+        this.enterprise = enterprise;
+        this.userAccount = userAccount;
+        populateDeviceTable();
+        
+    }
+    
+    public void populateDeviceTable(){
+        DefaultTableModel model = (DefaultTableModel)deviceTable.getModel();
+        model.setRowCount(0);
+        for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
+            for(InventoryItem inventoryItem : ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList()){
+               if(inventoryItem.getDevice().isIsAssigned()){
+                Object row[] = new Object[3];
+                row[0] = inventoryItem.getDevice().getDeviceName();
+                row[1] = inventoryItem.getDevice().getFunction();
+                row[2] = inventoryItem.getQuantity();
+                
+                model.addRow(row);
+               }
+            }
+        }
     }
 
     /**
@@ -28,19 +71,102 @@ public class ViewAndRequestDeviceSchedule extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        deviceTable = new javax.swing.JTable();
+        requestDeviceJButton = new javax.swing.JButton();
+        requestQuantityJTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+
+        deviceTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Device Name", "Function", "Stock Count"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(deviceTable);
+        if (deviceTable.getColumnModel().getColumnCount() > 0) {
+            deviceTable.getColumnModel().getColumn(0).setResizable(false);
+            deviceTable.getColumnModel().getColumn(1).setResizable(false);
+            deviceTable.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        requestDeviceJButton.setText("Request Device");
+        requestDeviceJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestDeviceJButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Request Quantity:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(requestQuantityJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(requestDeviceJButton)
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(requestDeviceJButton)
+                    .addComponent(requestQuantityJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void requestDeviceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestDeviceJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = deviceTable.getSelectedRow();
+        if(selectedRow <0 ){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
+        }
+        else{
+            Device device = (Device)deviceTable.getValueAt(selectedRow, 0);
+            String requestQuantity = requestQuantityJTextField.getText();
+             for(WorkRequest workRequest : userAccount.getWorkQueue().getWorkRequestList()){
+            if(workRequest instanceof OperationRequest){
+                if(userAccount.getPerson().getFirstName().equals(workRequest.getSender())){
+                    ((OperationRequest)workRequest).setDeviceQuantity(requestQuantity);
+                    ((OperationRequest)workRequest).setDeviceName(device.getDeviceName());
+                    ((OperationRequest)workRequest).setDeviceRequestIsCompeleted(false);
+                }
+            }
+        }
+        }
+    }//GEN-LAST:event_requestDeviceJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable deviceTable;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton requestDeviceJButton;
+    private javax.swing.JTextField requestQuantityJTextField;
     // End of variables declaration//GEN-END:variables
 }

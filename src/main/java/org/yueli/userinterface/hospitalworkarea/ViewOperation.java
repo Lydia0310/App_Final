@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 
-package org.yueli.userinterface.doctorworkarea;
+package org.yueli.userinterface.hospitalworkarea;
+
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.yueli.business.Business;
+import org.yueli.business.network.Network;
+import org.yueli.business.useraccount.UserAccount;
+import org.yueli.userinterface.doctorworkarea.*;
 
 /**
  *
@@ -15,8 +22,23 @@ public class ViewOperation extends javax.swing.JPanel {
     /**
      * Creates new form ViewOperation
      */
-    public ViewOperation() {
+    private JPanel userProcessContainer;
+    private Business business;
+    private Network network;
+    private UserAccount userAccount;
+    public ViewOperation(JPanel userProcessContainer, Business business, Network network, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+        this.network = network;
+        this.userAccount = userAccount;
+        populateOperationTable();
+    }
+    
+    public void populateOperationTable(){
+        DefaultTableModel model = (DefaultTableModel)operationTable.getModel();
+        model.setRowCount(0);
+        
     }
 
     /**
@@ -36,11 +58,11 @@ public class ViewOperation extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Operation ID", "Operation Name", "Doctor Name", "Care Team ID", "Operation Room Number", "Beginning Time", "End Time"
+                "Operation ID", "Operation Name", "Doctor Name", "Care Team ID", "Operation Room Number", "Beginning Time", "End Time", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -56,6 +78,7 @@ public class ViewOperation extends javax.swing.JPanel {
             operationTable.getColumnModel().getColumn(4).setResizable(false);
             operationTable.getColumnModel().getColumn(5).setResizable(false);
             operationTable.getColumnModel().getColumn(6).setResizable(false);
+            operationTable.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

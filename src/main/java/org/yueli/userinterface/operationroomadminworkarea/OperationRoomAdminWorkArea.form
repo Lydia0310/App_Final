@@ -19,6 +19,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="manageOperationRoomScheduleJButton" min="-2" pref="247" max="-2" attributes="0"/>
                   <Component id="viewOperationRoomRequestJButton" min="-2" pref="247" max="-2" attributes="0"/>
                   <Component id="manageOperationRoomJButton" min="-2" pref="247" max="-2" attributes="0"/>
               </Group>
@@ -31,9 +32,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Component id="manageOperationRoomJButton" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <Component id="manageOperationRoomScheduleJButton" min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Component id="viewOperationRoomRequestJButton" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace pref="273" max="32767" attributes="0"/>
+              <EmptySpace pref="201" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,11 +46,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Operation Room"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageOperationRoomJButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="viewOperationRoomRequestJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Operation Room Request"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewOperationRoomRequestJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="manageOperationRoomScheduleJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manage Operation Room Schedule"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageOperationRoomScheduleJButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -43,16 +43,8 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        viewTreeChartJButton = new javax.swing.JButton();
         manageNetworkJButton = new javax.swing.JButton();
         manageNetworkAdminJButton = new javax.swing.JButton();
-
-        viewTreeChartJButton.setText("View Tree Chart for whole system");
-        viewTreeChartJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewTreeChartJButtonActionPerformed(evt);
-            }
-        });
 
         manageNetworkJButton.setText("Manage Network");
         manageNetworkJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -76,30 +68,19 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
                 .addGap(205, 205, 205)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(manageNetworkAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageNetworkJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewTreeChartJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(manageNetworkJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(284, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(viewTreeChartJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(89, 89, 89)
                 .addComponent(manageNetworkJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(manageNetworkAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(273, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void viewTreeChartJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTreeChartJButtonActionPerformed
-        // TODO add your handling code here:
-        ViewTreeChart viewTreeChart = new ViewTreeChart(userProcessContainer);
-        userProcessContainer.add("View Tree Chart", viewTreeChart);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_viewTreeChartJButtonActionPerformed
 
     private void manageNetworkJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageNetworkJButtonActionPerformed
         // TODO add your handling code here:
@@ -122,6 +103,5 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton manageNetworkAdminJButton;
     private javax.swing.JButton manageNetworkJButton;
-    private javax.swing.JButton viewTreeChartJButton;
     // End of variables declaration//GEN-END:variables
 }

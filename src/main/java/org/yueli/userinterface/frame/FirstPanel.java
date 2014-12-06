@@ -6,7 +6,7 @@
 package org.yueli.userinterface.frame;
 
 import org.yueli.business.schedule.Schedule;
-import org.yueli.business.workqueue.ScheduleRequest;
+
 import org.yueli.userinterface.networkadminworkarea.NetworkAdminWorkArea;
 import org.yueli.userinterface.schedule.SchedulePanel;
 

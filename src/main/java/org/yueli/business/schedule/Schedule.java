@@ -1,6 +1,6 @@
 package org.yueli.business.schedule;
 
-import org.yueli.business.workqueue.ScheduleRequest;
+
 
 import java.util.Date;
 
@@ -9,17 +9,40 @@ import java.util.Date;
  */
 public class Schedule implements Comparable<Schedule> {
     private String item;
-    private ScheduleRequest.ScheduleType type;
     private Date beginTime;
     private Date endTime;
-
-    public Schedule(Date beginTime, Date endTime, String item, ScheduleRequest.ScheduleType type) {
+    private static int count = 0;
+    private String scheduleID;
+    
+     public static enum ScheduleType {
+        OperationRoom("OperationRoom"),
+        CareTeam("CareTeam"),
+        Doctor("Doctor");
+        
+        private String value;
+        private ScheduleType (String value){
+            this.value = value;
+        }
+        
+        public String getValue(){
+            return value;
+        }
+        
+        @Override
+        public String toString(){
+            return value;
+        }
+    }
+    private Schedule.ScheduleType type;
+      
+     public Schedule(Date beginTime, Date endTime, String item, Schedule.ScheduleType type) {
         this.item = item;
         this.type = type;
         this.beginTime = beginTime;
         this.endTime = endTime;
+        count++;
+        scheduleID = String.valueOf(count);
     }
-
     public String getItem() {
         return item;
     }
@@ -28,13 +51,7 @@ public class Schedule implements Comparable<Schedule> {
         this.item = item;
     }
 
-    public ScheduleRequest.ScheduleType getType() {
-        return type;
-    }
-
-    public void setType(ScheduleRequest.ScheduleType type) {
-        this.type = type;
-    }
+    
 
     public Date getBeginTime() {
         return beginTime;
@@ -51,6 +68,24 @@ public class Schedule implements Comparable<Schedule> {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+    public String getScheduleID() {
+        return scheduleID;
+    }
+
+    public void setScheduleID(String scheduleID) {
+        this.scheduleID = scheduleID;
+    }
+
+    public ScheduleType getType() {
+        return type;
+    }
+
+    public void setType(ScheduleType type) {
+        this.type = type;
+    }
+    
+    
 
     @Override
     public int compareTo(Schedule o) {

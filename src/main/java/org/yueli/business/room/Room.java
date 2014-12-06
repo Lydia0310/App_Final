@@ -6,6 +6,8 @@
 
 package org.yueli.business.room;
 
+import org.yueli.business.schedule.ScheduleDirectory;
+
 /**
  *
  * @author Lydia
@@ -13,9 +15,8 @@ package org.yueli.business.room;
 public abstract class Room {
     private static int counter;
     private int roomID;
-    private String roomNumber;
-    private String status;
-    Boolean isFull;
+    private ScheduleDirectory scheduleDirectory;
+ 
     
     public enum RoomType{
         OperationRoom("Operation Room"),
@@ -42,6 +43,7 @@ public abstract class Room {
         counter++;
         roomID = counter;
         this.type = type;
+        scheduleDirectory = new ScheduleDirectory();
     }
 
     public int getRoomID() {
@@ -52,22 +54,6 @@ public abstract class Room {
         this.roomID = roomID;
     }
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public RoomType getType() {
         return type;
     }
@@ -76,14 +62,15 @@ public abstract class Room {
         this.type = type;
     }
 
-    public Boolean isIsFull() {
-        return isFull;
+    public ScheduleDirectory getScheduleDirectory() {
+        return scheduleDirectory;
     }
 
-    public void setIsFull(Boolean isFull) {
-        this.isFull = isFull;
+    public void setScheduleDirectory(ScheduleDirectory scheduleDirectory) {
+        this.scheduleDirectory = scheduleDirectory;
     }
 
+   
     
     
     
