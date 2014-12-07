@@ -15,6 +15,7 @@ import org.yueli.business.organization.Organization;
 import org.yueli.business.organization.SupplierDirectory;
 import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.person.Person;
+import org.yueli.business.role.Role;
 import org.yueli.business.role.SupplierAdmin;
 import org.yueli.business.useraccount.UserAccount;
 
@@ -44,12 +45,16 @@ public class ManageSupplier extends javax.swing.JPanel {
         model.setRowCount(0);
          for(Network network : business.getNetworkList()){
         for(SupplierOrganization so : network.getSupplierDirectory().getSupplierList()){
+            
             for(UserAccount userAccount : so.getUserAccountDirectory().getUserAccountList()){
-                Object row[] = new Object[3];
+                
+                Object row[] = new Object[4];
                 row[0] = ((SupplierAdmin)userAccount.getRole()).getSupplierID();
                 row[1] = ((SupplierAdmin)userAccount.getRole()).getSupplierName();
                 row[2] = userAccount.getUsername();
+                row[3] = userAccount.getNetwork();
                 model.addRow(row);
+                
             }
         }
          }
@@ -83,11 +88,11 @@ public class ManageSupplier extends javax.swing.JPanel {
 
             },
             new String [] {
-                "SupplierID", "Supplier Name", "User Name"
+                "SupplierID", "Supplier Name", "User Name", "Network"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -99,6 +104,7 @@ public class ManageSupplier extends javax.swing.JPanel {
             supplierTable.getColumnModel().getColumn(0).setResizable(false);
             supplierTable.getColumnModel().getColumn(1).setResizable(false);
             supplierTable.getColumnModel().getColumn(2).setResizable(false);
+            supplierTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jLabel1.setText("Supplier Name: ");
@@ -208,9 +214,10 @@ public class ManageSupplier extends javax.swing.JPanel {
         person.setFirstName(firstName);
         person.setLastName(lastName);
         UserAccount userAccount = business.getUserAccountDirectory().addUserAccount(username, password, person, new SupplierAdmin());
-        network.getSupplierDirectory().addSupplier();
-        ((SupplierAdmin)userAccount.getRole()).setSupplierName(supplierName);
-         
+        for(Network network : business.getNetworkList()){
+            network.getSupplierDirectory().addSupplier();
+            ((SupplierAdmin)userAccount.getRole()).setSupplierName(supplierName);
+        }
          populateSupplierTable();
     }//GEN-LAST:event_addJButtonActionPerformed
 

@@ -11,6 +11,7 @@ import org.yueli.business.device.DeviceDirectory;
 import org.yueli.business.role.Role;
 import java.util.ArrayList;
 import org.yueli.business.inventory.Inventory;
+import org.yueli.business.role.SupplierAdmin;
 
 
 /**
@@ -27,7 +28,9 @@ public class SupplierOrganization extends Organization{
     }
     @Override
     public ArrayList<Role> getSupportedRoles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(new SupplierAdmin());
+        return roles;
     }
     
 }

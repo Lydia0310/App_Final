@@ -249,6 +249,7 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
             for(Enterprise enterprise1 : network.getEnterpriseList().getEnterpriseList()){
         if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital){
             UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new HospitalAdmin());
+            //business.getUserAccountDirectory().getUserAccountList().add(account);
         }
         if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.PrimaryCare){
             UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new PrimaryCareAdmin());

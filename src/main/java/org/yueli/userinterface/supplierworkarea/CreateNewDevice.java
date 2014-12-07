@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.device.Device;
+import org.yueli.business.inventory.InventoryItem;
 import static org.yueli.business.role.Role.RoleType.SupplierAdmin;
 import org.yueli.business.role.SupplierAdmin;
 import org.yueli.business.useraccount.UserAccount;
@@ -121,6 +122,7 @@ public class CreateNewDevice extends javax.swing.JPanel {
 
     private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
         // TODO add your handling code here:
+        //InventoryItem inventoryItem = ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().addDevice();
         Device device = ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().addDevice();
         device.setDeviceName(deviceNameJTextField.getText());
         device.setFunction(deviceFunctionJTextField.getText());
@@ -134,6 +136,8 @@ public class CreateNewDevice extends javax.swing.JPanel {
         device.setDescription(descriptionJTextField.getText());
         device.setSupplierID(((SupplierAdmin)userAccount.getRole()).getSupplierID());
         device.setSupplierName(((SupplierAdmin)userAccount.getRole()).getSupplierName());
+        InventoryItem inventoryItem = ((SupplierAdmin)userAccount.getRole()).getInventory().addInventoryItem();
+        inventoryItem.setDevice(device);
     }//GEN-LAST:event_createJButtonActionPerformed
 
 

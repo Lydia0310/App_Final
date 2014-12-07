@@ -20,11 +20,13 @@ public abstract class Enterprise extends Organization{
     private String enterpriseID;
     private static int count = 0;
     private RoomDirectory roomList;
+    private String networkName;
+    
     public Enterprise (String name, EnterpriseType type){
         super(name);
         this.enterpriseType = type;
         organizationDirectory = new OrganizationDirectory();
-        
+        roomList = new RoomDirectory();
         count++;
         enterpriseID = String.valueOf(count);
     }
@@ -53,6 +55,16 @@ public abstract class Enterprise extends Organization{
         
         
     }
+
+    public String getNetworkName() {
+        return networkName;
+    }
+
+    public void setNetworkName(String networkName) {
+        this.networkName = networkName;
+    }
+    
+    
 
     public EnterpriseType getEnterpriseType() {
         return enterpriseType;

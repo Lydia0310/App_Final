@@ -127,6 +127,10 @@ public class Device {
         this.isUsing = isUsing;
     }
 
+     @Override
     
+    public String toString(){
+        return deviceName;
+    }
     
 }

@@ -13,6 +13,7 @@ import  org.yueli.business.role.Role;
 
 import java.util.ArrayList;
 import org.yueli.business.organization.OrganizationDirectory;
+import org.yueli.business.role.SystemAdminRole;
 
 /**
  * @author Lydia
@@ -35,6 +36,7 @@ public class Business extends Organization {
         super(null);
         networkList = new ArrayList<Network>();
         masterOrderDirectory = new MasterOrderDirectory();
+        organizationDirectory = new OrganizationDirectory();
     }
 
     public ArrayList<Network> getNetworkList() {
@@ -78,6 +80,10 @@ public class Business extends Organization {
 
     @Override
     public ArrayList<Role> getSupportedRoles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Role> roleList = new ArrayList<>();
+        roleList.add(new SystemAdminRole());
+        return roleList;
     }
+
+
 }

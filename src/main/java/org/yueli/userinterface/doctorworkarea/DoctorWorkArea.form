@@ -22,7 +22,7 @@
                   <Component id="viewCareTeamScheduleJButton" min="-2" pref="263" max="-2" attributes="0"/>
                   <Component id="viewDeviceJButton" min="-2" pref="263" max="-2" attributes="0"/>
                   <Component id="viewRoomScheduleJButton" min="-2" pref="263" max="-2" attributes="0"/>
-                  <Component id="viewOperationJButton" min="-2" pref="263" max="-2" attributes="0"/>
+                  <Component id="managePatientJButton" min="-2" pref="263" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="271" max="32767" attributes="0"/>
           </Group>
@@ -32,7 +32,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Component id="viewOperationJButton" min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="managePatientJButton" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Component id="viewRoomScheduleJButton" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
@@ -45,25 +45,37 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="viewOperationJButton">
+    <Component class="javax.swing.JButton" name="managePatientJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View Operation"/>
+        <Property name="text" type="java.lang.String" value="Manage Patient"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="managePatientJButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="viewRoomScheduleJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View Room Schedule"/>
+        <Property name="text" type="java.lang.String" value="View Operation Room Schedule"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewRoomScheduleJButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="viewDeviceJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View Device Schedule"/>
+        <Property name="text" type="java.lang.String" value="View Device "/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewDeviceJButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="viewCareTeamScheduleJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Care Team Schedule"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewCareTeamScheduleJButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

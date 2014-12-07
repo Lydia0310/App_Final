@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.inventory.Inventory;
 import org.yueli.business.network.Network;
+import org.yueli.business.role.FAMCAdmin;
 import org.yueli.business.role.Role;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.famcworkarea.FAMCAdminWorkArea;
@@ -37,7 +38,9 @@ public class FoundingAcademicMedicalCenter extends Enterprise{
 
     @Override
     public ArrayList<Role> getSupportedRoles() {
-        return null;
+         ArrayList<Role> roles = new ArrayList();
+        roles.add(new FAMCAdmin());
+        return roles;
     }
     
     

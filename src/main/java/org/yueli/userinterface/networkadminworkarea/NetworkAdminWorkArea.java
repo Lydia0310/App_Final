@@ -95,7 +95,7 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
 
     private void manageEnterpriseJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEnterpriseJButtonActionPerformed
         // TODO add your handling code here:
-        ManageEnterprise manageEnterprise = new ManageEnterprise(userProcessContainer, userAccount ,business);
+        ManageEnterprise manageEnterprise = new ManageEnterprise(userProcessContainer, userAccount ,business, network);
         userProcessContainer.add("Manage Enterprise", manageEnterprise);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

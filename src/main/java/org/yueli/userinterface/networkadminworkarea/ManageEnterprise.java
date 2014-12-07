@@ -27,11 +27,13 @@ public class ManageEnterprise extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
-    public ManageEnterprise(JPanel userProcessContainer,UserAccount userAccount, Business business) {
+    private Network network;
+    public ManageEnterprise(JPanel userProcessContainer,UserAccount userAccount, Business business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.business = business;
+        this.network = network;
         populateEnterpriseTypeCombo();
         populateEnterpriseTable();
     }
@@ -103,14 +105,15 @@ public class ManageEnterprise extends javax.swing.JPanel {
                 .addGap(58, 58, 58)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 454, Short.MAX_VALUE)
-                .addComponent(deleteJButton)
-                .addGap(142, 142, 142))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(refreshJButton)
-                .addGap(75, 75, 75))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(deleteJButton)
+                        .addGap(142, 142, 142))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(refreshJButton)
+                        .addGap(75, 75, 75))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,6 +132,12 @@ public class ManageEnterprise extends javax.swing.JPanel {
         jLabel2.setText("Enterprise Name: ");
 
         jLabel3.setText("Enterprise Type: ");
+
+        enterpriseTypeJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterpriseTypeJComboBoxActionPerformed(evt);
+            }
+        });
 
         addEnterpriseJButton.setText("Add Enterprise");
         addEnterpriseJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +219,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
         }
     }
     
-    private void populateEnterpriseTable(){
+    private void populateEnterpriseTable() {
        
         DefaultTableModel model = (DefaultTableModel)enterpriseJTable.getModel();
         model.setRowCount(0);
@@ -241,7 +250,9 @@ public class ManageEnterprise extends javax.swing.JPanel {
         for(Network network : business.getNetworkList()){
             Enterprise enterprise = network.getEnterpriseList().addEnterprise(name, type);
             
+           
         }
+        
         populateEnterpriseTable();
     }//GEN-LAST:event_addEnterpriseJButtonActionPerformed
 
@@ -253,10 +264,22 @@ public class ManageEnterprise extends javax.swing.JPanel {
         }
         else{
             Enterprise enterprise = (Enterprise)enterpriseJTable.getValueAt(selectedRow, 0);
-            ((NetworkAdmin)userAccount.getRole()).getEnterpriseDirectory().deleteEnterprise(enterprise);
+            for(Network network : business.getNetworkList()){
+                for(Enterprise enterprise1 : network.getEnterpriseList().getEnterpriseList()){
+                    if(enterprise1.equals(enterprise)){
+                    for(UserAccount userAccount : enterprise1.getUserAccountDirectory().getUserAccountList()){
+                        ((NetworkAdmin)userAccount.getRole()).getEnterpriseDirectory().deleteEnterprise(enterprise);
+                    }
+                    }}
+        }
+            
             populateEnterpriseTable();
         }
     }//GEN-LAST:event_deleteJButtonActionPerformed
+
+    private void enterpriseTypeJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterpriseTypeJComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enterpriseTypeJComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

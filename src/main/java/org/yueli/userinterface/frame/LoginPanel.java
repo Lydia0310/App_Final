@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.zip.InflaterOutputStream;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
+import org.yueli.business.organization.Organization;
 
 /**
  * Created by Zhang Junyan on 11/19/2014/2014.
@@ -77,8 +80,40 @@ public class LoginPanel extends JPanel {
     }
 
     private void loginButtonClicked () {
+       
         UserAccount userAccount = AppEntrance.getBusiness().getUserAccountDirectory()
                 .authenticateUser(userNameField.getText(), passwordField.getText());
+              Enterprise inEnterprise = null;
+        Organization inOrganization = null;
+        if (userAccount == null) {
+            //Step2: Go inside each network to check each enterprise
+            for (Network network : AppEntrance.getBusiness().getNetworkList()) {
+                //Step 2-a: Check against each enterprise
+                for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
+                    userAccount = enterprise.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
+                    if (userAccount == null) {
+                        //Step3: Check against each organization inside that enterprise
+                        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                            userAccount = organization.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
+                            if (userAccount != null) {
+                                inEnterprise = enterprise;
+                                inOrganization = organization;
+                                break;
+                            }
+                        }
+                    } else {
+                        inEnterprise = enterprise;
+                        break;
+                    }
+                    if (inOrganization != null) {
+                        break;
+                    }
+                }
+                if (inEnterprise != null) {
+                    break;
+                }
+            }
+        }
 //        if(userNameField.getText().equals("sys")) {
 //            userAccount = new UserAccount();
 //            userAccount.setUsername("sys");

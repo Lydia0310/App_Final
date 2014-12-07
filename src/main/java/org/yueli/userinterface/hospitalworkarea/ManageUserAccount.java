@@ -33,6 +33,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         populateOrganizationCombo();
+        
         populateUserAccountTable();
     }
     
@@ -45,6 +46,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
                 }
             }
         }
+          populateRoleCombo(business);
     }
     
     public void populateRoleCombo(Organization organization){
@@ -121,6 +123,12 @@ public class ManageUserAccount extends javax.swing.JPanel {
         }
 
         jLabel1.setText("Organization:");
+
+        organizationCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                organizationComboActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Role:");
 
@@ -227,6 +235,14 @@ public class ManageUserAccount extends javax.swing.JPanel {
         populateUserAccountTable();
         
     }//GEN-LAST:event_addJButtonActionPerformed
+
+    private void organizationComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationComboActionPerformed
+        // TODO add your handling code here:
+        Organization organization = (Organization)organizationCombo.getSelectedItem();
+        if(organization != null){
+            populateRoleCombo(organization);
+        }
+    }//GEN-LAST:event_organizationComboActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

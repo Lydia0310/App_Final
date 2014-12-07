@@ -9,6 +9,7 @@ package org.yueli.userinterface.hospitalworkarea;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import org.yueli.business.Business;
+import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.AppEntrance;
@@ -25,6 +26,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Business business;
     private Network network;
+    private Enterprise enterprise;
     private UserAccount userAccount;
     
     public HospitalWorkArea() {
@@ -34,6 +36,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
       //  this.network = network;
         this.userAccount = AppEntrance.getLoginUser();
          userAccount.getNetwork();
+         userAccount.getEnterprise();
         
     }
 
@@ -175,7 +178,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
         // TODO add your handling code here:
-        ManageOrganization manageOrganization = new ManageOrganization(userProcessContainer, business, network);
+        ManageOrganization manageOrganization = new ManageOrganization(userProcessContainer, business,business.getOrganizationDirectory());
         userProcessContainer.add("Manage Organization", manageOrganization);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -8,6 +8,7 @@ package org.yueli.business.enterprise;
 
 import java.util.ArrayList;
 import org.yueli.business.inventory.Inventory;
+import org.yueli.business.role.PrimaryCareAdmin;
 import org.yueli.business.role.Role;
 
 /**
@@ -35,7 +36,9 @@ public class PrimaryCare extends Enterprise{
     
     @Override
     public ArrayList<Role> getSupportedRoles() {
-        return null;
+         ArrayList<Role> roles = new ArrayList();
+        roles.add(new PrimaryCareAdmin());
+        return roles;
     }
     
 }

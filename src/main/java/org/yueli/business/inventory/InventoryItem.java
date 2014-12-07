@@ -18,6 +18,7 @@ public class InventoryItem {
     private int Quantity;
 
     
+    
     public Device getDevice() {
         return device;
     }
@@ -34,8 +35,11 @@ public class InventoryItem {
         this.Quantity = Quantity;
     }
     
+    @Override
     public String toString(){
         return device.getDeviceName();
     }
+    
+   
     
 }

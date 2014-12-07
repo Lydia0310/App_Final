@@ -28,23 +28,31 @@ public class ManageOrganization extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Business business;
     private Network network;
-    public ManageOrganization(JPanel userProcessContainer,Business business, Network network) {
+    private Enterprise enterprise;
+    private OrganizationDirectory organizationDirectory;
+    public ManageOrganization(JPanel userProcessContainer,Business business, OrganizationDirectory organizationDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.network = network;
+        this.enterprise = enterprise;
+       this.organizationDirectory = organizationDirectory;
         populateOrganizationCombo();
         populateOrganizationTable();
     }
     
     public void populateOrganizationCombo(){
         organizationCombo.removeAllItems();
-        for(Type type : Organization.Type.values()){
-            
-            if(!((type.getValue().equals(Type.SysAdmin.getValue()))&&(type.getValue().equals(Type.Supplier.getValue())))){
-                organizationCombo.addItem(type);
-            }
-        }
+        organizationCombo.addItem(Organization.Type.Doctor);
+        organizationCombo.addItem(Organization.Type.CareTeam);
+        organizationCombo.addItem(Organization.Type.OperationRoomAdmin);
+        organizationCombo.addItem(Organization.Type.Warehouse);
+//        for(Type type : Organization.Type.values()){
+//            
+//            if(!((type.getValue().equals(Type.SysAdmin.getValue()))&&(type.getValue().equals(Type.Supplier.getValue())))){
+//                organizationCombo.addItem(type);
+//            }
+//        }
     }
     
     public void populateOrganizationTable(){
@@ -62,6 +70,13 @@ public class ManageOrganization extends javax.swing.JPanel {
                 } 
             }
          }
+//        for(Organization organization : organizationDirectory.getOrganizationList()){
+//             Object[] row = new Object [2];
+//                    row[0] = organization.getOrganizationID();
+//                    row[1] = organization.getName();
+//                    model.addRow(row);
+//                    populateOrganizationCombo();
+//        }
     }
 
     /**
@@ -148,13 +163,14 @@ public class ManageOrganization extends javax.swing.JPanel {
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         // TODO add your handling code here:
         Type type = (Type)organizationCombo.getSelectedItem();
-         for(Network network : business.getNetworkList()){
-             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
-                
-                    enterprise.getOrganizationDirectory().addOrganization(type);
-                
+        for(Network network : business.getNetworkList()){
+            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+                enterprise.getOrganizationDirectory().addOrganization(type);
             }
         }
+      //  organizationDirectory.addOrganization(type);
+                
+        
         populateOrganizationTable();
     }//GEN-LAST:event_addJButtonActionPerformed
 

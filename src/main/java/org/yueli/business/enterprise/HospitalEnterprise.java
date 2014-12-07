@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import org.yueli.business.inventory.Inventory;
 
 import org.yueli.business.organization.DoctorDirectory;
+import org.yueli.business.role.HospitalAdmin;
 
 
 /**
@@ -65,7 +66,9 @@ public class HospitalEnterprise extends Enterprise {
     
     @Override
     public ArrayList<Role> getSupportedRoles() {
-       return null; 
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new HospitalAdmin());
+        return roles;
     }
     
 }

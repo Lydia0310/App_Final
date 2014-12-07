@@ -10,8 +10,11 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.yueli.business.Business;
 import org.yueli.business.device.Device;
+import org.yueli.business.inventory.Inventory;
 import org.yueli.business.inventory.InventoryItem;
+import org.yueli.business.network.Network;
 import org.yueli.business.role.SupplierAdmin;
 import org.yueli.business.useraccount.UserAccount;
 
@@ -25,11 +28,13 @@ public class ManageDevicePanel extends javax.swing.JPanel {
      * Creates new form ManageDevicePanel
      */
      private JPanel userProcessContainer;
+     private Business business;
     private UserAccount userAccount;
-    public ManageDevicePanel(JPanel userProcessContainer, UserAccount userAccount) {
+    public ManageDevicePanel(JPanel userProcessContainer,Business business, UserAccount userAccount) {
         initComponents();
          initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.business = business;
         this.userAccount = userAccount;
         supplierNameJLabel.setText(((SupplierAdmin)userAccount.getRole()).getSupplierID());
         populateDeviceTable();
@@ -79,7 +84,6 @@ public class ManageDevicePanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         deviceTable = new javax.swing.JTable();
         deleteJButton = new javax.swing.JButton();
-        editJButton = new javax.swing.JButton();
         addQuantityJButton = new javax.swing.JButton();
         quantityJSpinner = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
@@ -87,6 +91,7 @@ public class ManageDevicePanel extends javax.swing.JPanel {
         refreshJButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         inventoryItemTable = new javax.swing.JTable();
+        editJButton1 = new javax.swing.JButton();
 
         deviceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,13 +118,6 @@ public class ManageDevicePanel extends javax.swing.JPanel {
             }
         });
 
-        editJButton.setText("Edit");
-        editJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editJButtonActionPerformed(evt);
-            }
-        });
-
         addQuantityJButton.setText("Add Quantity");
         addQuantityJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,10 +133,8 @@ public class ManageDevicePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(deleteJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                    .addComponent(editJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(60, 60, 60))
+                .addComponent(deleteJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(123, 123, 123)
                 .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,15 +145,13 @@ public class ManageDevicePanel extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(deleteJButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editJButton)))
+                        .addComponent(deleteJButton)))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addQuantityJButton)
@@ -201,23 +195,35 @@ public class ManageDevicePanel extends javax.swing.JPanel {
             inventoryItemTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        editJButton1.setText("Edit");
+        editJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editJButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(supplierNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(refreshJButton)
-                        .addGap(78, 78, 78))))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(refreshJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(supplierNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 19, Short.MAX_VALUE)
@@ -229,16 +235,16 @@ public class ManageDevicePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(supplierNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(refreshJButton)))
+                        .addComponent(refreshJButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(supplierNameJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editJButton1)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -277,35 +283,40 @@ public class ManageDevicePanel extends javax.swing.JPanel {
             JOptionPane .showMessageDialog(null, "Please select a row to continue!");
         }
         else{
-            InventoryItem inventoryItem = (InventoryItem)deviceTable.getValueAt(selectedRow, 0);
-            inventoryItem.setInventoryQuantity(quantity);
+            Device device = (Device)deviceTable.getValueAt(selectedRow,0)
+;            //InventoryItem inventoryItem = (InventoryItem)deviceTable.getValueAt(selectedRow, 0);
+            for(InventoryItem ii : ((SupplierAdmin)userAccount.getRole()).getInventory().getInventoryItemList()){
+                if(ii.getDevice().getDeviceName().equals(device.getDeviceName())){
+                    ii.setInventoryQuantity(quantity);
+                }
+            }
+           
             populateInventoryItemTable();
         }
         
     }//GEN-LAST:event_addQuantityJButtonActionPerformed
 
-    private void editJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJButtonActionPerformed
+    private void editJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJButton1ActionPerformed
         // TODO add your handling code here:
         int selectedRow = inventoryItemTable.getSelectedRow();
         if(selectedRow <0 ){
-            JOptionPane.showMessageDialog(null, "Please select a row in the Inventory Item table!");
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
         }
         else{
             InventoryItem inventoryItem = (InventoryItem)inventoryItemTable.getValueAt(selectedRow, 0);
-            ManageDeviceDetail manageDeviceDetail = new ManageDeviceDetail(userProcessContainer, inventoryItem);
-            userProcessContainer.add("Edit Device Detail", manageDeviceDetail);
+            EditDevice editDevice = new EditDevice(userProcessContainer, inventoryItem);
+            userProcessContainer.add("Edit Device", editDevice);
             CardLayout layout = (CardLayout)userProcessContainer.getLayout();
             layout.next(userProcessContainer);
-            
         }
-    }//GEN-LAST:event_editJButtonActionPerformed
+    }//GEN-LAST:event_editJButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addQuantityJButton;
     private javax.swing.JButton deleteJButton;
     private javax.swing.JTable deviceTable;
-    private javax.swing.JButton editJButton;
+    private javax.swing.JButton editJButton1;
     private javax.swing.JTable inventoryItemTable;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;

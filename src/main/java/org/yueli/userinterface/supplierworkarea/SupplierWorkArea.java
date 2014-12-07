@@ -44,6 +44,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
 
         manageDeviceJButton = new javax.swing.JButton();
         viewOrderJButton = new javax.swing.JButton();
+        createDeviceJButton1 = new javax.swing.JButton();
 
         manageDeviceJButton.setText("Manage Device");
         manageDeviceJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,25 +60,35 @@ public class SupplierWorkArea extends javax.swing.JPanel {
             }
         });
 
+        createDeviceJButton1.setText("Create Device");
+        createDeviceJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createDeviceJButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(214, 214, 214)
+                .addGap(205, 205, 205)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(258, Short.MAX_VALUE))
+                    .addComponent(createDeviceJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addContainerGap(109, Short.MAX_VALUE)
+                .addComponent(createDeviceJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
                 .addComponent(manageDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
+                .addGap(72, 72, 72)
                 .addComponent(viewOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addGap(168, 168, 168))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -91,10 +102,23 @@ public class SupplierWorkArea extends javax.swing.JPanel {
 
     private void manageDeviceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageDeviceJButtonActionPerformed
         // TODO add your handling code here:
+        ManageDevicePanel manageDevicePanel = new ManageDevicePanel(userProcessContainer,business, userAccount);
+        userProcessContainer.add("Manage Device", manageDevicePanel);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageDeviceJButtonActionPerformed
+
+    private void createDeviceJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDeviceJButton1ActionPerformed
+        // TODO add your handling code here:
+        CreateNewDevice createNewDevice = new CreateNewDevice(userProcessContainer, business, userAccount);
+        userProcessContainer.add("Create New Device", createNewDevice);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_createDeviceJButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton createDeviceJButton1;
     private javax.swing.JButton manageDeviceJButton;
     private javax.swing.JButton viewOrderJButton;
     // End of variables declaration//GEN-END:variables

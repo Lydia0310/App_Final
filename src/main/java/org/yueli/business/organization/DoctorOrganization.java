@@ -8,7 +8,7 @@ package org.yueli.business.organization;
 
 import org.yueli.business.role.Role;
 import java.util.ArrayList;
-
+import org.yueli.business.role.DoctorRole;
 
 /**
  *
@@ -21,7 +21,9 @@ public class DoctorOrganization extends Organization{
     }
     @Override
     public ArrayList<Role> getSupportedRoles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(new DoctorRole());
+        return roles;
     }
     
 }

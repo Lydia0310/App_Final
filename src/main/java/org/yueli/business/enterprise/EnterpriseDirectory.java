@@ -27,11 +27,19 @@ public class EnterpriseDirectory {
     
     public Enterprise addEnterprise(String name, Enterprise.EnterpriseType type ){
         Enterprise enterprise = null;
+        
+        if(type.getValue().equals(Enterprise.EnterpriseType.Hospital)){
         enterprise = new org.yueli.business.enterprise.HospitalEnterprise(name);
         enterpriseList.add(enterprise);
-        
-        
-        
+        }
+        else if(type.getValue().equals(Enterprise.EnterpriseType.PrimaryCare)){
+        enterprise = new org.yueli.business.enterprise.PrimaryCare(name);
+        enterpriseList.add(enterprise);
+        }
+        else if(type.getValue().equals(Enterprise.EnterpriseType.FoundingAMC)){
+        enterprise = new org.yueli.business.enterprise.FoundingAcademicMedicalCenter(name);
+        enterpriseList.add(enterprise);
+        }
         return enterprise;
     }
     
