@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.zip.InflaterOutputStream;
+
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
@@ -79,54 +80,50 @@ public class LoginPanel extends JPanel {
         add(Box.createVerticalStrut(30));
     }
 
-    private void loginButtonClicked () {
-       
-        UserAccount userAccount = AppEntrance.getBusiness().getUserAccountDirectory()
-                .authenticateUser(userNameField.getText(), passwordField.getText());
-              Enterprise inEnterprise = null;
+    private void loginButtonClicked() {
+        UserAccount userAccount = null;
+        Enterprise inEnterprise = null;
         Organization inOrganization = null;
-        if (userAccount == null) {
-            //Step2: Go inside each network to check each enterprise
-            for (Network network : AppEntrance.getBusiness().getNetworkList()) {
-                //Step 2-a: Check against each enterprise
+        Network inNetwork = null;
+        userAccount = AppEntrance.getBusiness().getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
+        if(userAccount != null) {
+            AppEntrance.setLoginUser(userAccount);
+            AppEntrance.getMainFrame().loginSuccess(userAccount.getRole().getPrivilegeList());
+            return;
+        }
+        outOfLoops:
+        for (Network network : AppEntrance.getBusiness().getNetworkDirectory().getNetworkList()) {
+            userAccount = network.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
+            if (userAccount != null) {
+                inNetwork = network;
+                break outOfLoops;
+            } else {
                 for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
                     userAccount = enterprise.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
-                    if (userAccount == null) {
-                        //Step3: Check against each organization inside that enterprise
+                    if (userAccount != null) {
+                        inEnterprise = enterprise;
+                        break outOfLoops;
+                    } else {
                         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
                             userAccount = organization.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
                             if (userAccount != null) {
-                                inEnterprise = enterprise;
                                 inOrganization = organization;
-                                break;
                             }
                         }
-                    } else {
-                        inEnterprise = enterprise;
-                        break;
                     }
-                    if (inOrganization != null) {
-                        break;
-                    }
-                }
-                if (inEnterprise != null) {
-                    break;
                 }
             }
         }
-//        if(userNameField.getText().equals("sys")) {
-//            userAccount = new UserAccount();
-//            userAccount.setUsername("sys");
-//            userAccount.setPassword("sys");
-//            userAccount.setRole(new SystemAdminRole());
-//        }
+
         if (userAccount == null) {
             // login failed
             infoLabel.setVisible(true);
             return;
         } else {
+            userAccount.setNetwork(inNetwork);
+            userAccount.setEnterprise(inEnterprise);
+            userAccount.setOrganization(inOrganization);
             // login success
-            userAccount.initialize();
             AppEntrance.setLoginUser(userAccount);
             AppEntrance.getMainFrame().loginSuccess(userAccount.getRole().getPrivilegeList());
         }

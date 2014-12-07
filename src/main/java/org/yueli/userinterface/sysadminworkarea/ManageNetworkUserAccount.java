@@ -37,18 +37,19 @@ public class ManageNetworkUserAccount extends javax.swing.JPanel {
 
     public void populateNetworkNameCombo(){
         networkNameCombo.removeAllItems();
-        for(Network network : business.getNetworkList()){
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
             networkNameCombo.addItem(network);
         }
     }
     public void populateNetworkUserAccountTable(){
         DefaultTableModel model = (DefaultTableModel) networkUserAccountTable.getModel();
         model.setRowCount(0);
-        
-        for(UserAccount userAccount : business.getUserAccountDirectory().getUserAccountList()){
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
+            for(UserAccount userAccount :network.getUserAccountDirectory().getUserAccountList()){
             Object row[] = new Object[1];
-            row[0] = userAccount.getUsername();
+            row[0] = userAccount;
             model.addRow(row);
+        }
         }
     }
     /**
@@ -186,18 +187,15 @@ public class ManageNetworkUserAccount extends javax.swing.JPanel {
        String username = userNameJTextField.getText();
        String password = String.valueOf(passwordField.getPassword());
        
-       if(business.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
-       Person person = business.getPersonDirectory().addPerson();
+
+      Person person = network.getPersonDirectory().addPerson();
        person.setFirstName(firstName);
        person.setLastName(lastName);
        
-       UserAccount userAccount = business.getUserAccountDirectory().addUserAccount(username, password, person, new NetworkAdmin());
+       UserAccount userAccount = network.getUserAccountDirectory().addUserAccount(username, password, person, new NetworkAdmin());
        
        populateNetworkUserAccountTable();
-       }
-       else{
-           JOptionPane.showMessageDialog(null, "This username already exit!");
-       }
+
     }//GEN-LAST:event_addJButtonActionPerformed
 
 

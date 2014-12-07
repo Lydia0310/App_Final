@@ -8,6 +8,8 @@ package org.yueli.userinterface.sysadminworkarea;
 
 import org.yueli.business.Business;
 import org.yueli.business.network.Network;
+import org.yueli.business.network.NetworkDirectory;
+
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -113,7 +115,7 @@ public class ManageNetwork extends javax.swing.JPanel {
         // TODO add your handling code here:
         String name = networkNameJTextField.getText();
         
-        Network network = business.addNetwork();
+        Network network = business.getNetworkDirectory().addNetwork();
         network.setName(name);
         
         populateNetworkTable();
@@ -123,8 +125,9 @@ public class ManageNetwork extends javax.swing.JPanel {
     private void populateNetworkTable(){
         DefaultTableModel model = (DefaultTableModel) networkJTable.getModel();
         model.setRowCount(0);
-        
-        for(Network network : business.getNetworkList()){
+        if (business.getNetworkDirectory() == null)
+            business.setNetworkDirectory(new NetworkDirectory());
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
             Object[] row = new Object[1];
             row[0] = network.getName();
             model.addRow(row);

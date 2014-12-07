@@ -6,6 +6,7 @@
 
 package org.yueli.userinterface.networkadminworkarea;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,23 +42,32 @@ public class ManageSupplier extends javax.swing.JPanel {
         this.network = network;
         populateSupplierTable();
     }
-
-    public void populateSupplierTable() {
-        DefaultTableModel model = (DefaultTableModel) supplierTable.getModel();
+    public void populateSupplierTable(){
+        DefaultTableModel model = (DefaultTableModel)supplierTable.getModel();
         model.setRowCount(0);
-        for (Network network : business.getNetworkList()) {
+        for(SupplierOrganization so : network.getSupplierDirectory().getSupplierList()){
+            Object row[] = new Object[2];
+            row[0] = so;
+            row[1] = so.getSupplierName();
+            model.addRow(row);
+         } 
+    }
+
+    public void populateSupplierUserAccountTable() {
+        DefaultTableModel model = (DefaultTableModel) supplierUserAccountTable.getModel();
+        model.setRowCount(0);
+        
             for (SupplierOrganization so : network.getSupplierDirectory().getSupplierList()) {
                 for (UserAccount userAccount : so.getUserAccountDirectory().getUserAccountList()) {
-                    Object row[] = new Object[4];
-                    row[0] = ((SupplierAdmin) userAccount.getRole()).getSupplierID();
-                    row[1] = ((SupplierAdmin) userAccount.getRole()).getSupplierName();
-                    row[2] = userAccount.getUsername();
-                    row[3] = userAccount.getNetwork();
+                    Object row[] = new Object[3];
+                    row[0] = userAccount.getUsername();
+                    row[1] = so.getSupplierName();
+                    row[2] = userAccount.getNetwork();
                     model.addRow(row);
 
                 }
             }
-        }
+        
     }
 
     /**
@@ -70,10 +80,10 @@ public class ManageSupplier extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        supplierTable = new javax.swing.JTable();
+        supplierUserAccountTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         supplierNameJTextField = new javax.swing.JTextField();
-        addJButton = new javax.swing.JButton();
+        addUserAccountJButton = new javax.swing.JButton();
         lastNameJTextField = new javax.swing.JTextField();
         usernameJLabel = new javax.swing.JLabel();
         userNameJTextField = new javax.swing.JTextField();
@@ -83,37 +93,40 @@ public class ManageSupplier extends javax.swing.JPanel {
         firstNameJLabel = new javax.swing.JLabel();
         lastNameJLabel = new javax.swing.JLabel();
         refresh = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        supplierTable = new javax.swing.JTable();
+        addSupplierJButton = new javax.swing.JButton();
+        refresh1 = new javax.swing.JButton();
 
-        supplierTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+        supplierUserAccountTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-                },
-                new String[]{
-                        "SupplierID", "Supplier Name", "User Name", "Network"
-                }
+            },
+            new String [] {
+                "User Name", "Supplier Name", "Network"
+            }
         ) {
-            boolean[] canEdit = new boolean[]{
-                    false, false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(supplierTable);
-        if (supplierTable.getColumnModel().getColumnCount() > 0) {
-            supplierTable.getColumnModel().getColumn(0).setResizable(false);
-            supplierTable.getColumnModel().getColumn(1).setResizable(false);
-            supplierTable.getColumnModel().getColumn(2).setResizable(false);
-            supplierTable.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(supplierUserAccountTable);
+        if (supplierUserAccountTable.getColumnModel().getColumnCount() > 0) {
+            supplierUserAccountTable.getColumnModel().getColumn(0).setResizable(false);
+            supplierUserAccountTable.getColumnModel().getColumn(1).setResizable(false);
+            supplierUserAccountTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jLabel1.setText("Supplier Name: ");
 
-        addJButton.setText("Add");
-        addJButton.addActionListener(new java.awt.event.ActionListener() {
+        addUserAccountJButton.setText("Add User Account");
+        addUserAccountJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addJButtonActionPerformed(evt);
+                addUserAccountJButtonActionPerformed(evt);
             }
         });
 
@@ -132,115 +145,192 @@ public class ManageSupplier extends javax.swing.JPanel {
             }
         });
 
+        supplierTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Supplier ID", "SupplierName"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(supplierTable);
+        if (supplierTable.getColumnModel().getColumnCount() > 0) {
+            supplierTable.getColumnModel().getColumn(0).setResizable(false);
+            supplierTable.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        addSupplierJButton.setText("Add Supplier");
+        addSupplierJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSupplierJButtonActionPerformed(evt);
+            }
+        });
+
+        refresh1.setText("Refresh");
+        refresh1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refresh1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(refresh)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(468, 468, 468)
+                                .addComponent(jLabel1)
+                                .addGap(26, 26, 26)
+                                .addComponent(supplierNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(58, 58, 58)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(148, 148, 148)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(refresh1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                                        .addComponent(addUserAccountJButton))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(35, 35, 35)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(3, 3, 3)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(passwordJLabel)
+                                                        .addComponent(usernameJLabel)))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(lastNameJLabel)
-                                                                .addComponent(firstNameJLabel)
-                                                                .addComponent(passwordJLabel)
-                                                                .addComponent(usernameJLabel))
+                                                            .addComponent(lastNameJLabel)
+                                                            .addComponent(firstNameJLabel))
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(jLabel1)
-                                                                .addGap(19, 19, 19)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(supplierNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addComponent(firstNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                                .addContainerGap(116, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(addJButton)
-                                                .addGap(103, 103, 103))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(refresh)
-                                                .addGap(29, 29, 29))))
+                                                            .addGap(94, 94, 94)
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                .addComponent(firstNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                    .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(addSupplierJButton))))))))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(refresh)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(63, 63, 63)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(supplierNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(usernameJLabel)
-                                        .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(passwordJLabel)
-                                        .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(firstNameJLabel)
-                                        .addComponent(firstNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lastNameJLabel)
-                                        .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                                .addComponent(addJButton)
-                                .addGap(27, 27, 27))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(refresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addComponent(refresh1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(supplierNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(26, 26, 26)
+                        .addComponent(addSupplierJButton)
+                        .addGap(135, 135, 135)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usernameJLabel)
+                            .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(passwordJLabel)
+                            .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(firstNameJLabel)
+                            .addComponent(firstNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lastNameJLabel)
+                            .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(addUserAccountJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+    private void addUserAccountJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserAccountJButtonActionPerformed
         // TODO add your handling code here:
-        String supplierName = supplierNameJTextField.getText();
-        String username = userNameJTextField.getText();
-        String password = String.valueOf(PasswordField.getPassword());
-        String firstName = firstNameJTextField.getText();
-        String lastName = lastNameJTextField.getText();
-
-        Person person = business.getPersonDirectory().addPerson();
-        person.setFirstName(firstName);
-        person.setLastName(lastName);
-        UserAccount userAccount = business.getUserAccountDirectory().addUserAccount(username, password, person, new SupplierAdmin());
-        for (Network network : business.getNetworkList()) {
-            network.getSupplierDirectory().addSupplier();
-            ((SupplierAdmin) userAccount.getRole()).setSupplierName(supplierName);
+        int selectedRow = supplierTable.getSelectedRow();
+        if(selectedRow <0 ){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
         }
-        populateSupplierTable();
-    }//GEN-LAST:event_addJButtonActionPerformed
+        else{
+            SupplierOrganization so = (SupplierOrganization)supplierTable.getValueAt(selectedRow, 0);
+            String username = userNameJTextField.getText();
+            String password = String.valueOf(PasswordField.getPassword());
+            String firstName = firstNameJTextField.getText();
+            String lastName = lastNameJTextField.getText();
+
+            Person person = so.getPersonDirectory().addPerson();
+            person.setFirstName(firstName);
+            person.setLastName(lastName);
+            UserAccount userAccounthere = so.getUserAccountDirectory().addUserAccount(username, password, person, new SupplierAdmin());
+            
+            populateSupplierTable();
+        }
+    }//GEN-LAST:event_addUserAccountJButtonActionPerformed
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
         // TODO add your handling code here:
         populateSupplierTable();
     }//GEN-LAST:event_refreshActionPerformed
 
+    private void addSupplierJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSupplierJButtonActionPerformed
+        // TODO add your handling code here:
+        String supplierName = supplierNameJTextField.getText();
+        SupplierOrganization supplierOrganization = network.getSupplierDirectory().addSupplier();
+        supplierOrganization.setSupplierName(supplierName);
+        populateSupplierTable();
+    }//GEN-LAST:event_addSupplierJButtonActionPerformed
+
+    private void refresh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh1ActionPerformed
+        // TODO add your handling code here:
+        populateSupplierUserAccountTable();
+    }//GEN-LAST:event_refresh1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField PasswordField;
-    private javax.swing.JButton addJButton;
+    private javax.swing.JButton addSupplierJButton;
+    private javax.swing.JButton addUserAccountJButton;
     private javax.swing.JLabel firstNameJLabel;
     private javax.swing.JTextField firstNameJTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lastNameJLabel;
     private javax.swing.JTextField lastNameJTextField;
     private javax.swing.JLabel passwordJLabel;
     private javax.swing.JButton refresh;
+    private javax.swing.JButton refresh1;
     private javax.swing.JTextField supplierNameJTextField;
     private javax.swing.JTable supplierTable;
+    private javax.swing.JTable supplierUserAccountTable;
     private javax.swing.JTextField userNameJTextField;
     private javax.swing.JLabel usernameJLabel;
     // End of variables declaration//GEN-END:variables

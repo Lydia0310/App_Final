@@ -12,7 +12,9 @@ import  org.yueli.business.organization.Organization;
 import  org.yueli.business.role.Role;
 
 import java.util.ArrayList;
+import org.yueli.business.network.NetworkDirectory;
 import org.yueli.business.organization.OrganizationDirectory;
+import org.yueli.business.organization.SupplierDirectory;
 import org.yueli.business.role.SystemAdminRole;
 
 /**
@@ -22,8 +24,8 @@ public class Business extends Organization {
     private static Business business;
     private OrganizationDirectory organizationDirectory;
     private MasterOrderDirectory masterOrderDirectory;
-
-    private ArrayList<Network> networkList;
+    //private SupplierDirectory supplierDirectory;
+   private NetworkDirectory networkDirectory;
 
     public static Business getInstance() {
         if (business == null) {
@@ -34,14 +36,21 @@ public class Business extends Organization {
 
     private Business() {
         super(null);
-        networkList = new ArrayList<Network>();
         masterOrderDirectory = new MasterOrderDirectory();
         organizationDirectory = new OrganizationDirectory();
+        networkDirectory = new NetworkDirectory();
+       // supplierDirectory = new SupplierDirectory();
     }
 
-    public ArrayList<Network> getNetworkList() {
-        return networkList;
+    public NetworkDirectory getNetworkDirectory() {
+        return networkDirectory;
     }
+
+    public void setNetworkDirectory(NetworkDirectory networkDirectory) {
+        this.networkDirectory = networkDirectory;
+    }
+
+   
 
     public MasterOrderDirectory getMasterOrderDirectory() {
         return masterOrderDirectory;
@@ -58,25 +67,29 @@ public class Business extends Organization {
     public void setOrganizationDirectory(OrganizationDirectory organizationDirectory) {
         this.organizationDirectory = organizationDirectory;
     }
+
+//    public SupplierDirectory getSupplierDirectory() {
+//        return supplierDirectory;
+//    }
+//
+//    public void setSupplierDirectory(SupplierDirectory supplierDirectory) {
+//        this.supplierDirectory = supplierDirectory;
+//    }
     
     
 
-    public Network addNetwork() {
-        Network network = new Network();
-        networkList.add(network);
-        return network;
-    }
+   
 
-    public boolean checkIfUsernameIsUnique(String username) {
-        if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
-            return false;
-        }
-
-        for (Network network : networkList) {
-
-        }
-        return true;
-    }
+//    public boolean checkIfUsernameIsUnique(String username) {
+//        if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+//            return false;
+//        }
+//
+//        for (Network network : networkList) {
+//
+//        }
+//        return true;
+//    }
 
     @Override
     public ArrayList<Role> getSupportedRoles() {

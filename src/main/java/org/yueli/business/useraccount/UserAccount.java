@@ -6,6 +6,7 @@
 
 package org.yueli.business.useraccount;
 
+import java.util.ArrayList;
 import org.yueli.business.enterprise.Enterprise;
 import  org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
@@ -27,6 +28,13 @@ public class UserAccount {
     private WorkQueue workQueue;
     private Enterprise enterprise;
     private Network network;
+    private Organization organization;
+    private String networkname;
+    private String enterprisename;
+    private String organizationname;
+    
+    
+    
     
     public UserAccount(){
         workQueue = new WorkQueue();
@@ -87,11 +95,47 @@ public class UserAccount {
     public void setNetwork(Network network) {
         this.network = network;
     }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    public String getNetworkname() {
+        return networkname;
+    }
+
+    public void setNetworkname(String networkname) {
+        this.networkname = networkname;
+    }
+
+    public String getEnterprisename() {
+        return enterprisename;
+    }
+
+    public void setEnterprisename(String enterprisename) {
+        this.enterprisename = enterprisename;
+    }
+
+    public String getOrganizationname() {
+        return organizationname;
+    }
+
+    public void setOrganizationname(String organizationname) {
+        this.organizationname = organizationname;
+    }
+    
+    
+
+    
     
     
     public void initialize(){
-
-//        Enterprise inEnterprise = null;
+//
+//       Enterprise inEnterprise = null;
 //        Organization inOrganization = null;
 //        if (userAccount == null) {
 //            //Step2: Go inside each network to check each enterprise

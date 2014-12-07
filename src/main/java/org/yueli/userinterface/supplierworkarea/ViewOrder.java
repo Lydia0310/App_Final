@@ -34,11 +34,16 @@ public class ViewOrder extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
-    public ViewOrder(JPanel userProcessContainer, UserAccount userAccount,Business business) {
+    private Network network;
+    private Organization organization;
+    
+    public ViewOrder(JPanel userProcessContainer, UserAccount userAccount,Business business, Network network, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.business = business;
+        this.network = network;
+        this.organization = organization;
         populateEnterpriseTypeCombo();
         populateOrderTable();
     }
@@ -46,14 +51,14 @@ public class ViewOrder extends javax.swing.JPanel {
     public void populateEnterpriseTypeCombo(){
         enterpriseJCombo.removeAllItems();
         
-        for(Network network: business.getNetworkList()){
+        
             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList())
                 for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList() ){
                     for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
                         enterpriseJCombo.addItem(userAccount);
                     }
                 }
-            }
+            
         }
     
     

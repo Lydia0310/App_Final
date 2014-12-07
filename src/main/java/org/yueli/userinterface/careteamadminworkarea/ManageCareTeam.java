@@ -45,7 +45,7 @@ public class ManageCareTeam extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)careTeamTable.getModel();
         model.setRowCount(0);
         
-       for(Network network : business.getNetworkList()){
+       for(Network network : business.getNetworkDirectory().getNetworkList()){
            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
                     if(organization instanceof CareTeamOrganization){

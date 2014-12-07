@@ -43,7 +43,7 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
     public void populateInventoryTable(){
         DefaultTableModel model = (DefaultTableModel)deviceInventoryTable.getModel();
         model.setRowCount(0);
-        for(Network network : business.getNetworkList()){
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
         for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
             for(InventoryItem inventoryItem : ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList()){
                if(inventoryItem.getDevice().isIsAssigned()){
@@ -73,8 +73,6 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         deviceInventoryTable = new javax.swing.JTable();
-        sortBySupplierNameButton = new javax.swing.JButton();
-        sortByFunctionJButton = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
         requestDispatchingJButton = new javax.swing.JButton();
         quantityJSpinner = new javax.swing.JSpinner();
@@ -104,15 +102,6 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
             deviceInventoryTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        sortBySupplierNameButton.setText("Sort by Supplier Name");
-        sortBySupplierNameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sortBySupplierNameButtonActionPerformed(evt);
-            }
-        });
-
-        sortByFunctionJButton.setText("Sort by Function");
-
         backJButton.setText("<< Back");
 
         requestDispatchingJButton.setText("Request Dispatching");
@@ -128,31 +117,21 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backJButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(requestDispatchingJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 29, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(sortBySupplierNameButton)
-                                .addGap(339, 339, 339)
-                                .addComponent(sortByFunctionJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addComponent(backJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, Short.MAX_VALUE)
+                .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(requestDispatchingJButton)
                 .addGap(21, 21, 21))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sortBySupplierNameButton)
-                    .addComponent(sortByFunctionJButton))
-                .addGap(29, 29, 29)
+                .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -160,17 +139,13 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
                         .addComponent(backJButton)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(requestDispatchingJButton)
                             .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(22, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void sortBySupplierNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortBySupplierNameButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sortBySupplierNameButtonActionPerformed
 
     private void requestDispatchingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestDispatchingJButtonActionPerformed
         // TODO add your handling code here:
@@ -196,8 +171,6 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner quantityJSpinner;
     private javax.swing.JButton requestDispatchingJButton;
-    private javax.swing.JButton sortByFunctionJButton;
-    private javax.swing.JButton sortBySupplierNameButton;
     // End of variables declaration//GEN-END:variables
 }
 

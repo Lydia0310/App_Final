@@ -47,7 +47,7 @@ public class ViewAndRequestCareTeamSchedule extends javax.swing.JPanel {
 
     public void populateCareTeamNumberCombo(){
         careTeamCombo.removeAllItems();
-        for(Network network : business.getNetworkList()){
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
                 for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
                     if(organization instanceof CareTeamOrganization){
@@ -132,7 +132,7 @@ public class ViewAndRequestCareTeamSchedule extends javax.swing.JPanel {
         );
 
         CareTeam careTeam = (CareTeam)careTeamCombo.getSelectedItem();
-        for(Network network : business.getNetworkList()){
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
                 for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
                     if(organization instanceof CareTeamOrganization){

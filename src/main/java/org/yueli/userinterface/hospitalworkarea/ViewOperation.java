@@ -46,7 +46,7 @@ public class ViewOperation extends javax.swing.JPanel {
     }
     
     public void checkOperationRequestStatus(){
-         for(Network network : business.getNetworkList()){
+         for(Network network : business.getNetworkDirectory().getNetworkList()){
             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
                 if(enterprise instanceof HospitalEnterprise ){
                 for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
@@ -94,7 +94,7 @@ public class ViewOperation extends javax.swing.JPanel {
     public void populateOperationTable(){
         DefaultTableModel model = (DefaultTableModel)operationTable.getModel();
         model.setRowCount(0);
-        for(Network network : business.getNetworkList()){
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
                 if(enterprise instanceof HospitalEnterprise ){
                 for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){

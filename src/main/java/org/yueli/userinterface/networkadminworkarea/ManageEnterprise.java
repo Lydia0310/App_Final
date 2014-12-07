@@ -223,7 +223,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
        
         DefaultTableModel model = (DefaultTableModel)enterpriseJTable.getModel();
         model.setRowCount(0);
-         for(Network network : business.getNetworkList()){
+         
         for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
                 Object[] row = new Object[2];
                 row[0] = enterprise.getName();
@@ -231,7 +231,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
                 
                 model.addRow(row);
             }
-         }
+         
         
     }
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
@@ -247,13 +247,10 @@ public class ManageEnterprise extends javax.swing.JPanel {
             return;
         }
         String name = enterpriseNameJTextField.getText();
-        for(Network network : business.getNetworkList()){
+        
             Enterprise enterprise = network.getEnterpriseList().addEnterprise(name, type);
             
-           
-        }
-        
-        populateEnterpriseTable();
+            populateEnterpriseTable();
     }//GEN-LAST:event_addEnterpriseJButtonActionPerformed
 
     private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
@@ -264,7 +261,7 @@ public class ManageEnterprise extends javax.swing.JPanel {
         }
         else{
             Enterprise enterprise = (Enterprise)enterpriseJTable.getValueAt(selectedRow, 0);
-            for(Network network : business.getNetworkList()){
+            for(Network network : business.getNetworkDirectory().getNetworkList()){
                 for(Enterprise enterprise1 : network.getEnterpriseList().getEnterpriseList()){
                     if(enterprise1.equals(enterprise)){
                     for(UserAccount userAccount : enterprise1.getUserAccountDirectory().getUserAccountList()){

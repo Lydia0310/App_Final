@@ -9,6 +9,8 @@ package org.yueli.userinterface.supplierworkarea;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import org.yueli.business.Business;
+import org.yueli.business.network.Network;
+import org.yueli.business.organization.Organization;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.AppEntrance;
 
@@ -24,11 +26,15 @@ public class SupplierWorkArea extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
+    private Network network;
+    private Organization organization;
     public SupplierWorkArea() {
         initComponents();
         this.userProcessContainer = AppEntrance.getSlide();
         this.userAccount = AppEntrance.getLoginUser();
         this.business = AppEntrance.getBusiness();
+        network = userAccount.getNetwork();
+        organization = userAccount.getOrganization();
     }
     
   
@@ -94,7 +100,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
 
     private void viewOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderJButtonActionPerformed
         // TODO add your handling code here:
-        ViewOrder viewOrder = new ViewOrder(userProcessContainer,userAccount,business);
+        ViewOrder viewOrder = new ViewOrder(userProcessContainer, userAccount, business, network, organization);
         userProcessContainer.add("View Order",viewOrder);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -102,7 +108,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
 
     private void manageDeviceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageDeviceJButtonActionPerformed
         // TODO add your handling code here:
-        ManageDevicePanel manageDevicePanel = new ManageDevicePanel(userProcessContainer,business, userAccount);
+        ManageDevicePanel manageDevicePanel = new ManageDevicePanel(userProcessContainer, business, userAccount, network, organization);
         userProcessContainer.add("Manage Device", manageDevicePanel);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -110,7 +116,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
 
     private void createDeviceJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDeviceJButton1ActionPerformed
         // TODO add your handling code here:
-        CreateNewDevice createNewDevice = new CreateNewDevice(userProcessContainer, business, userAccount);
+        CreateNewDevice createNewDevice = new CreateNewDevice(userProcessContainer, business, userAccount, network, organization);
         userProcessContainer.add("Create New Device", createNewDevice);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

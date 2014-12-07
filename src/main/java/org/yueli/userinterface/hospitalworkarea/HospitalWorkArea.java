@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
+import org.yueli.business.organization.Organization;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.AppEntrance;
 
@@ -27,17 +28,18 @@ public class HospitalWorkArea extends javax.swing.JPanel {
     private Business business;
     private Network network;
     private Enterprise enterprise;
+    private Organization organization;
     private UserAccount userAccount;
     
     public HospitalWorkArea() {
         initComponents();
         this.userProcessContainer = AppEntrance.getSlide();
         this.business = AppEntrance.getBusiness();
-      //  this.network = network;
         this.userAccount = AppEntrance.getLoginUser();
-         userAccount.getNetwork();
-         userAccount.getEnterprise();
-        
+        network = userAccount.getNetwork();
+        enterprise = userAccount.getEnterprise();
+        organization = userAccount.getOrganization();
+
     }
 
     /**
@@ -154,7 +156,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void browserDeviceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browserDeviceJButtonActionPerformed
         // TODO add your handling code here:
-        BrowserDevice browserDevice = new BrowserDevice(userProcessContainer, business.getMasterOrderDirectory(),userAccount,business);
+        BrowserDevice browserDevice = new BrowserDevice(userProcessContainer, business.getMasterOrderDirectory(), userAccount, business, network, organization);
         userProcessContainer.add("Browser Device", browserDevice);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -178,7 +180,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
         // TODO add your handling code here:
-        ManageOrganization manageOrganization = new ManageOrganization(userProcessContainer, business,business.getOrganizationDirectory());
+        ManageOrganization manageOrganization = new ManageOrganization(userProcessContainer,business,enterprise.getOrganizationDirectory(),network,enterprise);
         userProcessContainer.add("Manage Organization", manageOrganization);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -186,7 +188,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void manageUserAccountJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUserAccountJButtonActionPerformed
         // TODO add your handling code here:
-        ManageUserAccount manageUserAccount = new ManageUserAccount(userProcessContainer, business);
+        ManageUserAccount manageUserAccount = new ManageUserAccount(userProcessContainer, business,network,enterprise, userAccount);
         userProcessContainer.add("Manage User Account", manageUserAccount);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

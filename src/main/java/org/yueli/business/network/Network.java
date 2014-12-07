@@ -8,7 +8,9 @@ package org.yueli.business.network;
 
 import  org.yueli.business.enterprise.EnterpriseDirectory;
 import org.yueli.business.organization.SupplierDirectory;
+import org.yueli.business.person.PersonDirectory;
 import org.yueli.business.room.RoomDirectory;
+import org.yueli.business.useraccount.UserAccountDirectory;
 
 /**
  *
@@ -18,10 +20,14 @@ public class Network {
     private String name;
     private EnterpriseDirectory enterpriseList;
     private SupplierDirectory supplierDirectory;
+    private PersonDirectory personDirectory;
+    private UserAccountDirectory userAccountDirectory;
     
     public Network(){
         enterpriseList = new EnterpriseDirectory();
         supplierDirectory = new SupplierDirectory();
+        personDirectory = new PersonDirectory();
+        userAccountDirectory = new UserAccountDirectory();
                 
     }
 
@@ -45,10 +51,26 @@ public class Network {
         this.supplierDirectory = supplierDirectory;
     }
 
-    
-    
-    
-    
+    public PersonDirectory getPersonDirectory() {
+        return personDirectory;
+    }
+
+    public void setPersonDirectory(PersonDirectory personDirectory) {
+        this.personDirectory = personDirectory;
+    }
+
+    public void setEnterpriseList(EnterpriseDirectory enterpriseList) {
+        this.enterpriseList = enterpriseList;
+    }
+
+    public UserAccountDirectory getUserAccountDirectory() {
+        return userAccountDirectory;
+    }
+
+    public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {
+        this.userAccountDirectory = userAccountDirectory;
+    }
+
     @Override
     public String toString(){
         return name;

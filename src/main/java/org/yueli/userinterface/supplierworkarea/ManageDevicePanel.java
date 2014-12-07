@@ -15,6 +15,8 @@ import org.yueli.business.device.Device;
 import org.yueli.business.inventory.Inventory;
 import org.yueli.business.inventory.InventoryItem;
 import org.yueli.business.network.Network;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.role.SupplierAdmin;
 import org.yueli.business.useraccount.UserAccount;
 
@@ -30,13 +32,17 @@ public class ManageDevicePanel extends javax.swing.JPanel {
      private JPanel userProcessContainer;
      private Business business;
     private UserAccount userAccount;
-    public ManageDevicePanel(JPanel userProcessContainer,Business business, UserAccount userAccount) {
+    private Network network;
+    private Organization organization;
+    public ManageDevicePanel(JPanel userProcessContainer,Business business, UserAccount userAccount, Network network, Organization organization) {
         initComponents();
          initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.userAccount = userAccount;
-        supplierNameJLabel.setText(((SupplierAdmin)userAccount.getRole()).getSupplierID());
+        this.network = network;
+        this.organization = organization;
+        supplierNameJLabel.setText(userAccount.getOrganizationname());
         populateDeviceTable();
     }
 
@@ -47,7 +53,7 @@ public class ManageDevicePanel extends javax.swing.JPanel {
             model.removeRow(i);
         }
         
-        for(Device device : ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().getDeviceList()){
+        for(Device device : (((SupplierOrganization)organization).getDeviceCatalog().getDeviceList())){
             Object row[] = new Object[3];
             row[0] = device;
             row[1] = device.getDeviceID();
@@ -61,7 +67,7 @@ public class ManageDevicePanel extends javax.swing.JPanel {
          DefaultTableModel model = (DefaultTableModel)inventoryItemTable.getModel();
          model.setRowCount(0);
          
-         for(InventoryItem inventoryItem : ((SupplierAdmin)userAccount.getRole()).getInventory().getInventoryItemList()){
+         for(InventoryItem inventoryItem : (((SupplierOrganization)organization).getInventory().getInventoryItemList())){
              Object row[] = new Object[5];
              row[0] = inventoryItem.getDevice().getDeviceName();
              row[1] = inventoryItem.getDevice().getDeviceID();
@@ -261,10 +267,10 @@ public class ManageDevicePanel extends javax.swing.JPanel {
         }
         else{
             Device device = (Device)deviceTable.getValueAt(selectedRow, 0);
-            ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().removeDevice(device);
+            ((SupplierOrganization)organization).getDeviceCatalog().removeDevice(device);
             populateDeviceTable();
             InventoryItem inventoryItem = (InventoryItem)inventoryItemTable.getValueAt(selectedRow, 0);
-            ((SupplierAdmin)userAccount.getRole()).getInventory().deleteInventoryItem(inventoryItem);
+            ((SupplierOrganization)organization).getInventory().deleteInventoryItem(inventoryItem);
             populateInventoryItemTable();
         }
     }//GEN-LAST:event_deleteJButtonActionPerformed
@@ -285,7 +291,7 @@ public class ManageDevicePanel extends javax.swing.JPanel {
         else{
             Device device = (Device)deviceTable.getValueAt(selectedRow,0)
 ;            //InventoryItem inventoryItem = (InventoryItem)deviceTable.getValueAt(selectedRow, 0);
-            for(InventoryItem ii : ((SupplierAdmin)userAccount.getRole()).getInventory().getInventoryItemList()){
+            for(InventoryItem ii : ((SupplierOrganization)organization).getInventory().getInventoryItemList()){
                 if(ii.getDevice().getDeviceName().equals(device.getDeviceName())){
                     ii.setInventoryQuantity(quantity);
                 }

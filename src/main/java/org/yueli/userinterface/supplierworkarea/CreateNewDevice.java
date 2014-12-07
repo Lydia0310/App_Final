@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import org.yueli.business.Business;
 import org.yueli.business.device.Device;
 import org.yueli.business.inventory.InventoryItem;
+import org.yueli.business.network.Network;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.organization.SupplierOrganization;
 import static org.yueli.business.role.Role.RoleType.SupplierAdmin;
 import org.yueli.business.role.SupplierAdmin;
 import org.yueli.business.useraccount.UserAccount;
@@ -27,11 +30,15 @@ public class CreateNewDevice extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Business business;
     private UserAccount userAccount;
-    public CreateNewDevice(JPanel userProcessContainer, Business business, UserAccount userAccount) {
+    private Network network;
+    private Organization organization;
+    public CreateNewDevice(JPanel userProcessContainer, Business business, UserAccount userAccount, Network network, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.userAccount = userAccount;
+        this.network = network;
+        this.organization = organization;
     }
 
     /**
@@ -122,8 +129,8 @@ public class CreateNewDevice extends javax.swing.JPanel {
 
     private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
         // TODO add your handling code here:
-        //InventoryItem inventoryItem = ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().addDevice();
-        Device device = ((SupplierAdmin)userAccount.getRole()).getDeviceCatalog().addDevice();
+       //InventoryItem inventoryItem = ((SupplierOrganization)organization).getDeviceCatalog().addDevice();
+        Device device = ((SupplierOrganization)organization).getDeviceCatalog().addDevice();
         device.setDeviceName(deviceNameJTextField.getText());
         device.setFunction(deviceFunctionJTextField.getText());
         
@@ -134,9 +141,9 @@ public class CreateNewDevice extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter a valid price", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         device.setDescription(descriptionJTextField.getText());
-        device.setSupplierID(((SupplierAdmin)userAccount.getRole()).getSupplierID());
-        device.setSupplierName(((SupplierAdmin)userAccount.getRole()).getSupplierName());
-        InventoryItem inventoryItem = ((SupplierAdmin)userAccount.getRole()).getInventory().addInventoryItem();
+        device.setSupplierID(((SupplierOrganization)organization).getSupplierID());
+        device.setSupplierName(((SupplierOrganization)organization).getSupplierName());
+        InventoryItem inventoryItem = (((SupplierOrganization)organization).getInventory().addInventoryItem());
         inventoryItem.setDevice(device);
     }//GEN-LAST:event_createJButtonActionPerformed
 

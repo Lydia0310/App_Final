@@ -31,7 +31,7 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
         this.userProcessContainer = AppEntrance.getSlide();
         this.business = AppEntrance.getBusiness();
         this.userAccount = AppEntrance.getLoginUser();
-        userAccount.getNetwork();
+        network = userAccount.getNetwork();
     }
 
     /**

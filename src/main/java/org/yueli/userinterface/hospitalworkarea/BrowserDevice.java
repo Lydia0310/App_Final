@@ -6,6 +6,7 @@
 
 package org.yueli.userinterface.hospitalworkarea;
 
+
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import  org.yueli.business.Business;
@@ -23,6 +24,7 @@ import org.yueli.business.device.DeviceDirectory;
 import org.yueli.business.inventory.Inventory;
 import org.yueli.business.inventory.InventoryItem;
 import org.yueli.business.order.OrderItem;
+import static org.yueli.business.organization.Organization.Type.Supplier;
 import org.yueli.business.role.HospitalAdmin;
 import org.yueli.business.role.SupplierAdmin;
 import org.yueli.business.workqueue.OrderRequest;
@@ -38,28 +40,26 @@ public class BrowserDevice extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Business business;
+    private Network network;
+    private Organization organization;
     private UserAccount userAccount;
     private Order order;
     private MasterOrderDirectory masterOrderDirectory;
     Boolean isCheckedOut = false;
     
     
-    public BrowserDevice(JPanel userProcessContainer, MasterOrderDirectory masterOrderDirectory, UserAccount userAccount,Business business) {
+    public BrowserDevice(JPanel userProcessContainer, MasterOrderDirectory masterOrderDirectory, UserAccount userAccount,Business business, Network network, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.masterOrderDirectory = masterOrderDirectory;
         this.userAccount = userAccount;
         this.business = business;
-        for(Network network : business.getNetworkList()){
-            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
-                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
-                    for(UserAccount userAccount1 : organization.getUserAccountDirectory().getUserAccountList()){
-                        jLabel2.setText(userAccount1.getPerson().getFirstName());
-                    }
-                }
-            }
-        }
+        this.network = network;
+        this.organization = organization;
+        jLabel2.setText(userAccount.getPerson().getFirstName());
+                    
         populateSupplierCombo();
+        populateDeviceTable();
     }
 
     /**
@@ -301,16 +301,14 @@ public class BrowserDevice extends javax.swing.JPanel {
 
     private void populateSupplierCombo(){
         supplierNameComboBox.removeAllItems();
-        for(Network network : business.getNetworkList()){
-            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
-                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
-                    if(organization instanceof SupplierOrganization){
-                        for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
-                            supplierNameComboBox.addItem(userAccount);
-                        }
-                    }
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
+            
+                for(SupplierOrganization  so : network.getSupplierDirectory().getSupplierList()){
+                    String supplierName = so.getSupplierName();
+                    supplierNameComboBox.addItem(supplierName);
+                    
                 }
-            }
+            
         }
     }
     private void populateDeviceTable(){
@@ -319,7 +317,7 @@ public class BrowserDevice extends javax.swing.JPanel {
         model.setRowCount(0);
         
         if(userAccount != null){
-            for (InventoryItem inventoryItem : ((SupplierAdmin)userAccount.getRole()).getInventory().getInventoryItemList()){
+            for (InventoryItem inventoryItem : ((SupplierOrganization)organization).getInventory().getInventoryItemList()){
                 Object[] row = new Object[4];
                 row[0] = inventoryItem.getDevice().getDeviceName();
                 row[1] = inventoryItem.getDevice().getFunction();
@@ -332,10 +330,10 @@ public class BrowserDevice extends javax.swing.JPanel {
     private void populateDeviceTable(String name){
         DefaultTableModel model = (DefaultTableModel)deviceJTable.getModel();
         model.setRowCount(0);
-        for(Organization organization : business.getOrganizationDirectory().getOrganizationList()){
-            if(organization instanceof SupplierOrganization){
-                for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
-                    for(InventoryItem inventoryItem : ((SupplierAdmin)userAccount.getRole()).getInventory().getInventoryItemList()){
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
+            for(SupplierOrganization so : network.getSupplierDirectory().getSupplierList()){
+                for(UserAccount userAccount : so.getUserAccountDirectory().getUserAccountList()){
+                    for(InventoryItem inventoryItem : ((SupplierOrganization)organization).getInventory().getInventoryItemList()){
                         Object[] row = new Object[4];
                         row[0] = inventoryItem.getDevice().getDeviceName();
                         row[1] = inventoryItem.getDevice().getFunction();

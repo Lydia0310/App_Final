@@ -27,7 +27,8 @@ public class NetworkDirectory {
         this.networkList = networkList;
     }
     
-    public Network addNetwork(Network network){
+    public Network addNetwork(){
+        Network network = new Network();
         networkList.add(network);
         return network;
     }

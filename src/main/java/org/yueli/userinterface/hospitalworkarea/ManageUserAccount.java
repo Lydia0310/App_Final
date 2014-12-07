@@ -28,24 +28,26 @@ public class ManageUserAccount extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Business business;
-    public ManageUserAccount(JPanel userProcessContainer, Business business) {
+    private Enterprise enterprise;
+    private UserAccount userAccout;
+    private Network network;
+    public ManageUserAccount(JPanel userProcessContainer, Business business,Network network, Enterprise enterprise, UserAccount userAccout) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.business = business;
+        this.business = business; 
+        this.enterprise = enterprise;
+        this.network = network;
         populateOrganizationCombo();
-        
         populateUserAccountTable();
     }
     
     public void populateOrganizationCombo(){
         organizationCombo.removeAllItems();
-          for(Network network : business.getNetworkList()){
-            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
+          
                 for(Organization organization :enterprise.getOrganizationDirectory().getOrganizationList() ){
                      organizationCombo.addItem(organization);
                 }
-            }
-        }
+         
           populateRoleCombo(business);
     }
     
@@ -61,16 +63,14 @@ public class ManageUserAccount extends javax.swing.JPanel {
     public void populateUserAccountTable(){
         DefaultTableModel model = (DefaultTableModel) userAccountTable.getModel();
         model.setRowCount(0);
-        for(Network network : business.getNetworkList()){
-            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
+        
                  for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
                     for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
                          Object row[] = new Object[2];
                          row[0] = userAccount;
                          row[1] = userAccount.getRole();
                          model.addRow(row);
-            }
-        }
+         
             }
         }     
     }
@@ -229,9 +229,10 @@ public class ManageUserAccount extends javax.swing.JPanel {
         Person person = organization.getPersonDirectory().addPerson();
         person.setFirstName(firstName);
         person.setLastName(lastName);
-        organization.getUserAccountDirectory().addUserAccount(username, password, person, role);
+        UserAccount userAccounthere = organization.getUserAccountDirectory().addUserAccount(username, password, person, role);
         //Doctor role ---> setDoctorName(firstName + lastName)
-        
+        userAccounthere.setEnterprise(enterprise);
+        userAccounthere.setNetwork(network);
         populateUserAccountTable();
         
     }//GEN-LAST:event_addJButtonActionPerformed

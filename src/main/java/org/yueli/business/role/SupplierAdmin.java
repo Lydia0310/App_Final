@@ -24,57 +24,38 @@ import  org.yueli.userinterface.supplierworkarea.SupplierWorkArea;
  */
 public class SupplierAdmin extends Role {
 
-    private DeviceDirectory deviceCatalog;
-    private Inventory inventory;
-    private String supplierID;
-    private String supplierName;
-    private static int count = 0;
+//    private DeviceDirectory deviceCatalog;
+//    private Inventory inventory;
+    
     
     public SupplierAdmin(){
         super(Role.RoleType.SupplierAdmin);
         
-        count++;
-        supplierID = String.valueOf(count);
-        inventory = new Inventory();
-        deviceCatalog = new DeviceDirectory();
+       
+//        inventory = new Inventory();
+//        deviceCatalog = new DeviceDirectory();
         
         privilegeList.add(new Function(5, "Supplier Work Area",SupplierWorkArea.class));
         
         
     }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
-    
-    public DeviceDirectory getDeviceCatalog() {
-        return deviceCatalog;
-    }
-
-    public void setDeviceCatalog(DeviceDirectory deviceCatalog) {
-        this.deviceCatalog = deviceCatalog;
-    }
-
-    public String getSupplierID() {
-        return supplierID;
-    }
-
-    public void setSupplierID(String supplierID) {
-        this.supplierID = supplierID;
-    }
-
-    public String getSupplierName() {
-        return supplierName;
-    }
-
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
-    }
+//    public Inventory getInventory() {
+//        return inventory;
+//    }
+//
+//    public void setInventory(Inventory inventory) {
+//        this.inventory = inventory;
+//    }
+//
+//    
+//    public DeviceDirectory getDeviceCatalog() {
+//        return deviceCatalog;
+//    }
+//
+//    public void setDeviceCatalog(DeviceDirectory deviceCatalog) {
+//        this.deviceCatalog = deviceCatalog;
+//    }
 
    
     @Override

@@ -13,6 +13,9 @@ import org.yueli.business.network.Network;
 import org.yueli.business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.yueli.business.enterprise.FoundingAcademicMedicalCenter;
+import org.yueli.business.enterprise.HospitalEnterprise;
+import org.yueli.business.enterprise.PrimaryCare;
 import org.yueli.business.person.Person;
 import org.yueli.business.role.FAMCAdmin;
 import org.yueli.business.role.HospitalAdmin;
@@ -31,11 +34,13 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Business business;
     private UserAccount userAccount;
+    private Network network;
     public ManageEnterpriseAdmin(JPanel userProcessContainer,UserAccount userAccount, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.business = business;
+        this.network = userAccount.getNetwork();
         
         enterpriseNameJLabel.setVisible(false);
         usernameJLabel.setVisible(false);
@@ -56,7 +61,7 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)enterpriseAdminJTable.getModel();
         model.setRowCount(0);
         
-        for(Network network : business.getNetworkList()){
+        for(Network network : business.getNetworkDirectory().getNetworkList()){
             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
                 for(UserAccount userAccount : enterprise.getUserAccountDirectory().getUserAccountList()){
                         Object[] row = new Object[3];
@@ -241,24 +246,20 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         String password = String.valueOf(PasswordField.getPassword());
         String firstName = firstNameJTextField.getText();
         String lastName = lastNameJTextField.getText();
-        
+
         Person person = enterprise.getPersonDirectory().addPerson();
         person.setFirstName(firstName);
         person.setLastName(lastName);
-        for(Network network : business.getNetworkList()){
-            for(Enterprise enterprise1 : network.getEnterpriseList().getEnterpriseList()){
-        if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital){
-            UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new HospitalAdmin());
-            //business.getUserAccountDirectory().getUserAccountList().add(account);
+        if(enterprise instanceof HospitalEnterprise){
+            enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new HospitalAdmin());
         }
-        if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.PrimaryCare){
-            UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new PrimaryCareAdmin());
+        if(enterprise instanceof PrimaryCare){
+            enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new PrimaryCareAdmin());
         }
-        if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.FoundingAMC){
-            UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new FAMCAdmin());
+        if(enterprise instanceof FoundingAcademicMedicalCenter){
+            enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new FAMCAdmin());
         }
-        }
-        }
+        
     }//GEN-LAST:event_createJButtonActionPerformed
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
@@ -286,11 +287,11 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
 
     public void populateEnterpriseCombo(){
         enterpriseNamejComboBox.removeAllItems();
-         for(Network network : business.getNetworkList()){
+         
         for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
             enterpriseNamejComboBox.addItem(enterprise);
+        
         }
-         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
