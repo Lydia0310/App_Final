@@ -203,14 +203,14 @@ public class ManageSupplier extends javax.swing.JPanel {
         String password = String.valueOf(PasswordField.getPassword());
         String firstName = firstNameJTextField.getText();
         String lastName = lastNameJTextField.getText();
-         for(Network network : business.getNetworkList()){
+        
         Person person = business.getPersonDirectory().addPerson();
         person.setFirstName(firstName);
         person.setLastName(lastName);
         UserAccount userAccount = business.getUserAccountDirectory().addUserAccount(username, password, person, new SupplierAdmin());
         network.getSupplierDirectory().addSupplier();
         ((SupplierAdmin)userAccount.getRole()).setSupplierName(supplierName);
-         }
+         
          populateSupplierTable();
     }//GEN-LAST:event_addJButtonActionPerformed
 

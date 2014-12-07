@@ -46,7 +46,6 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
         manageEnterpriseJButton = new javax.swing.JButton();
         manageEnterpriseAdminJButton = new javax.swing.JButton();
         manageSupplierJButton = new javax.swing.JButton();
-        viewDeviceRequestJButton = new javax.swing.JButton();
 
         manageEnterpriseJButton.setText("Manage Enterprise");
         manageEnterpriseJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -69,8 +68,6 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        viewDeviceRequestJButton.setText("View Device Request");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,7 +75,6 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(267, 267, 267)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageEnterpriseJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageEnterpriseAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageSupplierJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -93,9 +89,7 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
                 .addComponent(manageEnterpriseAdminJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(manageSupplierJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(viewDeviceRequestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -129,6 +123,5 @@ public class NetworkAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton manageEnterpriseAdminJButton;
     private javax.swing.JButton manageEnterpriseJButton;
     private javax.swing.JButton manageSupplierJButton;
-    private javax.swing.JButton viewDeviceRequestJButton;
     // End of variables declaration//GEN-END:variables
 }

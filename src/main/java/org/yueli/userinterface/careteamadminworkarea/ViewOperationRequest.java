@@ -6,11 +6,19 @@
 
 package org.yueli.userinterface.careteamadminworkarea;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
+import org.yueli.business.organization.CareTeamOrganization;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.schedule.Schedule;
 import org.yueli.business.useraccount.UserAccount;
+import org.yueli.business.workqueue.OperationRequest;
+import org.yueli.business.workqueue.WorkRequest;
 
 /**
  *
@@ -38,7 +46,20 @@ public class ViewOperationRequest extends javax.swing.JPanel {
     }
     
     public void populateCareTeamRequestTable(){
-        
+        DefaultTableModel model = (DefaultTableModel)careTeamRequestTable.getModel();
+        model.setRowCount(0);
+        for(WorkRequest workRequest : business.getWorkQueue().getWorkRequestList()){
+            if(workRequest instanceof OperationRequest){
+                Object row[] = new Object[6];
+                row[0] = workRequest.getRequestID();
+                row[1] = ((OperationRequest)workRequest).getCareTeamID();
+                row[2] = ((OperationRequest)workRequest).getBeginningTime();
+                row[3] = ((OperationRequest)workRequest).getEndTime();
+                row[4] = ((OperationRequest)workRequest).getDoctorName();
+                row[5] = ((OperationRequest)workRequest).getOperationRequestStatus();
+                model.addRow(row);
+            }
+        }
     }
 
     /**
@@ -59,11 +80,11 @@ public class ViewOperationRequest extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Request ID", "Request Care Team Number", "Doctor Name"
+                "Request ID", "Request Care Team Number", "Beginning Time", "End Time", "Doctor Name", "Operation Request Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -75,23 +96,31 @@ public class ViewOperationRequest extends javax.swing.JPanel {
             careTeamRequestTable.getColumnModel().getColumn(0).setResizable(false);
             careTeamRequestTable.getColumnModel().getColumn(1).setResizable(false);
             careTeamRequestTable.getColumnModel().getColumn(2).setResizable(false);
+            careTeamRequestTable.getColumnModel().getColumn(3).setResizable(false);
+            careTeamRequestTable.getColumnModel().getColumn(4).setResizable(false);
+            careTeamRequestTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         approveJButton.setText("Approve");
+        approveJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(approveJButton)
-                        .addGap(66, 66, 66))))
+                        .addGap(66, 66, 66))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,9 +129,30 @@ public class ViewOperationRequest extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(approveJButton)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void approveJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = careTeamRequestTable.getSelectedRow();
+        if(selectedRow <0 ){
+            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
+        }
+        else{
+            OperationRequest operationRequest = (OperationRequest) careTeamRequestTable.getValueAt(selectedRow, 0);
+            for(Organization organization : business.getOrganizationDirectory().getOrganizationList()){
+                if(organization instanceof CareTeamOrganization){
+                    for(Schedule schedule : ((CareTeamOrganization)organization).getScheduleDirectory().getScheduleList()){
+                        Date requestBeginningTime = operationRequest.getBeginningTime();
+                       Date requestEndTime = operationRequest.getEndTime();
+                       ((CareTeamOrganization)organization).getScheduleDirectory().addSchedule(new Schedule(requestEndTime, requestEndTime, null, Schedule.ScheduleType.CareTeam));
+                       operationRequest.setCareTeamRequestIsCompeleted(true);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_approveJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -25,9 +25,21 @@ public class Operation {
     private Device device;
     private CareTeamOrganization careTeam;
     private Patient patient;
+    private static int count;
+    private String operationID;
     public void Operation(){
-    
+        count++;
+        operationID = String.valueOf(count);
     }
+
+    public String getOperationID() {
+        return operationID;
+    }
+
+    public void setOperationID(String operationID) {
+        this.operationID = operationID;
+    }
+    
     
     public Room getRoom() {
         return room;

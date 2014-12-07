@@ -49,6 +49,7 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         firstNameJTextField.setVisible(false);
         lastNameJTextField.setVisible(false);
         populateEnterpriseCombo();
+        populateEnterpriseAdminTable();
     }
 
     private void populateEnterpriseAdminTable(){

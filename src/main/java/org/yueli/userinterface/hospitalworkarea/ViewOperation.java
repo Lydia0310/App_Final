@@ -6,11 +6,18 @@
 
 package org.yueli.userinterface.hospitalworkarea;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.enterprise.HospitalEnterprise;
 import org.yueli.business.network.Network;
+import org.yueli.business.operation.Operation;
+import org.yueli.business.organization.Organization;
 import org.yueli.business.useraccount.UserAccount;
+import org.yueli.business.workqueue.OperationRequest;
+import org.yueli.business.workqueue.WorkRequest;
 import org.yueli.userinterface.doctorworkarea.*;
 
 /**
@@ -32,12 +39,85 @@ public class ViewOperation extends javax.swing.JPanel {
         this.business = business;
         this.network = network;
         this.userAccount = userAccount;
+        checkOperationRequestStatus();
         populateOperationTable();
+        
+        
+    }
+    
+    public void checkOperationRequestStatus(){
+         for(Network network : business.getNetworkList()){
+            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+                if(enterprise instanceof HospitalEnterprise ){
+                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                    for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
+                        for(WorkRequest workRequest : userAccount.getWorkQueue().getWorkRequestList()){
+                            if(workRequest instanceof OperationRequest){
+                                if(((OperationRequest)workRequest).isCareTeamRequestIsCompeleted()&&((OperationRequest)workRequest).isDeviceRequestIsCompeleted()&&((OperationRequest)workRequest).isOperationRoomRequestIsCompeleted()){
+                                    JOptionPane.showMessageDialog(null,"Complete Operation Request");
+                                    break;
+                                }
+                                if(((OperationRequest)workRequest).isCareTeamRequestIsCompeleted()&&((OperationRequest)workRequest).isDeviceRequestIsCompeleted()){
+                                     JOptionPane.showMessageDialog(null,"Waiting for operation room request approve");
+                                     break;
+                                }
+                                if(((OperationRequest)workRequest).isCareTeamRequestIsCompeleted()&&((OperationRequest)workRequest).isOperationRoomRequestIsCompeleted()){
+                                    JOptionPane.showMessageDialog(null,"Waiting for device request approve");
+                                    break;
+                                }
+                                if(((OperationRequest)workRequest).isDeviceRequestIsCompeleted()&&((OperationRequest)workRequest).isOperationRoomRequestIsCompeleted()){
+                                    JOptionPane.showMessageDialog(null, "Waiting for care team request approve");
+                                    break;
+                                }
+                                if(((OperationRequest)workRequest).isCareTeamRequestIsCompeleted()){
+                                    JOptionPane.showMessageDialog(null,"Waiting for operation room request and device request approve");
+                                    break;
+                                }
+                                if(((OperationRequest)workRequest).isDeviceRequestIsCompeleted()){
+                                    JOptionPane.showMessageDialog(null, "Waiting for operation room request and care team request approve");
+                                    break;
+                                }
+                                if(((OperationRequest)workRequest).isOperationRoomRequestIsCompeleted()){
+                                    JOptionPane.showMessageDialog(null, "Waiting for device request and care team request approve");
+                                    break;
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                }
+            }
+         }
     }
     
     public void populateOperationTable(){
         DefaultTableModel model = (DefaultTableModel)operationTable.getModel();
         model.setRowCount(0);
+        for(Network network : business.getNetworkList()){
+            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+                if(enterprise instanceof HospitalEnterprise ){
+                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                    for(UserAccount userAccount : organization.getUserAccountDirectory().getUserAccountList()){
+                        for(WorkRequest workRequest : userAccount.getWorkQueue().getWorkRequestList()){
+                            if(workRequest instanceof OperationRequest){
+                                for(Operation operation : ((HospitalEnterprise)enterprise).getOperationList().getOperationList()){
+                                    Object row[] = new Object[7];
+                                    row[0] = operation.getOperationID();
+                                    row[1] = operation.getDoctor();
+                                    row[2] = operation.getCareTeam();
+                                    row[3] = ((OperationRequest)workRequest).getOperationRoomNumber();
+                                    row[4] = ((OperationRequest)workRequest).getBeginningTime();
+                                    row[5] = ((OperationRequest)workRequest).getEndTime();
+                                    row[6] = ((OperationRequest)workRequest).getOperationRequestStatus();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            }
+        }
         
     }
 
@@ -58,11 +138,11 @@ public class ViewOperation extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Operation ID", "Operation Name", "Doctor Name", "Care Team ID", "Operation Room Number", "Beginning Time", "End Time", "Status"
+                "Operation ID", "Doctor Name", "Care Team ID", "Operation Room Number", "Beginning Time", "End Time", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -78,7 +158,6 @@ public class ViewOperation extends javax.swing.JPanel {
             operationTable.getColumnModel().getColumn(4).setResizable(false);
             operationTable.getColumnModel().getColumn(5).setResizable(false);
             operationTable.getColumnModel().getColumn(6).setResizable(false);
-            operationTable.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
