@@ -47,6 +47,7 @@ public class AppEntrance {
             } else {
                 business = businesses.get(businesses.size() - 1);
             }
+            business.setName("Business");
             objectContainer.close();
             return business;
         } else {

@@ -46,6 +46,11 @@ public class OrganizationDirectory {
             organization = new CareTeamOrganization();
             organizationList.add(organization);
         }
+
+        if(type.getValue().equals((Type.OperationRoomAdmin.getValue()))){
+            organization = new CareTeamOrganization();
+            organizationList.add(organization);
+        }
      
         return organization;
     }
