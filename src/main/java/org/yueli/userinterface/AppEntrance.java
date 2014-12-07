@@ -7,7 +7,6 @@ import com.db4o.ObjectSet;
 import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.ta.TransparentPersistenceSupport;
 import org.yueli.business.Business;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.yueli.business.ConfigureABusiness;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.frame.MainFrame;

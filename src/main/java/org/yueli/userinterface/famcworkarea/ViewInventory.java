@@ -42,7 +42,7 @@ public class ViewInventory extends javax.swing.JPanel {
     public void populateInventoryTable(){
         DefaultTableModel model = (DefaultTableModel)deviceInventoryTable.getModel();
         model.setRowCount(0);
-        
+        for(Network network : business.getNetworkList()){
         for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
             for(InventoryItem inventoryItem : ((FoundingAcademicMedicalCenter)enterprise).getInventory().getInventoryItemList()){
                 Object row[] = new Object[5];
@@ -53,6 +53,7 @@ public class ViewInventory extends javax.swing.JPanel {
                
                 model.addRow(row);
             }
+        }
         }
     }
 

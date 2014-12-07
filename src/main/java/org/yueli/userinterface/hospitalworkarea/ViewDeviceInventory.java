@@ -6,19 +6,15 @@
 
 package org.yueli.userinterface.hospitalworkarea;
 
-import com.sun.org.apache.bcel.internal.Constants;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
-import org.yueli.business.device.Device;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.enterprise.HospitalEnterprise;
-import org.yueli.business.inventory.Inventory;
 import org.yueli.business.inventory.InventoryItem;
 import org.yueli.business.network.Network;
-import org.yueli.business.organization.Organization;
-import org.yueli.business.role.SupplierAdmin;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.DeviceRequest;
 
@@ -47,6 +43,7 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
     public void populateInventoryTable(){
         DefaultTableModel model = (DefaultTableModel)deviceInventoryTable.getModel();
         model.setRowCount(0);
+        for(Network network : business.getNetworkList()){
         for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
             for(InventoryItem inventoryItem : ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList()){
                if(inventoryItem.getDevice().isIsAssigned()){
@@ -59,6 +56,7 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
                 model.addRow(row);
                }
             }
+        }
         }
         
     }

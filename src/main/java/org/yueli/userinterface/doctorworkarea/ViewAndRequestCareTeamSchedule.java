@@ -6,6 +6,20 @@
 
 package org.yueli.userinterface.doctorworkarea;
 
+import static javafx.beans.binding.Bindings.or;
+import javax.swing.JPanel;
+import org.yueli.business.Business;
+import org.yueli.business.careteam.CareTeam;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
+import org.yueli.business.organization.CareTeamOrganization;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.useraccount.UserAccount;
+import org.yueli.business.workqueue.OperationRequest;
+import org.yueli.business.workqueue.WorkRequest;
+
+import org.yueli.userinterface.schedule.SchedulePanel;
+
 /**
  *
  * @author Lydia
@@ -15,10 +29,36 @@ public class ViewAndRequestCareTeamSchedule extends javax.swing.JPanel {
     /**
      * Creates new form ViewAndRequestCareTeamSchedule
      */
-    public ViewAndRequestCareTeamSchedule() {
+    private JPanel userProcessContainer;
+    private Business business;
+    private Network network;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    public ViewAndRequestCareTeamSchedule(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+        this.network = network;
+        this.enterprise = enterprise;
+        this.userAccount = userAccount;
+        
+        populateCareTeamNumberCombo();
     }
 
+    public void populateCareTeamNumberCombo(){
+        careTeamCombo.removeAllItems();
+        for(Network network : business.getNetworkList()){
+            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                    if(organization instanceof CareTeamOrganization){
+                        for(CareTeam careTeam : ((CareTeamOrganization)organization).getCareTeamDirectory().getCareTeamList()){
+                            careTeamCombo.addItem(careTeam.getCareTeamID());
+                        }
+                    }
+                }
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,43 +68,101 @@ public class ViewAndRequestCareTeamSchedule extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        careTeamScheduleJPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        careTeamCombo = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        requestCareTeamJTextField = new javax.swing.JTextField();
+        requestJButton = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        careTeamScheduleJPanel.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setText("Care Team Number: ");
+
+        jLabel2.setText("Request Care Team Number:");
+
+        requestJButton.setText("Request");
+        requestJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestJButtonActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(careTeamCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(433, 433, 433))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(requestCareTeamJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(100, 100, 100))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(careTeamScheduleJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap()))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(requestJButton)
+                        .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(288, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(careTeamCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(careTeamScheduleJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(requestCareTeamJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(requestJButton)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
+
+        CareTeam careTeam = (CareTeam)careTeamCombo.getSelectedItem();
+        for(Network network : business.getNetworkList()){
+            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                    if(organization instanceof CareTeamOrganization){
+                        careTeamScheduleJPanel = new SchedulePanel(((CareTeamOrganization)organization).getScheduleDirectory().getScheduleList());
+                    }
+                }
+            }
+        }
     }// </editor-fold>//GEN-END:initComponents
+
+    private void requestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestJButtonActionPerformed
+        // TODO add your handling code here:
+        String requestCareTeamNumber = requestCareTeamJTextField.getText();
+        for(WorkRequest workRequest : userAccount.getWorkQueue().getWorkRequestList()){
+            if(workRequest instanceof OperationRequest){
+                if(userAccount.getPerson().getFirstName().equals(workRequest.getSender())){
+                    ((OperationRequest)workRequest).setCareTeamID(requestCareTeamNumber);
+                    ((OperationRequest)workRequest).setCareTeamRequestIsCompeleted(false);
+                }
+            }
+        }
+    }//GEN-LAST:event_requestJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox careTeamCombo;
+    private javax.swing.JPanel careTeamScheduleJPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField requestCareTeamJTextField;
+    private javax.swing.JButton requestJButton;
     // End of variables declaration//GEN-END:variables
 }

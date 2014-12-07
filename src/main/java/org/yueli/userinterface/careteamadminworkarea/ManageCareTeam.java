@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package org.yueli.userinterface.careteamworkarea;
+package org.yueli.userinterface.careteamadminworkarea;
 
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +12,7 @@ import org.yueli.business.Business;
 import org.yueli.business.careteam.CareTeam;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
+import org.yueli.business.organization.CareTeamOrganization;
 import org.yueli.business.organization.Organization;
 import org.yueli.business.role.CareTeamAdmin;
 import org.yueli.business.useraccount.UserAccount;
@@ -43,11 +44,20 @@ public class ManageCareTeam extends javax.swing.JPanel {
     public void populateCareTeamTable(){
         DefaultTableModel model = (DefaultTableModel)careTeamTable.getModel();
         model.setRowCount(0);
-       for(Organization careTeamOrganization :enterprise.getOrganizationDirectory().getOrganizationList() ){
-           Object row[] = new Object[2];
-           row[0] = ((CareTeamAdmin)userAccount.getRole()).getCareTeamID();
-           row[1] = ((CareTeamAdmin)userAccount.getRole()).getTeamLeaderName();
-           model.addRow(row);
+        
+       for(Network network : business.getNetworkList()){
+           for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+               for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                    if(organization instanceof CareTeamOrganization){
+                        for(CareTeam careTeam : ((CareTeamOrganization)organization).getCareTeamDirectory().getCareTeamList()){
+                        Object row[] = new Object[2];
+                        row[0] = careTeam.getCareTeamID();
+                        row[1] = careTeam.getCareTeamName();
+                        model.addRow(row);
+                        }
+                    }
+                }
+            }
        }
     }
 

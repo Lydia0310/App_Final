@@ -9,6 +9,7 @@ package org.yueli.business.organization;
 import org.yueli.business.role.Role;
 import java.util.ArrayList;
 import org.yueli.business.careteam.CareTeamDirectory;
+import org.yueli.business.schedule.ScheduleDirectory;
 
 
 /**
@@ -17,10 +18,11 @@ import org.yueli.business.careteam.CareTeamDirectory;
  */
 public class CareTeamOrganization extends Organization{
     private CareTeamDirectory careTeamDirectory;
-    
+    private ScheduleDirectory scheduleDirectory;
     public CareTeamOrganization(){
         super(Type.CareTeam.getValue());
         careTeamDirectory = new CareTeamDirectory();
+        scheduleDirectory = new ScheduleDirectory();
     }
 
     public CareTeamDirectory getCareTeamDirectory() {
@@ -29,6 +31,14 @@ public class CareTeamOrganization extends Organization{
 
     public void setCareTeamDirectory(CareTeamDirectory careTeamDirectory) {
         this.careTeamDirectory = careTeamDirectory;
+    }
+
+    public ScheduleDirectory getScheduleDirectory() {
+        return scheduleDirectory;
+    }
+
+    public void setScheduleDirectory(ScheduleDirectory scheduleDirectory) {
+        this.scheduleDirectory = scheduleDirectory;
     }
     
     

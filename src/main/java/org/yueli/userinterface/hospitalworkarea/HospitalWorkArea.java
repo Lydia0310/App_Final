@@ -175,7 +175,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
         // TODO add your handling code here:
-        ManageOrganization manageOrganization = new ManageOrganization(userProcessContainer, business.getOrganizationDirectory());
+        ManageOrganization manageOrganization = new ManageOrganization(userProcessContainer, business, network);
         userProcessContainer.add("Manage Organization", manageOrganization);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -191,6 +191,10 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void viewDeviceRequestJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceRequestJButton1ActionPerformed
         // TODO add your handling code here:
+        ViewDeviceRequest viewDeviceRequest = new ViewDeviceRequest(userProcessContainer, business, userAccount);
+        userProcessContainer.add("View Device Request", viewDeviceRequest);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_viewDeviceRequestJButton1ActionPerformed
 
 

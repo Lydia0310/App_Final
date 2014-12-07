@@ -13,7 +13,7 @@ import  org.yueli.business.function.Function;
 import org.yueli.business.network.Network;
 import  org.yueli.business.organization.Organization;
 import  org.yueli.business.useraccount.UserAccount;
-import org.yueli.userinterface.careteamworkarea.CareTeamWorkArea;
+import org.yueli.userinterface.careteamadminworkarea.CareTeamWorkArea;
 import org.yueli.userinterface.doctorworkarea.DoctorWorkArea;
 import org.yueli.userinterface.famcworkarea.FAMCAdminWorkArea;
 import org.yueli.userinterface.hospitalworkarea.HospitalWorkArea;

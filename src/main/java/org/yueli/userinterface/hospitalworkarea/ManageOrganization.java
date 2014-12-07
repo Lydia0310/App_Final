@@ -8,6 +8,9 @@ package org.yueli.userinterface.hospitalworkarea;
 
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.yueli.business.Business;
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
 import org.yueli.business.organization.Organization.Type;
 import org.yueli.business.organization.OrganizationDirectory;
@@ -21,19 +24,23 @@ public class ManageOrganization extends javax.swing.JPanel {
     /**
      * Creates new form ManageOrganization
      */
-    private OrganizationDirectory organizationDirectory;
+    
     private JPanel userProcessContainer;
-    public ManageOrganization(JPanel userProcessContainer, OrganizationDirectory organizationDirectory) {
+    private Business business;
+    private Network network;
+    public ManageOrganization(JPanel userProcessContainer,Business business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.organizationDirectory = organizationDirectory;
+        this.business = business;
+        this.network = network;
         populateOrganizationCombo();
         populateOrganizationTable();
     }
     
     public void populateOrganizationCombo(){
-        organizationCombo.removeAllItems();;
-        for(Type type : Organization.Type.values() ){
+        organizationCombo.removeAllItems();
+        for(Type type : Organization.Type.values()){
+            
             if(!((type.getValue().equals(Type.SysAdmin.getValue()))&&(type.getValue().equals(Type.Supplier.getValue())))){
                 organizationCombo.addItem(type);
             }
@@ -42,15 +49,19 @@ public class ManageOrganization extends javax.swing.JPanel {
     
     public void populateOrganizationTable(){
         DefaultTableModel model = (DefaultTableModel) organizationTable.getModel();
-        model.setRowCount(0);
-        for(Organization organization : organizationDirectory.getOrganizationList())
-        {
-            Object[] row = new Object [2];
-            row[0] = organization.getOrganizationID();
-            row[1] = organization.getName();
-            model.addRow(row);
-            populateOrganizationCombo();
-        } 
+        model.setRowCount(0); 
+         for(Network network : business.getNetworkList()){
+             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList())
+                {
+                    Object[] row = new Object [2];
+                    row[0] = organization.getOrganizationID();
+                    row[1] = organization.getName();
+                    model.addRow(row);
+                    populateOrganizationCombo();
+                } 
+            }
+         }
     }
 
     /**
@@ -137,7 +148,13 @@ public class ManageOrganization extends javax.swing.JPanel {
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         // TODO add your handling code here:
         Type type = (Type)organizationCombo.getSelectedItem();
-        organizationDirectory.addOrganization(type);
+         for(Network network : business.getNetworkList()){
+             for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+                
+                    enterprise.getOrganizationDirectory().addOrganization(type);
+                
+            }
+        }
         populateOrganizationTable();
     }//GEN-LAST:event_addJButtonActionPerformed
 

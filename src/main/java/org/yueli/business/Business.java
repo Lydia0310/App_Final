@@ -10,7 +10,6 @@ import  org.yueli.business.network.Network;
 import  org.yueli.business.order.MasterOrderDirectory;
 import  org.yueli.business.organization.Organization;
 import  org.yueli.business.role.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import org.yueli.business.organization.OrganizationDirectory;
@@ -19,14 +18,12 @@ import org.yueli.business.organization.OrganizationDirectory;
  * @author Lydia
  */
 public class Business extends Organization {
-    @JsonIgnore
     private static Business business;
     private OrganizationDirectory organizationDirectory;
     private MasterOrderDirectory masterOrderDirectory;
 
     private ArrayList<Network> networkList;
 
-    @JsonIgnore
     public static Business getInstance() {
         if (business == null) {
             business = new Business();
@@ -79,7 +76,6 @@ public class Business extends Organization {
         return true;
     }
 
-    @JsonIgnore
     @Override
     public ArrayList<Role> getSupportedRoles() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

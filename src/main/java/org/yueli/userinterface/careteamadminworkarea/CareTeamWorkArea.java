@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package org.yueli.userinterface.careteamworkarea;
+package org.yueli.userinterface.careteamadminworkarea;
 
 /**
  *

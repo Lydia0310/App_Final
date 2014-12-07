@@ -142,6 +142,7 @@ public class ViewAndRequestOperationRoom extends javax.swing.JPanel {
             if(workRequest instanceof OperationRequest){
                 if(userAccount.getPerson().getFirstName().equals(workRequest.getSender())){
                     ((OperationRequest)workRequest).setOperationRoomNumber(operationRoom);
+                    ((OperationRequest)workRequest).setOperationRoomRequestIsCompeleted(false);
                 }
             }
         }

@@ -50,7 +50,15 @@ public class BrowserDevice extends javax.swing.JPanel {
         this.masterOrderDirectory = masterOrderDirectory;
         this.userAccount = userAccount;
         this.business = business;
-        jLabel2.setText(userAccount.getPerson().getFirstName());
+        for(Network network : business.getNetworkList()){
+            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                    for(UserAccount userAccount1 : organization.getUserAccountDirectory().getUserAccountList()){
+                        jLabel2.setText(userAccount1.getPerson().getFirstName());
+                    }
+                }
+            }
+        }
         populateSupplierCombo();
     }
 

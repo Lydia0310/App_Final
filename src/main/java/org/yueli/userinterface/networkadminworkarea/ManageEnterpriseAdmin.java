@@ -244,6 +244,8 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         Person person = enterprise.getPersonDirectory().addPerson();
         person.setFirstName(firstName);
         person.setLastName(lastName);
+        for(Network network : business.getNetworkList()){
+            for(Enterprise enterprise1 : network.getEnterpriseList().getEnterpriseList()){
         if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital){
             UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new HospitalAdmin());
         }
@@ -252,6 +254,8 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         }
         if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.FoundingAMC){
             UserAccount account = enterprise.getUserAccountDirectory().addUserAccount(username, password, person, new FAMCAdmin());
+        }
+        }
         }
     }//GEN-LAST:event_createJButtonActionPerformed
 
