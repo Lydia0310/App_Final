@@ -26,6 +26,8 @@ import org.yueli.business.useraccount.UserAccount;
  *
  * @author Lydia
  */
+
+@SuppressWarnings("unchecked")
 public class AssignDevice extends javax.swing.JPanel {
 
     /**

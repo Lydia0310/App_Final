@@ -1,6 +1,7 @@
 package org.yueli.userinterface.frame;
 
 
+import org.yueli.business.role.SystemAdminRole;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.AppEntrance;
 
@@ -86,6 +87,10 @@ public class LoginPanel extends JPanel {
             // login success
             userAccount.initialize();
             AppEntrance.setLoginUser(userAccount);
+            if(userAccount.getUsername().equals("sys")){
+
+                userAccount.setRole(new SystemAdminRole());
+            }
             AppEntrance.getMainFrame().loginSuccess(userAccount.getRole().getPrivilegeList());
         }
     }

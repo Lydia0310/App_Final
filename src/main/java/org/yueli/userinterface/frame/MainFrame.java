@@ -188,6 +188,7 @@ public class MainFrame extends JFrame {
         verticalSplit.setRightComponent(horizontalSplit);
         funcButtonPanel.refresh(funcList);
         topBarLogout.setVisible(true);
+        rightPanel.removeAll();
     }
 
     public void logout() {
