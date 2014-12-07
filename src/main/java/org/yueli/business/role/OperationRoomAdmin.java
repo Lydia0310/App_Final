@@ -13,6 +13,7 @@ import org.yueli.business.function.Function;
 import org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
 import org.yueli.business.room.RoomDirectory;
+import org.yueli.business.schedule.ScheduleDirectory;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.operationroomadminworkarea.OperationRoomAdminWorkArea;
 
@@ -22,12 +23,22 @@ import org.yueli.userinterface.operationroomadminworkarea.OperationRoomAdminWork
  */
 public class OperationRoomAdmin extends Role{
     private RoomDirectory roomList;
-    
+    private ScheduleDirectory scheduleDirectory;
     public OperationRoomAdmin() {
         super(Role.RoleType.OperationRoomAdmin);
         privilegeList.add(new Function(9, "Operation Room Admin Work Area", OperationRoomAdminWorkArea.class));
         roomList = new RoomDirectory();
+        scheduleDirectory = new ScheduleDirectory();
     }
+
+    public ScheduleDirectory getScheduleDirectory() {
+        return scheduleDirectory;
+    }
+
+    public void setScheduleDirectory(ScheduleDirectory scheduleDirectory) {
+        this.scheduleDirectory = scheduleDirectory;
+    }
+    
 
     public RoomDirectory getRoomList() {
         return roomList;
