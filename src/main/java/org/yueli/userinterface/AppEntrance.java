@@ -45,7 +45,7 @@ public class AppEntrance {
             if (businesses.size() == 0) {
                 business = ConfigureABusiness.configure();  // If there's no System in the record, create a new one
             } else {
-                business = businesses.get(0);
+                business = businesses.get(businesses.size() - 1);
             }
             objectContainer.close();
             return business;
