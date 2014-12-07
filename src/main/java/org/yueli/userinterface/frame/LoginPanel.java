@@ -101,13 +101,17 @@ public class LoginPanel extends JPanel {
                 for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
                     userAccount = enterprise.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
                     if (userAccount != null) {
+                        inNetwork = network;
                         inEnterprise = enterprise;
                         break outOfLoops;
                     } else {
                         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
                             userAccount = organization.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
                             if (userAccount != null) {
+                                inNetwork = network;
+                                inEnterprise = enterprise;
                                 inOrganization = organization;
+                                break outOfLoops;
                             }
                         }
                     }
