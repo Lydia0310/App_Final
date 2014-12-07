@@ -79,6 +79,12 @@ public class LoginPanel extends JPanel {
     private void loginButtonClicked () {
         UserAccount userAccount = AppEntrance.getBusiness().getUserAccountDirectory()
                 .authenticateUser(userNameField.getText(), passwordField.getText());
+//        if(userNameField.getText().equals("sys")) {
+//            userAccount = new UserAccount();
+//            userAccount.setUsername("sys");
+//            userAccount.setPassword("sys");
+//            userAccount.setRole(new SystemAdminRole());
+//        }
         if (userAccount == null) {
             // login failed
             infoLabel.setVisible(true);
@@ -87,10 +93,6 @@ public class LoginPanel extends JPanel {
             // login success
             userAccount.initialize();
             AppEntrance.setLoginUser(userAccount);
-            if(userAccount.getUsername().equals("sys")){
-
-                userAccount.setRole(new SystemAdminRole());
-            }
             AppEntrance.getMainFrame().loginSuccess(userAccount.getRole().getPrivilegeList());
         }
     }
