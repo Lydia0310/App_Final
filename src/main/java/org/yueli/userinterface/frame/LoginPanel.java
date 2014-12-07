@@ -86,8 +86,7 @@ public class LoginPanel extends JPanel {
             // login success
             userAccount.initialize();
             AppEntrance.setLoginUser(userAccount);
-            AppEntrance.getMainFrame().loginSuccess();
+            AppEntrance.getMainFrame().loginSuccess(userAccount.getRole().getPrivilegeList());
         }
-
     }
 }

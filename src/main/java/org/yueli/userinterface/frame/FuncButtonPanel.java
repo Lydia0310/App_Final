@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by zjy on 13-11-16.
  */
-public class FuncButtonPanel extends JPanel{
+public class FuncButtonPanel extends JPanel {
 
     private JScrollPane scrollPane;
     private JPanel funcPanel;
@@ -31,10 +31,12 @@ public class FuncButtonPanel extends JPanel{
         this.add(scrollPane);
     }
 
-    public void refresh () {
+    public void refresh (List<Function> funcList) {
         funcPanel.removeAll();
-        SystemAdminRole systemAdminRole = new SystemAdminRole();
-        List<Function> funcList = systemAdminRole.getPrivilegeList();
+        if (funcList == null || funcList.size() == 0)
+            return;
+//        SystemAdminRole systemAdminRole = new SystemAdminRole();
+//        List<Function> funcList = systemAdminRole.getPrivilegeList();
         for (Function func : funcList) {
             JPanel buttonPanel = new JPanel(new BorderLayout());
             buttonPanel.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));

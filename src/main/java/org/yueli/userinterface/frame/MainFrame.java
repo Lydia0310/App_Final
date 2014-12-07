@@ -11,8 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MainFrame extends JFrame {
 
@@ -185,9 +184,9 @@ public class MainFrame extends JFrame {
         ((CardLayout)rightPanel.getLayout()).next(rightPanel);
     }
 
-    public void loginSuccess() {
+    public void loginSuccess(java.util.List<Function> funcList) {
         verticalSplit.setRightComponent(horizontalSplit);
-        funcButtonPanel.refresh();
+        funcButtonPanel.refresh(funcList);
         topBarLogout.setVisible(true);
     }
 
