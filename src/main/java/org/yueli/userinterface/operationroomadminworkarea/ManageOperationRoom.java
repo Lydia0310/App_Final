@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
-import org.yueli.business.room.OperationRoom;
 import org.yueli.business.room.Room;
 import org.yueli.business.useraccount.UserAccount;
 
@@ -42,10 +41,10 @@ public class ManageOperationRoom extends javax.swing.JPanel {
     public void populateOperationRoomTable(){
         DefaultTableModel model = (DefaultTableModel)operationRoomTable.getModel();
         model.setRowCount(0);
-        for(Room room : enterprise.getRoomList().getRoomList()){
+        for(Room room : enterprise.getRoomDirectory().getRoomList()){
             if(room.getType().equals(Room.RoomType.OperationRoom)){
                 Object row[] = new Object[1];
-                row[0] = ((OperationRoom)room).getOperationRoomNumber();
+                row[0] = room;
                 model.addRow(row);
             }
         }
@@ -133,7 +132,7 @@ public class ManageOperationRoom extends javax.swing.JPanel {
     private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
         // TODO add your handling code here:
         String operationRoomNumber = operationRoomNumberJTextField.getText();
-        Room room = enterprise.getRoomList().addRoom(operationRoomNumber, Room.RoomType.OperationRoom);
+        Room room = enterprise.getRoomDirectory().addRoom(operationRoomNumber, Room.RoomType.OperationRoom);
         populateOperationRoomTable();
     }//GEN-LAST:event_createJButtonActionPerformed
 

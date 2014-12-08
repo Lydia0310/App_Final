@@ -84,7 +84,7 @@ public abstract class Enterprise extends Organization{
         this.enterpriseID = enterpriseID;
     }
 
-    public RoomDirectory getRoomList() {
+    public RoomDirectory getRoomDirectory() {
         return roomList;
     }
 

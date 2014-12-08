@@ -15,6 +15,7 @@ public class OperationRoom extends Room{
     
     public OperationRoom() {
         super(Room.RoomType.OperationRoom);
+
     }
 
     public String getOperationRoomNumber() {
@@ -24,6 +25,9 @@ public class OperationRoom extends Room{
     public void setOperationRoomNumber(String operationRoomNumber) {
         this.operationRoomNumber = operationRoomNumber;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return operationRoomNumber;
+    }
 }

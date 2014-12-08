@@ -70,7 +70,7 @@ public class AssignDevice extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)roomTable.getModel();
         model.setRowCount(0);
         if(enterprise instanceof HospitalEnterprise ){
-         for(Room room : enterprise.getRoomList().getRoomList()){
+         for(Room room : enterprise.getRoomDirectory().getRoomList()){
             if(room.getType() == Room.RoomType.StorageRoom){
                 Object row[] = new Object[3];
                 row[0] = room.getRoomID();
@@ -84,7 +84,7 @@ public class AssignDevice extends javax.swing.JPanel {
     
     public void populateRoomNumberCombo(){
         roomNumberCombo.removeAllItems();
-        for(Room room : enterprise.getRoomList().getRoomList()){
+        for(Room room : enterprise.getRoomDirectory().getRoomList()){
             if(room.getType() == Room.RoomType.StorageRoom && !(((StorageRoom)room).isIsFull())){
                 roomNumberCombo.addItem(((StorageRoom)room).getStorageRoomNumber());
             }

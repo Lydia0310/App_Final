@@ -35,6 +35,9 @@ public class Patient {
     public void setPatientName(String patientName) {
         this.patientName = patientName;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return patientID.toString();
+    }
 }

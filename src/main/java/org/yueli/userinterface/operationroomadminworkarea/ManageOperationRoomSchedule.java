@@ -6,31 +6,19 @@
 
 package org.yueli.userinterface.operationroomadminworkarea;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
+
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.enterprise.HospitalEnterprise;
 import org.yueli.business.network.Network;
-import static org.yueli.business.organization.Organization.Type.OperationRoomAdmin;
-import org.yueli.business.role.OperationRoomAdmin;
-import static org.yueli.business.role.Role.RoleType.OperationRoomAdmin;
 import org.yueli.business.room.OperationRoom;
 import org.yueli.business.room.Room;
-import org.yueli.business.room.RoomDirectory;
-import org.yueli.business.schedule.Schedule;
 import org.yueli.business.schedule.ScheduleDirectory;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.schedule.SchedulePanel;
 
 /**
- *
  * @author Lydia
  */
 public class ManageOperationRoomSchedule extends javax.swing.JPanel {
@@ -43,26 +31,32 @@ public class ManageOperationRoomSchedule extends javax.swing.JPanel {
     private Network network;
     private Enterprise enterprise;
     private UserAccount userAccount;
+
     public ManageOperationRoomSchedule(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
+//        for(Room room : enterprise.getRoomDirectory().getRoomList()) {
+//            if(room.getType().equals(Room.RoomType.OperationRoom)) {
+//                ScheduleDirectory scheduleList = room.getScheduleDirectory();
+//                operationRoomScheduleJPanel = new SchedulePanel(scheduleList.getScheduleList());
+//            }
+//        }
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.network = network;
         this.enterprise = enterprise;
         this.userAccount = userAccount;
-        
         populateOperationRoomCombo();
     }
-    
-    public void populateOperationRoomCombo(){
+
+    public void populateOperationRoomCombo() {
         operationRoomNumberCombo.removeAllItems();
-            if(enterprise instanceof HospitalEnterprise){
-                for(Room room : enterprise.getRoomList().getRoomList()){
-                    if(room.getType().equals(Room.RoomType.OperationRoom)){
-                        operationRoomNumberCombo.addItem(((OperationRoom)room).getOperationRoomNumber());
-                    }
+        if (enterprise instanceof HospitalEnterprise) {
+            for (Room room : enterprise.getRoomDirectory().getRoomList()) {
+                if (room.getType().equals(Room.RoomType.OperationRoom)) {
+                    operationRoomNumberCombo.addItem(((OperationRoom) room).getOperationRoomNumber());
                 }
             }
+        }
     }
 
     /**
@@ -73,7 +67,6 @@ public class ManageOperationRoomSchedule extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         operationRoomScheduleJPanel = new javax.swing.JPanel();
         colonJLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -86,43 +79,36 @@ public class ManageOperationRoomSchedule extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(operationRoomNumberCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(colonJLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(216, 216, 216))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(operationRoomScheduleJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(operationRoomNumberCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(54, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(colonJLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(216, 216, 216))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(operationRoomScheduleJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(operationRoomNumberCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(operationRoomScheduleJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(colonJLabel3)
-                .addGap(69, 69, 69))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(operationRoomNumberCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(operationRoomScheduleJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(colonJLabel3)
+                                .addGap(69, 69, 69))
         );
-
-        for(Room room :((OperationRoomAdmin)userAccount.getRole()).getRoomList().getRoomList()){
-            if(room.getType().equals(Room.RoomType.OperationRoom)){
-                ScheduleDirectory scheduleList = room.getScheduleDirectory();
-                operationRoomScheduleJPanel = new SchedulePanel(scheduleList.getScheduleList());
-            }
-        }
     }// </editor-fold>//GEN-END:initComponents
 
 

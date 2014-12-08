@@ -6,7 +6,6 @@
 
 package org.yueli.userinterface.warehouseworkarea;
 
-import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -54,7 +53,7 @@ public class ManageStorageRoom extends javax.swing.JPanel {
     public void populateRoomTable(){
         DefaultTableModel model = (DefaultTableModel)storageRoomTable.getModel();
         model.setRowCount(0);
-        for(Room room : enterprise.getRoomList().getRoomList()){
+        for(Room room : enterprise.getRoomDirectory().getRoomList()){
             if(room.getType() == Room.RoomType.StorageRoom){
                 Object row[] = new Object[3];
                 row[0] = room.getRoomID();
@@ -291,7 +290,7 @@ public class ManageStorageRoom extends javax.swing.JPanel {
         // TODO add your handling code here:
         
        String roomNumber = roomNumberJTextField.getText();
-        Room room = enterprise.getRoomList().addRoom(roomNumber,Room.RoomType.StorageRoom);
+        Room room = enterprise.getRoomDirectory().addRoom(roomNumber,Room.RoomType.StorageRoom);
         ((StorageRoom)room).setStorageRoomNumber(roomNumber);
         ((StorageRoom)room).setStorageRoomStatus(status);
         if(status.equals("empty")){
