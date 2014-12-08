@@ -29,7 +29,7 @@ public class FAMCAdmin extends Role{
         super(Role.RoleType.FAMCAdmin);
         count++;
         famcID = String.valueOf(count);
-        
+        inventory = new Inventory();
         privilegeList.add(new Function(3, "Funding Academic Medical Center Admin Work Area", FAMCAdminWorkArea.class));
                 
     }

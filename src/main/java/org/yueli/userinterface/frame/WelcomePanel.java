@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  *
- * @author zjy
+ * @author Yue Li
  */
 public class WelcomePanel extends JPanel {
 
