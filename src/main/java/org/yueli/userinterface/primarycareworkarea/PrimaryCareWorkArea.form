@@ -16,11 +16,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="viewDeviceRequestJButton" max="32767" attributes="0"/>
-                  <Component id="viewInventoryJButton" pref="207" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="browserDeviceJButton" max="32767" attributes="0"/>
+                  <Component id="viewDeviceRequestJButton" alignment="1" max="32767" attributes="0"/>
+                  <Component id="viewInventoryJButton" alignment="1" pref="207" max="32767" attributes="0"/>
+                  <Component id="viewOrderJButton" alignment="0" pref="207" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
           </Group>
@@ -29,11 +31,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+              <Component id="browserDeviceJButton" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <Component id="viewOrderJButton" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Component id="viewInventoryJButton" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
               <Component id="viewDeviceRequestJButton" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace pref="180" max="32767" attributes="0"/>
+              <EmptySpace pref="103" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,6 +59,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewDeviceRequestJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="browserDeviceJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Browser Device"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browserDeviceJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="viewOrderJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Order"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewOrderJButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

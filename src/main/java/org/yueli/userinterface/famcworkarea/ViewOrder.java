@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package org.yueli.userinterface.hospitalworkarea;
+package org.yueli.userinterface.famcworkarea;
 
+import org.yueli.userinterface.hospitalworkarea.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,7 @@ import org.yueli.business.order.Order;
 import org.yueli.business.order.OrderItem;
 import org.yueli.business.organization.Organization;
 import org.yueli.business.organization.SupplierOrganization;
+import org.yueli.business.role.FAMCAdmin;
 import org.yueli.business.role.HospitalAdmin;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.OrderRequest;
@@ -49,7 +51,7 @@ public class ViewOrder extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) orderJTable.getModel();
         model.setRowCount(0);
         for (Order order : masterOrderDirectory.getMasterOrderList()) {
-            if (order.getOrderEnterpriseID().equals(((HospitalAdmin) userAccount.getRole()).getHospitalID())) {
+            if (order.getOrderEnterpriseID().equals(((FAMCAdmin) userAccount.getRole()).getFamcID())) {
                 Object row[] = new Object[2];
 
                 for (SupplierOrganization supplierOrganization : network.getSupplierDirectory().getSupplierList()) {

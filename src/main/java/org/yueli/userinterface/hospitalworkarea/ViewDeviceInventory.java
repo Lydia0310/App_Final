@@ -45,6 +45,7 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
+            if(enterprise instanceof HospitalEnterprise){
             for(InventoryItem inventoryItem : ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList()){
                if(inventoryItem.getDevice().isIsAssigned()){
                 Object row[] = new Object[5];
@@ -55,7 +56,7 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
                 row[4] = inventoryItem.getDevice().getLocation();
                 model.addRow(row);
                }
-
+            }
         }
         }
         

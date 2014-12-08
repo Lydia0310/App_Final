@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package org.yueli.userinterface.hospitalworkarea;
+package org.yueli.userinterface.primarycareworkarea;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-
-import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
 import org.yueli.business.order.MasterOrderDirectory;
 import org.yueli.business.order.Order;
 import org.yueli.business.order.OrderItem;
-import org.yueli.business.organization.Organization;
 import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.role.HospitalAdmin;
+import org.yueli.business.role.PrimaryCareAdmin;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.OrderRequest;
 import org.yueli.business.workqueue.WorkRequest;
 
 /**
+ *
  * @author Lydia
  */
 public class ViewOrder extends javax.swing.JPanel {
@@ -30,26 +28,24 @@ public class ViewOrder extends javax.swing.JPanel {
     /**
      * Creates new form ViewOrder
      */
-    private JPanel userProcessContainer;
+     private JPanel userProcessContainer;
     private MasterOrderDirectory masterOrderDirectory;
     private UserAccount userAccount;
     private Network network;
-
     public ViewOrder(JPanel userProcessContainer, MasterOrderDirectory masterOrderDirectory, UserAccount userAccount) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
+         this.userProcessContainer = userProcessContainer;
         this.masterOrderDirectory = masterOrderDirectory;
         this.userAccount = userAccount;
         this.network = userAccount.getNetwork();
 
         populateOrderOverviewTable();
     }
-
-    public void populateOrderOverviewTable() {
+public void populateOrderOverviewTable() {
         DefaultTableModel model = (DefaultTableModel) orderJTable.getModel();
         model.setRowCount(0);
         for (Order order : masterOrderDirectory.getMasterOrderList()) {
-            if (order.getOrderEnterpriseID().equals(((HospitalAdmin) userAccount.getRole()).getHospitalID())) {
+            if (order.getOrderEnterpriseID().equals(((PrimaryCareAdmin) userAccount.getRole()).getPrimaryCareID())) {
                 Object row[] = new Object[2];
 
                 for (SupplierOrganization supplierOrganization : network.getSupplierDirectory().getSupplierList()) {
@@ -66,7 +62,6 @@ public class ViewOrder extends javax.swing.JPanel {
             }
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,10 +95,6 @@ public class ViewOrder extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(orderJTable);
-        if (orderJTable.getColumnModel().getColumnCount() > 0) {
-            orderJTable.getColumnModel().getColumn(0).setResizable(false);
-            orderJTable.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         orderDetailJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,12 +113,6 @@ public class ViewOrder extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(orderDetailJTable);
-        if (orderDetailJTable.getColumnModel().getColumnCount() > 0) {
-            orderDetailJTable.getColumnModel().getColumn(0).setResizable(false);
-            orderDetailJTable.getColumnModel().getColumn(1).setResizable(false);
-            orderDetailJTable.getColumnModel().getColumn(2).setResizable(false);
-            orderDetailJTable.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         viewJButton.setText("View");
         viewJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +149,7 @@ public class ViewOrder extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,16 +160,11 @@ public class ViewOrder extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(viewJButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-        // TODO add your handling code here:
-        populateOrderOverviewTable();
-    }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void viewJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewJButtonActionPerformed
         // TODO add your handling code here:
@@ -205,6 +185,11 @@ public class ViewOrder extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_viewJButtonActionPerformed
+
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+        // TODO add your handling code here:
+        populateOrderOverviewTable();
+    }//GEN-LAST:event_refreshJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
