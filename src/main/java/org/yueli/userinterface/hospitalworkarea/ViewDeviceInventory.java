@@ -43,7 +43,7 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
     public void populateInventoryTable(){
         DefaultTableModel model = (DefaultTableModel)deviceInventoryTable.getModel();
         model.setRowCount(0);
-        for(Network network : business.getNetworkDirectory().getNetworkList()){
+
         for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
             for(InventoryItem inventoryItem : ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList()){
                if(inventoryItem.getDevice().isIsAssigned()){
@@ -55,7 +55,7 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
                 row[4] = inventoryItem.getDevice().getLocation();
                 model.addRow(row);
                }
-            }
+
         }
         }
         

@@ -9,16 +9,20 @@ package org.yueli.userinterface.hospitalworkarea;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
+import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.network.Network;
 import org.yueli.business.order.MasterOrderDirectory;
 import org.yueli.business.order.Order;
 import org.yueli.business.order.OrderItem;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.role.HospitalAdmin;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.OrderRequest;
 import org.yueli.business.workqueue.WorkRequest;
 
 /**
- *
  * @author Lydia
  */
 public class ViewOrder extends javax.swing.JPanel {
@@ -29,28 +33,36 @@ public class ViewOrder extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private MasterOrderDirectory masterOrderDirectory;
     private UserAccount userAccount;
+    private Network network;
+
     public ViewOrder(JPanel userProcessContainer, MasterOrderDirectory masterOrderDirectory, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.masterOrderDirectory = masterOrderDirectory;
         this.userAccount = userAccount;
+        this.network = userAccount.getNetwork();
+
         populateOrderOverviewTable();
-    }   
-    
-    public void populateOrderOverviewTable(){
-        DefaultTableModel model = (DefaultTableModel)orderJTable.getModel();
+    }
+
+    public void populateOrderOverviewTable() {
+        DefaultTableModel model = (DefaultTableModel) orderJTable.getModel();
         model.setRowCount(0);
-        for(Order order : masterOrderDirectory.getMasterOrderList()){
-            if(order.getOrderEnterpriseID().equals(((HospitalAdmin)userAccount.getRole()).getHospitalID())){
+        for (Order order : masterOrderDirectory.getMasterOrderList()) {
+            if (order.getOrderEnterpriseID().equals(((HospitalAdmin) userAccount.getRole()).getHospitalID())) {
                 Object row[] = new Object[2];
-                row[0] = order;
-                for(WorkRequest workRequest : userAccount.getWorkQueue().getWorkRequestList()){
-                    if(order.getOrderID().equals(((OrderRequest)workRequest).getOrder().getOrderID())){
-                        row[1] = ((OrderRequest)workRequest).getOrderStatus();
-                        
+
+                for (SupplierOrganization supplierOrganization : network.getSupplierDirectory().getSupplierList()) {
+                    for (WorkRequest workRequest : supplierOrganization.getWorkQueue().getWorkRequestList()) {
+                        if (order.getOrderID().equals(((OrderRequest) workRequest).getOrder().getOrderID())) {
+                            row[0] = order;
+                            row[1] = ((OrderRequest) workRequest).getOrderStatus();
+                            model.addRow(row);
+                        }
                     }
                 }
-                model.addRow(row);
+
+
             }
         }
     }
@@ -73,19 +85,19 @@ public class ViewOrder extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
 
         orderJTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][]{
 
-            },
-            new String [] {
-                "OrderID", "Status"
-            }
+                },
+                new String[]{
+                        "OrderID", "Status"
+                }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
+            boolean[] canEdit = new boolean[]{
+                    false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane1.setViewportView(orderJTable);
@@ -95,19 +107,19 @@ public class ViewOrder extends javax.swing.JPanel {
         }
 
         orderDetailJTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][]{
 
-            },
-            new String [] {
-                "Device Name", "Quantity", "Unit Price", "Total Price"
-            }
+                },
+                new String[]{
+                        "Device Name", "Quantity", "Unit Price", "Total Price"
+                }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
+            boolean[] canEdit = new boolean[]{
+                    false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane2.setViewportView(orderDetailJTable);
@@ -137,43 +149,43 @@ public class ViewOrder extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(viewJButton)
-                        .addGap(104, 104, 104))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(refreshJButton)
-                        .addGap(58, 58, 58))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(backJButton)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(viewJButton)
+                                                .addGap(104, 104, 104))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(refreshJButton)
+                                                .addGap(58, 58, 58))))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(106, 106, 106)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(52, 52, 52)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(20, 20, 20)
+                                                .addComponent(backJButton)))
+                                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(refreshJButton)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(viewJButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(backJButton)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(refreshJButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(viewJButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(backJButton)
+                                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,21 +196,20 @@ public class ViewOrder extends javax.swing.JPanel {
 
     private void viewJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewJButtonActionPerformed
         // TODO add your handling code here:
+        ((DefaultTableModel) orderDetailJTable.getModel()).setRowCount(0);
         int selectedRow = orderJTable.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel)orderJTable.getModel();
-        model.setRowCount(0);
-        if(selectedRow <0 ){
+        DefaultTableModel model = (DefaultTableModel) orderJTable.getModel();
+        if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row to continue!");
-        }
-        else{
-            OrderRequest orderRequest = (OrderRequest)orderJTable.getValueAt(selectedRow, 0);
-            for(OrderItem orderItem : orderRequest.getOrder().getOrderItemList()){
+        } else {
+            Order order = (Order) orderJTable.getModel().getValueAt(selectedRow, 0);
+            for (OrderItem orderItem : order.getOrderItemList()) {
                 Object row[] = new Object[4];
-                row[0] = orderItem.getInventoryItem().getDevice().getDeviceName();
+                row[0] = orderItem;
                 row[1] = orderItem.getOrderQuantity();
                 row[2] = orderItem.getInventoryItem().getDevice().getDevicePrice();
                 row[3] = orderItem.getInventoryItem().getDevice().getDevicePrice() * orderItem.getOrderQuantity();
-                model.addRow(row);
+                ((DefaultTableModel)orderDetailJTable.getModel()).addRow(row);
             }
         }
     }//GEN-LAST:event_viewJButtonActionPerformed

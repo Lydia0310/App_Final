@@ -1,6 +1,7 @@
 package org.yueli.userinterface.frame;
 
 
+import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.role.SystemAdminRole;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.userinterface.AppEntrance;
@@ -98,6 +99,14 @@ public class LoginPanel extends JPanel {
                 inNetwork = network;
                 break outOfLoops;
             } else {
+                for (SupplierOrganization supplier : network.getSupplierDirectory().getSupplierList()) {
+                    userAccount = supplier.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
+                    if (userAccount != null) {
+                        inNetwork = network;
+                        inOrganization = supplier;
+                        break outOfLoops;
+                    }
+                }
                 for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
                     userAccount = enterprise.getUserAccountDirectory().authenticateUser(userNameField.getText(), passwordField.getText());
                     if (userAccount != null) {

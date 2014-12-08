@@ -56,6 +56,7 @@ public class BrowserDevice extends javax.swing.JPanel {
         this.business = business;
         this.network = network;
         this.organization = organization;
+        order = new Order();
         jLabel2.setText(userAccount.getPerson().getFirstName());
                     
         populateSupplierCombo();
@@ -304,28 +305,28 @@ public class BrowserDevice extends javax.swing.JPanel {
         for(Network network : business.getNetworkDirectory().getNetworkList()){
             
                 for(SupplierOrganization  so : network.getSupplierDirectory().getSupplierList()){
-                    String supplierName = so.getSupplierName();
-                    supplierNameComboBox.addItem(supplierName);
+
+                    supplierNameComboBox.addItem(so);
                     
                 }
             
         }
     }
     private void populateDeviceTable(){
-        UserAccount userAccount = (UserAccount)supplierNameComboBox.getSelectedItem();
+        SupplierOrganization so = (SupplierOrganization)supplierNameComboBox.getSelectedItem();
         DefaultTableModel model = (DefaultTableModel)deviceJTable.getModel();
         model.setRowCount(0);
         
-        if(userAccount != null){
-            for (InventoryItem inventoryItem : ((SupplierOrganization)organization).getInventory().getInventoryItemList()){
+
+            for (InventoryItem inventoryItem : so.getInventory().getInventoryItemList()){
                 Object[] row = new Object[4];
-                row[0] = inventoryItem.getDevice().getDeviceName();
+                row[0] = inventoryItem;
                 row[1] = inventoryItem.getDevice().getFunction();
-                row[2] = inventoryItem.getDevice().getDevicePrice();
-                row[3] = inventoryItem.getQuantity();
+                row[2] = inventoryItem.getQuantity();
+                row[3] = inventoryItem.getDevice().getDevicePrice();
                 model.addRow(row);
             }
-        }
+
     }
     private void populateDeviceTable(String name){
         DefaultTableModel model = (DefaultTableModel)deviceJTable.getModel();
@@ -335,7 +336,7 @@ public class BrowserDevice extends javax.swing.JPanel {
                 for(UserAccount userAccount : so.getUserAccountDirectory().getUserAccountList()){
                     for(InventoryItem inventoryItem : ((SupplierOrganization)organization).getInventory().getInventoryItemList()){
                         Object[] row = new Object[4];
-                        row[0] = inventoryItem.getDevice().getDeviceName();
+                        row[0] = inventoryItem;
                         row[1] = inventoryItem.getDevice().getFunction();
                         row[2] = inventoryItem.getQuantity();
                         row[3] = inventoryItem.getDevice().getDevicePrice();
@@ -350,15 +351,17 @@ public class BrowserDevice extends javax.swing.JPanel {
     public void populateOrderTable(){
         DefaultTableModel model = (DefaultTableModel) orderJTable.getModel();
         model.setRowCount(0);
-        for(OrderItem orderItem : order.getOrderItemList()){
-            Object[] row = new Object[4];
-            row[0]= orderItem;
-            row[1] = orderItem.getOrderQuantity();
-            row[2] = orderItem.getInventoryItem().getDevice().getDevicePrice();
-            row[3] = orderItem.getOrderQuantity()*orderItem.getInventoryItem().getDevice().getDevicePrice();
-            model.addRow(row);
+
+            for (OrderItem orderItem : order.getOrderItemList()) {
+                Object[] row = new Object[4];
+                row[0] = orderItem;
+                row[1] = orderItem.getOrderQuantity();
+                row[2] = orderItem.getInventoryItem().getDevice().getDevicePrice();
+                row[3] = orderItem.getOrderQuantity() * orderItem.getInventoryItem().getDevice().getDevicePrice();
+                model.addRow(row);
+            }
         }
-    }
+
     private void viewDetailJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailJButtonActionPerformed
         // TODO add your handling code here:
         int selectedRow = deviceJTable.getSelectedRow();
@@ -389,37 +392,39 @@ public class BrowserDevice extends javax.swing.JPanel {
         }
         else{
             InventoryItem  inventoryItem = (InventoryItem)deviceJTable.getValueAt(selectedRow, 0);
-            if(quantity<=0 || quantity > inventoryItem.getQuantity()){
+            if(quantity <= 0 || quantity > inventoryItem.getQuantity()){
                 JOptionPane.showMessageDialog(null, "The stock is not enough", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             Boolean isInculded = false;
-            for(OrderItem orderItem : order.getOrderItemList()){
-                if(orderItem.getInventoryItem().getDevice().getDeviceName().equals(inventoryItem.getDevice().getDeviceName())){
-                    int oldQuantity = orderItem.getOrderQuantity();
-                    int newQuantity = (Integer)quantityJSpinner.getValue();
-                    int availiability = inventoryItem.getQuantity();
-                    int totalQuantity = oldQuantity + newQuantity;
-                    orderItem.setOrderQuantity(totalQuantity);
-                    int newAvailiability = inventoryItem.getQuantity() - newQuantity;
-                    inventoryItem.setInventoryQuantity(newAvailiability);
-                    isInculded = true;
-                    
+
+                for(OrderItem orderItem : order.getOrderItemList()) {
+                    if (orderItem.getInventoryItem().getDevice().getDeviceName().equals(inventoryItem.getDevice().getDeviceName())) {
+                        int oldQuantity = orderItem.getOrderQuantity();
+                        int newQuantity = (Integer) quantityJSpinner.getValue();
+                        int availiability = inventoryItem.getQuantity();
+                        int totalQuantity = oldQuantity + newQuantity;
+                        orderItem.setOrderQuantity(totalQuantity);
+                        int newAvailiability = inventoryItem.getQuantity() - newQuantity;
+                        inventoryItem.setInventoryQuantity(newAvailiability);
+                        isInculded = true;
+
+                    }
                 }
-            }
-            if(!isInculded){
-                OrderItem orderItem = order.addOrderItem();
-                orderItem.setInventoryItem(inventoryItem);
-                int quantity_notIncluded = (Integer)quantityJSpinner.getValue();
-                orderItem.setOrderQuantity(quantity_notIncluded);
-                int new_availiability = inventoryItem.getQuantity() - quantity_notIncluded;
-                inventoryItem.setInventoryQuantity(new_availiability);
-                
-            }
-            
+                    if(!isInculded){
+                        OrderItem orderItem1 = order.addOrderItem();
+                        orderItem1.setInventoryItem(inventoryItem);
+                        int quantity_notIncluded = (Integer)quantityJSpinner.getValue();
+                        orderItem1.setOrderQuantity(quantity_notIncluded);
+                        int new_availiability = inventoryItem.getQuantity() - quantity_notIncluded;
+                        inventoryItem.setInventoryQuantity(new_availiability);
+
+                    }
+
+
             populateDeviceTable();
             populateOrderTable();
-            
+
         }
     }//GEN-LAST:event_addJButtonActionPerformed
 
@@ -473,9 +478,9 @@ public class BrowserDevice extends javax.swing.JPanel {
             orderRequest.setRequestDate(orderRequest.getTimestamp());
             
             Organization organization = null;
-            for(Organization organization1 : business.getOrganizationDirectory().getOrganizationList()){
-                if(organization instanceof SupplierOrganization){
-                    organization1 = organization;
+            for(Organization organization1 : network.getSupplierDirectory().getSupplierList()){
+                if(organization1.getName().equals(((SupplierOrganization)supplierNameComboBox.getSelectedItem()).getName())){
+                    organization = organization1;
                     break;
                 }
             }

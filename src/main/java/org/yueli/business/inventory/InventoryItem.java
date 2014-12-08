@@ -17,8 +17,6 @@ public class InventoryItem {
     private  Device device;
     private int Quantity;
 
-    
-    
     public Device getDevice() {
         return device;
     }

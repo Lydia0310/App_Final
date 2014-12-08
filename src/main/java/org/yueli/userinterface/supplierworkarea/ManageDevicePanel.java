@@ -289,12 +289,21 @@ public class ManageDevicePanel extends javax.swing.JPanel {
             JOptionPane .showMessageDialog(null, "Please select a row to continue!");
         }
         else{
-            Device device = (Device)deviceTable.getValueAt(selectedRow,0)
+            Device device = (Device)deviceTable.getValueAt(selectedRow, 0)
 ;            //InventoryItem inventoryItem = (InventoryItem)deviceTable.getValueAt(selectedRow, 0);
             for(InventoryItem ii : ((SupplierOrganization)organization).getInventory().getInventoryItemList()){
                 if(ii.getDevice().getDeviceName().equals(device.getDeviceName())){
-                    ii.setInventoryQuantity(quantity);
+                    int newQuantity = ii.getQuantity() + quantity;
+                    ii.setInventoryQuantity(newQuantity);
+                    ii.setDevice(device);
                 }
+                else{
+                    ii = new InventoryItem();
+                    ii.setDevice(device);
+                    ii.setInventoryQuantity(quantity);
+
+                }
+
             }
            
             populateInventoryItemTable();

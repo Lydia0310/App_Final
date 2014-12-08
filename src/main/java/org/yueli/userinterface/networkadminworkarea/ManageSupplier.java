@@ -48,7 +48,7 @@ public class ManageSupplier extends javax.swing.JPanel {
         for(SupplierOrganization so : network.getSupplierDirectory().getSupplierList()){
             Object row[] = new Object[2];
             row[0] = so;
-            row[1] = so.getSupplierName();
+            row[1] = so.getName();
             model.addRow(row);
          } 
     }
@@ -61,7 +61,7 @@ public class ManageSupplier extends javax.swing.JPanel {
                 for (UserAccount userAccount : so.getUserAccountDirectory().getUserAccountList()) {
                     Object row[] = new Object[3];
                     row[0] = userAccount.getUsername();
-                    row[1] = so.getSupplierName();
+                    row[1] = so.getName();
                     row[2] = userAccount.getNetwork();
                     model.addRow(row);
 
@@ -304,7 +304,7 @@ public class ManageSupplier extends javax.swing.JPanel {
         // TODO add your handling code here:
         String supplierName = supplierNameJTextField.getText();
         SupplierOrganization supplierOrganization = network.getSupplierDirectory().addSupplier();
-        supplierOrganization.setSupplierName(supplierName);
+        supplierOrganization.setName(supplierName);
         populateSupplierTable();
     }//GEN-LAST:event_addSupplierJButtonActionPerformed
 

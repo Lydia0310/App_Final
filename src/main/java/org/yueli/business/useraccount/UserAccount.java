@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.yueli.business.enterprise.Enterprise;
 import  org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
+import org.yueli.business.organization.SupplierOrganization;
 import org.yueli.business.person.Person;
 import org.yueli.business.role.Role;
 import org.yueli.business.workqueue.WorkQueue;
@@ -32,8 +33,6 @@ public class UserAccount {
     private String networkname;
     private String enterprisename;
     private String organizationname;
-    
-    
     
     
     public UserAccount(){
@@ -127,12 +126,7 @@ public class UserAccount {
     public void setOrganizationname(String organizationname) {
         this.organizationname = organizationname;
     }
-    
-    
 
-    
-    
-    
     public void initialize(){
 //
 //       Enterprise inEnterprise = null;

@@ -31,14 +31,14 @@ public class CreateNewDevice extends javax.swing.JPanel {
     private Business business;
     private UserAccount userAccount;
     private Network network;
-    private Organization organization;
-    public CreateNewDevice(JPanel userProcessContainer, Business business, UserAccount userAccount, Network network, Organization organization) {
+    private SupplierOrganization supplierOrganization;
+    public CreateNewDevice(JPanel userProcessContainer, Business business, UserAccount userAccount, Network network, SupplierOrganization supplierOrganization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.userAccount = userAccount;
         this.network = network;
-        this.organization = organization;
+        this.supplierOrganization = supplierOrganization;
     }
 
     /**
@@ -130,7 +130,7 @@ public class CreateNewDevice extends javax.swing.JPanel {
     private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
         // TODO add your handling code here:
        //InventoryItem inventoryItem = ((SupplierOrganization)organization).getDeviceCatalog().addDevice();
-        Device device = ((SupplierOrganization)organization).getDeviceCatalog().addDevice();
+        Device device = supplierOrganization.getDeviceCatalog().addDevice();
         device.setDeviceName(deviceNameJTextField.getText());
         device.setFunction(deviceFunctionJTextField.getText());
         
@@ -141,9 +141,9 @@ public class CreateNewDevice extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter a valid price", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         device.setDescription(descriptionJTextField.getText());
-        device.setSupplierID(((SupplierOrganization)organization).getSupplierID());
-        device.setSupplierName(((SupplierOrganization)organization).getSupplierName());
-        InventoryItem inventoryItem = (((SupplierOrganization)organization).getInventory().addInventoryItem());
+        device.setSupplierID(supplierOrganization.getSupplierID());
+        device.setSupplierName(supplierOrganization.getName());
+        InventoryItem inventoryItem = (supplierOrganization.getInventory().addInventoryItem());
         inventoryItem.setDevice(device);
     }//GEN-LAST:event_createJButtonActionPerformed
 

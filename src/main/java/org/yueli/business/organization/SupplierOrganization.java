@@ -23,7 +23,7 @@ public class SupplierOrganization extends Organization{
     private Inventory inventory;
     private DeviceDirectory deviceCatalog;
     private String supplierID;
-    private String supplierName;
+
     private static int count = 0;
     
     public SupplierOrganization(){
@@ -59,14 +59,7 @@ public class SupplierOrganization extends Organization{
         this.supplierID = supplierID;
     }
 
-    public String getSupplierName() {
-        return supplierName;
-    }
 
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
-    }
-    
     
     @Override
     public ArrayList<Role> getSupportedRoles() {
@@ -74,6 +67,7 @@ public class SupplierOrganization extends Organization{
         roles.add(new SupplierAdmin());
         return roles;
     }
+    @Override
     public String toString(){
         return supplierID;
     }

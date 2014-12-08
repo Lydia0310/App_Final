@@ -48,7 +48,7 @@ public class OrganizationDirectory {
         }
 
         if(type.getValue().equals((Type.OperationRoomAdmin.getValue()))){
-            organization = new CareTeamOrganization();
+            organization = new OperationRoomOrganization();
             organizationList.add(organization);
         }
      
