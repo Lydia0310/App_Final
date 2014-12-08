@@ -40,7 +40,7 @@ public class OperationRoomAdmin extends Role{
     }
     
 
-    public RoomDirectory getRoomList() {
+    public RoomDirectory getRoomDirectory() {
         return roomList;
     }
 

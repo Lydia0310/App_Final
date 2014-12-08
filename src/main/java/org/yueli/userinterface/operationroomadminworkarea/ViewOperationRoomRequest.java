@@ -139,7 +139,7 @@ public class ViewOperationRoomRequest extends javax.swing.JPanel {
         }
         else{
             OperationRequest operationRequest = (OperationRequest)operationRoomRequestTable.getValueAt(selectedRow, 0);
-            for(Room room : enterprise.getRoomList().getRoomList()){
+            for(Room room : enterprise.getRoomDirectory().getRoomList()){
                if(room.getType().equals(Room.RoomType.OperationRoom)){
                    for(Schedule schedule: room.getScheduleDirectory().getScheduleList()){
                        Date requestBeginningTime = operationRequest.getBeginningTime();

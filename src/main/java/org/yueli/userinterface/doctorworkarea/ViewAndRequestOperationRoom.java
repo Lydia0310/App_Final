@@ -11,12 +11,8 @@ import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.enterprise.HospitalEnterprise;
 import org.yueli.business.network.Network;
-import org.yueli.business.role.DoctorRole;
-import org.yueli.business.role.OperationRoomAdmin;
-import static org.yueli.business.role.Role.RoleType.OperationRoomAdmin;
 import org.yueli.business.room.OperationRoom;
 import org.yueli.business.room.Room;
-import org.yueli.business.schedule.ScheduleDirectory;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.OperationRequest;
 import org.yueli.business.workqueue.WorkRequest;
@@ -49,7 +45,7 @@ public class ViewAndRequestOperationRoom extends javax.swing.JPanel {
     public void populateOperationRoomCombo(){
         operationRoomNumberCombo.removeAllItems();
         if(enterprise instanceof HospitalEnterprise){
-            for(Room room : enterprise.getRoomList().getRoomList()){
+            for(Room room : enterprise.getRoomDirectory().getRoomList()){
                 if(room.getType().equals(Room.RoomType.OperationRoom)){
                     operationRoomNumberCombo.addItem(((OperationRoom)room).getOperationRoomNumber());
                 }
@@ -132,7 +128,8 @@ public class ViewAndRequestOperationRoom extends javax.swing.JPanel {
         );
 
         OperationRoom or = (OperationRoom)operationRoomNumberCombo.getSelectedItem();
-        operationRoomScheduleJPanel = new SchedulePanel(or.getScheduleDirectory().getScheduleList());
+        if (operationRoomNumberCombo.getSelectedItem() != null)
+            operationRoomScheduleJPanel = new SchedulePanel(or.getScheduleDirectory().getScheduleList());
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestOperationRoomJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestOperationRoomJButtonActionPerformed

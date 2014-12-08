@@ -32,15 +32,16 @@ public class RoomDirectory {
         Room room = null;
         
         if(type.getValue().equals((RoomType.OperationRoom.getValue()))){
-            room = new OperationRoom();
-            roomList.add(room);
+            OperationRoom operationRoom = new OperationRoom();
+            operationRoom.setOperationRoomNumber(roomNumber);
+            roomList.add(operationRoom);
         }
         
         if(type.getValue().equals((RoomType.StorageRoom.getValue()))){
-            room = new StorageRoom();
-            roomList.add(room);
+            StorageRoom storageRoom = new StorageRoom();
+            storageRoom.setStorageRoomNumber(roomNumber);
+            roomList.add(storageRoom);
         }
-        
         return room;
     }
 }

@@ -33,8 +33,8 @@ public class OperationRoomAdminWorkArea extends javax.swing.JPanel {
         this.userProcessContainer = AppEntrance.getSlide();
         this.business = AppEntrance.getBusiness();
         this.userAccount = AppEntrance.getLoginUser();
-        network = userAccount.getNetwork();
-        enterprise = userAccount.getEnterprise();
+        this.network = userAccount.getNetwork();
+        this.enterprise = userAccount.getEnterprise();
     }
 
     /**

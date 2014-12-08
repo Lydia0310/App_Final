@@ -37,7 +37,7 @@ public class HospitalEnterprise extends Enterprise {
         inventory = new Inventory();
     }
 
-    public RoomDirectory getRoomList() {
+    public RoomDirectory getRoomDirectory() {
         return roomList;
     }
 
