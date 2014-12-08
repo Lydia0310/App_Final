@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
 import org.yueli.business.careteam.CareTeam;
 import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.enterprise.HospitalEnterprise;
 import org.yueli.business.network.Network;
 import org.yueli.business.organization.CareTeamOrganization;
 import org.yueli.business.organization.Organization;
@@ -161,7 +162,8 @@ public class ManageCareTeam extends javax.swing.JPanel {
         // TODO add your handling code here:
         String careTeamLeaderName = careTeamLeaderNameJTextField.getText();
         
-        CareTeam careTeam = new CareTeam();
+        //((HospitalEnterprise)enterprise).setCareTeamDirectory(new CareTeam());
+                CareTeam careTeam = ((HospitalEnterprise)enterprise).getCareTeamDirectory().addCareTeam();
         careTeam.setCareTeamName(careTeamLeaderName);
         
     }//GEN-LAST:event_addJButtonActionPerformed

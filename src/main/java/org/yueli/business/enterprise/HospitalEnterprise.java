@@ -12,6 +12,7 @@ import org.yueli.business.room.RoomDirectory;
 import org.yueli.business.enterprise.Enterprise;
 
 import java.util.ArrayList;
+import org.yueli.business.careteam.CareTeamDirectory;
 import org.yueli.business.inventory.Inventory;
 
 import org.yueli.business.organization.DoctorDirectory;
@@ -28,6 +29,7 @@ public class HospitalEnterprise extends Enterprise {
     private OperationDirectory operationList;
     private Inventory inventory;
     private DoctorDirectory doctorList;
+    private CareTeamDirectory careTeamDirectory;
     
     
     public HospitalEnterprise(String name){
@@ -35,8 +37,18 @@ public class HospitalEnterprise extends Enterprise {
         roomList = new RoomDirectory();
         operationList = new OperationDirectory();
         inventory = new Inventory();
+        careTeamDirectory = new CareTeamDirectory();
     }
 
+    public CareTeamDirectory getCareTeamDirectory() {
+        return careTeamDirectory;
+    }
+
+    public void setCareTeamDirectory(CareTeamDirectory careTeamDirectory) {
+        this.careTeamDirectory = careTeamDirectory;
+    }
+
+    
     public RoomDirectory getRoomDirectory() {
         return roomList;
     }

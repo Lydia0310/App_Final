@@ -9,6 +9,7 @@ package org.yueli.business.workqueue;
 import java.util.Date;
 import org.yueli.business.organization.DoctorDirectory;
 import static org.yueli.business.organization.Organization.Type.Doctor;
+import org.yueli.business.patient.Patient;
 
 /**
  *
@@ -26,7 +27,7 @@ public class OperationRequest extends WorkRequest{
     private String deviceQuantity;
     private String operationRoomNumber;
     Boolean operationRoomRequestIsCompeleted;
-   
+    private Patient patient;
     private Date beginningTime;
     private Date endTime;
     
@@ -38,6 +39,15 @@ public class OperationRequest extends WorkRequest{
         return operationID;
     }
 
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    
     public void setOperationID(String operationID) {
         this.operationID = operationID;
     }

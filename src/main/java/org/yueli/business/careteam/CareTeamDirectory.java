@@ -27,7 +27,8 @@ public class CareTeamDirectory {
         this.careTeamList = careTeamList;
     }
     
-    public CareTeam addCareTeam(CareTeam careTeam){
+    public CareTeam addCareTeam(){
+        CareTeam careTeam = new CareTeam();
         careTeamList.add(careTeam);
         return careTeam;
         
