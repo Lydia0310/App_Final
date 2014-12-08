@@ -15,7 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by zjy on 11/9/14.
+ * Created by Yue Li on 11/9/14.
  */
 public class AppEntrance {
     private static Business business;

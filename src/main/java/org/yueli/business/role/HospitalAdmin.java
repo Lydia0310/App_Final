@@ -31,6 +31,7 @@ public class HospitalAdmin extends Role{
         privilegeList.add(new Function(2, "Hospital Work Area",HospitalWorkArea.class));
         count++;
         hospitalID = String.valueOf(count);
+        inventory = new Inventory();
     }
 
     public String getHospitalID() {

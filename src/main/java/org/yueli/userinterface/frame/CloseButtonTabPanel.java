@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 /**
- * @author zjy
+ * @author Yue Li
  */
 public class CloseButtonTabPanel extends JPanel {
     private final JLabel titleLabel;

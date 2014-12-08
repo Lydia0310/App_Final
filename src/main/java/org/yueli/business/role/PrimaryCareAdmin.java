@@ -30,6 +30,7 @@ public class PrimaryCareAdmin extends Role{
         super(Role.RoleType.PrimaryCareAdmin);
         count++;
         primaryCareID = String.valueOf(count);
+        inventory = new Inventory();
         privilegeList.add(new Function(4, "Primary Care Admin Work Area",PrimaryCareWorkArea.class));
     }
 

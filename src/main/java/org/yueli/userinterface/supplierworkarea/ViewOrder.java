@@ -12,6 +12,9 @@ import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.enterprise.HospitalEnterprise;
+import org.yueli.business.enterprise.PrimaryCare;
+import org.yueli.business.inventory.Inventory;
+import org.yueli.business.inventory.InventoryItem;
 import org.yueli.business.network.Network;
 import org.yueli.business.order.Order;
 import org.yueli.business.order.OrderItem;
@@ -19,6 +22,7 @@ import org.yueli.business.organization.Organization;
 import org.yueli.business.role.FAMCAdmin;
 import org.yueli.business.role.HospitalAdmin;
 import org.yueli.business.role.PrimaryCareAdmin;
+import org.yueli.business.role.Role;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.OrderRequest;
 import org.yueli.business.workqueue.WorkQueue;
@@ -239,8 +243,12 @@ public class ViewOrder extends javax.swing.JPanel {
         else{
             OrderRequest orderRequest = (OrderRequest)orderJTable.getValueAt(selectedRow, 0);
             orderRequest.setOrderStatus("Completed");
+            Enterprise enterprise = orderRequest.getSender().getEnterprise();
             for(OrderItem orderItem : orderRequest.getOrder().getOrderItemList()){
-                orderItem.getInventoryItem().getDevice().setIsAssigned(Boolean.FALSE);
+                orderItem.getInventoryItem().getDevice().setIsAssigned(false);
+                if (enterprise instanceof HospitalEnterprise) {
+                    ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList().add(orderItem.getInventoryItem());
+                }
             }
         }
     }//GEN-LAST:event_approveJButtonActionPerformed

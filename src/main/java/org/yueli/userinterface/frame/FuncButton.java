@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by zjy on 13-11-16.
+ * Created by yue Li on 13-11-16.
  */
 public class FuncButton extends JButton {
     private Function func;

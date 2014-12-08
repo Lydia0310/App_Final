@@ -26,7 +26,8 @@ public class Inventory {
     public void setInventoryItemList(ArrayList<InventoryItem> inventoryItemList) {
         this.inventoryItemList = inventoryItemList;
     }
-    
+
+    // TODO: add new item error
     public InventoryItem addInventoryItem(){
         InventoryItem inventoryItem = new InventoryItem();
         inventoryItemList.add(inventoryItem);

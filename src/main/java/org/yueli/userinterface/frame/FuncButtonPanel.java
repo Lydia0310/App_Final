@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * Created by zjy on 13-11-16.
+ * Created by Yue Li on 13-11-16.
  */
 public class FuncButtonPanel extends JPanel {
 

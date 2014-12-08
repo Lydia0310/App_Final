@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  *
- * @author zjy
+ * @author Yue LI
  */
 public class FirstPanel extends JPanel {
 

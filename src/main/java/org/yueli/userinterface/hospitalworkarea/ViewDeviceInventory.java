@@ -10,6 +10,7 @@ package org.yueli.userinterface.hospitalworkarea;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 import org.yueli.business.Business;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.enterprise.HospitalEnterprise;
@@ -19,7 +20,6 @@ import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.DeviceRequest;
 
 /**
- *
  * @author Lydia
  */
 public class ViewDeviceInventory extends javax.swing.JPanel {
@@ -31,7 +31,8 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
     private Network network;
     private Business business;
     private UserAccount userAccount;
-    public ViewDeviceInventory(JPanel userProcessContainer,Network network,UserAccount userAccount, Business business ) {
+
+    public ViewDeviceInventory(JPanel userProcessContainer, Network network, UserAccount userAccount, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.network = network;
@@ -39,29 +40,29 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
         this.business = business;
         populateInventoryTable();
     }
-    
-    public void populateInventoryTable(){
-        DefaultTableModel model = (DefaultTableModel)deviceInventoryTable.getModel();
+
+    public void populateInventoryTable() {
+        DefaultTableModel model = (DefaultTableModel) deviceInventoryTable.getModel();
         model.setRowCount(0);
 
-        for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
-            if(enterprise instanceof HospitalEnterprise){
-            for(InventoryItem inventoryItem : ((HospitalEnterprise)enterprise).getInventory().getInventoryItemList()){
-               if(inventoryItem.getDevice().isIsAssigned()){
-                Object row[] = new Object[5];
-                row[0] = inventoryItem.getDevice().getDeviceName();
-                row[1] = inventoryItem.getDevice().getFunction();
-                row[2] = inventoryItem.getDevice().getSupplierID();
-                row[3] = inventoryItem.getQuantity();
-                row[4] = inventoryItem.getDevice().getLocation();
-                model.addRow(row);
-               }
+        for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
+            if (enterprise instanceof HospitalEnterprise) {
+                for (InventoryItem inventoryItem : ((HospitalEnterprise) enterprise).getInventory().getInventoryItemList()) {
+                    if (!inventoryItem.getDevice().isIsAssigned()) {
+                        Object row[] = new Object[5];
+                        row[0] = inventoryItem.getDevice().getDeviceName();
+                        row[1] = inventoryItem.getDevice().getFunction();
+                        row[2] = inventoryItem.getDevice().getSupplierID();
+                        row[3] = inventoryItem.getQuantity();
+                        row[4] = inventoryItem.getDevice().getLocation();
+                        model.addRow(row);
+                    }
+                }
             }
         }
-        }
-        
+
     }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,19 +80,19 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
         quantityJSpinner = new javax.swing.JSpinner();
 
         deviceInventoryTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][]{
 
-            },
-            new String [] {
-                "Device Name", "Supplier ID", "Function", "Stock Count", "Location"
-            }
+                },
+                new String[]{
+                        "Device Name", "Supplier ID", "Function", "Stock Count", "Location"
+                }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+            boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane1.setViewportView(deviceInventoryTable);
@@ -115,54 +116,54 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backJButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, Short.MAX_VALUE)
-                .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(requestDispatchingJButton)
-                .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(backJButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, Short.MAX_VALUE)
+                                .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(requestDispatchingJButton)
+                                .addGap(21, 21, 21))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backJButton)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(requestDispatchingJButton)
-                            .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(22, Short.MAX_VALUE))))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(backJButton)
+                                                .addContainerGap())
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(54, 54, 54)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(requestDispatchingJButton)
+                                                        .addComponent(quantityJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addContainerGap(22, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestDispatchingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestDispatchingJButtonActionPerformed
         // TODO add your handling code here:
         int selectedRow = deviceInventoryTable.getSelectedRow();
-        if(selectedRow < 0){
+        if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row to continue!");
         }
-        InventoryItem inventoryItem = (InventoryItem)deviceInventoryTable.getValueAt(selectedRow, 0);
+        InventoryItem inventoryItem = (InventoryItem) deviceInventoryTable.getValueAt(selectedRow, 0);
         DeviceRequest deviceRequest = new DeviceRequest();
         deviceRequest.setSender(userAccount);
         deviceRequest.setInventoryItem(inventoryItem);
-        int requestQuantity = (Integer)quantityJSpinner.getValue();
+        int requestQuantity = (Integer) quantityJSpinner.getValue();
         deviceRequest.setRequestQuantity(requestQuantity);
         deviceRequest.setDeviceRequestStatus("Sent");
         deviceRequest.setRequestDate(deviceRequest.getTimestamp());
-        
+
     }//GEN-LAST:event_requestDispatchingJButtonActionPerformed
 
 
