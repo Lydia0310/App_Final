@@ -60,7 +60,6 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
                 }
             }
         }
-
     }
 
 
