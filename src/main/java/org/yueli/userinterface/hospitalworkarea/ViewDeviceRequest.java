@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.yueli.business.Business;
 import org.yueli.business.inventory.InventoryItem;
+import org.yueli.business.network.Network;
 import org.yueli.business.role.HospitalAdmin;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.DeviceRequest;
@@ -27,13 +28,15 @@ public class ViewDeviceRequest extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Business business;
+    private Network network;
     private UserAccount userAccount;
     
-    public ViewDeviceRequest(JPanel userProcessContainer, Business business, UserAccount userAccount) {
+    public ViewDeviceRequest(JPanel userProcessContainer, Business business,Network network, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.userAccount = userAccount;
+        this.network = network;
         populateDeviceRequestTable();
     }
     
@@ -41,7 +44,8 @@ public class ViewDeviceRequest extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)deviceRequestJTable.getModel();
         model.setRowCount(0);
         
-        for(WorkRequest workRequest : userAccount.getWorkQueue().getWorkRequestList()){
+        for(WorkRequest workRequest : network.getWorkQueue().getWorkRequestList()){
+            if(workRequest instanceof DeviceRequest){
             Object[] row = new Object[5];
             row[0] = workRequest;
             DeviceRequest deviceRequest = (DeviceRequest)workRequest;
@@ -49,6 +53,8 @@ public class ViewDeviceRequest extends javax.swing.JPanel {
             row[2] = deviceRequest.getSender();
             row[3] = deviceRequest.getRequestQuantity();
             row[4] = deviceRequest.getDeviceRequestStatus();
+            model.addRow(row);
+            }
         }
     }
 

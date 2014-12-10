@@ -302,7 +302,7 @@ public class BrowserDevice extends javax.swing.JPanel {
 
     private void populateSupplierCombo(){
         supplierNameComboBox.removeAllItems();
-        for(Network network : business.getNetworkDirectory().getNetworkList()){
+       
             
                 for(SupplierOrganization  so : network.getSupplierDirectory().getSupplierList()){
 
@@ -310,7 +310,7 @@ public class BrowserDevice extends javax.swing.JPanel {
                     
                 }
             
-        }
+        
     }
     private void populateDeviceTable(){
         SupplierOrganization so = (SupplierOrganization)supplierNameComboBox.getSelectedItem();

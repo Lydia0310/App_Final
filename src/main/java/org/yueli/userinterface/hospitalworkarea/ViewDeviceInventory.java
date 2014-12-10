@@ -16,6 +16,8 @@ import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.enterprise.HospitalEnterprise;
 import org.yueli.business.inventory.InventoryItem;
 import org.yueli.business.network.Network;
+import org.yueli.business.order.Order;
+import org.yueli.business.order.OrderItem;
 import org.yueli.business.useraccount.UserAccount;
 import org.yueli.business.workqueue.DeviceRequest;
 
@@ -31,26 +33,39 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
     private Network network;
     private Business business;
     private UserAccount userAccount;
-
+    private Enterprise enterprise;
     public ViewDeviceInventory(JPanel userProcessContainer, Network network, UserAccount userAccount, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.network = network;
         this.userAccount = userAccount;
         this.business = business;
+        this.enterprise = userAccount.getEnterprise();
         populateInventoryTable();
     }
 
     public void populateInventoryTable() {
         DefaultTableModel model = (DefaultTableModel) deviceInventoryTable.getModel();
         model.setRowCount(0);
-
-        for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
-            if (enterprise instanceof HospitalEnterprise) {
+//        
+//        for(Order order : business.getMasterOrderDirectory().getMasterOrderList()){
+//            for(OrderItem orderItem : order.getOrderItemList()){
+//                if(!orderItem.getInventoryItem().getDevice().isIsAssigned()){
+//                    Object row[] = new Object[5];
+//                    row[0] = orderItem;
+//                    row[1] = orderItem.getInventoryItem().getDevice().getSupplierID();
+//                    row[2] = orderItem.getInventoryItem().getDevice().getFunction();
+//                    row[3] = orderItem.getInventoryItem().getQuantity();
+//                    row[4] = orderItem.getInventoryItem().getDevice().getLocation();
+//                    model.addRow(row);
+//                }
+//            }
+//        }//        for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
+//            if (enterprise instanceof HospitalEnterprise) {
                 for (InventoryItem inventoryItem : ((HospitalEnterprise) enterprise).getInventory().getInventoryItemList()) {
                     if (!inventoryItem.getDevice().isIsAssigned()) {
                         Object row[] = new Object[5];
-                        row[0] = inventoryItem.getDevice().getDeviceName();
+                        row[0] = inventoryItem;
                         row[1] = inventoryItem.getDevice().getFunction();
                         row[2] = inventoryItem.getDevice().getSupplierID();
                         row[3] = inventoryItem.getQuantity();
@@ -58,8 +73,8 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
                         model.addRow(row);
                     }
                 }
-            }
-        }
+//            }
+//        }
     }
 
 
@@ -155,7 +170,9 @@ public class ViewDeviceInventory extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row to continue!");
         }
         InventoryItem inventoryItem = (InventoryItem) deviceInventoryTable.getValueAt(selectedRow, 0);
+       
         DeviceRequest deviceRequest = new DeviceRequest();
+        network.getWorkQueue().getWorkRequestList().add(deviceRequest);
         deviceRequest.setSender(userAccount);
         deviceRequest.setInventoryItem(inventoryItem);
         int requestQuantity = (Integer) quantityJSpinner.getValue();

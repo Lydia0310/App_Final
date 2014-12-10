@@ -50,9 +50,7 @@ public class DoctorWorkArea extends javax.swing.JPanel {
     private void initComponents() {
 
         managePatientJButton = new javax.swing.JButton();
-        viewRoomScheduleJButton = new javax.swing.JButton();
-        viewDeviceJButton = new javax.swing.JButton();
-        viewCareTeamScheduleJButton = new javax.swing.JButton();
+        requestOperatioonJButton1 = new javax.swing.JButton();
 
         managePatientJButton.setText("Manage Patient");
         managePatientJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -61,24 +59,10 @@ public class DoctorWorkArea extends javax.swing.JPanel {
             }
         });
 
-        viewRoomScheduleJButton.setText("View Operation Room Schedule");
-        viewRoomScheduleJButton.addActionListener(new java.awt.event.ActionListener() {
+        requestOperatioonJButton1.setText("Request Operation");
+        requestOperatioonJButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewRoomScheduleJButtonActionPerformed(evt);
-            }
-        });
-
-        viewDeviceJButton.setText("View Device ");
-        viewDeviceJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewDeviceJButtonActionPerformed(evt);
-            }
-        });
-
-        viewCareTeamScheduleJButton.setText("View Care Team Schedule");
-        viewCareTeamScheduleJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewCareTeamScheduleJButtonActionPerformed(evt);
+                requestOperatioonJButton1ActionPerformed(evt);
             }
         });
 
@@ -89,9 +73,7 @@ public class DoctorWorkArea extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(236, 236, 236)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(viewCareTeamScheduleJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewRoomScheduleJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(requestOperatioonJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(managePatientJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(271, Short.MAX_VALUE))
         );
@@ -100,13 +82,9 @@ public class DoctorWorkArea extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addComponent(managePatientJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(viewRoomScheduleJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(viewDeviceJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(viewCareTeamScheduleJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addGap(83, 83, 83)
+                .addComponent(requestOperatioonJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(292, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -118,35 +96,18 @@ public class DoctorWorkArea extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_managePatientJButtonActionPerformed
 
-    private void viewRoomScheduleJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRoomScheduleJButtonActionPerformed
+    private void requestOperatioonJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestOperatioonJButton1ActionPerformed
         // TODO add your handling code here:
-        ViewAndRequestOperationRoom viewAndRequestOperationRoom = new ViewAndRequestOperationRoom(userProcessContainer, business, network, enterprise, userAccount);
-        userProcessContainer.add("View Operation Room", viewAndRequestOperationRoom);
+        RequestOperation requestOperation = new RequestOperation(userProcessContainer, business, enterprise, network, userAccount);
+        userProcessContainer.add("Request Operation", requestOperation);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_viewRoomScheduleJButtonActionPerformed
-
-    private void viewDeviceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceJButtonActionPerformed
-        // TODO add your handling code here:
-        ViewAndRequestDeviceSchedule viewAndRequestDeviceSchedule = new ViewAndRequestDeviceSchedule(userProcessContainer, business, network, enterprise, userAccount);
-        userProcessContainer.add("View Device", viewAndRequestDeviceSchedule);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_viewDeviceJButtonActionPerformed
-
-    private void viewCareTeamScheduleJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCareTeamScheduleJButtonActionPerformed
-        // TODO add your handling code here:
-        ViewAndRequestCareTeamSchedule viewAndRequestCareTeamSchedule = new ViewAndRequestCareTeamSchedule(userProcessContainer, business, network, enterprise, userAccount);
-        userProcessContainer.add("View Care Team", viewAndRequestCareTeamSchedule);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_viewCareTeamScheduleJButtonActionPerformed
+                
+    }//GEN-LAST:event_requestOperatioonJButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton managePatientJButton;
-    private javax.swing.JButton viewCareTeamScheduleJButton;
-    private javax.swing.JButton viewDeviceJButton;
-    private javax.swing.JButton viewRoomScheduleJButton;
+    private javax.swing.JButton requestOperatioonJButton1;
     // End of variables declaration//GEN-END:variables
 }

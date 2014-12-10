@@ -172,7 +172,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void viewDeviceRequestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceRequestJButtonActionPerformed
         // TODO add your handling code here:
-        ViewDeviceRequest viewDeviceRequest = new ViewDeviceRequest(userProcessContainer, business, userAccount);
+        ViewDeviceRequest viewDeviceRequest = new ViewDeviceRequest(userProcessContainer, business, network, userAccount);
         userProcessContainer.add("View Device Request", viewDeviceRequest);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -196,7 +196,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void viewDeviceRequestJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDeviceRequestJButton1ActionPerformed
         // TODO add your handling code here:
-        ViewDeviceRequest viewDeviceRequest = new ViewDeviceRequest(userProcessContainer, business, userAccount);
+        ViewDeviceRequest viewDeviceRequest = new ViewDeviceRequest(userProcessContainer, business, network, userAccount);
         userProcessContainer.add("View Device Request", viewDeviceRequest);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

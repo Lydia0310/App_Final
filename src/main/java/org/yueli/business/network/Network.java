@@ -11,6 +11,7 @@ import org.yueli.business.organization.SupplierDirectory;
 import org.yueli.business.person.PersonDirectory;
 import org.yueli.business.room.RoomDirectory;
 import org.yueli.business.useraccount.UserAccountDirectory;
+import org.yueli.business.workqueue.WorkQueue;
 
 /**
  *
@@ -22,13 +23,13 @@ public class Network {
     private SupplierDirectory supplierDirectory;
     private PersonDirectory personDirectory;
     private UserAccountDirectory userAccountDirectory;
-    
+    private WorkQueue workQueue;
     public Network(){
         enterpriseList = new EnterpriseDirectory();
         supplierDirectory = new SupplierDirectory();
         personDirectory = new PersonDirectory();
         userAccountDirectory = new UserAccountDirectory();
-                
+        workQueue = new WorkQueue();
     }
 
     public String getName() {
@@ -70,6 +71,15 @@ public class Network {
     public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {
         this.userAccountDirectory = userAccountDirectory;
     }
+
+    public WorkQueue getWorkQueue() {
+        return workQueue;
+    }
+
+    public void setWorkQueue(WorkQueue workQueue) {
+        this.workQueue = workQueue;
+    }
+    
 
     @Override
     public String toString(){

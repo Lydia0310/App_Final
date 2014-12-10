@@ -82,28 +82,21 @@ public class ManagePatient extends javax.swing.JPanel {
         patientNameJTextField = new javax.swing.JTextField();
         submitJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
-        assignOperationJButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        beginningTimeJTextField = new javax.swing.JTextField();
-        endTimeJTextField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         patientTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "Patient ID", "Patient Name", "Doctor ID"
-                }
+            },
+            new String [] {
+                "Patient ID", "Patient Name", "Doctor ID"
+            }
         ) {
-            boolean[] canEdit = new boolean[]{
-                    false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(patientTable);
@@ -136,97 +129,51 @@ public class ManagePatient extends javax.swing.JPanel {
             }
         });
 
-        assignOperationJButton.setText("Assign a operation");
-        assignOperationJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignOperationJButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Beginning Time:");
-
-        jLabel2.setText("End Time:");
-
-        jLabel3.setText("(yyyy-MM-dd hh:mm:ss)");
-
-        jLabel4.setText("(yyyy-MM-dd hh:mm:ss)");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(refreshJButton)
-                                .addGap(167, 167, 167))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(159, 159, 159)
-                                                .addComponent(createJButton)
-                                                .addGap(333, 333, 333)
-                                                .addComponent(assignOperationJButton))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(148, 148, 148)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 273, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel2)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addGap(194, 194, 194)
-                                                                .addComponent(submitJButton))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(patientNameJLabel)
-                                                                .addGap(48, 48, 48)
-                                                                .addComponent(patientNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(165, 165, 165)
-                                                .addComponent(jLabel1)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(beginningTimeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel3))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(endTimeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel4)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(refreshJButton)
+                .addGap(167, 167, 167))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(createJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 273, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(submitJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(patientNameJLabel)
+                        .addGap(48, 48, 48)
+                        .addComponent(patientNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(refreshJButton)
-                                .addGap(26, 26, 26)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(createJButton)
-                                        .addComponent(assignOperationJButton))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel1)
-                                                        .addComponent(beginningTimeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel3))
-                                                .addGap(27, 27, 27)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(endTimeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel2)
-                                                        .addComponent(jLabel4)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(patientNameJLabel)
-                                                        .addComponent(patientNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(56, 56, 56)
-                                                .addComponent(submitJButton)))
-                                .addContainerGap(113, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(refreshJButton)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(createJButton)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(patientNameJLabel)
+                    .addComponent(patientNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
+                .addComponent(submitJButton)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -247,36 +194,6 @@ public class ManagePatient extends javax.swing.JPanel {
 
     }//GEN-LAST:event_createJButtonActionPerformed
 
-    private void assignOperationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignOperationJButtonActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = patientTable.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row to continue!");
-        } else {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String requestBeginningTime = beginningTimeJTextField.getText();
-            String requestEndTime = endTimeJTextField.getText();
-            Date beginningTime;
-            Date endTime;
-            try {
-                beginningTime = df.parse(requestBeginningTime);
-                endTime = df.parse(requestEndTime);
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(this, "Time parse error!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            Patient patient = (Patient) patientTable.getValueAt(selectedRow, 0);
-            ((HospitalEnterprise) userAccount.getEnterprise()).getOperationList().addOperation().setPatient(patient);
-            OperationRequest operationRequest = new OperationRequest();
-            operationRequest.setSender(userAccount);
-            operationRequest.setRequestDate(operationRequest.getTimestamp());
-            operationRequest.setDoctorName(userAccount.getPerson().getFirstName());
-            operationRequest.setOperationRequestStatus("Pending");
-            operationRequest.setBeginningTime(beginningTime);
-            operationRequest.setEndTime(endTime);
-        }
-    }//GEN-LAST:event_assignOperationJButtonActionPerformed
-
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
         // TODO add your handling code here:
         populatePatientTable();
@@ -284,14 +201,7 @@ public class ManagePatient extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignOperationJButton;
-    private javax.swing.JTextField beginningTimeJTextField;
     private javax.swing.JButton createJButton;
-    private javax.swing.JTextField endTimeJTextField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel patientNameJLabel;
     private javax.swing.JTextField patientNameJTextField;

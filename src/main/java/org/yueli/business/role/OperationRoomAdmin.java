@@ -22,12 +22,12 @@ import org.yueli.userinterface.operationroomadminworkarea.OperationRoomAdminWork
  * @author Lydia
  */
 public class OperationRoomAdmin extends Role{
-    private RoomDirectory roomList;
+ 
     private ScheduleDirectory scheduleDirectory;
     public OperationRoomAdmin() {
         super(Role.RoleType.OperationRoomAdmin);
         privilegeList.add(new Function(9, "Operation Room Admin Work Area", OperationRoomAdminWorkArea.class));
-        roomList = new RoomDirectory();
+       
         scheduleDirectory = new ScheduleDirectory();
     }
 
@@ -40,14 +40,7 @@ public class OperationRoomAdmin extends Role{
     }
     
 
-    public RoomDirectory getRoomDirectory() {
-        return roomList;
-    }
-
-    public void setRoomList(RoomDirectory roomList) {
-        this.roomList = roomList;
-    }
-
+    
     
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, Network network, Business business) {

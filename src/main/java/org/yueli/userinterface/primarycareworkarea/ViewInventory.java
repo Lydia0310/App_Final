@@ -43,18 +43,20 @@ public class ViewInventory extends javax.swing.JPanel {
     public void populateInventoryTable(){
         DefaultTableModel model = (DefaultTableModel)deviceInventoryTable.getModel();
         model.setRowCount(0);
-        for(Network network : business.getNetworkDirectory().getNetworkList()){
-        for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList() ){
-            for(InventoryItem inventoryItem : ((PrimaryCare)enterprise).getInventory().getInventoryItemList()){
-               Object row[] = new Object[5];
-               row[0] = inventoryItem.getDevice().getDeviceName();
-               row[1] = inventoryItem.getDevice().getFunction();
-               row[2] = inventoryItem.getDevice().getSupplierID();
-               row[3] = inventoryItem.getQuantity();
-               
-               model.addRow(row);
+        for (Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()) {
+            if (enterprise instanceof PrimaryCare) {
+                for (InventoryItem inventoryItem : ((HospitalEnterprise) enterprise).getInventory().getInventoryItemList()) {
+                    if (!inventoryItem.getDevice().isIsAssigned()) {
+                        Object row[] = new Object[5];
+                        row[0] = inventoryItem;
+                        row[1] = inventoryItem.getDevice().getFunction();
+                        row[2] = inventoryItem.getDevice().getSupplierID();
+                        row[3] = inventoryItem.getQuantity();
+                        row[4] = inventoryItem.getDevice().getLocation();
+                        model.addRow(row);
+                    }
+                }
             }
-        }
         }
         
     }

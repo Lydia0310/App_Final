@@ -29,6 +29,7 @@ public class CareTeamDirectory {
     
     public CareTeam addCareTeam(){
         CareTeam careTeam = new CareTeam();
+        
         careTeamList.add(careTeam);
         return careTeam;
         

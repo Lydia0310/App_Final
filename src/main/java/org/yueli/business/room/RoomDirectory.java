@@ -34,12 +34,14 @@ public class RoomDirectory {
         if(type.getValue().equals((RoomType.OperationRoom.getValue()))){
             OperationRoom operationRoom = new OperationRoom();
             operationRoom.setOperationRoomNumber(roomNumber);
+            
             roomList.add(operationRoom);
         }
         
         if(type.getValue().equals((RoomType.StorageRoom.getValue()))){
             StorageRoom storageRoom = new StorageRoom();
             storageRoom.setStorageRoomNumber(roomNumber);
+           
             roomList.add(storageRoom);
         }
         return room;

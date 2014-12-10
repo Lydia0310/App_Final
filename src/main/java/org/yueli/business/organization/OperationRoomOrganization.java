@@ -18,10 +18,21 @@ import org.yueli.business.room.RoomDirectory;
 public class OperationRoomOrganization extends Organization{
 
     private RoomDirectory roomDirectory;
+    
     public OperationRoomOrganization() {
         super(Type.OperationRoomAdmin.getValue());
+        roomDirectory = new RoomDirectory();
     }
 
+    public RoomDirectory getRoomDirectory() {
+        return roomDirectory;
+    }
+
+    public void setRoomDirectory(RoomDirectory roomDirectory) {
+        this.roomDirectory = roomDirectory;
+    }
+
+    
     @Override
     public ArrayList<Role> getSupportedRoles() {
         ArrayList<Role> roles = new ArrayList<Role>();

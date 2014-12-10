@@ -14,7 +14,8 @@ import org.yueli.business.schedule.ScheduleDirectory;
  */
 public abstract class Room {
     private static int counter;
-    private int roomID;
+    private String roomID;
+//    private String roomNumber;
     private ScheduleDirectory scheduleDirectory;
  
     
@@ -31,6 +32,7 @@ public abstract class Room {
             return value;
         }
             
+        
     @Override
     public String toString(){
         return value;
@@ -41,18 +43,20 @@ public abstract class Room {
     
     public Room(RoomType type){
         counter++;
-        roomID = counter;
+        roomID = String.valueOf(counter);
         this.type = type;
         scheduleDirectory = new ScheduleDirectory();
     }
 
-    public int getRoomID() {
+    public String getRoomID() {
         return roomID;
     }
 
-    public void setRoomID(int roomID) {
+    public void setRoomID(String roomID) {
         this.roomID = roomID;
     }
+
+
 
     public RoomType getType() {
         return type;
@@ -72,6 +76,9 @@ public abstract class Room {
 
    
     
-    
+    @Override
+    public String toString(){
+        return roomID;
+    }
     
 }

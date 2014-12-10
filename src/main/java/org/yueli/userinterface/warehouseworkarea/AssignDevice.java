@@ -18,6 +18,8 @@ import org.yueli.business.inventory.InventoryItem;
 import org.yueli.business.network.Network;
 import org.yueli.business.order.Order;
 import org.yueli.business.order.OrderItem;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.organization.WarehouseOrganization;
 import org.yueli.business.room.Room;
 import org.yueli.business.room.StorageRoom;
 import org.yueli.business.useraccount.UserAccount;
@@ -38,6 +40,7 @@ public class AssignDevice extends javax.swing.JPanel {
     private Network network;
     private UserAccount userAccount;
     private Enterprise enterprise;
+    private Organization organization;
     public AssignDevice(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -45,9 +48,10 @@ public class AssignDevice extends javax.swing.JPanel {
         this.network = network;
         this.userAccount = userAccount;
         this.enterprise = enterprise;
+        this.organization = userAccount.getOrganization();
         populateDeviceTable();
-        populateRoomTable();
-        populateRoomNumberCombo();
+       populateRoomTable();
+     
     }
     
     public void populateDeviceTable(){
@@ -58,7 +62,7 @@ public class AssignDevice extends javax.swing.JPanel {
             for(OrderItem orderItem : order.getOrderItemList()){
                 if(!orderItem.getInventoryItem().getDevice().isIsAssigned()){
                     Object row[] = new Object[2];
-                    row[0] = orderItem.getInventoryItem().getDevice().getDeviceName();
+                    row[0] = orderItem;
                     row[1] = orderItem.getInventoryItem().getDevice().getDeviceID();
                     model.addRow(row);
                 }
@@ -67,29 +71,23 @@ public class AssignDevice extends javax.swing.JPanel {
     }
 
     public void populateRoomTable(){
-        DefaultTableModel model = (DefaultTableModel)roomTable.getModel();
+        DefaultTableModel model = (DefaultTableModel)storageRoomTable.getModel();
         model.setRowCount(0);
-        if(enterprise instanceof HospitalEnterprise ){
-         for(Room room : enterprise.getRoomDirectory().getRoomList()){
+        
+        for(Room room :((WarehouseOrganization)organization).getRoomDirectory().getRoomList()){
             if(room.getType() == Room.RoomType.StorageRoom){
                 Object row[] = new Object[3];
-                row[0] = room.getRoomID();
+                row[0] = (StorageRoom)room;
                 row[1] = ((StorageRoom)room).getStorageRoomNumber();
                 row[2] = ((StorageRoom)room).getStorageRoomStatus();
                 model.addRow(row);
              }
         }
-    }
+        
+    
     }
     
-    public void populateRoomNumberCombo(){
-        roomNumberCombo.removeAllItems();
-        for(Room room : enterprise.getRoomDirectory().getRoomList()){
-            if(room.getType() == Room.RoomType.StorageRoom && !(((StorageRoom)room).isIsFull())){
-                roomNumberCombo.addItem(((StorageRoom)room).getStorageRoomNumber());
-            }
-        }
-    }
+
     
     public void populateAssignDeviceTable(){
     
@@ -105,25 +103,9 @@ public class AssignDevice extends javax.swing.JPanel {
             }
         }
         
-        if(enterprise instanceof PrimaryCare){
-             for(InventoryItem inventoryItem : ((PrimaryCare)enterprise).getInventory().getInventoryItemList()){
-                Object row[] = new Object[3];
-                row[0] = inventoryItem.getDevice().getLocation();
-                row[1] = inventoryItem.getDevice().getDeviceName();
-                row[2] = inventoryItem.getQuantity();
-                model.addRow(row);
-            }
-        }
+
         
-        if(enterprise instanceof FoundingAcademicMedicalCenter){
-             for(InventoryItem inventoryItem : ((FoundingAcademicMedicalCenter)enterprise).getInventory().getInventoryItemList()){
-                Object row[] = new Object[3];
-                row[0] = inventoryItem.getDevice().getLocation();
-                row[1] = inventoryItem.getDevice().getDeviceName();
-                row[2] = inventoryItem.getQuantity();
-                model.addRow(row);
-            }
-        }
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,14 +118,14 @@ public class AssignDevice extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         deviceTable = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        roomTable = new javax.swing.JTable();
         assignRoomJButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         assignDeviceTable = new javax.swing.JTable();
         refreshJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        roomNumberCombo = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        storageRoomTable = new javax.swing.JTable();
+        roomNumberJTextField = new javax.swing.JTextField();
 
         deviceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -165,29 +147,7 @@ public class AssignDevice extends javax.swing.JPanel {
         if (deviceTable.getColumnModel().getColumnCount() > 0) {
             deviceTable.getColumnModel().getColumn(0).setResizable(false);
             deviceTable.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        roomTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Room ID", "Room Number", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(roomTable);
-        if (roomTable.getColumnModel().getColumnCount() > 0) {
-            roomTable.getColumnModel().getColumn(0).setResizable(false);
-            roomTable.getColumnModel().getColumn(1).setResizable(false);
-            roomTable.getColumnModel().getColumn(2).setResizable(false);
+            deviceTable.getColumnModel().getColumn(1).setHeaderValue("Room Type");
         }
 
         assignRoomJButton.setText("Assign to a Storage Room");
@@ -229,63 +189,93 @@ public class AssignDevice extends javax.swing.JPanel {
 
         jLabel1.setText("Room Number: ");
 
+        storageRoomTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Room ID", "Storage Room Number", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(storageRoomTable);
+        if (storageRoomTable.getColumnModel().getColumnCount() > 0) {
+            storageRoomTable.getColumnModel().getColumn(0).setResizable(false);
+            storageRoomTable.getColumnModel().getColumn(1).setResizable(false);
+            storageRoomTable.getColumnModel().getColumn(2).setResizable(false);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(roomNumberCombo, 0, 96, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(assignRoomJButton)
-                .addGap(116, 116, 116)
-                .addComponent(refreshJButton)
-                .addGap(147, 147, 147))
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(roomNumberJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(assignRoomJButton)
+                        .addGap(132, 132, 132)
+                        .addComponent(refreshJButton)
+                        .addGap(40, 40, 40)))
+                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(assignRoomJButton)
-                    .addComponent(refreshJButton)
-                    .addComponent(jLabel1)
-                    .addComponent(roomNumberCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(roomNumberJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(refreshJButton))
+                    .addComponent(assignRoomJButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignRoomJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignRoomJButtonActionPerformed
         // TODO add your handling code here:
         int selectedRow = deviceTable.getSelectedRow();
+        String roomNumber = roomNumberJTextField.getText();
         if(selectedRow <0 ){
             JOptionPane.showMessageDialog(null, "Please select a row to continue!");
         }
         else{
-            InventoryItem inventoryItem = (InventoryItem)deviceTable.getValueAt(selectedRow, 0);
-            Room assignRoomNumber = (Room)roomNumberCombo.getSelectedItem();
-            inventoryItem.getDevice().setLocation(((StorageRoom)assignRoomNumber).getStorageRoomNumber());
-            inventoryItem.getDevice().setIsAssigned(true);
+            OrderItem orderItem = (OrderItem)deviceTable.getValueAt(selectedRow, 0);
+            orderItem.getInventoryItem().getDevice().setLocation(roomNumber);
+//            Room assignRoomNumber = (Room)roomNumberCombo.getSelectedItem();
+//            inventoryItem.getDevice().setLocation(((StorageRoom)assignRoomNumber).getStorageRoomNumber());
+           orderItem.getInventoryItem().getDevice().setIsAssigned(true);
             populateAssignDeviceTable();
-            populateRoomTable();
-            populateRoomNumberCombo();
+//            populateRoomTable();
+            
         }
     }//GEN-LAST:event_assignRoomJButtonActionPerformed
 
@@ -305,7 +295,7 @@ public class AssignDevice extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton refreshJButton;
-    private javax.swing.JComboBox roomNumberCombo;
-    private javax.swing.JTable roomTable;
+    private javax.swing.JTextField roomNumberJTextField;
+    private javax.swing.JTable storageRoomTable;
     // End of variables declaration//GEN-END:variables
 }

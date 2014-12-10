@@ -9,14 +9,23 @@ package org.yueli.userinterface.operationroomadminworkarea;
 
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 import org.yueli.business.Business;
+import org.yueli.business.careteam.CareTeam;
 import org.yueli.business.enterprise.Enterprise;
+import org.yueli.business.enterprise.HospitalEnterprise;
 import org.yueli.business.network.Network;
+import org.yueli.business.organization.CareTeamOrganization;
+import org.yueli.business.organization.OperationRoomOrganization;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.organization.WarehouseOrganization;
+import org.yueli.business.role.OperationRoomAdmin;
+import org.yueli.business.room.OperationRoom;
 import org.yueli.business.room.Room;
+import org.yueli.business.room.StorageRoom;
 import org.yueli.business.useraccount.UserAccount;
 
 /**
- *
  * @author Lydia
  */
 public class ManageOperationRoom extends javax.swing.JPanel {
@@ -29,6 +38,8 @@ public class ManageOperationRoom extends javax.swing.JPanel {
     private Network network;
     private Enterprise enterprise;
     private UserAccount userAccount;
+    private Organization organization;
+
     public ManageOperationRoom(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -36,19 +47,25 @@ public class ManageOperationRoom extends javax.swing.JPanel {
         this.network = network;
         this.enterprise = enterprise;
         this.userAccount = userAccount;
+        this.organization = userAccount.getOrganization();
         populateOperationRoomTable();
     }
-    public void populateOperationRoomTable(){
-        DefaultTableModel model = (DefaultTableModel)operationRoomTable.getModel();
+
+    public void populateOperationRoomTable() {
+        DefaultTableModel model = (DefaultTableModel) operationRoomTable.getModel();
         model.setRowCount(0);
-        for(Room room : enterprise.getRoomDirectory().getRoomList()){
-            if(room.getType().equals(Room.RoomType.OperationRoom)){
-                Object row[] = new Object[1];
-                row[0] = room;
+       
+        for(Room room :((OperationRoomOrganization)organization).getRoomDirectory().getRoomList()){
+            if(room.getType() == Room.RoomType.OperationRoom){
+                Object row[] = new Object[2];
+                row[0] = (OperationRoom)room;
+                row[1] = ((OperationRoom)room).getOperationRoomNumber();
+                
                 model.addRow(row);
-            }
+             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,11 +86,11 @@ public class ManageOperationRoom extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Operation Room Number"
+                "Room ID", "Operation Room Number"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -83,6 +100,7 @@ public class ManageOperationRoom extends javax.swing.JPanel {
         jScrollPane1.setViewportView(operationRoomTable);
         if (operationRoomTable.getColumnModel().getColumnCount() > 0) {
             operationRoomTable.getColumnModel().getColumn(0).setResizable(false);
+            operationRoomTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         jLabel1.setText("Operation Room Number:");
@@ -132,7 +150,8 @@ public class ManageOperationRoom extends javax.swing.JPanel {
     private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
         // TODO add your handling code here:
         String operationRoomNumber = operationRoomNumberJTextField.getText();
-        Room room = enterprise.getRoomDirectory().addRoom(operationRoomNumber, Room.RoomType.OperationRoom);
+        ((OperationRoomOrganization)organization).getRoomDirectory().addRoom(operationRoomNumber, Room.RoomType.OperationRoom);
+         
         populateOperationRoomTable();
     }//GEN-LAST:event_createJButtonActionPerformed
 

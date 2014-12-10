@@ -32,6 +32,7 @@ public class ManageCareTeam extends javax.swing.JPanel {
     private Network network;
     private Enterprise enterprise;
     private UserAccount userAccount;
+    private Organization organization;
     public ManageCareTeam(JPanel userProcessContainer, Business business, Network network, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -39,6 +40,7 @@ public class ManageCareTeam extends javax.swing.JPanel {
         this.network = network;
         this.enterprise = enterprise;
         this.userAccount = userAccount;
+        this.organization = userAccount.getOrganization();
         populateCareTeamTable();
     }
     
@@ -46,21 +48,23 @@ public class ManageCareTeam extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)careTeamTable.getModel();
         model.setRowCount(0);
         
-       for(Network network : business.getNetworkDirectory().getNetworkList()){
+       
            for(Enterprise enterprise : network.getEnterpriseList().getEnterpriseList()){
+               if(enterprise instanceof HospitalEnterprise){
                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
                     if(organization instanceof CareTeamOrganization){
                         for(CareTeam careTeam : ((CareTeamOrganization)organization).getCareTeamDirectory().getCareTeamList()){
                         Object row[] = new Object[2];
-                        row[0] = careTeam.getCareTeamID();
+                        row[0] = careTeam;
                         row[1] = careTeam.getCareTeamName();
                         model.addRow(row);
                         }
                     }
                 }
-            }
+           }
+           } 
        }
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -163,8 +167,14 @@ public class ManageCareTeam extends javax.swing.JPanel {
         String careTeamLeaderName = careTeamLeaderNameJTextField.getText();
         
         //((HospitalEnterprise)enterprise).setCareTeamDirectory(new CareTeam());
-                CareTeam careTeam = ((HospitalEnterprise)enterprise).getCareTeamDirectory().addCareTeam();
-        careTeam.setCareTeamName(careTeamLeaderName);
+       
+           
+                CareTeam careTeam = ((CareTeamOrganization)organization).getCareTeamDirectory().addCareTeam();
+                careTeam.setCareTeamName(careTeamLeaderName);
+       
+       populateCareTeamTable();
+        
+       
         
     }//GEN-LAST:event_addJButtonActionPerformed
 

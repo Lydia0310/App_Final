@@ -17,7 +17,7 @@ import org.yueli.business.network.Network;
 import org.yueli.business.organization.Organization;
 
 /**
- * Created by Zhang Junyan on 11/19/2014/2014.
+ * Created by Yue Li on 11/19/2014/2014.
  */
 public class LoginPanel extends JPanel {
     private JTextField userNameField;

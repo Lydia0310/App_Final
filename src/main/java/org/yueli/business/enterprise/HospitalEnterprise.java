@@ -25,33 +25,28 @@ import org.yueli.business.role.HospitalAdmin;
  */
 public class HospitalEnterprise extends Enterprise {
 
-    private RoomDirectory roomList;
+//    private RoomDirectory roomList;
     private OperationDirectory operationList;
     private Inventory inventory;
     private DoctorDirectory doctorList;
-    private CareTeamDirectory careTeamDirectory;
+//    private CareTeamDirectory careTeamDirectory;
     
     
     public HospitalEnterprise(String name){
         super(name, EnterpriseType.Hospital);
-        roomList = new RoomDirectory();
+//        roomList = new RoomDirectory();
         operationList = new OperationDirectory();
         inventory = new Inventory();
-        careTeamDirectory = new CareTeamDirectory();
+//        careTeamDirectory = new CareTeamDirectory();
     }
 
-    public CareTeamDirectory getCareTeamDirectory() {
-        return careTeamDirectory;
-    }
-
-    public void setCareTeamDirectory(CareTeamDirectory careTeamDirectory) {
-        this.careTeamDirectory = careTeamDirectory;
-    }
-
-    
-    public RoomDirectory getRoomDirectory() {
-        return roomList;
-    }
+//    public CareTeamDirectory getCareTeamDirectory() {
+//        return careTeamDirectory;
+//    }
+//
+//    public void setCareTeamDirectory(CareTeamDirectory careTeamDirectory) {
+//        this.careTeamDirectory = careTeamDirectory;
+//    }
 
     public OperationDirectory getOperationList() {
         return operationList;

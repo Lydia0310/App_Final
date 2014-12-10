@@ -36,5 +36,8 @@ public class CareTeam {
         this.careTeamName = careTeamName;
     }
     
-    
+    @Override
+    public String toString(){
+        return careTeamID;
+    }
 }

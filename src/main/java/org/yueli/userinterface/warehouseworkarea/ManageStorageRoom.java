@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.yueli.business.enterprise.Enterprise;
 import org.yueli.business.network.Network;
+import org.yueli.business.organization.Organization;
+import org.yueli.business.organization.WarehouseOrganization;
 import org.yueli.business.room.Room;
 import org.yueli.business.room.StorageRoom;
 import org.yueli.business.useraccount.UserAccount;
@@ -29,6 +31,7 @@ public class ManageStorageRoom extends javax.swing.JPanel {
     private Network network;
     private Enterprise enterprise;
     private UserAccount userAccount;   
+    private Organization organization;
     
             
     public ManageStorageRoom(JPanel userProcessContainer, Network network,Enterprise enterprise, UserAccount userAccount) {
@@ -37,13 +40,13 @@ public class ManageStorageRoom extends javax.swing.JPanel {
         this.network = network;
         this.userAccount = userAccount;
         this.enterprise = enterprise;
-        
+        this.organization = userAccount.getOrganization();
         roomNumberJLabel.setVisible(false);
         roomNumberJTextField.setVisible(false);
         roomStatusJLabel.setVisible(false);
+        roomStatusJTextField1.setVisible(false);
         noteJLabel.setVisible(false);
-        emptyJRadioButton.setVisible(false);
-        fullJRadioButton.setVisible(false);
+        roomStatusSampleJLabel.setVisible(false);
         doneJButton.setVisible(false);
         submitJButton.setVisible(false);
         
@@ -53,10 +56,10 @@ public class ManageStorageRoom extends javax.swing.JPanel {
     public void populateRoomTable(){
         DefaultTableModel model = (DefaultTableModel)storageRoomTable.getModel();
         model.setRowCount(0);
-        for(Room room : enterprise.getRoomDirectory().getRoomList()){
+        for(Room room :((WarehouseOrganization)organization).getRoomDirectory().getRoomList()){
             if(room.getType() == Room.RoomType.StorageRoom){
                 Object row[] = new Object[3];
-                row[0] = room.getRoomID();
+                row[0] = (StorageRoom)room;
                 row[1] = ((StorageRoom)room).getStorageRoomNumber();
                 row[2] = ((StorageRoom)room).getStorageRoomStatus();
                 model.addRow(row);
@@ -81,12 +84,12 @@ public class ManageStorageRoom extends javax.swing.JPanel {
         roomNumberJLabel = new javax.swing.JLabel();
         roomNumberJTextField = new javax.swing.JTextField();
         roomStatusJLabel = new javax.swing.JLabel();
-        emptyJRadioButton = new javax.swing.JRadioButton();
-        fullJRadioButton = new javax.swing.JRadioButton();
         doneJButton = new javax.swing.JButton();
         submitJButton = new javax.swing.JButton();
         noteJLabel = new javax.swing.JLabel();
         refreshJButton = new javax.swing.JButton();
+        roomStatusJTextField1 = new javax.swing.JTextField();
+        roomStatusSampleJLabel = new javax.swing.JLabel();
 
         storageRoomTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,22 +134,6 @@ public class ManageStorageRoom extends javax.swing.JPanel {
 
         roomStatusJLabel.setText("Room Status:");
 
-        buttonGroup1.add(emptyJRadioButton);
-        emptyJRadioButton.setText("Empty");
-        emptyJRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emptyJRadioButtonActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(fullJRadioButton);
-        fullJRadioButton.setText("Full");
-        fullJRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fullJRadioButtonActionPerformed(evt);
-            }
-        });
-
         doneJButton.setText("Done");
         doneJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +157,10 @@ public class ManageStorageRoom extends javax.swing.JPanel {
             }
         });
 
+        roomStatusJTextField1.setEditable(false);
+
+        roomStatusSampleJLabel.setText("(Empty / Full)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,29 +180,28 @@ public class ManageStorageRoom extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(roomStatusJLabel)
                                 .addComponent(roomNumberJLabel))
+                            .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
                                     .addComponent(roomNumberJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(noteJLabel))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(27, 27, 27)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(emptyJRadioButton)
-                                        .addComponent(fullJRadioButton)))))))
+                                    .addComponent(roomStatusJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(roomStatusSampleJLabel))))))
                 .addComponent(refreshJButton)
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(submitJButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addComponent(addJButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editJButton)))
+                        .addComponent(editJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(submitJButton)))
                 .addGap(186, 186, 186))
         );
         layout.setVerticalGroup(
@@ -233,29 +223,18 @@ public class ManageStorageRoom extends javax.swing.JPanel {
                     .addComponent(roomNumberJLabel)
                     .addComponent(roomNumberJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(noteJLabel))
-                .addGap(22, 22, 22)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(roomStatusJLabel)
-                    .addComponent(emptyJRadioButton))
-                .addGap(18, 18, 18)
-                .addComponent(fullJRadioButton)
-                .addGap(18, 18, 18)
+                    .addComponent(roomStatusJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(roomStatusSampleJLabel))
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(doneJButton)
                     .addComponent(submitJButton))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void emptyJRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emptyJRadioButtonActionPerformed
-        // TODO add your handling code here:
-        status = "Empty";
-    }//GEN-LAST:event_emptyJRadioButtonActionPerformed
-
-    private void fullJRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fullJRadioButtonActionPerformed
-        // TODO add your handling code here:
-        status = "Full";
-    }//GEN-LAST:event_fullJRadioButtonActionPerformed
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         // TODO add your handling code here:
@@ -264,8 +243,9 @@ public class ManageStorageRoom extends javax.swing.JPanel {
         roomNumberJTextField.setEditable(true);
         noteJLabel.setVisible(true);
         roomStatusJLabel.setVisible(true);
-        emptyJRadioButton.setVisible(true);
-        fullJRadioButton.setVisible(true);
+        roomStatusJTextField1.setVisible(true);
+        roomStatusJTextField1.setEditable(true);
+        roomStatusSampleJLabel.setVisible(true);
         submitJButton.setVisible(true);
         
         
@@ -275,11 +255,13 @@ public class ManageStorageRoom extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = storageRoomTable.getSelectedRow();
         StorageRoom storageRoom = (StorageRoom)storageRoomTable.getValueAt(selectedRow, 0);
+        String status = roomStatusJTextField1.getText();
         storageRoom.setStorageRoomStatus(status);
-        if(status.equals("Empty")){
+        
+        if(storageRoom.getStorageRoomStatus().equals("Empty")){
             storageRoom.setIsFull(false);
         }
-        if(status.equals("Full")){
+        {
             storageRoom.setIsFull(true);
         }
         populateRoomTable();
@@ -290,15 +272,22 @@ public class ManageStorageRoom extends javax.swing.JPanel {
         // TODO add your handling code here:
         
        String roomNumber = roomNumberJTextField.getText();
-        Room room = enterprise.getRoomDirectory().addRoom(roomNumber,Room.RoomType.StorageRoom);
-        ((StorageRoom)room).setStorageRoomNumber(roomNumber);
-        ((StorageRoom)room).setStorageRoomStatus(status);
-        if(status.equals("empty")){
-           ((StorageRoom)room).setIsFull(false);
-        }
-        if(status.equals("Full")){
-            ((StorageRoom)room).setIsFull(true);
-        }
+       ((WarehouseOrganization)organization).getRoomDirectory().addRoom(roomNumber,Room.RoomType.StorageRoom);
+       
+         String status = roomStatusJTextField1.getText();
+         
+         for(Room room : ((WarehouseOrganization)organization).getRoomDirectory().getRoomList()){
+             if(room instanceof StorageRoom){
+                 if(((StorageRoom)room).getStorageRoomNumber().equals(roomNumber)){
+                     ((StorageRoom)room).setStorageRoomStatus(status);
+                     
+                 }
+             }
+         }
+         
+//       ((StorageRoom)room).setStorageRoomStatus(status);
+//        
+       
         populateRoomTable();
     }//GEN-LAST:event_submitJButtonActionPerformed
 
@@ -312,8 +301,8 @@ public class ManageStorageRoom extends javax.swing.JPanel {
             roomNumberJLabel.setVisible(true);
             roomNumberJTextField.setVisible(true);
             roomStatusJLabel.setVisible(true);
-            emptyJRadioButton.setVisible(true);
-            fullJRadioButton.setVisible(true);
+            roomStatusJTextField1.setVisible(true);
+            roomStatusSampleJLabel.setVisible(true);
             doneJButton.setVisible(true);
             
         }
@@ -330,14 +319,14 @@ public class ManageStorageRoom extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton doneJButton;
     private javax.swing.JButton editJButton;
-    private javax.swing.JRadioButton emptyJRadioButton;
-    private javax.swing.JRadioButton fullJRadioButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel noteJLabel;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JLabel roomNumberJLabel;
     private javax.swing.JTextField roomNumberJTextField;
     private javax.swing.JLabel roomStatusJLabel;
+    private javax.swing.JTextField roomStatusJTextField1;
+    private javax.swing.JLabel roomStatusSampleJLabel;
     private javax.swing.JTable storageRoomTable;
     private javax.swing.JButton submitJButton;
     // End of variables declaration//GEN-END:variables

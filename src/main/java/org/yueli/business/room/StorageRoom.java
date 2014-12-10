@@ -43,5 +43,9 @@ public class StorageRoom extends Room{
         this.isFull = isFull;
     }
 
-    
+    @Override
+    public String toString(){
+        return storageRoomNumber;
+    }
+
 }
